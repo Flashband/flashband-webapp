@@ -11,5 +11,12 @@ describe('EntranceController', function() {
         .expect(403, done);
     });
   });
+  describe('GET /entrance', function() {
+    it('should not allow', function (done) {
+      request(sails.hooks.http.app)
+        .get('/entrance')
+        .expect(405, done);
+    });
+  });
 });
 
