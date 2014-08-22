@@ -7,5 +7,5 @@ dependencies:
     - cd api/ && npm install
 
 test:
-  overrride:
+  override:
     - mocha test/ -R spec
