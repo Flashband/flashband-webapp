@@ -8,4 +8,4 @@ dependencies:
 
 test:
   override:
-    - pwd && cd api/ && node_modules/mocha/bin/mocha -R spec
+    - cd api/ && node_modules/mocha/bin/mocha -R spec
