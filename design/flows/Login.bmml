@@ -1,0 +1,517 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="3982" measuredH="3084" mockupW="3935" mockupH="3073">
+  <controls>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="50" y="14" w="1280" h="704" measuredW="450" measuredH="400" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="632" y="100" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Canvas" x="52" y="87" w="1271" h="60" measuredW="100" measuredH="70" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Paragraph" x="458" y="193" w="459" h="28" measuredW="200" measuredH="80" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Bem-vindo%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::TextInput" x="537" y="359" w="334" h="-1" measuredW="64" measuredH="32" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>entrar</text>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::StickyNote" x="47" y="743" w="235" h="188" measuredW="109" measuredH="123" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tela%20de%20login.%20Para%20previnir%20erros%2C%20o%20bot%E3o%20%22entrar%22%20s%F3%20fica%20habilitado%20depois%20do%20usu%E1rio%20adicionar%20um%20email%20v%E1lido%20e%204%20caracteres%20ou%20mais%20na%20senha.</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::StickyNote" x="309" y="743" w="235" h="203" measuredW="109" measuredH="123" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AInputs%20e%20buttons%20default%20%3A%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::Arrow" x="1262" y="640" w="182" h="10" measuredW="150" measuredH="100" zOrder="42" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="112" controlTypeID="com.balsamiq.mockups::Arrow" x="1273" y="675" w="1471" h="598" measuredW="150" measuredH="100" zOrder="43" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="113" controlTypeID="com.balsamiq.mockups::TextInput" x="537" y="253" w="334" h="-1" measuredW="130" measuredH="30" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20seu%20email</text>
+      </controlProperties>
+    </control>
+    <control controlID="114" controlTypeID="com.balsamiq.mockups::TextInput" x="537" y="299" w="334" h="-1" measuredW="136" measuredH="30" zOrder="45" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20sua%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="115" controlTypeID="com.balsamiq.mockups::Label" x="637" y="426" w="-1" h="-1" measuredW="135" measuredH="22" zOrder="46" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Esqueci%20minha%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="116" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1377" y="12" w="1280" h="704" measuredW="450" measuredH="400" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="117" controlTypeID="com.balsamiq.mockups::Canvas" x="1379" y="85" w="1271" h="60" measuredW="100" measuredH="70" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="118" controlTypeID="com.balsamiq.mockups::Label" x="1959" y="98" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="119" controlTypeID="com.balsamiq.mockups::Paragraph" x="1785" y="191" w="459" h="28" measuredW="200" measuredH="80" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Bem-vindo%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="com.balsamiq.mockups::TextInput" x="1864" y="357" w="334" h="-1" measuredW="64" measuredH="32" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>entrar</text>
+      </controlProperties>
+    </control>
+    <control controlID="123" controlTypeID="com.balsamiq.mockups::Arrow" x="2589" y="638" w="182" h="10" measuredW="150" measuredH="100" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="124" controlTypeID="com.balsamiq.mockups::TextInput" x="1864" y="251" w="334" h="-1" measuredW="161" measuredH="30" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>umemail@email.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="125" controlTypeID="com.balsamiq.mockups::TextInput" x="1864" y="297" w="334" h="-1" measuredW="44" measuredH="30" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>****</text>
+      </controlProperties>
+    </control>
+    <control controlID="126" controlTypeID="com.balsamiq.mockups::Label" x="1964" y="424" w="-1" h="-1" measuredW="135" measuredH="22" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Esqueci%20minha%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="127" controlTypeID="com.balsamiq.mockups::ProgressBar" x="1965" y="161" w="-1" h="-1" measuredW="100" measuredH="20" zOrder="47" locked="false" isInGroup="-1"/>
+    <control controlID="128" controlTypeID="com.balsamiq.mockups::StickyNote" x="1377" y="742" w="235" h="188" measuredW="109" measuredH="123" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20os%20input%20s%E3o%20preenchidos%2C%20o%20bot%E3o%20entrar%20%E9%20habilitado.</text>
+      </controlProperties>
+    </control>
+    <control controlID="129" controlTypeID="com.balsamiq.mockups::StickyNote" x="1648" y="743" w="235" h="203" measuredW="109" measuredH="123" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0ADefault%20loading%20bar</text>
+      </controlProperties>
+    </control>
+    <control controlID="130" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="2699" y="11" w="1280" h="704" measuredW="450" measuredH="400" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="131" controlTypeID="com.balsamiq.mockups::Canvas" x="2701" y="84" w="1271" h="60" measuredW="100" measuredH="70" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="132" controlTypeID="com.balsamiq.mockups::Label" x="3281" y="97" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="133" controlTypeID="com.balsamiq.mockups::Paragraph" x="3107" y="190" w="459" h="28" measuredW="200" measuredH="80" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Bem-vindo%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="134" controlTypeID="com.balsamiq.mockups::TextInput" x="3186" y="356" w="334" h="-1" measuredW="64" measuredH="32" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>entrar</text>
+      </controlProperties>
+    </control>
+    <control controlID="135" controlTypeID="com.balsamiq.mockups::TextInput" x="3186" y="250" w="334" h="-1" measuredW="161" measuredH="30" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>umemail@email.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="136" controlTypeID="com.balsamiq.mockups::TextInput" x="3186" y="296" w="334" h="-1" measuredW="136" measuredH="30" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20sua%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="137" controlTypeID="com.balsamiq.mockups::Label" x="3286" y="423" w="-1" h="-1" measuredW="135" measuredH="22" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Esqueci%20minha%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="139" controlTypeID="com.balsamiq.mockups::StickyNote" x="2699" y="741" w="235" h="188" measuredW="109" measuredH="123" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Feedback%20de%20usu%E1rio%20inexistente%20ou%20senha%20incorreta.%20Sugiro%20de%2C%20se%20poss%EDvel%2C%20mantermos%20o%20email%20digitado%20no%20input%20pro%20usu%E1rio%20poder%20conferir%20o%20que%20errou.%20A%20senha%20pode%20ser%20resetada.%20%3A%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="140" controlTypeID="com.balsamiq.mockups::StickyNote" x="2970" y="742" w="235" h="203" measuredW="109" measuredH="123" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20error</text>
+      </controlProperties>
+    </control>
+    <control controlID="141" controlTypeID="__group__" x="3049" y="144" w="591" h="42" measuredW="591" measuredH="42" zOrder="50" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="591" h="42" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="141">
+          <controlProperties>
+            <borderColor>15374745</borderColor>
+            <color>15374745</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="15" y="9" w="561" h="-1" measuredW="498" measuredH="24" zOrder="1" locked="false" isInGroup="141">
+          <controlProperties>
+            <align>center</align>
+            <color>6684672</color>
+            <size>16</size>
+            <text>Usu%E1rio%20ou%20senha%20n%E3o%20conferem.%20Por%20favor%2C%20corrija%20e%20tente%20novamente.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="142" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="53" y="1037" w="1280" h="704" measuredW="450" measuredH="400" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="143" controlTypeID="com.balsamiq.mockups::Canvas" x="55" y="1110" w="1271" h="60" measuredW="100" measuredH="70" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="144" controlTypeID="com.balsamiq.mockups::Label" x="635" y="1123" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="145" controlTypeID="com.balsamiq.mockups::Paragraph" x="461" y="1216" w="459" h="28" measuredW="200" measuredH="80" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Esqueceu%20sua%20senha%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="146" controlTypeID="com.balsamiq.mockups::TextInput" x="540" y="1328" w="334" h="-1" measuredW="149" measuredH="32" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>recuperar%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="147" controlTypeID="com.balsamiq.mockups::StickyNote" x="50" y="1766" w="235" h="188" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tela%20de%20%22esqueci%20minha%20senha%22.%20Mesmo%20comportamento%20do%20login%3A%20bot%E3o%20s%F3%20%E9%20habilitado%20depois%20que%20o%20usu%E1rio%20digita%20um%20email%20v%E1lido.</text>
+      </controlProperties>
+    </control>
+    <control controlID="148" controlTypeID="com.balsamiq.mockups::StickyNote" x="312" y="1766" w="235" h="203" measuredW="109" measuredH="123" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AInputs%20e%20buttons%20default%20%3A%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="149" controlTypeID="com.balsamiq.mockups::TextInput" x="540" y="1276" w="334" h="-1" measuredW="130" measuredH="30" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20seu%20email</text>
+      </controlProperties>
+    </control>
+    <control controlID="151" controlTypeID="com.balsamiq.mockups::Label" x="673" y="1395" w="-1" h="-1" measuredW="69" measuredH="22" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Fazer%20login</text>
+      </controlProperties>
+    </control>
+    <control controlID="162" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1380" y="1037" w="1280" h="704" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="163" controlTypeID="com.balsamiq.mockups::Canvas" x="1382" y="1110" w="1271" h="60" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="164" controlTypeID="com.balsamiq.mockups::Label" x="1962" y="1123" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="165" controlTypeID="com.balsamiq.mockups::Paragraph" x="1788" y="1216" w="459" h="28" measuredW="200" measuredH="80" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Esqueceu%20sua%20senha%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="166" controlTypeID="com.balsamiq.mockups::TextInput" x="1867" y="1328" w="334" h="-1" measuredW="149" measuredH="32" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>recuperar%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="169" controlTypeID="com.balsamiq.mockups::TextInput" x="1867" y="1276" w="334" h="-1" measuredW="170" measuredH="30" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>meuemail@email.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="170" controlTypeID="com.balsamiq.mockups::Label" x="2000" y="1395" w="-1" h="-1" measuredW="69" measuredH="22" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Fazer%20login</text>
+      </controlProperties>
+    </control>
+    <control controlID="171" controlTypeID="com.balsamiq.mockups::ProgressBar" x="1968" y="1187" w="-1" h="-1" measuredW="100" measuredH="20" zOrder="51" locked="false" isInGroup="-1"/>
+    <control controlID="172" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="2702" y="1037" w="1280" h="704" measuredW="450" measuredH="400" zOrder="52" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="173" controlTypeID="com.balsamiq.mockups::Canvas" x="2704" y="1110" w="1271" h="60" measuredW="100" measuredH="70" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="174" controlTypeID="com.balsamiq.mockups::Label" x="3284" y="1123" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="175" controlTypeID="com.balsamiq.mockups::Paragraph" x="3110" y="1216" w="459" h="28" measuredW="200" measuredH="80" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Bem-vindo%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="176" controlTypeID="com.balsamiq.mockups::TextInput" x="3189" y="1382" w="334" h="-1" measuredW="64" measuredH="32" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>entrar</text>
+      </controlProperties>
+    </control>
+    <control controlID="177" controlTypeID="com.balsamiq.mockups::StickyNote" x="2699" y="1766" w="235" h="188" measuredW="109" measuredH="123" zOrder="57" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20email%20%E9%20encontrado%20no%20sistema%2C%20o%20usu%E1rio%20%E9%20redirecionado%20para%20a%20p%E1gina%20de%20login%20e%20recebe%20um%20feedback%20de%20informa%E7%E3o.</text>
+      </controlProperties>
+    </control>
+    <control controlID="178" controlTypeID="com.balsamiq.mockups::StickyNote" x="2961" y="1766" w="235" h="203" measuredW="109" measuredH="123" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20info</text>
+      </controlProperties>
+    </control>
+    <control controlID="179" controlTypeID="com.balsamiq.mockups::TextInput" x="3189" y="1276" w="334" h="-1" measuredW="130" measuredH="30" zOrder="59" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20seu%20email</text>
+      </controlProperties>
+    </control>
+    <control controlID="180" controlTypeID="com.balsamiq.mockups::TextInput" x="3189" y="1322" w="334" h="-1" measuredW="136" measuredH="30" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20sua%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="181" controlTypeID="com.balsamiq.mockups::Label" x="3289" y="1449" w="-1" h="-1" measuredW="135" measuredH="22" zOrder="61" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Esqueci%20minha%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="183" controlTypeID="__group__" x="3044" y="1172" w="591" h="42" measuredW="591" measuredH="42" zOrder="62" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="591" h="42" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="183">
+          <controlProperties>
+            <borderColor>10470904</borderColor>
+            <color>10470904</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="15" y="9" w="561" h="-1" measuredW="493" measuredH="24" zOrder="1" locked="false" isInGroup="183">
+          <controlProperties>
+            <align>center</align>
+            <color>472931</color>
+            <size>16</size>
+            <text>Enviamos%20um%20email%20para%20meuemail@email.com%20com%20sua%20nova%20senha.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="184" controlTypeID="com.balsamiq.mockups::Arrow" x="2589" y="1658" w="182" h="10" measuredW="150" measuredH="100" zOrder="63" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="185" controlTypeID="com.balsamiq.mockups::Arrow" x="1262" y="1660" w="182" h="10" measuredW="150" measuredH="100" zOrder="64" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="186" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="50" y="2122" w="1280" h="704" measuredW="450" measuredH="400" zOrder="65" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="187" controlTypeID="com.balsamiq.mockups::Canvas" x="52" y="2195" w="1271" h="60" measuredW="100" measuredH="70" zOrder="66" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>15658734</borderColor>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="188" controlTypeID="com.balsamiq.mockups::Label" x="632" y="2208" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="67" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Flashband</text>
+      </controlProperties>
+    </control>
+    <control controlID="189" controlTypeID="com.balsamiq.mockups::Paragraph" x="458" y="2301" w="459" h="28" measuredW="200" measuredH="80" zOrder="68" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>24</size>
+        <text>Esqueceu%20sua%20senha%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="190" controlTypeID="com.balsamiq.mockups::TextInput" x="537" y="2413" w="334" h="-1" measuredW="149" measuredH="32" zOrder="69" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>recuperar%20senha</text>
+      </controlProperties>
+    </control>
+    <control controlID="191" controlTypeID="com.balsamiq.mockups::TextInput" x="537" y="2361" w="334" h="-1" measuredW="170" measuredH="30" zOrder="70" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>meuemail@email.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="192" controlTypeID="com.balsamiq.mockups::Label" x="670" y="2480" w="-1" h="-1" measuredW="69" measuredH="22" zOrder="71" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>6989903</color>
+        <size>14</size>
+        <text>Fazer%20login</text>
+      </controlProperties>
+    </control>
+    <control controlID="194" controlTypeID="com.balsamiq.mockups::StickyNote" x="50" y="2881" w="235" h="188" measuredW="109" measuredH="123" zOrder="72" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20email%20n%E3o%20%E9%20encontrado%20no%20banco%20de%20dados%2C%20mantemos%20o%20usu%E1rio%20na%20tela%20e%20damos%20um%20feedback%20de%20erro.%20%3A%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="195" controlTypeID="com.balsamiq.mockups::StickyNote" x="312" y="2881" w="235" h="203" measuredW="109" measuredH="123" zOrder="73" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20error</text>
+      </controlProperties>
+    </control>
+    <control controlID="196" controlTypeID="__group__" x="297" y="2257" w="834" h="41" measuredW="834" measuredH="41" zOrder="74" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="834" h="41" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="196">
+          <controlProperties>
+            <borderColor>15374745</borderColor>
+            <color>15374745</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="24" y="9" w="795" h="-1" measuredW="758" measuredH="24" zOrder="1" locked="false" isInGroup="196">
+          <controlProperties>
+            <align>center</align>
+            <color>6684672</color>
+            <size>16</size>
+            <text>Email%20n%E3o%20cadastrado.%20Por%20favor%2C%20corrija%20e%20tente%20novamente%20ou%20entre%20em%20contato%20com%20a%20equipe%20Flashband.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="197" controlTypeID="com.balsamiq.mockups::Arrow" x="1262" y="1704" w="1471" h="598" measuredW="150" measuredH="100" zOrder="75" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
