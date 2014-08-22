@@ -1,0 +1,984 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="3990" measuredH="3355" mockupW="3962" mockupH="3343">
+  <controls>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="50" y="14" w="1280" h="704" measuredW="450" measuredH="400" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1377" y="14" w="1280" h="704" measuredW="450" measuredH="400" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="32" controlTypeID="com.balsamiq.mockups::Paragraph" x="1537" y="193" w="397" h="28" measuredW="200" measuredH="80" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="34" controlTypeID="com.balsamiq.mockups::TextInput" x="1973" y="392" w="-1" h="-1" measuredW="80" measuredH="32" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>vincular</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::StickyNote" x="1374" y="743" w="235" h="188" measuredW="109" measuredH="123" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Tela%20de%20v%EDnculo%20de%20visitantes.%20A%20princ%EDpio%2C%20todos%20os%20bot%F5es%20v%EAm%20desabilitados%20para%20previnir%20erro.</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::StickyNote" x="1636" y="743" w="235" h="203" measuredW="109" measuredH="123" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AInput%20groups%20%3E%20button%20addons%0AInputs%20e%20buttons%20default%20%3A%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Paragraph" x="1537" y="241" w="534" h="61" measuredW="200" measuredH="80" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Para%20vincular%20um%20visitante%20a%20uma%20pulseira%2C%20basta%20buscar%20pelo%20nome%20ou%20n%FAmero%20do%20documento%20cadastrado.%20Depois%2C%20%E9%20s%F3%20clicar%20em%20vincular%20e%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="40" controlTypeID="com.balsamiq.mockups::Label" x="1537" y="304" w="-1" h="-1" measuredW="222" measuredH="22" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>N%E3o%20mostrar%20mais%20essa%20mensagem</text>
+      </controlProperties>
+    </control>
+    <control controlID="41" controlTypeID="com.balsamiq.mockups::TextInput" x="1537" y="341" w="514" h="-1" measuredW="311" measuredH="30" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20o%20nome%20ou%20documento%20do%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="43" controlTypeID="com.balsamiq.mockups::Label" x="1895" y="396" w="-1" h="-1" measuredW="67" measuredH="24" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>16</size>
+        <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="43" y="1194" w="1280" h="704" measuredW="450" measuredH="400" zOrder="32" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::StickyNote" x="40" y="1923" w="235" h="188" measuredW="109" measuredH="123" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Depois%20do%20visitante%20ser%20encontrado%2C%20o%20bot%E3o%20de%20vincular%20%E9%20habilitado.</text>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="__group__" x="1537" y="1327" w="917" h="42" measuredW="917" measuredH="42" zOrder="34" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="917" h="42" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="96">
+          <controlProperties>
+            <borderColor>15374745</borderColor>
+            <color>15374745</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="273" y="9" w="-1" h="-1" measuredW="372" measuredH="24" zOrder="1" locked="false" isInGroup="96">
+          <controlProperties>
+            <color>6684672</color>
+            <size>16</size>
+            <text>Opa%2C%20esse%20visitante%20j%E1%20foi%20vinculado%20a%20uma%20pulseira.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="2706" y="1194" w="1280" h="704" measuredW="450" measuredH="400" zOrder="35" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="105" controlTypeID="com.balsamiq.mockups::StickyNote" x="2703" y="1923" w="235" h="272" measuredW="109" measuredH="123" zOrder="36" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20visitante%20n%E3o%20est%E1%20vinculado%20e%20o%20usu%E1rio%20clica%20em%20vincular%2C%20exibimos%20um%20feedback%20pedindo%20para%20ele%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="106" controlTypeID="com.balsamiq.mockups::StickyNote" x="2965" y="1923" w="235" h="203" measuredW="109" measuredH="123" zOrder="37" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20info</text>
+      </controlProperties>
+    </control>
+    <control controlID="108" controlTypeID="com.balsamiq.mockups::Arrow" x="1262" y="640" w="182" h="10" measuredW="150" measuredH="100" zOrder="38" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="109" controlTypeID="com.balsamiq.mockups::Arrow" x="2586" y="640" w="182" h="10" measuredW="150" measuredH="100" zOrder="39" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="110" controlTypeID="com.balsamiq.mockups::Arrow" x="1247" y="2974" w="182" h="10" measuredW="150" measuredH="100" zOrder="98" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="111" controlTypeID="com.balsamiq.mockups::Arrow" x="2578" y="1826" w="182" h="10" measuredW="150" measuredH="100" zOrder="40" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+    <control controlID="112" controlTypeID="com.balsamiq.mockups::Arrow" x="1273" y="675" w="1471" h="598" measuredW="150" measuredH="100" zOrder="41" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="120" controlTypeID="__group__" x="1379" y="89" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="42" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="120">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="120">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="120">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="120">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="120">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="120">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="164" controlTypeID="com.balsamiq.mockups::StickyNote" x="47" y="745" w="235" h="272" measuredW="109" measuredH="123" zOrder="43" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20visitante%20%E9%20cadastrado%20com%20sucesso%2C%20o%20usu%E1rio%20%E9%20redirecionado%20para%20a%20p%E1gina%20anterior%20e%20um%20feedback%20de%20sucesso%20%E9%20mostrado.%20Al%E9m%20disso%2C%20a%20informa%E7%E3o%20do%20total%20de%20visitantes%20cadastradas%20%E9%20atualizado.%20Esse%20feedback%20pode%20ficar%20apenas%20poucos%20segundos%20em%20tela.%20%0A%20%0AComo%20no%20sistema%20j%E1%20existe%20um%20ou%20mais%20visitantes%20cadastrados%2C%20agora%20%E9%20poss%EDvel%20vincular%20uma%20pulseira%20a%20um%20visitante.</text>
+      </controlProperties>
+    </control>
+    <control controlID="165" controlTypeID="com.balsamiq.mockups::StickyNote" x="309" y="745" w="235" h="203" measuredW="109" measuredH="123" zOrder="44" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20success</text>
+      </controlProperties>
+    </control>
+    <control controlID="166" controlTypeID="__group__" x="211" y="151" w="917" h="42" measuredW="917" measuredH="42" zOrder="45" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="917" h="42" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="166">
+          <controlProperties>
+            <borderColor>11982760</borderColor>
+            <color>11982760</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="331" y="9" w="-1" h="-1" measuredW="255" measuredH="24" zOrder="1" locked="false" isInGroup="166">
+          <controlProperties>
+            <color>2575891</color>
+            <size>16</size>
+            <text>Visitante%20cadastrado%20com%20sucesso.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="167" controlTypeID="__group__" x="53" y="90" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="46" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="167">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="167">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="167">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="167">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="167">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="167">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="168" controlTypeID="com.balsamiq.mockups::Paragraph" x="210" y="195" w="459" h="28" measuredW="200" measuredH="80" zOrder="47" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Cadastre%20e%20vincule%20visitantes</text>
+      </controlProperties>
+    </control>
+    <control controlID="169" controlTypeID="com.balsamiq.mockups::Paragraph" x="210" y="241" w="534" h="64" measuredW="200" measuredH="80" zOrder="48" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Voc%EA%20possui%20122%20visitantes%20cadastrados.%20Para%20adicionar%20um%20novo%20visitante%2C%20%E9%20s%F3%20clicar%20em%20cadastrar%20visitante.%20Para%20vincular%20um%20visitante%20cadastrado%20a%20uma%20pulseira%2C%20%E9%20s%F3%20clicar%20em%20vincular%20visitante.</text>
+      </controlProperties>
+    </control>
+    <control controlID="170" controlTypeID="com.balsamiq.mockups::TextInput" x="210" y="313" w="-1" h="-1" measuredW="171" measuredH="32" zOrder="49" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>cadastrar%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="171" controlTypeID="com.balsamiq.mockups::TextInput" x="400" y="313" w="-1" h="-1" measuredW="157" measuredH="32" zOrder="50" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="173" controlTypeID="com.balsamiq.mockups::TextInput" x="1994" y="343" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="51" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <text>buscar</text>
+      </controlProperties>
+    </control>
+    <control controlID="174" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="2710" y="12" w="1280" h="704" measuredW="450" measuredH="400" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="175" controlTypeID="com.balsamiq.mockups::Paragraph" x="2870" y="191" w="397" h="28" measuredW="200" measuredH="80" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="176" controlTypeID="com.balsamiq.mockups::TextInput" x="3306" y="390" w="-1" h="-1" measuredW="80" measuredH="32" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>vincular</text>
+      </controlProperties>
+    </control>
+    <control controlID="177" controlTypeID="com.balsamiq.mockups::StickyNote" x="2707" y="741" w="235" h="188" measuredW="109" measuredH="123" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20input%20%E9%20preenchido%2C%20o%20bot%E3o%20buscar%20%E9%20habilitado.</text>
+      </controlProperties>
+    </control>
+    <control controlID="179" controlTypeID="com.balsamiq.mockups::Paragraph" x="2870" y="239" w="534" h="61" measuredW="200" measuredH="80" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Para%20vincular%20um%20visitante%20a%20uma%20pulseira%2C%20basta%20buscar%20pelo%20nome%20ou%20n%FAmero%20do%20documento%20cadastrado.%20Depois%2C%20%E9%20s%F3%20clicar%20em%20vincular%20e%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="180" controlTypeID="com.balsamiq.mockups::Label" x="2870" y="302" w="-1" h="-1" measuredW="222" measuredH="22" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>N%E3o%20mostrar%20mais%20essa%20mensagem</text>
+      </controlProperties>
+    </control>
+    <control controlID="181" controlTypeID="com.balsamiq.mockups::TextInput" x="2870" y="339" w="514" h="-1" measuredW="247" measuredH="30" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Roberval%20o%20ladr%E3o%20de%20chocolates</text>
+      </controlProperties>
+    </control>
+    <control controlID="182" controlTypeID="com.balsamiq.mockups::Label" x="3228" y="394" w="-1" h="-1" measuredW="67" measuredH="24" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>16</size>
+        <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="183" controlTypeID="__group__" x="2712" y="87" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="20" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="183">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="183">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="183">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="183">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="183">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="183">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="184" controlTypeID="com.balsamiq.mockups::TextInput" x="3327" y="341" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <text>buscar</text>
+      </controlProperties>
+    </control>
+    <control controlID="186" controlTypeID="com.balsamiq.mockups::Paragraph" x="203" y="1372" w="397" h="28" measuredW="200" measuredH="80" zOrder="52" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="187" controlTypeID="com.balsamiq.mockups::TextInput" x="639" y="1629" w="-1" h="-1" measuredW="80" measuredH="32" zOrder="53" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>vincular</text>
+      </controlProperties>
+    </control>
+    <control controlID="188" controlTypeID="com.balsamiq.mockups::Paragraph" x="203" y="1420" w="534" h="61" measuredW="200" measuredH="80" zOrder="54" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Para%20vincular%20um%20visitante%20a%20uma%20pulseira%2C%20basta%20buscar%20pelo%20nome%20ou%20n%FAmero%20do%20documento%20cadastrado.%20Depois%2C%20%E9%20s%F3%20clicar%20em%20vincular%20e%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="189" controlTypeID="com.balsamiq.mockups::Label" x="203" y="1483" w="-1" h="-1" measuredW="222" measuredH="22" zOrder="55" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>N%E3o%20mostrar%20mais%20essa%20mensagem</text>
+      </controlProperties>
+    </control>
+    <control controlID="191" controlTypeID="com.balsamiq.mockups::Label" x="561" y="1633" w="-1" h="-1" measuredW="67" measuredH="24" zOrder="56" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>16</size>
+        <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="192" controlTypeID="__group__" x="45" y="1268" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="57" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="192">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="192">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="192">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="192">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="192">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="192">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="194" controlTypeID="com.balsamiq.mockups::StickyNote" x="2978" y="742" w="235" h="203" measuredW="109" measuredH="123" zOrder="58" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0ADefault%20loading%20bar</text>
+      </controlProperties>
+    </control>
+    <control controlID="195" controlTypeID="com.balsamiq.mockups::ProgressBar" x="2874" y="392" w="-1" h="-1" measuredW="100" measuredH="20" zOrder="59" locked="false" isInGroup="-1"/>
+    <control controlID="196" controlTypeID="com.balsamiq.mockups::Paragraph" x="203" y="1578" w="534" h="61" measuredW="200" measuredH="80" zOrder="60" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Roberval%20o%20ladr%E3o%20de%20chocolates</text>
+      </controlProperties>
+    </control>
+    <control controlID="197" controlTypeID="com.balsamiq.mockups::Paragraph" x="203" y="1604" w="534" h="25" measuredW="200" measuredH="80" zOrder="61" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>CPF%20999.988.999-30</text>
+      </controlProperties>
+    </control>
+    <control controlID="198" controlTypeID="com.balsamiq.mockups::TextInput" x="203" y="1520" w="514" h="-1" measuredW="311" measuredH="30" zOrder="62" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20o%20nome%20ou%20documento%20do%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="199" controlTypeID="com.balsamiq.mockups::TextInput" x="660" y="1522" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="63" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <text>buscar</text>
+      </controlProperties>
+    </control>
+    <control controlID="200" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1380" y="1197" w="1280" h="704" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="201" controlTypeID="com.balsamiq.mockups::StickyNote" x="1377" y="1926" w="235" h="188" measuredW="109" measuredH="123" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20visitante%20j%E1%20est%E1%20cadastrado%2C%20exibimos%20um%20feedback%20de%20erro.%20Esse%20feedback%20fica%20em%20tela%20at%E9%20o%20usu%E1rio%20buscar%20um%20novo%20visitante%2C%20cancelar%20ou%20sair%20da%20tela.</text>
+      </controlProperties>
+    </control>
+    <control controlID="203" controlTypeID="com.balsamiq.mockups::Paragraph" x="1540" y="1375" w="397" h="28" measuredW="200" measuredH="80" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="204" controlTypeID="com.balsamiq.mockups::TextInput" x="1976" y="1632" w="-1" h="-1" measuredW="80" measuredH="32" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>vincular</text>
+      </controlProperties>
+    </control>
+    <control controlID="205" controlTypeID="com.balsamiq.mockups::Paragraph" x="1540" y="1423" w="534" h="61" measuredW="200" measuredH="80" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Para%20vincular%20um%20visitante%20a%20uma%20pulseira%2C%20basta%20buscar%20pelo%20nome%20ou%20n%FAmero%20do%20documento%20cadastrado.%20Depois%2C%20%E9%20s%F3%20clicar%20em%20vincular%20e%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="206" controlTypeID="com.balsamiq.mockups::Label" x="1540" y="1486" w="-1" h="-1" measuredW="222" measuredH="22" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>N%E3o%20mostrar%20mais%20essa%20mensagem</text>
+      </controlProperties>
+    </control>
+    <control controlID="207" controlTypeID="com.balsamiq.mockups::Label" x="1898" y="1636" w="-1" h="-1" measuredW="67" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>16</size>
+        <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="208" controlTypeID="__group__" x="1382" y="1271" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="7" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="208">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="208">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="208">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="208">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="208">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="208">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="209" controlTypeID="com.balsamiq.mockups::Paragraph" x="1540" y="1581" w="534" h="61" measuredW="200" measuredH="80" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Roberval%20o%20ladr%E3o%20de%20chocolates</text>
+      </controlProperties>
+    </control>
+    <control controlID="210" controlTypeID="com.balsamiq.mockups::Paragraph" x="1540" y="1607" w="534" h="25" measuredW="200" measuredH="80" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>CPF%20999.988.999-30</text>
+      </controlProperties>
+    </control>
+    <control controlID="211" controlTypeID="com.balsamiq.mockups::TextInput" x="1540" y="1523" w="514" h="-1" measuredW="311" measuredH="30" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20o%20nome%20ou%20documento%20do%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="212" controlTypeID="com.balsamiq.mockups::TextInput" x="1997" y="1525" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <text>buscar</text>
+      </controlProperties>
+    </control>
+    <control controlID="213" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="31" y="2354" w="1280" h="704" measuredW="450" measuredH="400" zOrder="64" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="214" controlTypeID="com.balsamiq.mockups::StickyNote" x="28" y="3083" w="235" h="272" measuredW="109" measuredH="123" zOrder="65" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Quando%20o%20visitante%20%E9%20vinculado%20com%20sucesso%2C%20o%20usu%E1rio%20%E9%20redirecionado%20para%20a%20p%E1gina%20anterior%20e%20um%20feedback%20de%20sucesso%20%E9%20mostrado.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="215" controlTypeID="com.balsamiq.mockups::StickyNote" x="290" y="3083" w="235" h="203" measuredW="109" measuredH="123" zOrder="66" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20success</text>
+      </controlProperties>
+    </control>
+    <control controlID="216" controlTypeID="__group__" x="192" y="2489" w="917" h="42" measuredW="917" measuredH="42" zOrder="67" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="917" h="42" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="216">
+          <controlProperties>
+            <borderColor>11982760</borderColor>
+            <color>11982760</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="331" y="9" w="-1" h="-1" measuredW="242" measuredH="24" zOrder="1" locked="false" isInGroup="216">
+          <controlProperties>
+            <color>2575891</color>
+            <size>16</size>
+            <text>Visitante%20vinculado%20com%20sucesso.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="217" controlTypeID="__group__" x="34" y="2428" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="68" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="217">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="217">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="217">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="217">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="217">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="217">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="218" controlTypeID="com.balsamiq.mockups::Paragraph" x="191" y="2533" w="459" h="28" measuredW="200" measuredH="80" zOrder="69" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Cadastre%20visitantes%20e%20vincule%20pulseiras</text>
+      </controlProperties>
+    </control>
+    <control controlID="219" controlTypeID="com.balsamiq.mockups::Paragraph" x="191" y="2579" w="534" h="64" measuredW="200" measuredH="80" zOrder="70" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Voc%EA%20possui%20122%20visitantes%20cadastrados.%20Para%20adicionar%20um%20novo%20visitante%2C%20%E9%20s%F3%20clicar%20em%20cadastrar%20visitante.%20Para%20vincular%20um%20visitante%20cadastrado%20a%20uma%20pulseira%2C%20%E9%20s%F3%20clicar%20em%20vincular%20pulseira.</text>
+      </controlProperties>
+    </control>
+    <control controlID="220" controlTypeID="com.balsamiq.mockups::TextInput" x="191" y="2651" w="-1" h="-1" measuredW="171" measuredH="32" zOrder="71" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>cadastrar%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="221" controlTypeID="com.balsamiq.mockups::TextInput" x="381" y="2651" w="-1" h="-1" measuredW="149" measuredH="32" zOrder="72" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>vincular%20pulseira</text>
+      </controlProperties>
+    </control>
+    <control controlID="222" controlTypeID="com.balsamiq.mockups::StickyNote" x="1687" y="1929" w="235" h="203" measuredW="109" measuredH="123" zOrder="73" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Componentes%20utilizados%20do%20Bootstrap%0AAlert%20error</text>
+      </controlProperties>
+    </control>
+    <control controlID="223" controlTypeID="com.balsamiq.mockups::Paragraph" x="2867" y="1373" w="397" h="28" measuredW="200" measuredH="80" zOrder="74" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="224" controlTypeID="com.balsamiq.mockups::TextInput" x="3303" y="1630" w="-1" h="-1" measuredW="80" measuredH="32" zOrder="75" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <size>18</size>
+        <text>vincular</text>
+      </controlProperties>
+    </control>
+    <control controlID="225" controlTypeID="com.balsamiq.mockups::Paragraph" x="2867" y="1421" w="534" h="61" measuredW="200" measuredH="80" zOrder="76" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Para%20vincular%20um%20visitante%20a%20uma%20pulseira%2C%20basta%20buscar%20pelo%20nome%20ou%20n%FAmero%20do%20documento%20cadastrado.%20Depois%2C%20%E9%20s%F3%20clicar%20em%20vincular%20e%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="226" controlTypeID="com.balsamiq.mockups::Label" x="2867" y="1484" w="-1" h="-1" measuredW="222" measuredH="22" zOrder="77" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>N%E3o%20mostrar%20mais%20essa%20mensagem</text>
+      </controlProperties>
+    </control>
+    <control controlID="227" controlTypeID="com.balsamiq.mockups::Label" x="3225" y="1634" w="-1" h="-1" measuredW="67" measuredH="24" zOrder="78" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>16</size>
+        <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="228" controlTypeID="__group__" x="2709" y="1269" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="79" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="228">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="228">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="228">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="228">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="228">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="228">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="229" controlTypeID="com.balsamiq.mockups::Paragraph" x="2867" y="1579" w="534" h="61" measuredW="200" measuredH="80" zOrder="80" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Roberval%20o%20ladr%E3o%20de%20chocolates</text>
+      </controlProperties>
+    </control>
+    <control controlID="230" controlTypeID="com.balsamiq.mockups::Paragraph" x="2867" y="1605" w="534" h="25" measuredW="200" measuredH="80" zOrder="81" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>CPF%20999.988.999-30</text>
+      </controlProperties>
+    </control>
+    <control controlID="231" controlTypeID="com.balsamiq.mockups::TextInput" x="2867" y="1521" w="514" h="-1" measuredW="311" measuredH="30" zOrder="82" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Digite%20o%20nome%20ou%20documento%20do%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="232" controlTypeID="com.balsamiq.mockups::TextInput" x="3324" y="1523" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="83" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <text>buscar</text>
+      </controlProperties>
+    </control>
+    <control controlID="233" controlTypeID="__group__" x="2864" y="1325" w="917" h="42" measuredW="917" measuredH="42" zOrder="94" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="917" h="42" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="233">
+          <controlProperties>
+            <borderColor>10470904</borderColor>
+            <color>10470904</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="244" y="9" w="-1" h="-1" measuredW="436" measuredH="24" zOrder="1" locked="false" isInGroup="233">
+          <controlProperties>
+            <color>472931</color>
+            <size>16</size>
+            <text>Vinculando%20visitante...%20Por%20favor%2C%20aproxime%20a%20pulseira%20do%20leitor.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="234" controlTypeID="com.balsamiq.mockups::Arrow" x="1295" y="1863" w="1471" h="598" measuredW="150" measuredH="100" zOrder="95" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>true</leftArrow>
+        <rightArrow>false</rightArrow>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="235" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="1396" y="2354" w="1280" h="704" measuredW="450" measuredH="400" zOrder="84" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="236" controlTypeID="com.balsamiq.mockups::StickyNote" x="1393" y="3083" w="235" h="188" measuredW="109" measuredH="123" zOrder="85" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>No%20formul%E1rio%20de%20vincular%2C%20tamb%E9m%20pode%20ocorrer%20da%20busca%20n%E3o%20mostrar%20resultados.%20A%ED%20uma%20mensagem%20%E9%20exibida%20ao%20usu%E1rio.%20Aqui%20seria%20legal%20j%E1%20dar%20a%20op%E7%E3o%20dele%20cadastrar%20esse%20visitante%20que%20ele%20procurou%20e%20n%E3o%20encontrou.</text>
+      </controlProperties>
+    </control>
+    <control controlID="237" controlTypeID="com.balsamiq.mockups::Paragraph" x="1556" y="2532" w="397" h="28" measuredW="200" measuredH="80" zOrder="86" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Vincular%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="238" controlTypeID="com.balsamiq.mockups::TextInput" x="1992" y="2789" w="-1" h="-1" measuredW="80" measuredH="32" zOrder="87" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>1</backgroundAlpha>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <size>18</size>
+        <text>vincular</text>
+      </controlProperties>
+    </control>
+    <control controlID="239" controlTypeID="com.balsamiq.mockups::Paragraph" x="1556" y="2580" w="534" h="61" measuredW="200" measuredH="80" zOrder="88" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Para%20vincular%20um%20visitante%20a%20uma%20pulseira%2C%20basta%20buscar%20pelo%20nome%20ou%20n%FAmero%20do%20documento%20cadastrado.%20Depois%2C%20%E9%20s%F3%20clicar%20em%20vincular%20e%20aproximar%20a%20pulseira%20do%20leitor.</text>
+      </controlProperties>
+    </control>
+    <control controlID="240" controlTypeID="com.balsamiq.mockups::Label" x="1556" y="2643" w="-1" h="-1" measuredW="222" measuredH="22" zOrder="89" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>14</size>
+        <text>N%E3o%20mostrar%20mais%20essa%20mensagem</text>
+      </controlProperties>
+    </control>
+    <control controlID="241" controlTypeID="com.balsamiq.mockups::Label" x="1914" y="2793" w="-1" h="-1" measuredW="67" measuredH="24" zOrder="90" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <size>16</size>
+        <text>Cancelar</text>
+      </controlProperties>
+    </control>
+    <control controlID="242" controlTypeID="__group__" x="1398" y="2428" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="91" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="242">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="242">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="242">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="692" y="17" w="-1" h="-1" measuredW="158" measuredH="26" zOrder="3" locked="false" isInGroup="242">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>outro%20item%20de%20menu</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="561" y="14" w="-1" h="-1" measuredW="95" measuredH="32" zOrder="4" locked="false" isInGroup="242">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="242">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="245" controlTypeID="com.balsamiq.mockups::TextInput" x="1556" y="2680" w="514" h="-1" measuredW="123" measuredH="30" zOrder="92" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Renata%20Ingrata</text>
+      </controlProperties>
+    </control>
+    <control controlID="246" controlTypeID="com.balsamiq.mockups::TextInput" x="2013" y="2682" w="-1" h="-1" measuredW="55" measuredH="27" zOrder="93" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>11982760</borderColor>
+        <color>11982760</color>
+        <text>buscar</text>
+      </controlProperties>
+    </control>
+    <control controlID="247" controlTypeID="com.balsamiq.mockups::Paragraph" x="1556" y="2728" w="534" h="61" measuredW="200" measuredH="80" zOrder="96" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>N%E3o%20existem%20visitantes%20cadastrados%20com%20esse%20nome%20ou%20documento.%20Por%20favor%2C%20corrija%20ou%20%5Bcadastre%20um%20novo%20visitante%5D.</text>
+      </controlProperties>
+    </control>
+    <control controlID="249" controlTypeID="com.balsamiq.mockups::Arrow" x="1282" y="1836" w="182" h="10" measuredW="150" measuredH="100" zOrder="97" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16711935</color>
+        <curvature>0</curvature>
+        <leftArrow>false</leftArrow>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
