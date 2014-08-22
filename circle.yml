@@ -8,4 +8,4 @@ dependencies:
 
 test:
   override:
-    - mocha test/ -R spec
+    - node_modules/mocha/bin/mocha -R spec
