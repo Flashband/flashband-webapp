@@ -1,7 +1,7 @@
 {
   "name": "flashband-api",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a Sails application",
   "keywords": [],
   "dependencies": {
@@ -25,15 +25,19 @@
     "sails-mongo": "^0.10.4"
   },
   "scripts": {
-    "start": "node app.js",
-    "debug": "node debug app.js"
+    "start": "sails lift",
+    "debug": "node debug app.js",
+    "test": "mocha test/"
   },
   "main": "app.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/luiz/flashband-api.git"
   },
-  "author": "luiz",
+  "author": [
+    "Luiz Amorim <luiz.amorim@oncast.com.br>",
+    "Pablo Bender <pablo.bender@oncast.com.br>",
+  ],
   "license": "",
   "devDependencies": {
     "expect.js": "^0.3.1",
