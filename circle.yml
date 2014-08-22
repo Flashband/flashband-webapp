@@ -8,4 +8,4 @@ dependencies:
 
 test:
   overrride:
-    - cd api/ && mocha test/ -R spec
+    - mocha test/ -R spec
