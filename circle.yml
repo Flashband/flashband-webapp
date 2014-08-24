@@ -9,3 +9,6 @@ dependencies:
 test:
   override:
     - cd api/ && npm test
+
+  post:
+    - cd api/ && bash coverage.sh
