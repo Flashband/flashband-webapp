@@ -1,11 +1,12 @@
-module.exports ={
+module.exports = {
   register: function(flashbandUid, callback) {
     var args = {flashband: flashbandUid};
     Entrance.count(args).exec(function(err, count) {
-      if (count)
+      if (count) {
         callback({message: 'duplicated entrance'}, null);
-      else
+      } else {
         Entrance.create(args, callback);
+      }
     });
   }
 }

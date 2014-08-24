@@ -13,10 +13,9 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
-  for (var index in sails.models) {
-    sails.models[index].drop();
-  }
-  done();
+  async.map(sails.models, function(model, callback) {
+    model.drop(callback);
+  }, done);
 });
 
 after(function(done) {
