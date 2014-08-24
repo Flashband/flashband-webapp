@@ -14,8 +14,7 @@ before(function(done) {
 
 beforeEach(function(done) {
   for (var index in sails.models) {
-    model = sails.models[index];
-    model.drop();
+    sails.models[index].drop();
   }
   done();
 });

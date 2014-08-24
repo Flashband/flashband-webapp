@@ -1,14 +1,14 @@
-var Sails = require('sails');
-var expect = require('expect.js');
 var request = require('supertest');
 var shared = require('../shared-specs');
 
 describe('EntranceController', function() {
+  shared.shoudRequestNotFoundOnGet('/entrance');
+
   describe('POST /entrance', function() {
     it('should reject non-existing flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/entrance')
-        .send({flb: "123456"})
+        .send({flb: '123456'})
         .expect(403, done);
     });
 
@@ -20,5 +20,4 @@ describe('EntranceController', function() {
     //    .expect(201, done);
     //});
   });
-  shared.shoudRequestNotFoundOnGet("/entrance");
 });

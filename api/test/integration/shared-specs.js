@@ -1,5 +1,3 @@
-var Sails = require('sails');
-var expect = require('expect.js');
 var request = require('supertest');
 
 module.exports.shoudRequestNotFoundOnGet = function(path) {

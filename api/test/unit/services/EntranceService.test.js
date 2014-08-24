@@ -1,4 +1,3 @@
-var Sails = require('sails');
 var expect = require('expect.js');
 
 describe('EntranceService', function() {
@@ -13,6 +12,7 @@ describe('EntranceService', function() {
         });
       });
     });
+
     it('should not register an flashband already registered', function (done) {
       Entrance.create({flashband: '11223344'}).exec(function(err, flashband) {
         EntranceService.register('11223344', function(err, entrance) {
