@@ -2,21 +2,24 @@ var Q = require('q');
 
 module.exports = {
   register: function(flashbandUid, callback) {
+    var deferred = Q.defer();
     var args = { flashband: flashbandUid };
-    Q(FlashbandService.exists(args)).then(function(flashbandExists) {
-      if (flashbandExists) {
-        Q(Entrance.count(args)).then(function(count) {
-          if (count) {
-            callback({message: 'duplicated entrance'}, null);
-          } else {
-            Q(Entrance.create(args)).then(function(newEntrance) {
-              callback(err, entrance);
-            });
-          }
-        });
-      } else {
-        callback({message: 'flashband does not exists'}, null);
-      }
+
+    Entrance.create(args, function(err, entranceModel) {
+      deferred.resolve(entranceModel);
     });
+
+    return deferred.promise;
+  },
+
+  checkRegistered: function(flashbandUid) {
+    var deferred = Q.defer();
+    var args = { flashband: flashbandUid };
+
+    Entrance.count(args, function(err, count) {
+      deferred.resolve(count != null && count > 0);
+    });
+
+    return deferred.promise;
   }
 };

@@ -1,9 +1,9 @@
-var expect = require('expect.js');
+var expect = require('chai').expect
 
 describe('Testing', function() {
   describe('should', function() {
     it('true', function (done) {
-      expect(true).to.be.ok();
+      expect(1).to.be.ok;
       done();
     });
   });
