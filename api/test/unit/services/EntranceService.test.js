@@ -3,17 +3,25 @@ var sinon = require('sinon');
 var Q = require('q');
 
 describe('EntranceService', function() {
+  var flashbandServiceExistsStub;
+  beforeEach(function(done) {
+    flashbandServiceExistsStub = null;
+    done();
+  });
+
+  afterEach(function(done) {
+    if (flashbandServiceExistsStub) flashbandServiceExistsStub.restore();
+    done();
+  });
   describe('#register', function() {
     it('should create an Entrance', function (done) {
       flashbandServiceExistsStub = sinon.stub(FlashbandService, 'exists').returns(true);
-      Q.nfcall(EntranceService.register, '1234').done(function(err, entrance) {
+      Q(EntranceService.register('1234')).then(function(err, entrance) {
         expect(entrance).to.have.property('flashband', '1234');
         Q(Entrance.find({flashband: '1234'})).then(function(flashbands) {
           expect(flashbands).to.have.length(1);
-          flashbandServiceExistsStub.restore();
-          done();
         });
-      });
+      }).finally(done);
     });
 
     it('should not register entrance when another entrance exists for same flashband', function (done) {
@@ -34,10 +42,7 @@ describe('EntranceService', function() {
         Q(Entrance.find({flashband: '5678'})).then(function(flashbands) {
           expect(flashbands).to.have.length(0);
         });
-      }).finally(function() {
-        flashbandServiceExistsStub.restore();
-        done();
-      });
+      }).finally(done);
     });
   });
 });
