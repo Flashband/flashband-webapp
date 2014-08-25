@@ -6,7 +6,7 @@
 */
 
 module.exports = {
-
+  autoCreatedAt: true,
   attributes: {
     uid: { type: 'string' },
     serial: { type: 'string', columnName: 'srl' }
