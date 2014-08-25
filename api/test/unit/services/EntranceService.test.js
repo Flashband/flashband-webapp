@@ -1,19 +1,22 @@
 var expect = require('expect.js');
+var sinon = require('sinon');
+var Q = require('q');
 
 describe('EntranceService', function() {
   describe('#register', function() {
     it('should create an Entrance', function (done) {
-      EntranceService.register('1234', function(err, entrance) {
-        expect(err).to.be(null);
+      flashbandServiceExistsStub = sinon.stub(FlashbandService, 'exists').returns(true);
+      Q.nfcall(EntranceService.register, '1234').done(function(err, entrance) {
         expect(entrance).to.have.property('flashband', '1234');
-        Entrance.find({flashband: '1234'}).exec(function(err, flashbands) {
+        Q(Entrance.find({flashband: '1234'})).then(function(flashbands) {
           expect(flashbands).to.have.length(1);
+          flashbandServiceExistsStub.restore();
           done();
         });
       });
     });
 
-    it('should not register an flashband already registered', function (done) {
+    it('should not register entrance when another entrance exists for same flashband', function (done) {
       Entrance.create({flashband: '11223344'}).exec(function(err, flashband) {
         EntranceService.register('11223344', function(err, entrance) {
           expect(entrance).to.be(null);
@@ -21,6 +24,19 @@ describe('EntranceService', function() {
           expect(err).to.have.property('message', 'duplicated entrance');
           done();
         });
+      });
+    });
+
+    it('should not register entrance when flashband does not exists', function (done) {
+      flashbandServiceExistsStub = sinon.stub(FlashbandService, 'exists').returns(false);
+      Q(EntranceService.register('5678')).then(function(entrance) {
+        expect(entrance).to.be(null);
+        Q(Entrance.find({flashband: '5678'})).then(function(flashbands) {
+          expect(flashbands).to.have.length(0);
+        });
+      }).finally(function() {
+        flashbandServiceExistsStub.restore();
+        done();
       });
     });
   });
