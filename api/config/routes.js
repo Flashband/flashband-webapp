@@ -25,5 +25,6 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'post /entrance': 'EntranceController.create'
+  'post /entrance': 'EntranceController.create',
+  'post /Authenticate': 'AuthenticateController.create'
 };

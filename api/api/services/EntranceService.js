@@ -5,16 +5,35 @@ module.exports = {
     var deferred = Q.defer();
     var args = { flashband: flashbandUid };
 
-    Q(FlashbandService.exists(flashbandUid)).then(function(flashbandExists) {
-      if (!flashbandExists) return deferred.reject('Flashband not found.');
-    });
-
-    Q(this.checkRegistered(flashbandUid)).then(function(registered) {
-      if (registered) return deferred.reject('Duplicated entrance.');
+    EntranceService.validateBeforeRegister(flashbandUid).then(function(results) {
+      if (results.numberNotImported)      return deferred.reject('Flashband not found.');
+      if (results.entranceEverRegistered) return deferred.reject('Duplicated entrance.');
 
       Entrance.create(args, function(err, entranceModel) {
         deferred.resolve(entranceModel);
       });
+    });
+
+    return deferred.promise;
+  },
+
+  validateBeforeRegister: function(flashbandUid) {
+    var deferred = Q.defer();
+
+    async.series({
+        numberNotImported: function(callback){
+          FlashbandService.exists(flashbandUid).then(function(exist) {
+            callback(null, !exist);
+          });
+        },
+        entranceEverRegistered: function(callback) {
+          EntranceService.checkRegistered(flashbandUid).then(function(registered) {
+            callback(null, registered);
+          });
+        }
+    },
+    function(err, results) {
+      deferred.resolve(results);
     });
 
     return deferred.promise;
