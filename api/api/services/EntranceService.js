@@ -5,12 +5,12 @@ module.exports = {
     var deferred = Q.defer();
     var args = { flashband: flashbandUid };
 
-    FlashbandService.exists(args).then(function(flashbandExists) {
-      if (!flashbandExists) return deferred.reject(new Error('Flashband not found.'));
+    Q(FlashbandService.exists(flashbandUid)).then(function(flashbandExists) {
+      if (!flashbandExists) return deferred.reject('Flashband not found.');
     });
 
-    this.checkRegistered(flashbandUid).then(function(registered) {
-      if (registered) return deferred.reject(new Error('Duplicated entrance.'));
+    Q(this.checkRegistered(flashbandUid)).then(function(registered) {
+      if (registered) return deferred.reject('Duplicated entrance.');
 
       Entrance.create(args, function(err, entranceModel) {
         deferred.resolve(entranceModel);

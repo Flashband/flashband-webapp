@@ -1,4 +1,5 @@
 var Sails = require('sails');
+var async = require('async');
 
 before(function(done) {
   Sails.lift({
@@ -13,8 +14,8 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
-  async.eachSeries(sails.models, function(model, callback) {
-    model.drop(callback);
+  async.each(sails.models, function(model, next) {
+    Q(model.drop()).then(next);
   }, done);
 });
 

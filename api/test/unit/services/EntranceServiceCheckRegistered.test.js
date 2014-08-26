@@ -2,13 +2,12 @@ var Q = require('q');
 var chai = require('chai');
 chai.should();
 chai.use(require('chai-as-promised'));
-var args;
+//var args;
 
 describe('EntranceService', function() {
   describe('#checkRegistered', function() {
     beforeEach(function() {
       args = {flashband: '1234'};
-      Entrance.drop();
     });
 
     it('should return false when ShowGoer not entry', function (done) {

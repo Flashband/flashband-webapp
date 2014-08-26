@@ -8,8 +8,7 @@ describe('EntranceService', function() {
 
     beforeEach(function(done) {
       flashbandServiceExistsStub = null;
-      Entrance.drop();
-      done();
+      Q(Entrance.drop()).then(done);
     });
 
     afterEach(function(done) {
@@ -29,6 +28,7 @@ describe('EntranceService', function() {
         expect(Entrance.count({flashband: '1234'})).to.eventually.equal(1).and.notify(done);
       }).catch(function(reason) {
         expect.fail(reason);
+        done();
       });
     });
 
