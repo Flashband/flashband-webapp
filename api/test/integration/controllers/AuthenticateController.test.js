@@ -1,10 +1,5 @@
 var request = require('supertest');
 var shared = require('../shared-specs');
-var Q = require('q');
-var expect = require('chai').expect;
-var validArg;
-var userRegistered;
-var bcrypt = require('bcryptjs');
 
 describe('AuthenticateController', function() {
   shared.shoudRequestNotFoundOnGet('/login');

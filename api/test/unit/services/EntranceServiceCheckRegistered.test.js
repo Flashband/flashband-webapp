@@ -1,8 +1,7 @@
-var Q = require('q');
 var chai = require('chai');
+var args;
 chai.should();
 chai.use(require('chai-as-promised'));
-//var args;
 
 describe('EntranceService', function() {
   describe('#checkRegistered', function() {

@@ -1,7 +1,5 @@
 var request = require('supertest');
 var shared = require('../shared-specs');
-var Q = require('q');
-var expect = require('chai').expect;
 
 describe('EntranceController', function() {
   shared.shoudRequestNotFoundOnGet('/entrance');
@@ -13,7 +11,7 @@ describe('EntranceController', function() {
     });
 
     it('should register a valid flashband', function (done) {
-      Q(Flashband.create({uid: '1234', serial: 1})).then(function() {
+      Flashband.create({uid: '1234', serial: 1}, function() {
         request(sails.hooks.http.app).post('/entrance').send({flb: args.flashband}).expect(201, done);
       });
     });
