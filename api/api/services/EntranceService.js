@@ -6,13 +6,11 @@ module.exports = {
     var args = { flashband: flashbandUid };
 
     this.checkRegistered(flashbandUid).done(function(registered) {
-      if (registered) {
-        deferred.reject(new Error('Duplicated entrance.'));
-      } else {
-        Entrance.create(args, function(err, entranceModel) {
-          deferred.resolve(entranceModel);
-        });
-      }
+      if (registered) return deferred.reject(new Error('Duplicated entrance.'));
+
+      Entrance.create(args, function(err, entranceModel) {
+        deferred.resolve(entranceModel);
+      });
     });
 
     return deferred.promise;
