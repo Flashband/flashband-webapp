@@ -12,12 +12,20 @@ describe('EntranceService', function() {
     });
 
     it('should not register entrance when ShowGoer already in', function (done) {
-      prmised = EntranceService.register(args.flashband);
+      var promised = EntranceService.register(args.flashband);
 
       Q.all([
-        prmised.should.eventually.have.property("id"),
-        prmised.should.eventually.have.property("flashband", args.flashband)
+        promised.should.eventually.have.property("id"),
+        promised.should.eventually.have.property("flashband", args.flashband)
       ]).should.notify(done);
+    });
+
+    it('should register entrance when ShowGoer not already in', function (done) {
+
+
+      Entrance.create(args, function(err, entranceModel) {
+        EntranceService.register(args.flashband).should.be.rejectedWith(Error, 'Duplicated entrance.').notify(done);
+      });
     });
   });
 });

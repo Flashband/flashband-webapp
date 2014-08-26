@@ -7,7 +7,7 @@ module.exports = {
 
     this.checkRegistered(flashbandUid).done(function(registered) {
       if (registered) {
-        deferred.reject(new Error('Duplicated entrance'));
+        deferred.reject(new Error('Duplicated entrance.'));
       } else {
         Entrance.create(args, function(err, entranceModel) {
           deferred.resolve(entranceModel);
