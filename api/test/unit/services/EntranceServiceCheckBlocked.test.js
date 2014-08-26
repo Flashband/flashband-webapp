@@ -1,6 +1,4 @@
-var Sails = require('sails');
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var async = require('async');
 
 describe('EntranceService #register', function() {
   it ('should reject blocked flashband', function(done) {
