@@ -1,11 +1,11 @@
 var Q = require('q');
 
 module.exports = {
-  register: function(flashbandUid, callback) {
+  register: function(flashbandUid) {
     var deferred = Q.defer();
     var args = { flashband: flashbandUid };
 
-    this.checkRegistered(flashbandUid).done(function(registered) {
+    this.checkRegistered(flashbandUid).then(function(registered) {
       if (registered) return deferred.reject(new Error('Duplicated entrance.'));
 
       Entrance.create(args, function(err, entranceModel) {

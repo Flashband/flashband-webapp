@@ -21,8 +21,6 @@ describe('EntranceService', function() {
     });
 
     it('should register entrance when ShowGoer not already in', function (done) {
-
-
       Entrance.create(args, function(err, entranceModel) {
         EntranceService.register(args.flashband).should.be.rejectedWith(Error, 'Duplicated entrance.').notify(done);
       });

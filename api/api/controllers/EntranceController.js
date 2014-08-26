@@ -6,6 +6,10 @@
  */
 module.exports = {
   create: function(req, res) {
-    res.forbidden();
+    EntranceService.register(req.flb).then(function(entrance) {
+      res.created();
+    }).fail(function (error) {
+      res.forbidden(error);
+    });
   }
 };

@@ -8,6 +8,7 @@ describe('EntranceService', function() {
   describe('#checkRegistered', function() {
     beforeEach(function() {
       args = {flashband: '1234'};
+      Entrance.drop();
     });
 
     it('should return false when ShowGoer not entry', function (done) {

@@ -5,19 +5,19 @@ describe('EntranceController', function() {
   shared.shoudRequestNotFoundOnGet('/entrance');
 
   describe('POST /entrance', function() {
-    it('should reject non-existing flashband', function (done) {
-      request(sails.hooks.http.app)
-        .post('/entrance')
-        .send({flb: '123456'})
-        .expect(403, done);
+    beforeEach(function() {
+      args = {flashband: '1234'};
+      Entrance.drop();
     });
 
-    //it('should allow existing flashband', function(done) {
-      //registrar a flashband
-    //  request(sails.hooks.http.app)
-    //    .post('/entrance')
-    //    .send({flb: "123456"})
-    //    .expect(201, done);
-    //});
+    it('should register an valid flashband', function (done) {
+      request(sails.hooks.http.app).post('/entrance').send({flb: args.flashband}).expect(201, done);
+    });
+
+    it('should reject duplicated flashband', function (done) {
+      request(sails.hooks.http.app).post('/entrance').send({flb: args.flashband}).end(function(err, res) {
+        request(sails.hooks.http.app).post('/entrance').send({flb: args.flashband}).expect(403, done);
+      });
+    });
   });
 });
