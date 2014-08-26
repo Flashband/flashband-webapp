@@ -46,11 +46,10 @@
   "devDependencies": {
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
-    "expect.js": "^0.3.1",
     "jscover": "^0.2.4",
     "mocha": "^1.21.4",
     "mocha-lcov-reporter": "0.0.1",
-    "passport": "^0.2.0",
+    "password-hash": "^1.2.2",
     "sinon": "^1.10.3",
     "supertest": "^0.13.0"
   }

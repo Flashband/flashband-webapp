@@ -8,8 +8,8 @@
 module.exports = {
   autoCreatedAt: true,
   attributes: {
-    hash: { type: 'string' },
-    user: { model:'user' }
+    user: { model:'user' },
+    rehash: { type: 'string' }
   }
 };
 

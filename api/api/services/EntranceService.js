@@ -5,7 +5,7 @@ module.exports = {
     var deferred = Q.defer();
     var args = { flashband: flashbandUid };
 
-    EntranceService.validateBeforeRegister(flashbandUid).then(function(results) {
+    this.validateBeforeRegister(flashbandUid).then(function(results) {
       if (results.numberNotImported)      return deferred.reject('Flashband not found.');
       if (results.entranceEverRegistered) return deferred.reject('Duplicated entrance.');
 
