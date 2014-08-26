@@ -9,6 +9,11 @@ module.exports = {
   autoCreatedAt: true,
   attributes: {
     uid: { type: 'string' },
-    serial: { type: 'string', columnName: 'srl' }
-  }
+    serial: { type: 'string', columnName: 'srl' },
+    blockedAt: { type: 'datetime', columnName: 'blkd_at' },
+
+    blocked: function() {
+      return Boolean(this.blockedAt);
+    }
+  },
 };
