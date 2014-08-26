@@ -13,7 +13,7 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
-  async.map(sails.models, function(model, callback) {
+  async.eachSeries(sails.models, function(model, callback) {
     model.drop(callback);
   }, done);
 });

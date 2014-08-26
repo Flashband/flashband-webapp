@@ -14,7 +14,7 @@ describe('EntranceService', function() {
       EntranceService.checkRegistered(args.flashband).should.eventually.equal(false).notify(done);
     });
 
-    it('should return true when ShowGoer not entry', function (done) {
+    it('should return true when ShowGoer ever entry', function (done) {
       Entrance.create(args, function(err, entranceModel) {
         EntranceService.checkRegistered(args.flashband).should.eventually.equal(true).notify(done);
       });
