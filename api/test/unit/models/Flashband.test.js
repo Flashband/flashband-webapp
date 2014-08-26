@@ -7,7 +7,6 @@ describe('Flashband model', function() {
 
   beforeEach(function(done) {
     flashband = new Flashband._model({uid: '9876', serial: 1});
-    console.log(flashband);
     done();
   });
 

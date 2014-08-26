@@ -32,7 +32,7 @@ describe('EntranceService', function() {
       });
     });
 
-    it('should not register entrance when flashband does not exists', function (done) {
+    it('should not register entrance when non existing flashband', function (done) {
       stubFlashbandExists(false);
       expect(EntranceService.register('5678')).to.be.rejectedWith('Flashband not found.').and.notify(done);
     });
