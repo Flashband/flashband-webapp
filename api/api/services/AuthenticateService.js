@@ -1,11 +1,13 @@
 var Q = require('q');
-var passwordHash = require('password-hash');
+var bcrypt = require('bcryptjs');
 
-var loadUser = function(nickname) {
+var loadUserByPass = function(passW) {
   var deferred = Q.defer();
 
-  User.findOne({nickname: nickname}, function(err, user) {
-    if (err) return deferred.reject(err);
+  User.findOne({password: passW}, function(err, user) {
+    if (err)   return deferred.reject(err);
+    if (!user) return deferred.reject(new Error("Authentication Unauthorized"));
+
     deferred.resolve(user);
   });
 
@@ -13,20 +15,18 @@ var loadUser = function(nickname) {
 };
 
 module.exports = {
-  login: function(nickname, password) {
+  login: function(password) {
     var deferred = Q.defer();
 
-    loadUser(nickname).then(function(user) {
-      if (!passwordHash.verify(password, user.password)) return deferred.reject('Authenticate unauthorized.');
-
-      var argToken = {
-        rehash: passwordHash.generate(user.id.concat(new Date().toISOString()))
+    loadUserByPass(password).then(function(user) {
+      var args = {
+        token: bcrypt.hashSync(user.id.concat(new Date().toISOString()), 8)
       };
 
-      user.tokens.add(argToken);
-      deferred.resolve(argToken);
+      user.tokens.add(args);
+      deferred.resolve(args);
     }).fail(function(error) {
-      deferred.reject(err);
+      deferred.reject(error);
     });
 
     return deferred.promise;

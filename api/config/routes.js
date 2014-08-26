@@ -26,5 +26,5 @@ module.exports.routes = {
   },
 
   'post /entrance': 'EntranceController.create',
-  'post /Authenticate': 'AuthenticateController.create'
+  'post /authenticate': 'AuthenticateController.create'
 };
