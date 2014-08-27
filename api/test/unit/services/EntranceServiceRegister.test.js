@@ -20,8 +20,8 @@ describe('EntranceService', function() {
     it('should register entrance when ShowGoer not already in', function (done) {
       var promised = EntranceService.register(args.flashband);
       Q.all([
-        promised.should.eventually.have.property("id"),
-        promised.should.eventually.have.property("flashband", args.flashband)
+        promised.should.eventually.have.property('id'),
+        promised.should.eventually.have.property('flashband', args.flashband)
         ]).should.notify(function(err, results) {
           done();
         });

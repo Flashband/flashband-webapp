@@ -1,5 +1,6 @@
 var request = require('supertest');
 var shared = require('../shared-specs');
+var args;
 
 describe('EntranceController', function() {
   shared.shoudRequestNotFoundOnGet('/entrance');

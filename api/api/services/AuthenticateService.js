@@ -6,7 +6,7 @@ var loadUserByPass = function(passW) {
 
   User.findOne({password: passW}, function(err, user) {
     if (err)   return deferred.reject(err);
-    if (!user) return deferred.reject(new Error("Authentication Unauthorized"));
+    if (!user) return deferred.reject(new Error('Authentication Unauthorized'));
 
     deferred.resolve(user);
   });
