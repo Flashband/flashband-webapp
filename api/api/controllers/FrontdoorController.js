@@ -1,5 +1,5 @@
 module.exports = {
-  create: function(req, res) {
+  enter: function(req, res) {
     EntranceService.register(req.param('tag')).then(function(entrance) {
       res.created();
     }).fail(function (error) {

@@ -5,10 +5,10 @@ var passwordHash = require('password-hash');
 var args;
 var serialToken;
 
-describe('EntranceController', function() {
-  shared.shoudRequestNotFound('/entrance', ['GET', 'PUT', 'DELETE']);
+describe('FrontdoorController', function() {
+  shared.shoudRequestNotFound('/frontdoor/enter', ['GET', 'PUT', 'DELETE']);
 
-  describe('POST /entrance', function() {
+  describe('POST /frontdoor/enter', function() {
     beforeEach(function(done) {
       args = {tag: '1234'};
 
@@ -22,7 +22,7 @@ describe('EntranceController', function() {
     it('should register a valid flashband', function (done) {
       Flashband.create({uid: '1234', serial: 1}, function() {
         request(sails.hooks.http.app)
-          .post('/entrance')
+          .post('/frontdoor/enter')
           .send({tag: args.tag})
           .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -32,7 +32,7 @@ describe('EntranceController', function() {
 
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
-        .post('/entrance')
+        .post('/frontdoor/enter')
         .send({tag: "123123123123"})
         .expect(403, "Flashband not found.")
         .set('Authorization', 'Token token='.concat(serialToken))
@@ -42,7 +42,7 @@ describe('EntranceController', function() {
     it('should reject duplicated flashband', function (done) {
       Entrance.create({flb: args.tag}, function(err, entranceModel) {
         request(sails.hooks.http.app)
-          .post('/entrance')
+          .post('/frontdoor/enter')
           .send({tag: args.tag})
           .expect(403, 'Duplicated entrance.')
           .set('Authorization', 'Token token='.concat(serialToken))
