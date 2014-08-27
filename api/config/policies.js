@@ -26,11 +26,11 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': 'authenticated',
+  '*': 'authenticated',
 
-  // 'AuthenticateController': {
-  //   'create': true
-  // }
+  'AuthenticateController': {
+    'create': true
+  }
 
   /***************************************************************************
   *                                                                          *

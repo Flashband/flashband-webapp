@@ -1,13 +1,14 @@
-/**
- * Allow any authenticated user.
- */
-var passport = require('passport');
+module.exports = function (req, res, next) {
+  var spliter = req.headers.authorization.split("Token token=");
+  var token = false;
 
-module.exports = function (req, res, done) {
-  passport.authenticate('bearer', {session: false}, function(err, success) {
-    if (err)     return done(err);
-    if (success.allowed) return done();
+  if (spliter.length == 2) token = spliter[1];
+  if (!token) return res.unauthorized();
 
-    return res.send(403, {message: 'You are not permitted to perform this action.'});
-  })(req, res);
+  AuthenticateService.checkTokenValid(token).then(function(allowed) {
+    if (!allowed) return res.unauthorized();
+    next();
+  }).fail(function(err) {
+    res.serverError(err);
+  });
 };

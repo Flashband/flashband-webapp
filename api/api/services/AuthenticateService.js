@@ -1,5 +1,5 @@
 var Q = require('q');
-var bcrypt = require('bcryptjs');
+var tokenHasher = require('password-hash');
 
 var loadUserByPass = function(passW) {
   var deferred = Q.defer();
@@ -20,13 +20,42 @@ module.exports = {
 
     loadUserByPass(password).then(function(user) {
       var args = {
-        token: bcrypt.hashSync(user.id.concat(new Date().toISOString()), 8)
+        token: tokenHasher.generate(user.id)
       };
 
       user.tokens.add(args);
-      deferred.resolve(args);
+      user.save(function(err) {
+        deferred.resolve(args);
+      });
     }).fail(function(error) {
       deferred.reject(error);
+    });
+
+    return deferred.promise;
+  },
+  checkTokenValid: function(accessToken) {
+    var deferred = Q.defer();
+
+    if (!accessToken) {
+      deferred.resolve(false);
+      return deferred.promise;
+    }
+
+    if (!tokenHasher.isHashed(accessToken)) {
+      deferred.resolve(false);
+      return deferred.promise;
+    }
+
+    Token.findOne({token: accessToken}).exec(function(err, theToken) {
+
+      console.log("==============");
+      console.log(theToken);
+      console.log("==============");
+
+      if (err)    return deferred.resolve(false);
+      if (!theToken) return deferred.resolve(false);
+
+      deferred.resolve(theToken.token == accessToken);
     });
 
     return deferred.promise;

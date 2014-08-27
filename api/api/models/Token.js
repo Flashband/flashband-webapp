@@ -9,7 +9,7 @@ module.exports = {
   autoCreatedAt: true,
   attributes: {
     user: { model:'user' },
-    rehash: { type: 'string' }
+    token: { type: 'string' }
   }
 };
 
