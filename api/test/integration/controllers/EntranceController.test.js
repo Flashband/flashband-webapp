@@ -23,7 +23,7 @@ describe('EntranceController', function() {
       Flashband.create({uid: '1234', serial: 1}, function() {
         request(sails.hooks.http.app)
           .post('/entrance')
-          .send({flb: args.tag})
+          .send({tag: args.tag})
           .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -33,7 +33,7 @@ describe('EntranceController', function() {
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/entrance')
-        .send({flb: "123123123123"})
+        .send({tag: "123123123123"})
         .expect(403, "Flashband not found.")
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -43,7 +43,7 @@ describe('EntranceController', function() {
       Entrance.create({flb: args.tag}, function(err, entranceModel) {
         request(sails.hooks.http.app)
           .post('/entrance')
-          .send({flb: args.tag})
+          .send({tag: args.tag})
           .expect(403, 'Duplicated entrance.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
