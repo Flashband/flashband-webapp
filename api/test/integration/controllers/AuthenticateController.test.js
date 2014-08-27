@@ -3,7 +3,7 @@ var shared = require('../shared-specs');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 
 describe('AuthenticateController', function() {
-  shared.shoudRequestNotFoundOnGet('/login');
+  shared.shoudRequestNotFound('/authenticate', ['GET', 'PUT', 'DELETE']);
 
   describe('POST /authenticate', function() {
     it('should allow authentication with valid user data', function (done) {

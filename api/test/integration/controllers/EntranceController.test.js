@@ -6,7 +6,7 @@ var args;
 var serialToken;
 
 describe('EntranceController', function() {
-  shared.shoudRequestNotFoundOnGet('/entrance');
+  shared.shoudRequestNotFound('/entrance', ['GET', 'PUT', 'DELETE']);
 
   describe('POST /entrance', function() {
     beforeEach(function(done) {
@@ -28,6 +28,15 @@ describe('EntranceController', function() {
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       });
+    });
+
+    it('should reject a invalid flashband', function (done) {
+      request(sails.hooks.http.app)
+        .post('/entrance')
+        .send({flb: "123123123123"})
+        .expect(403, "Flashband not found.")
+        .set('Authorization', 'Token token='.concat(serialToken))
+        .end(done);
     });
 
     it('should reject duplicated flashband', function (done) {
