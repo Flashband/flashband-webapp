@@ -8,7 +8,7 @@ describe('EntranceService', function() {
 
     beforeEach(function(done) {
       flashbandServiceExistsStub = null;
-      Q(Entrance.drop()).then(done);
+      Entrance.drop(done);
     });
 
     afterEach(function(done) {

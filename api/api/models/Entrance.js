@@ -8,7 +8,7 @@
 module.exports = {
   autoCreatedAt: true,
   attributes: {
-    flashband: { type: 'string', columnName: 'flb' }
+    tag: { type: 'string' }
   }
 };
 

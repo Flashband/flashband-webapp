@@ -10,7 +10,7 @@ describe('EntranceController', function() {
 
   describe('POST /entrance', function() {
     beforeEach(function(done) {
-      args = {flashband: '1234'};
+      args = {tag: '1234'};
 
       User.create({password: '123123123'}, function(err, user) {
         serialToken = passwordHash.generate(user.id);
@@ -23,7 +23,7 @@ describe('EntranceController', function() {
       Flashband.create({uid: '1234', serial: 1}, function() {
         request(sails.hooks.http.app)
           .post('/entrance')
-          .send({flb: args.flashband})
+          .send({flb: args.tag})
           .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -40,10 +40,10 @@ describe('EntranceController', function() {
     });
 
     it('should reject duplicated flashband', function (done) {
-      Entrance.create({flb: args.flashband}, function(err, entranceModel) {
+      Entrance.create({flb: args.tag}, function(err, entranceModel) {
         request(sails.hooks.http.app)
           .post('/entrance')
-          .send({flb: args.flashband})
+          .send({flb: args.tag})
           .expect(403, 'Duplicated entrance.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
