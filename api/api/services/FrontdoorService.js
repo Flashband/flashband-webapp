@@ -10,7 +10,7 @@ var _validateBeforeRegister = function(flashbandUid) {
       });
     },
     entranceAlreadyRegistered: function(callback) {
-      EntranceService.checkRegistered(flashbandUid).then(function(registered) {
+      FrontdoorService.checkRegistered(flashbandUid).then(function(registered) {
         callback(null, registered);
       });
     },

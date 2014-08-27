@@ -2,7 +2,7 @@ var expect = require('chai').use(require('chai-as-promised')).expect;
 var sinon = require('sinon');
 var Q = require('q');
 
-describe('EntranceService', function() {
+describe('FrontdoorService', function() {
   describe('#register', function() {
     var flashbandServiceExistsStub;
 
@@ -23,7 +23,7 @@ describe('EntranceService', function() {
     it('should create an Entrance', function (done) {
       stubFlashbandExists(true);
 
-      Q(EntranceService.register('1234')).then(function(entrance) {
+      Q(FrontdoorService.register('1234')).then(function(entrance) {
         expect(entrance).to.have.property('flashband', '1234');
         expect(Entrance.count({flashband: '1234'})).to.eventually.equal(1).and.notify(done);
       }).catch(function(reason) {
@@ -34,7 +34,7 @@ describe('EntranceService', function() {
 
     it('should not register entrance when non existing flashband', function (done) {
       stubFlashbandExists(false);
-      expect(EntranceService.register('5678')).to.be.rejectedWith('Flashband not found.').and.notify(done);
+      expect(FrontdoorService.register('5678')).to.be.rejectedWith('Flashband not found.').and.notify(done);
     });
   });
 });
