@@ -47,11 +47,6 @@ module.exports = {
     }
 
     Token.findOne({token: accessToken}).exec(function(err, theToken) {
-
-      console.log("==============");
-      console.log(theToken);
-      console.log("==============");
-
       if (err)    return deferred.resolve(false);
       if (!theToken) return deferred.resolve(false);
 
