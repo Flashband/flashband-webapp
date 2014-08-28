@@ -21,7 +21,12 @@ describe('AuthenticateController', function() {
     });
 
     it('should danied authentication with invalid user data', function (done) {
-      request(sails.hooks.http.app).post('/authenticate').send({password: 'invalidPassword'}).expect(401).end(done);
+      request(sails.hooks.http.app)
+      .post('/authenticate')
+      .send({password: 'invalidPassword'})
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+      .end(done);
     });
   });
 });
