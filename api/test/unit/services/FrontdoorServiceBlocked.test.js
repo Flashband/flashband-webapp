@@ -1,5 +1,5 @@
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var FlashbandHelper = require('../helpers/FlashbandHelper');
+var FlashbandHelper = require('../../helpers/FlashbandHelper');
 
 describe('FrontdoorService #register', function() {
   it ('should reject blocked flashband', function(done) {

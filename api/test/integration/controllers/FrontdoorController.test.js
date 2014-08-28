@@ -1,6 +1,7 @@
 var request      = require('supertest');
 var shared       = require('../shared-specs');
 var passwordHash = require('password-hash');
+var FlashbandHelper = require('../../helpers/FlashbandHelper');
 
 var args;
 var serialToken;
@@ -48,6 +49,19 @@ describe('FrontdoorController', function() {
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       });
+    });
+
+    it('should reject blocked flashband', function (done) {
+      var verifyFlashBandBlocked = function(flashBlocked ) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: flashBlocked.tag})
+          .expect(403, 'Blocked flashband.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      FlashbandHelper.createBlocked().then(verifyFlashBandBlocked);
     });
   });
 });
