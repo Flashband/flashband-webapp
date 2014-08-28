@@ -1,24 +1,12 @@
 var Q = require('q');
 var tokenHasher = require('password-hash');
-
-var loadUserByPass = function(passW) {
-  var deferred = Q.defer();
-
-  User.findOne({password: passW}, function(err, user) {
-    if (err)   return deferred.reject(err);
-    if (!user) return deferred.reject(new Error('Authentication Unauthorized'));
-
-    deferred.resolve(user);
-  });
-
-  return deferred.promise;
-};
+var loadUserByPass = require('./LoadUserByPass');
 
 module.exports = {
   login: function(password) {
     var deferred = Q.defer();
 
-    loadUserByPass(password).then(function(user) {
+    var generateToken = function(user) {
       var args = {
         token: tokenHasher.generate(user.id)
       };
@@ -27,12 +15,15 @@ module.exports = {
       user.save(function(err) {
         deferred.resolve(args);
       });
-    }).fail(function(error) {
+    };
+
+    loadUserByPass(password).then(generateToken).fail(function(error) {
       deferred.reject(error);
     });
 
     return deferred.promise;
   },
+
   checkTokenValid: function(accessToken) {
     var deferred = Q.defer();
 
@@ -50,7 +41,7 @@ module.exports = {
       if (err)    return deferred.resolve(false);
       if (!theToken) return deferred.resolve(false);
 
-      deferred.resolve(theToken.token == accessToken);
+      deferred.resolve(theToken.token === accessToken);
     });
 
     return deferred.promise;

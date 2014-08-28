@@ -7,21 +7,21 @@ var args;
 describe('FrontdoorService', function() {
   describe('#checkRegistered', function() {
     beforeEach(function(done) {
-      args = {flashband: '1234'};
+      args = {tag: '1234'};
       done();
     });
 
     it('should not register entrance when ShowGoer already in', function (done) {
       Entrance.create(args, function(err, entranceModel) {
-        FrontdoorService.register(args.flashband).should.be.rejectedWith('Duplicated entrance.').notify(done);
+        FrontdoorService.register(args.tag).should.be.rejectedWith('Duplicated entrance.').notify(done);
       });
     });
 
     it('should register entrance when ShowGoer not already in', function (done) {
-      var promised = FrontdoorService.register(args.flashband);
+      var promised = FrontdoorService.register(args.tag);
       Q.all([
         promised.should.eventually.have.property('id'),
-        promised.should.eventually.have.property('flashband', args.flashband)
+        promised.should.eventually.have.property('tag', args.tag)
         ]).should.notify(function(err, results) {
           done();
         });

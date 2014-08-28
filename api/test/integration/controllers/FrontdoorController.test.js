@@ -20,7 +20,7 @@ describe('FrontdoorController', function() {
     });
 
     it('should register a valid flashband', function (done) {
-      Flashband.create({uid: '1234', serial: 1}, function() {
+      Flashband.create({tag: '1234', serial: 1}, function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
           .send({tag: args.tag})
@@ -33,8 +33,8 @@ describe('FrontdoorController', function() {
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/enter')
-        .send({tag: "123123123123"})
-        .expect(403, "Flashband not found.")
+        .send({tag: '123123123123'})
+        .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
     });

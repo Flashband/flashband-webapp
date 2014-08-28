@@ -8,7 +8,7 @@
 module.exports = {
   autoCreatedAt: true,
   attributes: {
-    uid: { type: 'string' },
+    tag: { type: 'string' },
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
 
