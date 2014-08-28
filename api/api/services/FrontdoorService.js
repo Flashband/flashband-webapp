@@ -2,15 +2,26 @@ var Q = require('q');
 var validateBeforeRegister = require('./ValidateBeforeRegister');
 
 module.exports = {
-  register: function(flashbandUid) {
+  registerEnter: function(flashbandUid) {
     var deferred = Q.defer();
-    var args = { tag: flashbandUid };
 
-    validateBeforeRegister(flashbandUid).then(function(results) {
-      if (results.flashbandNotImported)       return deferred.reject('Flashband not found.');
-      if (results.blockedFlashband)           return deferred.reject('Blocked flashband.');
-      if (results.entranceAlreadyRegistered)  return deferred.reject('Duplicated entrance.');
+    validateBeforeRegister.enter(flashbandUid).then(function(results) {
+      if (results.flashbandNotImported)      return deferred.reject('Flashband not found.');
+      if (results.blockedFlashband)          return deferred.reject('Blocked flashband.');
+      if (results.entranceAlreadyRegistered) return deferred.reject('Duplicated entrance.');
 
+      Entrance.create({ tag: flashbandUid }, function(err, entranceModel) {
+        deferred.resolve(entranceModel);
+      });
+    });
+
+    return deferred.promise;
+  },
+
+  registerLeave: function(flashbandUid) {
+    var deferred = Q.defer();
+
+    validateBeforeRegister.leave(flashbandUid).then(function(results) {
       Entrance.create(args, function(err, entranceModel) {
         deferred.resolve(entranceModel);
       });

@@ -25,12 +25,12 @@ describe('FrontdoorService', function() {
         expect(Entrance.count({tag: '1234'})).to.eventually.equal(1).and.notify(done);
       };
 
-      FrontdoorService.register('1234').then(verifyRegisterEntrance);
+      FrontdoorService.registerEnter('1234').then(verifyRegisterEntrance);
     });
 
     it('should not register entrance when non existing flashband', function (done) {
       stubFlashbandExists(false);
-      expect(FrontdoorService.register('5678')).to.be.rejectedWith('Flashband not found.').and.notify(done);
+      expect(FrontdoorService.registerEnter('5678')).to.be.rejectedWith('Flashband not found.').and.notify(done);
     });
 
     afterEach(function(done) {
