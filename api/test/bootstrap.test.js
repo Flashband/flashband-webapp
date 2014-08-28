@@ -15,7 +15,7 @@ before(function(done) {
 
 beforeEach(function(done) {
   async.each(sails.models, function(model, next) {
-    Q(model.drop()).then(next);
+    Q(model.drop()).then(next, done);
   }, done);
 });
 
