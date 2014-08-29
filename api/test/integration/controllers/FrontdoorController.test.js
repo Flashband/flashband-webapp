@@ -61,7 +61,7 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      FlashbandHelper.createBlocked().then(verifyFlashBandBlocked, done);
+      FlashbandHelper.createBlocked().then(verifyFlashBandBlocked);
     });
   });
 });

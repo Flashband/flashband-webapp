@@ -8,7 +8,7 @@ describe('FrontdoorService #registerEnter', function() {
       expect(promise).to.be.rejectedWith('Blocked flashband.').and.notify(done);
     };
 
-    FlashbandHelper.createBlocked(expect).then(verifyBlockedFlashband);
+    FlashbandHelper.createBlocked(expect).then(verifyBlockedFlashband, done);
   });
 
   it ('should allow non blocked flashband', function(done) {
@@ -17,6 +17,6 @@ describe('FrontdoorService #registerEnter', function() {
       expect(promise).to.eventually.have.property('tag', flashSuccess.tag).and.notify(done);
     };
 
-    FlashbandHelper.createSuccess().then(verifyFlashBandAllowed);
+    FlashbandHelper.createSuccess().then(verifyFlashBandAllowed, done);
   });
 });

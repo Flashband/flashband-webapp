@@ -12,7 +12,7 @@ describe('FrontdoorService', function() {
       FlashbandHelper.createSuccess().then(function(flashSuccess) {
         validFlashband = flashSuccess;
         done();
-      });
+      }, done);
     });
 
     it('should register output when ShowGoer go home.', function (done) {
