@@ -13,6 +13,7 @@ module.exports = {
 
     return promiseTarget(deferred);
   },
+
   createSuccess: function(expect) {
     var deferred = Q.defer();
 
