@@ -1,6 +1,6 @@
-var expect = require('chai').use(require('chai-as-promised')).expect;
-var sinon = require('sinon');
 var Q = require('q');
+var sinon = require('sinon');
+var expect = require('chai').use(require('chai-as-promised')).expect;
 var flashbandServiceExistsStub;
 
 var stubFlashbandExists = function(exists) {
@@ -25,7 +25,7 @@ describe('FrontdoorService', function() {
         expect(Entrance.count({tag: '1234'})).to.eventually.equal(1).and.notify(done);
       };
 
-      FrontdoorService.registerEnter('1234').then(verifyRegisterEntrance);
+      FrontdoorService.registerEnter('1234').then(verifyRegisterEntrance, done);
     });
 
     it('should not register entrance when non existing flashband', function (done) {

@@ -5,9 +5,9 @@ module.exports = {
     var deferred = Q.defer();
 
     async.series({
-      flashbandNotImported: function(callback){
+      flashbandImported: function(callback){
         FlashbandService.exists(flashbandUid).then(function(exists) {
-          callback(null, !exists);
+          callback(null, exists);
         });
       },
       entranceAlreadyIn: function(callback) {
@@ -31,17 +31,17 @@ module.exports = {
     var deferred = Q.defer();
 
     async.series({
-      flashbandNotImported: function(callback){
+      imported: function(callback){
         FlashbandService.exists(flashbandUid).then(function(exists) {
-          callback(null, !exists);
+          callback(null, exists);
         });
       },
-      flashbandWithoutEntry: function(callback) {
-        FrontdoorService.checkRegistered(flashbandUid).then(function(registered) {
-          callback(null, !registered);
+      alreadyOut: function(callback) {
+        FrontdoorService.checkAlreadyOut(flashbandUid).then(function(alreadyOut) {
+          callback(null, alreadyOut);
         });
       },
-      blockedFlashband: function(callback) {
+      blocked: function(callback) {
         Flashband.findOne({tag: flashbandUid}).then(function(flashband) {
           callback(null, flashband ? flashband.blocked() : false);
         });

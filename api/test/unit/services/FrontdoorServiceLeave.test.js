@@ -1,29 +1,40 @@
 var Q = require('q');
-var chai = require('chai');
-var validFlashband;
-var FlashbandHelper = require('../../helpers/FlashbandHelper');
-
-chai.should();
-chai.use(require('chai-as-promised'));
+var expect = require('chai').use(require('chai-as-promised')).expect;
+var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerLeave', function() {
-    beforeEach(function(done) {
-      FlashbandHelper.createSuccess().then(function(flashSuccess) {
-        validFlashband = flashSuccess;
-        done();
-      });
+    it('should not register leave when flashband not imported', function (done) {
+      FrontdoorService.registerLeave('0000000001').should.be.rejectedWith('Flashband not found.').notify(done);
     });
 
-    it('should register output when ShowGoer go home.', function (done) {
-      var promised = FrontdoorService.registerLeave(validFlashband.tag);
+    it('should not register leave when ShowGoer blocked flashband', function (done) {
+      var verifyFlashBandBlocked = function(flashBlocked) {
+        FrontdoorService.registerLeave(flashBlocked.tag).should.be.rejectedWith('Blocked flashband.').notify(done);
+      };
 
-      Q.all([
-        promised.should.eventually.have.property('date'),
-        promised.should.eventually.have.property('tag', validFlashband.tag)
-        ]).should.notify(function(err, results) {
-          done();
-        });
+      FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
+    });
+
+    it('should register leave when ShowGoer go home', function (done) {
+      var verifyLeave = function(entrance) {
+        var promise = FrontdoorService.registerLeave(entrance.tag);
+
+        Q.all([
+          promise.should.eventually.have.property('leave'),
+          promise.should.eventually.have.property('tag', entrance.tag)
+        ]).should.notify(done);
+      };
+
+      FrontdoorHelper.createEntrance().then(verifyLeave, done);
+    });
+
+    it('should not register leave when ShowGoer already out', function (done) {
+      var verifyDuplicated = function(entrance) {
+        FrontdoorService.registerLeave(entrance.tag).should.be.rejectedWith('Duplicated exit.').notify(done);
+      };
+
+      FrontdoorHelper.createLeave().then(verifyDuplicated, done);
     });
   });
 });

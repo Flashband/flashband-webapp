@@ -6,7 +6,7 @@ module.exports = {
     var deferred = Q.defer();
 
     var registerEntrance = function(results) {
-      if (results.flashbandNotImported) return deferred.reject('Flashband not found.');
+      if (!results.flashbandImported)   return deferred.reject('Flashband not found.');
       if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
       if (results.entranceAlreadyIn)    return deferred.reject('Duplicated entrance.');
 
@@ -23,20 +23,20 @@ module.exports = {
   registerLeave: function(flashbandUid) {
     var deferred = Q.defer();
 
-    var registerLeave = function(results) {
-      if (results.flashbandNotImported)  return deferred.reject('Flashband not found.');
-      if (results.blockedFlashband)      return deferred.reject('Blocked flashband.');
-      if (results.flashbandWithoutEntry) return deferred.reject('Flashband without entry.');
+    var registerExit = function(results) {
+      if (!results.imported)  return deferred.reject('Flashband not found.');
+      if (results.blocked)    return deferred.reject('Blocked flashband.');
+      if (results.alreadyOut) return deferred.reject('Duplicated exit.');
 
       Entrance.findOne({ tag: flashbandUid }).exec(function(err, entranceModel) {
         entranceModel.leave = new Date();
-        entranceModel.save(function() {
-          deferred.resolve(entranceModel);
+        entranceModel.save(function(err, mdl) {
+          deferred.resolve(mdl);
         });
       });
     };
 
-    validateBeforeRegister.leave(flashbandUid).then(registerLeave);
+    validateBeforeRegister.leave(flashbandUid).then(registerExit);
 
     return deferred.promise;
   },
@@ -46,6 +46,16 @@ module.exports = {
 
     Entrance.count({ tag: flashbandUid, leave: null }, function(err, count) {
       deferred.resolve(!err && count > 0);
+    });
+
+    return deferred.promise;
+  },
+
+  checkAlreadyOut: function(flashbandUid) {
+    var deferred = Q.defer();
+
+    Entrance.count({ tag: flashbandUid, leave: null }, function(err, count) {
+      deferred.resolve(!count);
     });
 
     return deferred.promise;
