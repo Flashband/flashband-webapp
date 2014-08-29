@@ -1,29 +1,20 @@
-// var Q = require('q');
-// var chai = require('chai');
-// var validFlashband;
-// var FlashbandHelper = require('../../helpers/FlashbandHelper');
+var Q = require('q');
+var expect = require('chai').use(require('chai-as-promised')).expect;
+var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 
-// chai.should();
-// chai.use(require('chai-as-promised'));
+describe('FrontdoorService', function() {
+  describe('#registerEnter', function() {
+    it('should register entrance when ShowGoer not already in', function (done) {
+      var verifyLeave = function(entrance) {
+        var promise = FrontdoorService.registerLeave(entrance.tag);
 
-// describe('FrontdoorService', function() {
-//   describe('#registerLeave', function() {
-//     beforeEach(function(done) {
-//       FlashbandHelper.createSuccess().then(function(flashSuccess) {
-//         validFlashband = flashSuccess;
-//         done();
-//       }, done);
-//     });
+        Q.all([
+          promise.should.eventually.have.property('leave'),
+          promise.should.eventually.have.property('tag', flashSuccess.tag)
+        ]).should.notify(done);
+      };
 
-//     it('should register output when ShowGoer go home.', function (done) {
-//       var promised = FrontdoorService.registerLeave(validFlashband.tag);
-
-//       Q.all([
-//         promised.should.eventually.have.property('date'),
-//         promised.should.eventually.have.property('tag', validFlashband.tag)
-//         ]).should.notify(function(err, results) {
-//           done();
-//         });
-//     });
-//   });
-// });
+      FrontdoorHelper.createEntrance().then(verifyLeave, done);
+    });
+  });
+});
