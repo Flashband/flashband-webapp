@@ -5,7 +5,7 @@ chai.use(require('chai-as-promised'));
 var args;
 
 describe('FrontdoorService', function() {
-  describe('#checkRegistered', function() {
+  describe('#registerEnter', function() {
     beforeEach(function(done) {
       args = {tag: '1234'};
       done();
@@ -13,12 +13,13 @@ describe('FrontdoorService', function() {
 
     it('should not register entrance when ShowGoer already in', function (done) {
       Entrance.create(args, function(err, entranceModel) {
-        FrontdoorService.register(args.tag).should.be.rejectedWith('Duplicated entrance.').notify(done);
+        FrontdoorService.registerEnter(args.tag).should.be.rejectedWith('Duplicated entrance.').notify(done);
       });
     });
 
     it('should register entrance when ShowGoer not already in', function (done) {
-      var promised = FrontdoorService.register(args.tag);
+      var promised = FrontdoorService.registerEnter(args.tag);
+
       Q.all([
         promised.should.eventually.have.property('id'),
         promised.should.eventually.have.property('tag', args.tag)

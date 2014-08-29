@@ -8,7 +8,7 @@ describe('FlashbandService', function() {
         expect(FlashbandService.exists(flashSuccess.tag)).to.eventually.be.equal(true).and.notify(done);
       };
 
-      FlashbandHelper.createSuccess().then(verifyFlashbandExists, done);
+      FlashbandHelper.createSuccess().then(verifyFlashbandExists);
     });
 
     it('should check for a flashband that not exists', function(done) {
