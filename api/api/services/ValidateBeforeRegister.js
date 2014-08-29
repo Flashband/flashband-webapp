@@ -36,6 +36,11 @@ module.exports = {
           callback(null, exists);
         });
       },
+      entranceAlreadyOut: function(callback) {
+        Entrance.findOne({tag: flashbandUid, leave: null}).exec(function(err, found) {
+          callback(null, !found);
+        });
+      },
       blockedFlashband: function(callback) {
         Flashband.findOne({tag: flashbandUid}).then(function(flashband) {
           callback(null, flashband ? flashband.blocked() : false);

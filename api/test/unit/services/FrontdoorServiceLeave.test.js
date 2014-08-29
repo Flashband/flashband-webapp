@@ -28,5 +28,13 @@ describe('FrontdoorService', function() {
 
       FrontdoorHelper.createEntrance().then(verifyLeave, done);
     });
+
+    it('should not register leave when ShowGoer already out', function (done) {
+      var verifyDuplicated = function(flashSuccess) {
+        FrontdoorService.registerLeave(flashSuccess.tag).should.be.rejectedWith('Duplicated exit.').notify(done);
+      };
+
+      FrontdoorHelper.createLeave().then(verifyDuplicated, done);
+    });
   });
 });

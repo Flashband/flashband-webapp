@@ -26,21 +26,18 @@ module.exports = {
     });
 
     return promiseTarget(deferred);
+  },
+
+  createLeave: function() {
+    var deferred = Q.defer();
+
+    this.createEntrance().then(function(entrance) {
+      entrance.leave = new Date();
+      entrance.save(function(err, mdl) {
+        deferred.resolve(mdl);
+      });
+    });
+
+    return promiseTarget(deferred);
   }
-  //,
-
-  // createLeave: function() {
-  //   var deferred = Q.defer();
-
-  //   var returnLeave = function(entrance) {
-  //     entrance.leave = new Date();
-  //     entrance.save(function(err, mdl) {
-  //       deferred.resolve(mdl);
-  //     });
-  //   };
-
-  //   this.createEntrance().then(returnLeave);
-
-  //   return promiseTarget(deferred);
-  // }
 };
