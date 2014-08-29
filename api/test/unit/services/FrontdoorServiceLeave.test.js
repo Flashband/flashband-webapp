@@ -10,7 +10,7 @@ describe('FrontdoorService', function() {
 
         Q.all([
           promise.should.eventually.have.property('leave'),
-          promise.should.eventually.have.property('tag', flashSuccess.tag)
+          promise.should.eventually.have.property('tag', entrance.tag)
         ]).should.notify(done);
       };
 
