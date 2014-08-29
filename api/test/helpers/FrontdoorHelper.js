@@ -6,16 +6,41 @@ module.exports = {
   createEntrance: function() {
     var deferred = Q.defer();
 
-    var returnEntrance = function(err, entranceModel) {
-      deferred.resolve(entranceModel);
-    };
+    FlashbandHelper.createSuccess().then(function(flashSuccess) {
+      Entrance.create({tag: flashSuccess.tag}).then(deferred.resolve);
+    });
 
-    var newEntrance = function(flashSuccess) {
-      Entrance.create({tag: flashSuccess.tag}, returnEntrance);
-    };
+    return promiseTarget(deferred);
+  },
 
-    FlashbandHelper.createSuccess().then(newEntrance);
+  createEntranceAndBlocked: function() {
+    var deferred = Q.defer();
+
+    this.createEntrance().then(function(entrance) {
+      Flashband.findOne({tag: entrance.tag}).then(function(flashband) {
+        flashband.blockedAt = new Date();
+        flashband.save(function(err, mdl) {
+          deferred.resolve(mdl);
+        });
+      });
+    });
 
     return promiseTarget(deferred);
   }
+  //,
+
+  // createLeave: function() {
+  //   var deferred = Q.defer();
+
+  //   var returnLeave = function(entrance) {
+  //     entrance.leave = new Date();
+  //     entrance.save(function(err, mdl) {
+  //       deferred.resolve(mdl);
+  //     });
+  //   };
+
+  //   this.createEntrance().then(returnLeave);
+
+  //   return promiseTarget(deferred);
+  // }
 };

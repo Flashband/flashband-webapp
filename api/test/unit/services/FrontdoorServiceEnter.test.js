@@ -13,7 +13,7 @@ describe('FrontdoorService', function() {
       FrontdoorHelper.createEntrance().then(verifyDuplicated, done);
     });
 
-    it('should not register entrance when ShowGoer already in', function (done) {
+    it('should not register entrance when ShowGoer blocked flashband', function (done) {
       var verifyFlashBandBlocked = function(flashBlocked ) {
         FrontdoorService.registerEnter(flashBlocked.tag).should.be.rejectedWith('Blocked flashband.').notify(done);
       };

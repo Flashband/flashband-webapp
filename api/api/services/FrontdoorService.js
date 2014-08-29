@@ -19,15 +19,32 @@ module.exports = {
 
     return deferred.promise;
   },
-
   registerLeave: function(flashbandUid) {
     var deferred = Q.defer();
 
-    var returnEntrance = function(err, entranceModel) {
-      entranceModel.leave = new Date();
-      entranceModel.save(function(err, mdl) {
-        deferred.resolve(mdl);
+    var registerExit = function(results) {
+      if (!results.flashbandImported)   return deferred.reject('Flashband not found.');
+      if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
+      // if (results.entranceAlreadyIn)    return deferred.reject('Duplicated entrance.');
+
+      Entrance.findOne({ tag: flashbandUid }).exec(function(err, entranceModel) {
+        entranceModel.leave = new Date();
+        entranceModel.save(function(err, mdl) {
+          deferred.resolve(mdl);
+        });
       });
+    };
+
+    validateBeforeRegister.leave(flashbandUid).then(registerExit);
+
+    return deferred.promise;
+  },
+
+  registerLeave2: function(flashbandUid) {
+    var deferred = Q.defer();
+
+    var returnEntrance = function(err, entranceModel) {
+
     };
 
     Entrance.findOne({ tag: flashbandUid }).exec(returnEntrance);
