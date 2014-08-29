@@ -6,7 +6,7 @@ module.exports = {
     var deferred = Q.defer();
 
     var registerEntrance = function(results) {
-      if (results.flashbandNotImported) return deferred.reject('Flashband not found.');
+      if (!results.flashbandImported)   return deferred.reject('Flashband not found.');
       if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
       if (results.entranceAlreadyIn)    return deferred.reject('Duplicated entrance.');
 
@@ -24,7 +24,7 @@ module.exports = {
     var deferred = Q.defer();
 
     var registerLeave = function(results) {
-      if (results.flashbandNotImported)  return deferred.reject('Flashband not found.');
+      if (!results.flashbandImported)    return deferred.reject('Flashband not found.');
       if (results.blockedFlashband)      return deferred.reject('Blocked flashband.');
       if (results.flashbandWithoutEntry) return deferred.reject('Flashband without entry.');
 
