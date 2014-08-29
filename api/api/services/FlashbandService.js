@@ -9,5 +9,15 @@ module.exports = {
     });
 
     return deferred.promise;
+  },
+  block: function(flashbandUid) {
+    var deferred = Q.defer();
+    Flashband.findOne({ uid: flashbandUid }).then(function(flashband) {
+      flashband.blockedAt = new Date();
+      flashband.save().then(function(savedFlashband) {
+        deferred.resolve(savedFlashband);
+      });
+    });
+    return deferred.promise;
   }
 };
