@@ -3,9 +3,17 @@ var expect = require('chai').use(require('chai-as-promised')).expect;
 var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
-  describe('#registerEnter', function() {
+  describe('#registerLeave', function() {
     it('should not register leave when flashband not imported', function (done) {
-      FrontdoorService.registerLeave('0000000001').should.be.rejectedWith('Flashband not found..').notify(done);
+      FrontdoorService.registerLeave('0000000001').should.be.rejectedWith('Flashband not found.').notify(done);
+    });
+
+    it('should not register leave when ShowGoer blocked flashband', function (done) {
+      var verifyFlashBandBlocked = function(flashBlocked) {
+        FrontdoorService.registerLeave(flashBlocked.tag).should.be.rejectedWith('Blocked flashband.').notify(done);
+      };
+
+      FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
     });
 
     it('should register leave when ShowGoer go home', function (done) {

@@ -24,7 +24,7 @@ module.exports = {
 
     var registerExit = function(results) {
       if (!results.flashbandImported)   return deferred.reject('Flashband not found.');
-      // if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
+      if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
       // if (results.entranceAlreadyIn)    return deferred.reject('Duplicated entrance.');
 
       Entrance.findOne({ tag: flashbandUid }).exec(function(err, entranceModel) {
