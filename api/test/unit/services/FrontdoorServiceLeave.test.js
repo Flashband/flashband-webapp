@@ -5,7 +5,7 @@ var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 describe('FrontdoorService', function() {
   describe('#registerEnter', function() {
     it('should not register leave when flashband not imported', function (done) {
-      FrontdoorService.registerLeave('0000000001').should.be.rejectedWith('Flashband not found.').notify(done);
+      FrontdoorService.registerLeave('0000000001').should.be.rejectedWith('Flashband not found..').notify(done);
     });
 
     it('should register leave when ShowGoer go home', function (done) {
