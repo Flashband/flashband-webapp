@@ -31,17 +31,17 @@ module.exports = {
     var deferred = Q.defer();
 
     async.series({
-      flashbandImported: function(callback){
+      imported: function(callback){
         FlashbandService.exists(flashbandUid).then(function(exists) {
           callback(null, exists);
         });
       },
-      entranceAlreadyOut: function(callback) {
-        Entrance.findOne({tag: flashbandUid, leave: null}).exec(function(err, found) {
-          callback(null, !found);
+      alreadyOut: function(callback) {
+        FrontdoorService.checkAlreadyOut(flashbandUid).then(function(alreadyOut) {
+          callback(null, alreadyOut);
         });
       },
-      blockedFlashband: function(callback) {
+      blocked: function(callback) {
         Flashband.findOne({tag: flashbandUid}).then(function(flashband) {
           callback(null, flashband ? flashband.blocked() : false);
         });

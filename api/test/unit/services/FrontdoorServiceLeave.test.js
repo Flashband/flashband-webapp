@@ -30,8 +30,8 @@ describe('FrontdoorService', function() {
     });
 
     it('should not register leave when ShowGoer already out', function (done) {
-      var verifyDuplicated = function(flashSuccess) {
-        FrontdoorService.registerLeave(flashSuccess.tag).should.be.rejectedWith('Duplicated exit.').notify(done);
+      var verifyDuplicated = function(entrance) {
+        FrontdoorService.registerLeave(entrance.tag).should.be.rejectedWith('Duplicated exit.').notify(done);
       };
 
       FrontdoorHelper.createLeave().then(verifyDuplicated, done);

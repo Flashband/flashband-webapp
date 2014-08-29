@@ -31,12 +31,14 @@ module.exports = {
   createLeave: function() {
     var deferred = Q.defer();
 
-    this.createEntrance().then(function(entrance) {
+    var leave = function(entrance) {
       entrance.leave = new Date();
       entrance.save(function(err, mdl) {
         deferred.resolve(mdl);
       });
-    });
+    };
+
+    this.createEntrance().then(leave);
 
     return promiseTarget(deferred);
   }

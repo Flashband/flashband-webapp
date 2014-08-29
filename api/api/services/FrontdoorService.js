@@ -19,13 +19,14 @@ module.exports = {
 
     return deferred.promise;
   },
+
   registerLeave: function(flashbandUid) {
     var deferred = Q.defer();
 
     var registerExit = function(results) {
-      if (!results.flashbandImported)   return deferred.reject('Flashband not found.');
-      if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
-      if (results.entranceAlreadyOut)   return deferred.reject('Duplicated exit.');
+      if (!results.imported)  return deferred.reject('Flashband not found.');
+      if (results.blocked)    return deferred.reject('Blocked flashband.');
+      if (results.alreadyOut) return deferred.reject('Duplicated exit.');
 
       Entrance.findOne({ tag: flashbandUid }).exec(function(err, entranceModel) {
         entranceModel.leave = new Date();
@@ -40,23 +41,21 @@ module.exports = {
     return deferred.promise;
   },
 
-  registerLeave2: function(flashbandUid) {
-    var deferred = Q.defer();
-
-    var returnEntrance = function(err, entranceModel) {
-
-    };
-
-    Entrance.findOne({ tag: flashbandUid }).exec(returnEntrance);
-
-    return deferred.promise;
-  },
-
   checkRegistered: function(flashbandUid) {
     var deferred = Q.defer();
 
     Entrance.count({ tag: flashbandUid, leave: null }, function(err, count) {
       deferred.resolve(!err && count > 0);
+    });
+
+    return deferred.promise;
+  },
+
+  checkAlreadyOut: function(flashbandUid) {
+    var deferred = Q.defer();
+
+    Entrance.count({ tag: flashbandUid, leave: null }, function(err, count) {
+      deferred.resolve(!count);
     });
 
     return deferred.promise;

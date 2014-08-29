@@ -26,5 +26,6 @@ module.exports.routes = {
   },
 
   'post /frontdoor/enter': 'FrontdoorController.enter',
+  'post /frontdoor/leave': 'FrontdoorController.leave',
   'post /authenticate': 'AuthenticateController.create'
 };
