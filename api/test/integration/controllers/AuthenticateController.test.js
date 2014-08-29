@@ -14,7 +14,7 @@ describe('AuthenticateController', function() {
         .expect('Content-type', /application\/json/)
         .expect(202)
         .end(function(err, res) {
-          if (!err) expect(res.body).to.have.property('token');
+          if (!err) expect(res.body).to.have.property('token').and.is.a('string').and.match(/^sha1.*/);
           done(err);
         });
       });
