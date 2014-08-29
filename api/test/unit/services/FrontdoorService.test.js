@@ -25,7 +25,7 @@ describe('FrontdoorService', function() {
         expect(Entrance.count({tag: '1234'})).to.eventually.equal(1).and.notify(done);
       };
 
-      FrontdoorService.register('1234').then(verifyRegisterEntrance);
+      FrontdoorService.register('1234').then(verifyRegisterEntrance, done);
     });
 
     it('should not register entrance when non existing flashband', function (done) {
