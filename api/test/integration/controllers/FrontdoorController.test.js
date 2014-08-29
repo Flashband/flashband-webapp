@@ -2,6 +2,7 @@ var request      = require('supertest');
 var shared       = require('../shared-specs');
 var passwordHash = require('password-hash');
 var FlashbandHelper = require('../../helpers/FlashbandHelper');
+var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 
 var args;
 var serialToken;
@@ -41,14 +42,16 @@ describe('FrontdoorController', function() {
     });
 
     it('should reject duplicated flashband', function (done) {
-      Entrance.create({flb: args.tag}, function(err, entranceModel) {
+      var verifyDuplicated = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: args.tag})
+          .send({tag: entrance.tag})
           .expect(403, 'Duplicated entrance.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
-      });
+      };
+
+      FrontdoorHelper.createEntrance().then(verifyDuplicated, done);
     });
 
     it('should reject blocked flashband', function (done) {

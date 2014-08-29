@@ -1,6 +1,6 @@
-var expect = require('chai').use(require('chai-as-promised')).expect;
-var sinon = require('sinon');
 var Q = require('q');
+var sinon = require('sinon');
+var expect = require('chai').use(require('chai-as-promised')).expect;
 var flashbandServiceExistsStub;
 
 var stubFlashbandExists = function(exists) {

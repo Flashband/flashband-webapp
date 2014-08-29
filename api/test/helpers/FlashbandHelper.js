@@ -4,19 +4,22 @@ var promiseTarget = require('./PromiseTarget');
 module.exports = {
   createBlocked: function() {
     var deferred = Q.defer();
+    var d = new Date();
+    var randonTag = ''.concat(d.getTime());
+    var args = {tag: randonTag, serial: 1, blockedAt: new Date()};
 
-    Flashband.create({tag: '3456', serial: 1, blockedAt: new Date()}).then(function(flash) {
-      deferred.resolve(flash);
-    }, deferred.reject);
+    Flashband.create(args).then(deferred.resolve, deferred.reject);
+
     return promiseTarget(deferred);
   },
 
   createSuccess: function(expect) {
     var deferred = Q.defer();
+    var d = new Date();
+    var randonTag = ''.concat(d.getTime());
+    var args = {tag: randonTag, serial: 1, blockedAt: null};
 
-    Flashband.create({tag: '4567', serial: 1, blockedAt: null}).then(function(flash) {
-      deferred.resolve(flash);
-    }, deferred.reject);
+    Flashband.create(args).then(deferred.resolve, deferred.reject);
 
     return promiseTarget(deferred);
   }
