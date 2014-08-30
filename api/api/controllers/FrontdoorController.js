@@ -23,7 +23,10 @@ module.exports = {
     var tag = getFlashbandTag(req);
     FrontdoorService.checkRegistered(tag).then(function (inside) {
       FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag)
-        .then(res.created.bind(res))
+        .then(function (result) {
+          result.inside = inside;
+          res.created(result);
+        })
         .catch(res.forbidden)
     });
   }
