@@ -20,11 +20,11 @@ module.exports = {
   },
 
   cross: function(req, res) {
-    FrontdoorService.registerEnter(getFlashbandTag(req)).then(function(entrance) {
-      res.created();
-    }).fail(function (error) {
-      console.log(error);
-      res.forbidden(error, { 'Content-Type': 'text/plain' });
+    var tag = getFlashbandTag(req);
+    FrontdoorService.checkRegistered(tag).then(function (inside) {
+      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag)
+        .then(res.created.bind(res))
+        .catch(res.forbidden)
     });
   }
 };
