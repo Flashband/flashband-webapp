@@ -17,5 +17,14 @@ module.exports = {
     }).fail(function (error) {
       res.forbidden(error, { 'Content-Type': 'text/plain' });
     });
+  },
+
+  cross: function(req, res) {
+    FrontdoorService.registerEnter(getFlashbandTag(req)).then(function(entrance) {
+      res.created();
+    }).fail(function (error) {
+      console.log(error);
+      res.forbidden(error, { 'Content-Type': 'text/plain' });
+    });
   }
 };
