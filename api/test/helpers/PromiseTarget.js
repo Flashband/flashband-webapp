@@ -6,4 +6,4 @@ module.exports = function(deferred) {
   });
 
   return promise;
-}
+};

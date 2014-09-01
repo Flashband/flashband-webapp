@@ -13,7 +13,7 @@ module.exports = {
     return promiseTarget(deferred);
   },
 
-  createSuccess: function(expect) {
+  createSuccess: function() {
     var deferred = Q.defer();
     var d = new Date();
     var randonTag = ''.concat(d.getTime());
