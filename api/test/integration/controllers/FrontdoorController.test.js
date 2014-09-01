@@ -4,6 +4,8 @@ var passwordHash = require('password-hash');
 var FlashbandHelper = require('../../helpers/FlashbandHelper');
 var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 
+var outputSuccessful;
+var inputSuccessful;
 var args;
 var serialToken;
 
@@ -15,6 +17,8 @@ describe('FrontdoorController', function() {
     args = {tag: '1234'};
     Entrance.drop();
     Flashband.drop();
+    inputSuccessful  = {door: "in", message: "Input successful."};
+    outputSuccessful = {door: "out", message: "Output successful."};
 
     User.create({password: '123123123'}, function(err, user) {
       serialToken = passwordHash.generate(user.id);
@@ -29,7 +33,7 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
           .send({tag: flashband.tag})
-          .expect(201)
+          .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
@@ -79,7 +83,7 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
           .send({tag: entrance.tag})
-          .expect(201)
+          .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
@@ -129,7 +133,7 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
           .send({tag: flashband.tag})
-          .expect(201)
+          .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
@@ -142,7 +146,7 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
           .send({tag: entrance.tag})
-          .expect(201)
+          .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
