@@ -4,7 +4,7 @@ var getFlashbandTag = function(req) {
 
 module.exports = {
   enter: function(req, res) {
-    FrontdoorService.registerEnter(getFlashbandTag(req)).then(function(entrance) {
+    FrontdoorService.registerEnter(getFlashbandTag(req)).then(function() {
       res.created();
     }).fail(function (error) {
       res.forbidden(error, { 'Content-Type': 'text/plain' });
@@ -12,7 +12,7 @@ module.exports = {
   },
 
   leave: function(req, res) {
-    FrontdoorService.registerLeave(getFlashbandTag(req)).then(function(entrance) {
+    FrontdoorService.registerLeave(getFlashbandTag(req)).then(function() {
       res.created();
     }).fail(function (error) {
       res.forbidden(error, { 'Content-Type': 'text/plain' });

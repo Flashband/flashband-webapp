@@ -1,5 +1,4 @@
 var Q = require('q');
-var expect = require('chai').use(require('chai-as-promised')).expect;
 var FlashbandHelper = require('../../helpers/FlashbandHelper');
 var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 

@@ -1,5 +1,6 @@
 var Sails = require('sails');
 var async = require('async');
+var Q = require('q');
 
 before(function(done) {
   Sails.lift({
