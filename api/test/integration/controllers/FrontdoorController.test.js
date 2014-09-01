@@ -175,5 +175,62 @@ describe('FrontdoorController', function() {
 
       FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
     });
+
+    it('should register a valid flashband after exit', function (done) {
+      var verifyRegister = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .expect(201, inputSuccessful)
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      FrontdoorHelper.createLeave().then(verifyRegister);
+    });
+
+    it('should register output after entering 2x', function (done) {
+      var verifyRegister = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/cross')
+              .send({tag: entrance.tag})
+              .expect(201, outputSuccessful)
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(done);
+          });
+      };
+
+      FrontdoorHelper.createLeave().then(verifyRegister);
+    });
+
+    it('must register the entry after leaving 2x', function (done) {
+      var verifyRegister = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/cross')
+              .send({tag: entrance.tag})
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(function() {
+                request(sails.hooks.http.app)
+                  .post('/frontdoor/cross')
+                  .send({tag: entrance.tag})
+                  .expect(201, inputSuccessful)
+                  .set('Authorization', 'Token token='.concat(serialToken))
+                  .end(done);
+              });
+          });
+      };
+
+      FrontdoorHelper.createLeave().then(verifyRegister);
+    });
   });
 });
