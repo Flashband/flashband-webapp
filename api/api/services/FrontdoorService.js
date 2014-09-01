@@ -45,7 +45,7 @@ module.exports = {
     var deferred = Q.defer();
 
     Entrance.findOne({ tag: flashbandUid, leave: null }, function(err, found) {
-      deferred.resolve(found !== null);
+      deferred.resolve(found != null);
     });
 
     return deferred.promise;
@@ -55,7 +55,7 @@ module.exports = {
     var deferred = Q.defer();
 
     Entrance.findOne({ tag: flashbandUid, leave: null }, function(err, found) {
-      deferred.resolve(found === null);
+      deferred.resolve(found == null);
     });
 
     return deferred.promise;
