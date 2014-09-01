@@ -2,8 +2,8 @@ var getFlashbandTag = function(req) {
   return req.param('tag');
 };
 
-var inputSuccessful  = {door: "in",  message: "Input successful."};
-var outputSuccessful = {door: "out", message: "Output successful."};
+var inputSuccessful  = {door: 'in',  message: 'Input successful.'};
+var outputSuccessful = {door: 'out', message: 'Output successful.'};
 
 module.exports = {
   enter: function(req, res) {
@@ -26,10 +26,10 @@ module.exports = {
     var tag = getFlashbandTag(req);
 
     FrontdoorService.checkRegistered(tag).then(function (inside) {
-      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag).then(function (result) {
+      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag).then(function () {
         if (inside) return res.created(outputSuccessful);
         res.created(inputSuccessful);
-      }).catch(res.forbidden)
+      }).catch(res.forbidden);
     });
   }
 };

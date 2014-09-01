@@ -17,8 +17,8 @@ describe('FrontdoorController', function() {
     args = {tag: '1234'};
     Entrance.drop();
     Flashband.drop();
-    inputSuccessful  = {door: "in", message: "Input successful."};
-    outputSuccessful = {door: "out", message: "Output successful."};
+    inputSuccessful  = {door: 'in', message: 'Input successful.'};
+    outputSuccessful = {door: 'out', message: 'Output successful.'};
 
     User.create({password: '123123123'}, function(err, user) {
       serialToken = passwordHash.generate(user.id);
