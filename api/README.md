@@ -13,6 +13,11 @@ Run Tests
 ==========
     $ npm test
 
+
+Run Code Analysis
+=================
+    $ npm run-script jshint
+
 Start Server
 =========
     $ npm start

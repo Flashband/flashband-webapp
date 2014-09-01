@@ -12,7 +12,7 @@ module.exports = {
       };
 
       user.tokens.add(args);
-      user.save(function(err) {
+      user.save(function() {
         deferred.resolve(args);
       });
     };

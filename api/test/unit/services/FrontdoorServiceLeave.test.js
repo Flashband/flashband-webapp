@@ -1,5 +1,4 @@
 var Q = require('q');
-var expect = require('chai').use(require('chai-as-promised')).expect;
 var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {

@@ -31,7 +31,8 @@
   "scripts": {
     "start": "node_modules/.bin/sails lift",
     "debug": "node debug app.js",
-    "test": "node_modules/.bin/mocha test/ -R spec"
+    "test": "node_modules/.bin/mocha test/ -R spec",
+    "jshint": "node_modules/.bin/jshint --reporter node_modules/jshint-stylish/stylish.js test/ api/"
   },
   "main": "app.js",
   "repository": {
@@ -47,6 +48,8 @@
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "jscover": "^0.2.4",
+    "jshint": "^2.5.5",
+    "jshint-stylish": "^0.4.0",
     "mocha": "^1.21.4",
     "mocha-lcov-reporter": "0.0.1",
     "sinon": "^1.10.3",

@@ -7,9 +7,9 @@
  * 
  */
 
-var glob  = require('glob')
-  , path  = require('path')
-  , async = require('async');
+var glob  = require('glob'),
+    path  = require('path'),
+    async = require('async');
 
 module.exports = function seedsHook(sails) {
   return {
@@ -32,7 +32,7 @@ module.exports = function seedsHook(sails) {
             return {
               model: path.basename(filePath, '.json'),
               data: require('../../' + filePath)
-            }
+            };
           });
 
           async.eachSeries(seeding, populate, callback);
