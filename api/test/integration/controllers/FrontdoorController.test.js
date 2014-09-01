@@ -13,6 +13,8 @@ describe('FrontdoorController', function() {
 
   beforeEach(function(done) {
     args = {tag: '1234'};
+    Entrance.drop();
+    Flashband.drop();
 
     User.create({password: '123123123'}, function(err, user) {
       serialToken = passwordHash.generate(user.id);
@@ -23,14 +25,16 @@ describe('FrontdoorController', function() {
 
   describe('POST /frontdoor/enter', function() {
     it('should register a valid flashband', function (done) {
-      Flashband.create({tag: '1234', serial: 1}, function() {
+      var verifyRegister = function(flashband) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: args.tag})
+          .send({tag: flashband.tag})
           .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
-      });
+      };
+
+      FlashbandHelper.createSuccess().then(verifyRegister);
     });
 
     it('should reject a invalid flashband', function (done) {
@@ -116,6 +120,56 @@ describe('FrontdoorController', function() {
       };
 
       FrontdoorHelper.createLeave().then(verifyDuplicated, done);
+    });
+  });
+
+  describe('POST /frontdoor/cross', function() {
+    it('should register a valid flashband', function (done) {
+      var verifyRegister = function(flashband) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: flashband.tag})
+          .expect(201)
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      FlashbandHelper.createSuccess().then(verifyRegister);
+    });
+
+    it('should leave a valid flashband', function (done) {
+      var verifyLeave = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .expect(201)
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      FrontdoorHelper.createEntrance().then(verifyLeave, done);
+    });
+
+    it('should reject a invalid flashband', function (done) {
+      request(sails.hooks.http.app)
+        .post('/frontdoor/cross')
+        .send({tag: '123123123123'})
+        .expect(403, 'Flashband not found.')
+        .set('Authorization', 'Token token='.concat(serialToken))
+        .end(done);
+    });
+
+    it('should reject blocked flashband', function (done) {
+      var verifyFlashBandBlocked = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .expect(403, 'Blocked flashband.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
     });
   });
 });
