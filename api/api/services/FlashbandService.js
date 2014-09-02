@@ -4,6 +4,7 @@ module.exports = {
       return !!count && count > 0;
     });
   },
+
   block: function(flashbandUid) {
     return Flashband.findOne({ tag: flashbandUid }).then(function(flashband) {
       flashband.blockedAt = new Date();
