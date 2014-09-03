@@ -21,10 +21,10 @@ describe('FlashbandService', function() {
       }, done);
     });
 
-    //it('should not allow blocking a non-existing flashband', function(done) {
-      //expect(FlashbandService.block('non-existing'))
-        //.to.be.rejectedWith('Flashband not found.')
-        //.and.notify(done);
-    //});
+    it('should not allow blocking a non-existing flashband', function(done) {
+      expect(FlashbandService.block('non-existing'))
+        .to.be.rejectedWith('Flashband not found.')
+        .and.notify(done);
+    });
   });
 });
