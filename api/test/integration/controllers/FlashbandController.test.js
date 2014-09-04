@@ -32,11 +32,22 @@ describe('FlashbandController', function() {
     
     it('should not found a non existing flashband', function(done) {
       request(sails.hooks.http.app)
+      .post('/flashband/block')
+      .send({tag: 'non-existing'})
+      .expect(403, 'Flashband not found.')
+      .set('Authorization', 'Token token='.concat(serialToken))
+      .end(done);
+    });
+
+    it('should not found an already blocked flashband', function(done) {
+      FlashbandHelper.createBlocked().then(function(validFlashband) {
+        request(sails.hooks.http.app)
         .post('/flashband/block')
-        .send({tag: 'non-existing'})
-        .expect(403, 'Flashband not found.')
+        .send({tag: validFlashband.tag})
+        .expect(403, 'Flashband already blocked.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
+      }).fail(done);
     });
   });
 });

@@ -8,6 +8,7 @@ module.exports = {
   block: function(flashbandUid) {
     return Flashband.findOne({ tag: flashbandUid }).then(function(flashband) {
       if (!flashband) throw 'Flashband not found.';
+      if (flashband.blockedAt) throw 'Flashband already blocked.';
       flashband.blockedAt = new Date();
       return flashband.save();
     });
