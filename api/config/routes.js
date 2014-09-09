@@ -29,5 +29,5 @@ module.exports.routes = {
   'post /frontdoor/leave': 'FrontdoorController.leave',
   'post /frontdoor/cross': 'FrontdoorController.cross',
   'post /authenticate': 'AuthenticateController.create',
-  'post /flashband/block': 'FlashbandController.block'
+  'put /flashband/:tag/block': 'FlashbandController.block'
 };
