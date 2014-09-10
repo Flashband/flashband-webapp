@@ -3,12 +3,17 @@
 angular.module('flashbandWebapp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
-        url: '/',
+      .state('login', {
+        url: '/login',
+        templateUrl: 'partials/main.html',
+        controller: 'MainCtrl'
+      })
+      .state('dashboard', {
+        url: '/dashboard',
         templateUrl: 'partials/main.html',
         controller: 'MainCtrl'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
   })
 ;
