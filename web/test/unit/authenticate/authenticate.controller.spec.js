@@ -2,6 +2,7 @@
 
 describe('Controller: Login', function(){
   var scope,
+      credencials,
       browserState,
       $httpBackend;
 
@@ -11,6 +12,11 @@ describe('Controller: Login', function(){
     browserState = $state;
     $httpBackend = _$httpBackend_;
 
+    credencials = {
+      email: 'email@valid.com',
+      password: 'senhaValida'
+    };
+
     scope = $rootScope.$new();
 
     $controller('AuthenticateCtrl', {
@@ -18,12 +24,7 @@ describe('Controller: Login', function(){
     });
   }));
 
-  it('should authenticate a valid user', function() {
-    var credencials = {
-      email: 'email@valid.com',
-      password: 'senhaValida'
-    };
-
+  it('should redirect to dashboard when AuthenticateCtrl authenticate successfully', function() {
     var response202 = {
       token: 'the user authentication token',
       user: 10,
@@ -31,12 +32,22 @@ describe('Controller: Login', function(){
       updatedAt: '09/04/2014 01:15:27 AM (-0300)'
     };
 
-    $httpBackend.whenGET('partials/main.html').respond(201);
     $httpBackend.whenPOST('http://localhost:1337/authenticate', credencials).respond(202, response202);
+    $httpBackend.whenGET('partials/main.html').respond(201);
 
     scope.login(credencials);
     $httpBackend.flush();
 
     expect(browserState.current.name).toEqual('dashboard');
+  });
+
+  it('should view message error when AuthenticateCtrl authenticate failed', function() {
+    $httpBackend.whenPOST('http://localhost:1337/authenticate', credencials).respond(401);
+    $httpBackend.whenGET('partials/main.html').respond(201);
+
+    scope.login(credencials);
+    $httpBackend.flush();
+
+    expect(scope.messageError).toEqual('Invalid credencials!');
   });
 });

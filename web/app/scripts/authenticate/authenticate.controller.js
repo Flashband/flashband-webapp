@@ -9,7 +9,7 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scop
     };
 
     var loginFail = function(rason) {
-      $scope.messageError = rason;
+      $scope.messageError = "Invalid credencials!";
     };
 
     AuthenticateSrvc.login(credencials).then(successfully, loginFail);
