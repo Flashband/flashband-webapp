@@ -7,9 +7,9 @@ describe('FlashbandController', function() {
 
   var serialToken;
 
-  shared.shoudRequestNotFound('/flashband/block', ['GET', 'PUT', 'DELETE']);
+  shared.shoudRequestNotFound('/flashband/000000000000/block', ['GET', 'POST', 'DELETE']);
 
-  describe('POST /block', function() {
+  describe('PUT /flashband/{tag}/block', function() {
     beforeEach(function(done) {
       User.create({password: '123123123'}).then(function(user) {
         serialToken = passwordHash.generate(user.id);
@@ -22,8 +22,7 @@ describe('FlashbandController', function() {
     it ('should block an existing flashband', function(done) {
       FlashbandHelper.createSuccess().then(function(validFlashband) {
         request(sails.hooks.http.app)
-        .post('/flashband/block')
-        .send({tag: validFlashband.tag})
+        .put('/flashband/' + validFlashband.tag + '/block')
         .expect(200, { message: 'Flashband blocked.' })
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -32,8 +31,7 @@ describe('FlashbandController', function() {
     
     it('should not found a non existing flashband', function(done) {
       request(sails.hooks.http.app)
-      .post('/flashband/block')
-      .send({tag: 'non-existing'})
+      .put('/flashband/000000000000/block')
       .expect(403, 'Flashband not found.')
       .set('Authorization', 'Token token='.concat(serialToken))
       .end(done);
@@ -42,8 +40,7 @@ describe('FlashbandController', function() {
     it('should not found an already blocked flashband', function(done) {
       FlashbandHelper.createBlocked().then(function(validFlashband) {
         request(sails.hooks.http.app)
-        .post('/flashband/block')
-        .send({tag: validFlashband.tag})
+        .put('/flashband/' + validFlashband.tag + '/block')
         .expect(403, 'Flashband already blocked.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
