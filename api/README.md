@@ -5,9 +5,9 @@ flashband-api
 
 Install API
 ==========
-    $ git clone git@github.com:oncast-labs/flashband-webapp.git flashband
+    $ git clone git@github.com:Flashband/flashband-webapp.git
 
-    $ cd flashband/api/
+    $ cd flashband-webapp/api/
 
     $ npm install
 
