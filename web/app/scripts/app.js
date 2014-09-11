@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router'])
+angular.module('flashbandWebapp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'angularFileUpload'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('login', {

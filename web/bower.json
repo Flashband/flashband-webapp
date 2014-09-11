@@ -2,6 +2,7 @@
   "name": "flashbandWebapp",
   "version": "0.0.0",
   "dependencies": {
+    "ng-file-upload-shim": "~1.6.5",
     "modernizr": "2.8.x",
     "angular": "1.2.x",
     "jquery": "2.x.x",
@@ -11,7 +12,8 @@
     "angular-sanitize": "1.2.x",
     "restangular": "1.4.x",
     "angular-ui-router": "0.2.x",
-    "bootstrap-sass-official": "3.2.x"
+    "bootstrap-sass-official": "3.2.x",
+    "ng-file-upload": "~1.6.5"
   },
   "devDependencies": {
     "angular-mocks": "1.2.x"
