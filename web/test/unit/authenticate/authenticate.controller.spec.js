@@ -33,7 +33,8 @@ describe('Controller: Login', function(){
     };
 
     $httpBackend.whenPOST('http://localhost:1337/authenticate', credencials).respond(202, response202);
-    $httpBackend.whenGET('partials/main.html').respond(201);
+    $httpBackend.whenGET('partials/login.html').respond(201);
+    $httpBackend.whenGET('partials/dashboard.html').respond(201);
 
     scope.login(credencials);
     $httpBackend.flush();
@@ -43,7 +44,7 @@ describe('Controller: Login', function(){
 
   it('should view message error when AuthenticateCtrl authenticate failed', function() {
     $httpBackend.whenPOST('http://localhost:1337/authenticate', credencials).respond(401);
-    $httpBackend.whenGET('partials/main.html').respond(201);
+    $httpBackend.whenGET('partials/login.html').respond(201);
 
     scope.login(credencials);
     $httpBackend.flush();

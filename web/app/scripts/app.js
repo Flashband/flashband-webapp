@@ -5,13 +5,13 @@ angular.module('flashbandWebapp', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanit
     $stateProvider
       .state('login', {
         url: '/login',
-        templateUrl: 'partials/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'partials/login.html',
+        controller: 'AuthenticateCtrl'
       })
       .state('dashboard', {
         url: '/dashboard',
-        templateUrl: 'partials/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'partials/dashboard.html',
+        controller: 'DashboardCtrl'
       });
 
     $urlRouterProvider.otherwise('/login');
