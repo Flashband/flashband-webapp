@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: Login', function(){
+describe('Controller: EnableFlashbandsCtrl', function(){
   var scope;
 
   beforeEach(module('flashbandWebapp'));
@@ -8,19 +8,8 @@ describe('Controller: Login', function(){
   beforeEach(inject(function($rootScope, $controller) {
     scope = $rootScope.$new();
 
-    $controller('LoginCtrl', {
+    $controller('EnableFlashbandsCtrl', {
       $scope: scope
     });
   }));
-
-  // it('should authenticate a valid user', function() {
-  //   var credencials = {
-  //     email: 'email@valid.com',
-  //     password: 'senhaValida'
-  //   };
-
-  //   scope.login(credencials).then(function() {
-  //     expect(true).toBe(true);
-  //   });
-  // });
 });
