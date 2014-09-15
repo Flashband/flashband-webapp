@@ -43,5 +43,5 @@ gulp.task(onlyProtractorMocked, ['webdriver-update', 'wiredep-dev'], function (d
 });
 
 gulp.task('protractor', ['serve:e2e', onlyProtractorMocked]);
-gulp.task('protractor:served', ['serve:e2e', onlyProtractorApi]);
+gulp.task('protractor:api', ['serve:e2e', onlyProtractorApi]);
 gulp.task('protractor:dist', ['serve:e2e-dist', onlyProtractorApi]);

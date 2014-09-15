@@ -15,7 +15,7 @@ E2E testing without mocked requests.
 ==========
 Before run tests, needed prepare server api.
 
-    $ gulp protractor:served
+    $ gulp protractor:api
 
 Development real time with watcher
 ==========

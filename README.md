@@ -1,6 +1,10 @@
 Flashband Project
 =========
 
+*   Modules.
+    * [api-server](https://github.com/Flashband/flashband-webapp/tree/fs/25-import-bracelets/api "api-server")
+    * [web-application](https://github.com/Flashband/flashband-webapp/tree/fs/25-import-bracelets/web "web-application")
+
 *   Suggestion to install node.
     * [ndenv](https://github.com/riywo/ndenv "ndenv")
     * [node-build](https://github.com/riywo/node-build "node-build")
