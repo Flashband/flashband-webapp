@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scope, $state, AuthenticateSrvc) {
+  $scope.messageError = false;
+
   $scope.login = function(credencials) {
-    $scope.messageError = false;
 
     var successfully = function(user) {
       $state.go('dashboard');

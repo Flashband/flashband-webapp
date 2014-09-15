@@ -1,36 +1,26 @@
-flashband-web
+Flashband Web Application
 =========
 
-Install 
+*   [Install](https://github.com/Flashband/flashband-webapp/tree/fs/25-import-bracelets "Install")
+
+Unit Tests
 ==========
+    $ gulp test
 
-    $ git clone git@github.com:Flashband/flashband-webapp.git
-
-    $ cd flashband-webapp/api/
-
-    $ npm install
-    
-    $ bower install
-
-Run Tests
+E2E testing with mocked requests.
 ==========
+    $ gulp protractor
 
-* for unit tests:
+E2E testing without mocked requests.
+==========
+Before run tests, needed prepare server api.
 
-  * $ gulp test
+    $ gulp protractor:served
 
-    or
-
-* for e2e test:
-
-  * $ gulp protractor
-
-Run Code Analysis
-=================
-    $ gulp scripts
-
-
-Start Server
-=========
+Development real time with watcher
+==========
     $ gulp serve
 
+Run Code Analysis
+==========
+    $ gulp scripts

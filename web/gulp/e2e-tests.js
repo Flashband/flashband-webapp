@@ -11,26 +11,37 @@ gulp.task('webdriver-update', $.protractor.webdriver_update);
 
 gulp.task('webdriver-standalone', $.protractor.webdriver_standalone);
 
-gulp.task('protractor-only', ['webdriver-update', 'wiredep'], function (done) {
+var API = "api";
+var MOCKED = "mocked";
+
+var registerProtractor = function(mode, done) {
   var testFiles = [
     'test/e2e/**/*.js'
   ];
 
-  gulp.src(testFiles)
-    .pipe($.protractor.protractor({
-      configFile: 'test/protractor.conf.js',
-    }))
-    .on('error', function (err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    })
-    .on('end', function () {
-      // Close browser sync server
-      browserSync.exit();
-      done();
-    });
+  var cfg = {};
+  if (mode === API) cfg.configFile = 'test/protractor.conf.api.js';
+  if (mode === MOCKED) cfg.configFile = 'test/protractor.conf.mocked.js';
+
+  return gulp.src(testFiles).pipe($.protractor.protractor(cfg)).on('error', function (err) {
+    throw err;
+  }).on('end', function () {
+    browserSync.exit();
+    done();
+  });
+};
+
+var onlyProtractorApi = 'protractor-only-api';
+var onlyProtractorMocked = 'protractor-only-mocked';
+
+gulp.task(onlyProtractorApi, ['webdriver-update', 'wiredep'], function (done) {
+  registerProtractor(API, done);
 });
 
-gulp.task('protractor', ['serve:e2e', 'protractor-only']);
-gulp.task('protractor:src', ['serve:e2e', 'protractor-only']);
-gulp.task('protractor:dist', ['serve:e2e-dist', 'protractor-only']);
+gulp.task(onlyProtractorMocked, ['webdriver-update', 'wiredep-dev'], function (done) {
+  registerProtractor(MOCKED, done);
+});
+
+gulp.task('protractor', ['serve:e2e', onlyProtractorMocked]);
+gulp.task('protractor:served', ['serve:e2e', onlyProtractorApi]);
+gulp.task('protractor:dist', ['serve:e2e-dist', onlyProtractorApi]);

@@ -1,18 +1,25 @@
-flashband-api
+Flashband Project
 =========
-[![Codacy Badge](https://www.codacy.com/project/badge/9d6caced45da40b2bcd3ed5b913aa803)](https://www.codacy.com) 
-[![Circle CI](https://circleci.com/gh/oncast-labs/flashband-webapp.png?style=badge&circle-token=733e2af1886cc5a474f78cc72636689e9ee2c1ff)](https://circleci.com/gh/oncast-labs/flashband-webapp)
 
-Install API
+*   Suggestion to install node.
+    * [ndenv](https://github.com/riywo/ndenv "ndenv")
+    * [node-build](https://github.com/riywo/node-build "node-build")
+
+Development dependencies:
 ==========
-    $ git clone git@github.com:Flashband/flashband-webapp.git
-    $ cd flashband-webapp/api/
-    $ npm install
+    $ ndenv install v0.10.31
+    $ ndenv global v0.10.31
+    $ ndenv rehash
+    $ npm install -g yo gulp bower generator-gulp-angular
+    $ ndenv rehash
 
-Run Tests
+Get sources
 ==========
-    $ npm test
+    $ git clone git@github.com:Flashband/flashband-webapp.git flashband-web-server
+    $ cd flashband-web-server/
+    $ git fetch
+    $ git checkout fs/25-import-bracelets
 
-Start Server
-=========
-    $ npm start
+Project dependencies
+==========
+    $ bash install-flashband-project.sh

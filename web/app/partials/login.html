@@ -1,5 +1,7 @@
 <div class="container">
-  <form class="form-signin" role="form">
+  <div ng-show="messageError" class="alert alert-danger" role="alert">{{messageError}}</div>
+
+  <form class="form-signin" role="form" ng-submit="login()">
     <h2 class="form-signin-heading">Please sign in</h2>
     <input type="email" class="form-control" placeholder="Email address" required autofocus ng-model="credencials.email">
     <input type="password" class="form-control" placeholder="Password" required ng-model="credencials.password">

@@ -9,6 +9,8 @@ exports.config = {
     'browserName': 'chrome'
   },
 
+  baseUrl: 'http://localhost:3000',
+
   // Spec patterns are relative to the current working directly when
   // protractor is called.
   specs: ['test/e2e/**/*.js'],
@@ -17,5 +19,9 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000
+  },
+
+  onPrepare: function () {
+    browser.mock = function () {}
   }
 };
