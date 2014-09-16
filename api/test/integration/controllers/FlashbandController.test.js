@@ -55,7 +55,7 @@ describe('FlashbandController', function() {
           .post('/flashband/enable')
           .send(fileContent)
           .set('Authorization', 'Token token='.concat(serialToken))
-          .expect(201, fileContent)
+          .expect(201, { message: 'Flashbands enabled successfully.' })
           .expect('Content-Type', /application\/json/)
           .end(done);
       });

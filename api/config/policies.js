@@ -28,8 +28,12 @@ module.exports.policies = {
 
   '*': 'authenticated',
 
-  'AuthenticateController': {
-    'create': true
+  AuthenticateController: {
+    create: true
+  },
+
+  FlashbandController: {
+    enable: true
   }
 
   /***************************************************************************
