@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scope, $state, AuthenticateSrvc, SessionSrvc) {
+angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scope, $state, AuthenticateSrvc, FlashbandSessionSrvc) {
   $scope.messageError = false;
 
   $scope.login = function(credencials) {
     var successfully = function(session) {
-      SessionSrvc.setSession(session);
+      FlashbandSessionSrvc.setSession(session);
       $state.go('dashboard');
     };
 
@@ -13,7 +13,7 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scop
       $scope.messageError = "Invalid credencials!";
     };
 
-    SessionSrvc.clearSession();
+    FlashbandSessionSrvc.clearSession();
     AuthenticateSrvc.login(credencials).then(successfully, loginFail);
   };
 });

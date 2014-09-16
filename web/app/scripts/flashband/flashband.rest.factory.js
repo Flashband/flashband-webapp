@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').factory('FlashbandRest', function(Restangular) {
+angular.module('flashbandWebapp').factory('FlashbandRestSrvc', function(Restangular) {
   return Restangular.withConfig(function (config) {
     config.setBaseUrl('http://localhost:1337');
 
