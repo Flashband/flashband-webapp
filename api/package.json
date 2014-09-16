@@ -46,8 +46,11 @@
   "license": "",
   "config": {
     "blanket": {
-      "pattern": "\/api\/",
-      "data-cover-never": [ "\/api\/node_modules", "\/api\/responses" ]
+      "pattern": "/api/",
+      "data-cover-never": [
+        "/api/node_modules",
+        "/api/responses"
+      ]
     }
   },
   "devDependencies": {
@@ -60,6 +63,7 @@
     "jshint-stylish": "^0.4.0",
     "mocha": "^1.21.4",
     "mocha-lcov-reporter": "0.0.1",
+    "phantomjs": "^1.9.7-15",
     "sinon": "^1.10.3",
     "supertest": "^0.13.0"
   }
