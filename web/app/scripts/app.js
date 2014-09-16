@@ -30,4 +30,12 @@ angular.module('flashbandWebapp', dependencies).config(function ($stateProvider,
     });
 
   $urlRouterProvider.otherwise('/login');
+}).run(function ($rootScope, FlashbandSessionSrvc, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, next) {
+    if (next.data.isPublic) return;
+    if (FlashbandSessionSrvc.hasUserAuthenticated()) return;
+
+    event.preventDefault();
+    $state.go('login');
+  });
 });

@@ -20,7 +20,7 @@ angular.module('flashbandWebapp').service("FlashbandSessionSrvc", function (Flas
       return FlashbandStorageSrvc.set(keySession, session);
     },
 
-    isLogged: function() {
+    hasUserAuthenticated: function() {
       var logged;
 
       try {
