@@ -25,6 +25,7 @@ module.exports.routes = {
   'post /frontdoor/leave': 'FrontdoorController.leave',
   'post /frontdoor/cross': 'FrontdoorController.cross',
 
+  'post /login': 'AuthenticateController.login',
   'post /authenticate': 'AuthenticateController.authenticate',
 
   'put /flashband/:tag/block': 'FlashbandController.block',

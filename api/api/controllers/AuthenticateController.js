@@ -1,7 +1,13 @@
 module.exports = {
-  authenticate: function(req, res) {
+  login: function(req, res) {
+    var email = req.param('email');
     var password = req.param('password');
 
-    AuthenticateService.login(password).then(res.accepted).fail(res.unauthorized);
+    AuthenticateService.webLogin(email, password).then(res.accepted).fail(res.unauthorized);
+  },
+
+  authenticate: function(req, res) {
+    var password = req.param('password');
+    AuthenticateService.mobileLogin(password).then(res.accepted).fail(res.unauthorized);
   }
 };

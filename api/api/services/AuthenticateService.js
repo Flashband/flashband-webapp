@@ -2,17 +2,37 @@ var Q = require('q');
 var tokenHasher = require('password-hash');
 
 module.exports = {
-  login: function(password) {
+  webLogin: function(email, password) {
     var deferred = Q.defer();
 
     var generateToken = function(user) {
       var args = {
-        token: tokenHasher.generate(user.id),
-        user: user
+        token: tokenHasher.generate(user.id)
       };
 
       user.tokens.add(args);
       user.save(function() {
+        args.user = user;
+        deferred.resolve(args);
+      });
+    };
+
+    User.findOne({email: email, webpassword: password}).then(generateToken).fail(deferred.reject);
+
+    return deferred.promise;
+  },
+
+  mobileLogin: function(password) {
+    var deferred = Q.defer();
+
+    var generateToken = function(user) {
+      var args = {
+        token: tokenHasher.generate(user.id)
+      };
+
+      user.tokens.add(args);
+      user.save(function() {
+        args.user = user;
         deferred.resolve(args);
       });
     };
