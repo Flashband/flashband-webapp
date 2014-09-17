@@ -1,3 +1,5 @@
+<div ng-show="message" class="alert alert-{{message.type}}" translate="{{message.text}}"></div>
+
 <h1>Cadastrar Pulseiras</h1>
 <div>
   Você pode cadastrar todo o lote de pulseiras recebidas de uma só vez.
@@ -9,7 +11,7 @@
   <a href="#">Não mostrar mais esta mensagem</a>
 </div>
 
-<form role="form">
+<form role="form" ng-submit="uploadFile()">
   <div class="form-group">
     <input type="text" class="form-control" ng-model="name" placeholder="Digite o nome do lote de pulseiras">
   </div>
@@ -25,7 +27,7 @@
     <button type="button" class="btn btn-default btn-xs" ng-click="upload.abort()">Cancelar Upload</button>
   </div>
   <button type="button" class="btn btn-default">Cancelar</button>
-  <a class="btn btn-success" ui-sref="finish-flashbands" role="button">Cadastrar</a>
+  <button type="submit" class="btn btn-success" translate="FLASHBAND.ENABLE.SAVE"></button>
 </form>
 
 

@@ -1,6 +1,15 @@
 'use strict';
 
 angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function ($scope, $upload) {
+  $scope.message = false;
+
+  $scope.uploadFile = function() {
+    $scope.message = {
+      type: "warning",
+      text: "FLASHBAND.MESSAGE.ERROR.VALIDATION"
+    };
+  };
+
   $scope.onFileSelect = function($files) {
     $scope.flashbandsEnabled = false;
     var onSuccess = function(data) { //(data, status, headers, config)
