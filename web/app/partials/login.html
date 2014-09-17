@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" ng-init="credencials = {}">
   <div ng-show="message" class="alert alert-danger" role="{{message.type}}" translate="{{message.text}}"></div>
 
-  <form class="form-signin" role="form" ng-submit="login()">
+  <form class="form-signin" role="form" ng-submit="login(credencials)">
     <h2 class="form-signin-heading" translate="LOGIN.TEXT"></h2>
     <input type="email" class="form-control" placeholder="Email address" required autofocus ng-model="credencials.email">
     <input type="password" class="form-control" placeholder="Password" required ng-model="credencials.password">

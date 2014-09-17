@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('AuthenticateCtrl', function($scope, $state, AuthenticateSrvc, FlashbandSessionSrvc) {
+angular.module('flashbandWebapp').controller('AuthenticateCtrl', function($scope, $state, FlashbandRestSrvc, FlashbandSessionSrvc) {
   $scope.message = false;
 
   $scope.login = function(credencials) {
@@ -17,6 +17,6 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function($scope
     };
 
     FlashbandSessionSrvc.clearSession();
-    AuthenticateSrvc.login(credencials).then(successfully, loginFail);
+    FlashbandRestSrvc.service('login').post(credencials).then(successfully, loginFail);
   };
 });

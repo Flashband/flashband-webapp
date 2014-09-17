@@ -1,45 +1,33 @@
 var Q = require('q');
 var tokenHasher = require('password-hash');
 
-module.exports = {
-  webLogin: function(email, password) {
-    var deferred = Q.defer();
+var auth = function(argsFind) {
+  var deferred = Q.defer();
 
-    var generateToken = function(user) {
-      var args = {
-        token: tokenHasher.generate(user.id)
-      };
-
-      user.tokens.add(args);
-      user.save(function() {
-        args.user = user;
-        deferred.resolve(args);
-      });
+  var generateToken = function(user) {
+    var args = {
+      token: tokenHasher.generate(user.id)
     };
 
-    User.findOne({email: email, webpassword: password}).then(generateToken).fail(deferred.reject);
+    user.tokens.add(args);
+    user.save(function() {
+      args.user = user;
+      deferred.resolve(args);
+    });
+  };
 
-    return deferred.promise;
+  User.findOne(argsFind).then(generateToken).fail(deferred.reject);
+
+  return deferred.promise;
+};
+
+module.exports = {
+  webLogin: function(email, password) {
+    return auth({email: email, webpassword: password});
   },
 
   mobileLogin: function(password) {
-    var deferred = Q.defer();
-
-    var generateToken = function(user) {
-      var args = {
-        token: tokenHasher.generate(user.id)
-      };
-
-      user.tokens.add(args);
-      user.save(function() {
-        args.user = user;
-        deferred.resolve(args);
-      });
-    };
-
-    User.findOne({mobpassword: password}).then(generateToken).fail(deferred.reject);
-
-    return deferred.promise;
+    return auth({mobpassword: password});
   },
 
   checkTokenValid: function(accessToken) {

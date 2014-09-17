@@ -1,7 +1,7 @@
 module.exports = {
   registerMock: function() {
     angular.module('authenticate.invalid.mock', ['ngMockE2E', 'flashbandWebapp']).run(function($httpBackend) {
-      $httpBackend.whenPOST('http://localhost:1337/authenticate').respond(401);
+      $httpBackend.whenPOST('http://localhost:1337/login').respond(401);
 
       var all = /.*/;
       $httpBackend.whenGET(all).passThrough();
