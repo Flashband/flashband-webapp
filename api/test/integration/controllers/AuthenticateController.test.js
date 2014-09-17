@@ -16,7 +16,6 @@ describe('AuthenticateController', function() {
         .expect('Content-type', /application\/json/)
         .expect(202)
         .end(function(err, res) {
-          console.log(res.body);
           expect(res.body).to.have.property('token').and.is.a('string').and.match(/^sha1.*/);
           expect(res.body).to.have.property('user').and.is.a('object').and.to.have.property('email', user.email);
           done(err);
