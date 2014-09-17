@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 <html class="no-js" ng-app="flashbandWebapp">
   <head>
     <meta charset="utf-8">
@@ -39,6 +39,7 @@
     <script src="bower_components/restangular/dist/restangular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
     <script src="bower_components/angular-mocks/angular-mocks.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
@@ -47,13 +48,16 @@
     <script src="scripts/app.js"></script>
 
     <script src="scripts/flashband/flashband.rest.factory.js"></script>
-    <script src="scripts/flashband/flashband.storage.service.js"></script>
+    <script src="scripts/flashband/flashband.menu.directive.js"></script>
     <script src="scripts/flashband/flashband.session.service.js"></script>
+    <script src="scripts/flashband/flashband.storage.service.js"></script>
 
     <script src="scripts/dashboard/dashboard.controller.js"></script>
+    <script src="scripts/dashboard/dashboard.abstract.constant.js"></script>
 
     <script src="scripts/authenticate/authenticate.service.js"></script>
     <script src="scripts/authenticate/authenticate.controller.js"></script>
+    <script src="scripts/authenticate/authenticate.access.constant.js"></script>
 
     <script src="scripts/enable-flashbands/enable.flashbands.ctrl.js"></script>
     <!-- inject:partials -->

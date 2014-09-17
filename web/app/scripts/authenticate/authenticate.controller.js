@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scope, $state, AuthenticateSrvc, FlashbandSessionSrvc) {
-  $scope.messageError = false;
+angular.module('flashbandWebapp').controller('AuthenticateCtrl', function($scope, $state, AuthenticateSrvc, FlashbandSessionSrvc) {
+  $scope.message = false;
 
   $scope.login = function(credencials) {
     var successfully = function(session) {
@@ -10,7 +10,10 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function ($scop
     };
 
     var loginFail = function(rason) {
-      $scope.messageError = "Invalid credencials!";
+      $scope.message = {
+        type: 'alert',
+        text: 'LOGIN.MESSAGE.ERROR'
+      };
     };
 
     FlashbandSessionSrvc.clearSession();

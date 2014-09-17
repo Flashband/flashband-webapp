@@ -32,6 +32,7 @@ describe('Service: Login', function() {
     };
 
     $httpBackend.whenPOST('http://localhost:1337/authenticate', credencials).respond(202, response202);
+    $httpBackend.whenGET('partials/login.html').respond(201);
     authPromise.then(spySuccessfully, spyFail);
 
     $httpBackend.flush();
@@ -42,6 +43,7 @@ describe('Service: Login', function() {
 
   it('should login fail with invalid credencials', function() {
     $httpBackend.whenPOST('http://localhost:1337/authenticate', credencials).respond(401);
+    $httpBackend.whenGET('partials/login.html').respond(201);
     authPromise.then(spySuccessfully, spyFail);
 
     $httpBackend.flush();

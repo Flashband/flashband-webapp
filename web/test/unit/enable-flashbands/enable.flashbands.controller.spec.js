@@ -21,15 +21,17 @@ describe('Controller: EnableFlashbandsCtrl', function(){
       scope.onFileSelect([{}]);
     });
     it ('should set flashbandsEnabled on successfully upload', function() {
-      $httpBackend.whenPOST('http://localhost:1337/flashband/enable')
-        .respond(201, {message: 'Flashbands enabled successfully'});
+      $httpBackend.whenPOST('http://localhost:1337/flashband/enable').respond(201, {message: 'Flashbands enabled successfully'});
+      $httpBackend.whenGET('partials/login.html').respond(201);
+
       expect(scope.flashbandsEnabled).toEqual(false);
       $httpBackend.flush();
       expect(scope.flashbandsEnabled).toEqual(true);
     });
+
     it ('should set message on successfully upload', function() {
-      $httpBackend.whenPOST('http://localhost:1337/flashband/enable')
-        .respond(201, {message: 'Flashbands enabled successfully'});
+      $httpBackend.whenPOST('http://localhost:1337/flashband/enable').respond(201, {message: 'Flashbands enabled successfully'});
+      $httpBackend.whenGET('partials/login.html').respond(201);
       expect(scope.message).toBeFalsy();
       $httpBackend.flush();
       expect(scope.message).toEqual('Flashbands enabled successfully');
@@ -40,7 +42,7 @@ describe('Controller: EnableFlashbandsCtrl', function(){
     $httpBackend.whenPOST('http://localhost:1337/flashband/enable').respond({message: 'Flashbands enabled successfully'});
     expect(scope.onFileSelect).toBeDefined();
     //$httpBackend.flush();
-    
+
     //$scope.userPassword = 'wrong-password';
     //$scope.signinClick();
     //$httpBackend.flush();

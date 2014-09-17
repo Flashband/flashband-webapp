@@ -49,6 +49,9 @@ describe('Controller: Login', function(){
     scope.login(credencials);
     $httpBackend.flush();
 
-    expect(scope.messageError).toEqual('Invalid credencials!');
+    expect(scope.message).toEqual({
+      type: 'alert',
+      text: 'LOGIN.MESSAGE.ERROR'
+    });
   });
 });
