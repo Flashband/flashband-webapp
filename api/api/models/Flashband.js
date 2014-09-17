@@ -12,6 +12,10 @@ module.exports = {
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
 
+    //batch: {
+      //model: 'FlashbandBatch'
+    //},
+
     blocked: function() {
       return Boolean(this.blockedAt);
     }
