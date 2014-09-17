@@ -26,6 +26,6 @@ describe('The login view', function () {
     btnSubmit.click();
     browser.waitForAngular();
 
-    expect(browser.getCurrentUrl()).toBe('http://localhost:3000/#/flashbands-upload');
+    expect(browser.getCurrentUrl()).toContain('#/flashbands-upload');
   });
 });
