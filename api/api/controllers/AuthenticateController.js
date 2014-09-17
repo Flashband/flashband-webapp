@@ -1,11 +1,7 @@
 module.exports = {
-  create: function(req, res) {
+  authenticate: function(req, res) {
     var password = req.param('password');
 
-    AuthenticateService.login(password).then(function(auth) {
-      res.accepted(auth);
-    }).fail(function (error) {
-      res.unauthorized(error);
-    });
+    AuthenticateService.login(password).then(res.accepted).fail(res.unauthorized);
   }
 };

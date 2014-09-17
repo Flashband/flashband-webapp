@@ -7,7 +7,7 @@ describe('AuthenticateController', function() {
 
   describe('POST /authenticate', function() {
     it('should allow authentication with valid user data', function (done) {
-      User.create({password: 'validPassword'}, function() {
+      User.create({mobpassword: 'validPassword'}, function() {
         request(sails.hooks.http.app)
         .post('/authenticate')
         .send({password: 'validPassword'})

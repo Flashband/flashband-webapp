@@ -1,6 +1,5 @@
 var Q = require('q');
 var tokenHasher = require('password-hash');
-var loadUserByPass = require('./LoadUserByPass');
 
 module.exports = {
   login: function(password) {
@@ -8,7 +7,8 @@ module.exports = {
 
     var generateToken = function(user) {
       var args = {
-        token: tokenHasher.generate(user.id)
+        token: tokenHasher.generate(user.id),
+        user: user
       };
 
       user.tokens.add(args);
@@ -17,9 +17,7 @@ module.exports = {
       });
     };
 
-    loadUserByPass(password).then(generateToken).fail(function(error) {
-      deferred.reject(error);
-    });
+    User.findOne({mobpassword: password}).then(generateToken).fail(deferred.reject);
 
     return deferred.promise;
   },
@@ -27,22 +25,18 @@ module.exports = {
   checkTokenValid: function(accessToken) {
     var deferred = Q.defer();
 
-    if (!accessToken) {
+    if (accessToken && tokenHasher.isHashed(accessToken)) {
+      var resolve = function(err, theToken) {
+        if (err)       return deferred.resolve(false);
+        if (!theToken) return deferred.resolve(false);
+
+        deferred.resolve(theToken.token === accessToken);
+      };
+
+      Token.findOne({token: accessToken}).exec(resolve);
+    } else {
       deferred.resolve(false);
-      return deferred.promise;
     }
-
-    if (!tokenHasher.isHashed(accessToken)) {
-      deferred.resolve(false);
-      return deferred.promise;
-    }
-
-    Token.findOne({token: accessToken}).exec(function(err, theToken) {
-      if (err)    return deferred.resolve(false);
-      if (!theToken) return deferred.resolve(false);
-
-      deferred.resolve(theToken.token === accessToken);
-    });
 
     return deferred.promise;
   }
