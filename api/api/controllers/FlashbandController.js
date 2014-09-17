@@ -1,4 +1,4 @@
-/*globals FlashbandService*/
+/*globals FlashbandService, FlashbandBatch*/
 'use strict';
 
 module.exports = {
@@ -25,6 +25,8 @@ module.exports = {
       // console.log('********************************************************************************');
       if (err)
         return res.serverError(err);
+
+      FlashbandBatch.create({name: req.body.name});
 
       return res.created({ message: 'Flashbands enabled successfully.' });
     });
