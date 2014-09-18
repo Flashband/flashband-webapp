@@ -1,25 +1,8 @@
 'use strict';
 
-var enableFlashbandPage = require('../pages/enable.flashband.page');
-
 describe('The login view', function () {
-  it('should import csv file of flashbands', function() {
-    browser.mock('enable.flashbands.mock');
-    enableFlashbandPage.setBrowser(browser).goEnableFlashbands();
-
-    browser.get('#/flashbands-upload');
-    browser.waitForAngular();
-
-    var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.SAVE"]'));
-    btnNewImport.click();
-
-    var msg = element(by.css('div[translate="FLASHBAND.MESSAGE.ERROR.VALIDATION"]'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Campos obrigatórios!");
-  });
-
   it('should visible required elements', function() {
-    browser.mock('enable.flashbands.mock');
+    var enableFlashbandPage = require('../pages/enable.flashband.page');
     enableFlashbandPage.setBrowser(browser).goEnableFlashbands();
 
     browser.get('#/flashbands-enable');
@@ -41,4 +24,20 @@ describe('The login view', function () {
 
     expect(browser.getCurrentUrl()).toContain('#/flashbands-upload');
   });
+
+  it('should import csv file of flashbands', function() {
+    var enableFlashbandPage = require('../pages/enable.flashband.page');
+    enableFlashbandPage.setBrowser(browser).goEnableFlashbands();
+
+    browser.get('#/flashbands-upload');
+    browser.waitForAngular();
+
+    var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.SAVE"]'));
+    btnNewImport.click();
+
+    var msg = element(by.css('div[translate="FLASHBAND.MESSAGE.ERROR.VALIDATION"]'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe("Campos obrigatórios!");
+  });
+
 });

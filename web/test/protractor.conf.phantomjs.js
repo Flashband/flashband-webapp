@@ -22,12 +22,5 @@ exports.config = {
     includeStackTrace: true,
     // Default time to wait in ms before a test fails.
     defaultTimeoutInterval: 10000
-  },
-
-  onPrepare: function () {
-    browser.mock = function (name) {
-      browser.clearMockModules();
-      browser.addMockModule(name, require('./mocks/'.concat(name)).registerMock)
-    }
   }
 };

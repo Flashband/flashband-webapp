@@ -13,13 +13,11 @@ describe('The login view', function () {
   });
 
   it('should redirect to dashboard when authenticate successfully', function() {
-    browser.mock('authenticate.valid.mock');
     loginPage.setBrowser(browser).tryAuthenticateSuccessfully();
     expect(browser.getCurrentUrl()).toContain('#/dashboard');
   });
 
   it('should view message error when authenticate fail', function() {
-    browser.mock('authenticate.invalid.mock');
     loginPage.setBrowser(browser).tryAuthenticateFail();
     expect(browser.getCurrentUrl()).toContain('#/login');
 

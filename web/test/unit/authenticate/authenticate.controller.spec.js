@@ -13,8 +13,8 @@ describe('Controller: Login', function(){
     $httpBackend = _$httpBackend_;
 
     credencials = {
-      email: 'email@valid.com',
-      password: 'senhaValida'
+      email: 'admin@flashband.com',
+      password: '123123'
     };
 
     scope = $rootScope.$new();
