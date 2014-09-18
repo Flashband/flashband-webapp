@@ -49,5 +49,7 @@ describe('FlashbandService', function() {
     });
     it('should reject existing flashbands');
     it('should reject duplcated flashbands');
+    it('should disable prior active flashband batch');
+    it('should destroy existing flashbands');
   });
 });
