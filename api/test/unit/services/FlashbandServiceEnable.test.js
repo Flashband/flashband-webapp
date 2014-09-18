@@ -47,9 +47,18 @@ describe('FlashbandService', function() {
           }).fail(done);
         }).fail(done);
     });
+    it('should activate created flashbandBatch', function(done) {
+      FlashbandService.enable([{ tag: '123456', serial: 1 }], 'lote 1')
+        .then(function() {
+          FlashbandBatch.findOne({name:'lote 1'}).then(function(flashbandBatch) {
+            expect(flashbandBatch.active).to.be.ok;
+            done();
+          }).fail(done);
+        }).fail(done);
+    });
+    it('should inactivate prior active flashband batch');
     it('should reject existing flashbands');
     it('should reject duplcated flashbands');
-    it('should disable prior active flashband batch');
     it('should destroy existing flashbands');
   });
 });

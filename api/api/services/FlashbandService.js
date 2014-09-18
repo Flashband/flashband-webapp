@@ -17,7 +17,7 @@ module.exports = {
   },
   enable: function(flashbands, name, file) {
     return Flashband.create(flashbands).then(function(flashbands) {
-      return FlashbandBatch.create({name: name, file: file}).then(function(flashbandBatch) {
+      return FlashbandBatch.create({name: name, file: file, active: true}).then(function(flashbandBatch) {
         flashbands.forEach(function(flashband) {
           flashbandBatch.flashbands.add(flashband.id);
         });
