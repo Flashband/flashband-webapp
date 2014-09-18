@@ -40,7 +40,7 @@ describe('The login view', function () {
     var enableFlashbandPage = require('../pages/enable.flashband.page');
     enableFlashbandPage.goUploadFlashbands();
 
-    var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.CANCEL"]'));
+    var btnNewImport = element(by.css('a[translate="FLASHBAND.ENABLE.CANCEL"]'));
     btnNewImport.click();
 
     expect(browser.getCurrentUrl()).toContain('#/flashbands-enable');

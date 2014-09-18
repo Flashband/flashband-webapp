@@ -54,7 +54,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "TITLE": "Cadastre um lote de pulseiras.",
         "TEXT": "Seja bem vindo. Você ainda não possui nenhuma pulseira cadastrada. Para começar, é só clicar em adicionar pulseiras.",
         "BUTTON": "Cadastrar pulseiras &raquo;",
-        "SAVE": "Cadstrar"
+        "SAVE": "Cadstrar",
+        "CANCEL": "Cancelar",
       },
       "MESSAGE": {
          "ERROR": {
