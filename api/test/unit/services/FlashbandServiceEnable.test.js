@@ -3,18 +3,6 @@ var expect = require('chai').use(require('chai-as-promised')).expect;
 
 describe('FlashbandService', function() {
   describe('#enable', function() {
-    //beforeEach(function(done) {
-      //Flashband.count().then(function(qtdFlashbands) {
-        //if (qtdFlashbands) {
-          //Flashband.destroy().then(done).fail(done);
-        //} else {
-          //done();
-        //}
-      //});
-    //});
-    //it('should enable flashband when flashband not exists', function(done) {
-      //expect(FlashbandService.enable([ {tag: '123456', serial: 1} ], 'lote 1')).to.be.fulfilled.and.notify(done);
-    //});
     it('should associate flashband in', function(done) {
       var expectAssociation = function(flashbandBatch) {
         FlashbandBatch.findOne(flashbandBatch.id).populate('flashbands').then(function(saved) {

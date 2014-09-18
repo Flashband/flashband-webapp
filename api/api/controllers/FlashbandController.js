@@ -11,7 +11,7 @@ module.exports = {
     });
   },
   enable: function enableFlashbands(req, res) {
-    req.file('flashbands').upload(function (err, files) {
+    req.file('flashbands').upload(function (err) { //}, files) {
       // console.log('********************************************************************************');
       // console.log('req.query');
       // console.log(req.query);
