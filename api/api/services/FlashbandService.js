@@ -1,3 +1,5 @@
+var q = require('q');
+
 module.exports = {
   exists: function(flashbandUid) {
     return Flashband.count({ tag: flashbandUid }).then(function (count) {
@@ -13,9 +15,14 @@ module.exports = {
       return flashband.save();
     });
   },
-  enable: function(flashbands, name) {
+  enable: function(flashbands, name, file) {
     return Flashband.create(flashbands).then(function(flashbands) {
-      return FlashbandBatch.create({name: name, flashbands: flashbands});
+      return FlashbandBatch.create({name: name, file: file}).then(function(flashbandBatch) {
+        flashbands.forEach(function(flashband) {
+          flashbandBatch.flashbands.add(flashband.id);
+        });
+        return flashbandBatch.save();
+      });
     });
   }
 };
