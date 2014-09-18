@@ -5,7 +5,6 @@ var loginPage = require('../pages/login.page');
 describe('The login view', function () {
   it('should visible required fields', function() {
     browser.get('#/login');
-    browser.waitForAngular();
 
     expect(element(by.model('credencials.email')).isDisplayed()).toBeTruthy();
     expect(element(by.model('credencials.password')).isDisplayed()).toBeTruthy();
@@ -13,12 +12,12 @@ describe('The login view', function () {
   });
 
   it('should redirect to dashboard when authenticate successfully', function() {
-    loginPage.setBrowser(browser).tryAuthenticateSuccessfully();
+    loginPage.tryAuthenticateSuccessfully();
     expect(browser.getCurrentUrl()).toContain('#/dashboard');
   });
 
   it('should view message error when authenticate fail', function() {
-    loginPage.setBrowser(browser).tryAuthenticateFail();
+    loginPage.tryAuthenticateFail();
     expect(browser.getCurrentUrl()).toContain('#/login');
 
     var msg = element(by.css('div[translate="LOGIN.MESSAGE.ERROR"]'));

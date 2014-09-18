@@ -3,10 +3,9 @@
 describe('The login view', function () {
   it('should visible required elements', function() {
     var enableFlashbandPage = require('../pages/enable.flashband.page');
-    enableFlashbandPage.setBrowser(browser).goEnableFlashbands();
+    enableFlashbandPage.goEnableFlashbands();
 
     browser.get('#/flashbands-enable');
-    browser.waitForAngular();
 
     var titlePage = element(by.css('h1[translate="FLASHBAND.ENABLE.TITLE"]'));
     expect(titlePage.isDisplayed()).toBeTruthy();
@@ -27,10 +26,7 @@ describe('The login view', function () {
 
   it('should import csv file of flashbands', function() {
     var enableFlashbandPage = require('../pages/enable.flashband.page');
-    enableFlashbandPage.setBrowser(browser).goEnableFlashbands();
-
-    browser.get('#/flashbands-upload');
-    browser.waitForAngular();
+    enableFlashbandPage.goUploadFlashbands();
 
     var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.SAVE"]'));
     btnNewImport.click();
@@ -40,4 +36,13 @@ describe('The login view', function () {
     expect(msg.getText()).toBe("Campos obrigatórios!");
   });
 
+  it('should redirect page to start enable flashbands when click cancel button', function() {
+    var enableFlashbandPage = require('../pages/enable.flashband.page');
+    enableFlashbandPage.goUploadFlashbands();
+
+    var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.CANCEL"]'));
+    btnNewImport.click();
+
+    expect(browser.getCurrentUrl()).toContain('#/flashbands-enable');
+  });
 });

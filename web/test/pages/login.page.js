@@ -1,19 +1,13 @@
 'use strict';
 
 module.exports = {
-  setBrowser: function(browser) {
-    this.browser = browser;
-    return this;
-  },
-
   tryAuthenticate: function(user, pass) {
-    this.browser.get('#/login');
-    this.browser.waitForAngular();
+    browser.get('#/login');
 
     element(by.model('credencials.email')).sendKeys(user);
     element(by.model('credencials.password')).sendKeys(pass);
     element(by.css('button[type="submit"]')).click();
-    this.browser.waitForAngular();
+    browser.waitForAngular();
 
     return this;
   },
