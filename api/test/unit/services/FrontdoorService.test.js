@@ -1,13 +1,14 @@
 var Q = require('q');
 var sinon = require('sinon');
 var expect = require('chai').use(require('chai-as-promised')).expect;
+var databaseHelper = require('../../helpers/DatabaseHelper');
 var flashbandServiceExistsStub;
 
 describe('FrontdoorService', function() {
   describe('#register', function() {
     beforeEach(function(done) {
       flashbandServiceExistsStub = null;
-      Entrance.drop(done);
+      databaseHelper.emptyModels([Entrance]).then(done);
     });
 
     var stubFlashbandExists = function(exists) {

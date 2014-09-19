@@ -3,6 +3,7 @@ var shared       = require('../shared-specs');
 var passwordHash = require('password-hash');
 var FlashbandHelper = require('../../helpers/FlashbandHelper');
 var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
+var databaseHelper = require('../../helpers/DatabaseHelper');
 
 var outputSuccessful;
 var inputSuccessful;
@@ -12,16 +13,16 @@ var serialToken;
 describe('FrontdoorController', function() {
   beforeEach(function(done) {
     args = {tag: '1234'};
-    Entrance.drop();
-    Flashband.drop();
-    inputSuccessful  = {door: 'in', message: 'Input successful.'};
-    outputSuccessful = {door: 'out', message: 'Output successful.'};
+    databaseHelper.emptyModels([Entrance, Flashband]).then(function() {
+      inputSuccessful  = {door: 'in', message: 'Input successful.'};
+      outputSuccessful = {door: 'out', message: 'Output successful.'};
 
-    User.create({password: '123123123'}).then(function(user) {
-      serialToken = passwordHash.generate(user.id);
-      user.tokens.add({ token: serialToken });
-      user.save(done);
-    }).fail(done);
+      User.create({password: '123123123'}).then(function(user) {
+        serialToken = passwordHash.generate(user.id);
+        user.tokens.add({ token: serialToken });
+        user.save(done);
+      }).fail(done);
+    });
   });
 
   describe('POST /frontdoor/enter', function() {

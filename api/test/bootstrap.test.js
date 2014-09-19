@@ -1,6 +1,5 @@
 var Sails = require('sails');
-var async = require('async');
-var Q = require('q');
+var databaseHelper = require('./helpers/DatabaseHelper');
 
 before(function(done) {
   Sails.lift({
@@ -15,9 +14,7 @@ before(function(done) {
 });
 
 beforeEach(function(done) {
-  async.each(sails.models, function(model, next) {
-    Q(model.drop()).then(next, done);
-  }, done);
+  databaseHelper.emptyModels(sails.models, done);
 });
 
 after(function(done) {

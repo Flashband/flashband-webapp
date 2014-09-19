@@ -1,14 +1,12 @@
 var expect = require('chai').use(require('chai-as-promised')).expect;
 var async = require('async');
+var databaseHelper = require('../../helpers/DatabaseHelper');
 //var FlashbandHelper = require('../../helpers/FlashbandHelper');
 
 describe('FlashbandService', function() {
   describe('#enable', function() {
     beforeEach(function(done) {
-      async.each([Flashband, FlashbandBatch], function(model, next) {
-        model.drop();
-        next();
-      }, done);
+      databaseHelper.emptyModels([Flashband, FlashbandBatch]).then(done);
     });
 
     it('should associate flashband in', function(done) {
