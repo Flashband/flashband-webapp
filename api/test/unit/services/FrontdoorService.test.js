@@ -8,7 +8,7 @@ describe('FrontdoorService', function() {
   describe('#register', function() {
     beforeEach(function(done) {
       flashbandServiceExistsStub = null;
-      databaseHelper.emptyModels([Entrance]).then(done);
+      databaseHelper.emptyModels([Entrance]).finally(done);
     });
 
     var stubFlashbandExists = function(exists) {

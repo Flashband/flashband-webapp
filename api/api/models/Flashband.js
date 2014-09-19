@@ -8,13 +8,12 @@
 module.exports = {
   autoCreatedAt: true,
   attributes: {
-    tag: { type: 'string' },
+    tag: { 
+      type: 'string',
+      unique: true
+    },
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
-
-    //batch: {
-      //model: 'FlashbandBatch'
-    //},
 
     blocked: function() {
       return Boolean(this.blockedAt);

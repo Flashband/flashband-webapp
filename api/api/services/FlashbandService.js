@@ -1,4 +1,4 @@
-//var q = require('q');
+var q = require('q');
 
 var inactivate = function(flashbandBatches) {
   flashbandBatches.forEach(function(flashbandBatch) {
@@ -23,16 +23,31 @@ module.exports = {
     });
   },
   enable: function(flashbands, name, file) {
-    return Flashband.create(flashbands).then(function(flashbands) {
-      return FlashbandBatch.find({active: true}).then(function(flashbandBatches) {
-        inactivate(flashbandBatches);
-        return FlashbandBatch.create({name: name, file: file, active: true}).then(function(flashbandBatch) {
-          flashbands.forEach(function(flashband) {
-            flashbandBatch.flashbands.add(flashband.id);
-          });
-          return flashbandBatch.save();
-        });
+    var defer = q.defer();
+    Flashband.destroy().then(function() {
+      var newFlashbands = [];
+      var createFlashband = function(args, next) {
+        Flashband.create(args).then(function (flashband) { 
+          newFlashbands.push(flashband); 
+          next();
+        }).fail(next);
+      };
+      async.each(flashbands, createFlashband, function(err) {
+        if (err) {
+          defer.reject(err instanceof Error ? err : new Error(err));
+        } else {
+          FlashbandBatch.find({active: true}).then(function(flashbandBatches) {
+            inactivate(flashbandBatches);
+            FlashbandBatch.create({name: name, file: file, active: true}).then(function(flashbandBatch) {
+              newFlashbands.forEach(function(flashband) {
+                flashbandBatch.flashbands.add(flashband.id);
+              });
+              flashbandBatch.save().then(defer.resolve, defer.reject);
+            }).fail(defer.reject);
+          }).fail(defer.reject);
+        }
       });
-    });
+    }).fail(defer.reject);
+    return defer.promise;
   }
 };

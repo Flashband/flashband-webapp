@@ -1,17 +1,17 @@
-module.exports = {
-  createBlocked: function() {
-    var d = new Date();
-    var randonTag = ''.concat(d.getTime());
-    var args = {tag: randonTag, serial: 1, blockedAt: new Date()};
+var prepareArgs = function(tag, serial, blockedAt) {
+  var newTag = tag ? tag : ''.concat((new Date()).getTime());
+  var newSerial = serial ? serial : 1;
+  return {tag: newTag, serial: newSerial, blockedAt: blockedAt};
+};
 
+module.exports = {
+  createBlocked: function(tag, serial) {
+    var args = prepareArgs(tag, serial, new Date());
     return Flashband.create(args);
   },
 
-  createSuccess: function() {
-    var d = new Date();
-    var randonTag = ''.concat(d.getTime());
-    var args = {tag: randonTag, serial: 1, blockedAt: null};
-
+  createSuccess: function(tag, serial) {
+    var args = prepareArgs(tag, serial, null);
     return Flashband.create(args);
   }
 };

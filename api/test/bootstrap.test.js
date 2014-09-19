@@ -7,14 +7,11 @@ before(function(done) {
     models: {
       migrate: 'drop'
     }
-  }, function(err, sails) {
-    if (err) return done(err);
-    done(err, sails);
-  });
+  }, done);
 });
 
 beforeEach(function(done) {
-  databaseHelper.emptyModels(sails.models, done);
+  databaseHelper.emptyModels(sails.models).finally(done);
 });
 
 after(function(done) {
