@@ -1,4 +1,11 @@
-var q = require('q');
+//var q = require('q');
+
+var inactivate = function(flashbandBatches) {
+  flashbandBatches.forEach(function(flashbandBatch) {
+    flashbandBatch.inactivate();
+    flashbandBatch.save().fail(function(err) { throw err; });
+  });
+};
 
 module.exports = {
   exists: function(flashbandUid) {
@@ -17,11 +24,14 @@ module.exports = {
   },
   enable: function(flashbands, name, file) {
     return Flashband.create(flashbands).then(function(flashbands) {
-      return FlashbandBatch.create({name: name, file: file, active: true}).then(function(flashbandBatch) {
-        flashbands.forEach(function(flashband) {
-          flashbandBatch.flashbands.add(flashband.id);
+      return FlashbandBatch.find({active: true}).then(function(flashbandBatches) {
+        inactivate(flashbandBatches);
+        return FlashbandBatch.create({name: name, file: file, active: true}).then(function(flashbandBatch) {
+          flashbands.forEach(function(flashband) {
+            flashbandBatch.flashbands.add(flashband.id);
+          });
+          return flashbandBatch.save();
         });
-        return flashbandBatch.save();
       });
     });
   }

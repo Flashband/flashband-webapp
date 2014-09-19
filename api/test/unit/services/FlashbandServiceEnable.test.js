@@ -1,6 +1,7 @@
 var expect = require('chai').use(require('chai-as-promised')).expect;
 var async = require('async');
 var databaseHelper = require('../../helpers/DatabaseHelper');
+var flashbandBatchHelper = require('../../helpers/FlashbandBatchHelper');
 //var FlashbandHelper = require('../../helpers/FlashbandHelper');
 
 describe('FlashbandService', function() {
@@ -54,7 +55,17 @@ describe('FlashbandService', function() {
           }).fail(done);
         }).fail(done);
     });
-    it('should inactivate prior active flashband batch');
+    it('should inactivate prior active flashband batch', function (done) {
+      flashbandBatchHelper.createActive('lote 1').then(function(priorFlashbandBatch) {
+        FlashbandService.enable([{ tag: '123456', serial: 1 }], 'lote 2')
+          .then(function() {
+            FlashbandBatch.findOne(priorFlashbandBatch.id).then(function(flashbandBatch) {
+              expect(flashbandBatch.active).to.be.not.ok;
+              done();
+            }).fail(done);
+          }).fail(done);
+      }).fail(done);
+    });
     it('should reject existing flashbands');
     it('should reject duplcated flashbands');
     it('should destroy existing flashbands');
