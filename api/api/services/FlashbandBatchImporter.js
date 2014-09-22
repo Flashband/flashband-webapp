@@ -1,29 +1,23 @@
-var parse = require('csv-parse');
-var transform = require('stream-transform');
+var csv = require('csv');
 var q = require('q');
-
-//var fs = require('fs');
-//var parse = require('csv-parse');
-//var transform = require('stream-transform');
-
-//var output = [];
-//var parser = parse({delimiter: ':'})
-//var input = fs.createReadStream('/etc/passwd');
-//var transformer = transform(function(record, callback){
-  //setTimeout(function(){
-    //callback(null, record.join(' ')+'\n');
-  //}, 500);
-//}, {parallel: 10});
-//input.pipe(parser).pipe(transformer).pipe(process.stdout);
-
 
 module.exports = {
   parse: function(input) {
-    var defer = q.derfer();
-    var parser = parse({delimiter: ':'});
-    var transformer = transform(function(record, callback){
+    var defer = q.defer();
+    var parser = csv.parse({columns: true, trim: true, delimiter: ';'});
+    var flashbands = [];
+    var transformer = csv.transform(function(record) {
+      var tag = record.UID.replace(/ /g, '');
+      var serial = record.Qrcode;
+      flashbands.push({tag: tag, serial: serial});
     });
-    input.pipe(parser).pipe();
+    transformer.on('finish', function() {
+      defer.resolve(flashbands);
+    });
+    transformer.on('error', function(err) {
+      defer.reject(err);
+    });
+    input.pipe(parser).pipe(transformer).pipe(process.stdout);
     return defer.promise;
   }
 };
