@@ -44,9 +44,17 @@
     "Pablo Bender <pablo.bender@oncast.com.br>"
   ],
   "license": "",
+  "config": {
+    "blanket": {
+      "pattern": "\/api\/",
+      "data-cover-never": [ "\/api\/node_modules", "\/api\/responses" ]
+    }
+  },
   "devDependencies": {
+    "blanket": "^1.1.6",
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
+    "grunt-mocha-cov": "^0.3.0",
     "jscover": "^0.2.4",
     "jshint": "^2.5.5",
     "jshint-stylish": "^0.4.0",

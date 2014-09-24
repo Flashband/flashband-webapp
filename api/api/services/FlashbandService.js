@@ -1,13 +1,16 @@
-var Q = require('q');
-
 module.exports = {
   exists: function(flashbandUid) {
-    var deferred = Q.defer();
-
-    Flashband.count({ tag: flashbandUid }).exec(function(err, count) {
-      deferred.resolve(!err && !!count && count > 0);
+    return Flashband.count({ tag: flashbandUid }).then(function (count) {
+      return !!count && count > 0;
     });
+  },
 
-    return deferred.promise;
+  block: function(flashbandUid) {
+    return Flashband.findOne({ tag: flashbandUid }).then(function(flashband) {
+      if (!flashband) throw 'Flashband not found.';
+      if (flashband.blockedAt) throw 'Flashband already blocked.';
+      flashband.blockedAt = new Date();
+      return flashband.save();
+    });
   }
 };
