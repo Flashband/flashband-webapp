@@ -9,6 +9,8 @@ module.exports = {
     var transformer = csv.transform(function(record) {
       var tag = record.UID.replace(/ /g, '');
       var serial = record.Qrcode;
+      if (!(tag || serial))
+        return;
       flashbands.push({tag: tag, serial: serial});
     });
     transformer.on('finish', function() {
