@@ -17,7 +17,7 @@ module.exports = {
     transformer.on('error', function(err) {
       defer.reject(err);
     });
-    input.pipe(parser).pipe(transformer).pipe(process.stdout);
+    input.pipe(parser).pipe(transformer);
     return defer.promise;
   }
 };
