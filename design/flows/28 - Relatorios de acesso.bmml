@@ -1,0 +1,238 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1314" measuredH="1930" mockupW="1298" mockupH="1897">
+  <controls>
+    <control controlID="291" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="34" y="33" w="1280" h="1551" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Flashband%0Ahttp%3A//app.flashband.com</text>
+      </controlProperties>
+    </control>
+    <control controlID="292" controlTypeID="com.balsamiq.mockups::StickyNote" x="16" y="1687" w="317" h="243" measuredW="109" measuredH="123" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Clicando%20no%20menu%20Relat%F3rios%20o%20usu%E1rio%20%E9%20levado%20direto%20para%20a%20tela%20do%20relat%F3rio%20%28No%20MVP%20n%E3o%20teremos%20multiplos%20eventos%20para%20que%20ele%20possa%20selecionar%20qual%20evento%20quer%20ver%20os%20relat%F3rios%29.%20No%20cabe%E7alho%2C%20o%20t%EDtulo%20do%20evento%20e%20uma%20introdu%E7%E3o.%20Embaixo%2C%20as%20informa%E7%F5es%20gerais%3A%20data%2C%20total%20de%20visitantes%2C%20dura%E7%E3o%20e%20tempo%20m%E9dio%20da%20visita.%20Depois%2C%20as%20informa%E7%F5es%20detalhadas.%20%0A%20%0APor%20enquanto%20temos%20dois%20gr%E1ficos.%20O%20gr%E1fico%20de%20fluxo%20de%20entrada%20e%20o%20de%20fluxo%20de%20sa%EDda.%20Ambos%20mostram%20os%20dados%20do%20n%FAmero%20de%20hora%20em%20hora%20por%20n%FAmero%20de%20visitantes.%20Aqui%20no%20sketch%20os%20gr%E1ficos%20t%EAm%20duas%20linhas%2C%20mas%20no%20produto%20ele%20ter%E1%20apenas%20uma.%20%3A%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="293" controlTypeID="com.balsamiq.mockups::Paragraph" x="196" y="401" w="48" h="24" measuredW="275" measuredH="80" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>14</size>
+        <text>TOTAL</text>
+      </controlProperties>
+    </control>
+    <control controlID="294" controlTypeID="com.balsamiq.mockups::Paragraph" x="199" y="212" w="492" h="28" measuredW="275" measuredH="80" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>24</size>
+        <text>Tim%20Festival</text>
+      </controlProperties>
+    </control>
+    <control controlID="295" controlTypeID="com.balsamiq.mockups::Paragraph" x="199" y="260" w="534" h="61" measuredW="275" measuredH="80" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Esse%20evento%20iniciou%20no%20dia%2010/10/2014.%20No%20total%203200%20visitantes%20estiveram%20no%20evento.%20O%20primeiro%20visitante%20entrou%20%E0s%2020hs%20e%20a%20sa%EDda%20do%20%FAltimo%20visitante%20foi%20%E0s%204hs%20do%20dia%2011/10/2014.</text>
+      </controlProperties>
+    </control>
+    <control controlID="296" controlTypeID="__group__" x="41" y="107" w="1271" h="60" measuredW="1271" measuredH="60" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties/>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="1271" h="60" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="296">
+          <controlProperties>
+            <borderColor>15658734</borderColor>
+            <color>15658734</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="158" y="13" w="-1" h="-1" measuredW="112" measuredH="32" zOrder="1" locked="false" isInGroup="296">
+          <controlProperties>
+            <size>24</size>
+            <text>Flashband</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="1044" y="13" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="296">
+          <controlProperties>
+            <icon>GearIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="566" y="17" w="-1" h="-1" measuredW="81" measuredH="26" zOrder="3" locked="false" isInGroup="296">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>visitantes</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="701" y="14" w="-1" h="-1" measuredW="91" measuredH="32" zOrder="4" locked="false" isInGroup="296">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <size>18</size>
+            <text>relat%F3rios</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="440" y="17" w="-1" h="-1" measuredW="73" measuredH="26" zOrder="5" locked="false" isInGroup="296">
+          <controlProperties>
+            <color>6989903</color>
+            <size>18</size>
+            <text>pulseiras</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="302" controlTypeID="com.balsamiq.mockups::Paragraph" x="244" y="401" w="122" h="24" measuredW="275" measuredH="80" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>14</size>
+        <text>3200%20visitantes</text>
+      </controlProperties>
+    </control>
+    <control controlID="303" controlTypeID="com.balsamiq.mockups::HRule" x="196" y="503" w="919" h="-1" measuredW="100" measuredH="10" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+      </controlProperties>
+    </control>
+    <control controlID="311" controlTypeID="com.balsamiq.mockups::TextInput" x="1054" y="205" w="-1" h="-1" measuredW="61" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>6989903</borderColor>
+        <color>6989903</color>
+        <text>imprimir</text>
+      </controlProperties>
+    </control>
+    <control controlID="312" controlTypeID="com.balsamiq.mockups::Paragraph" x="198" y="421" w="88" h="24" measuredW="275" measuredH="80" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>14</size>
+        <text>DURA%C7%C3O</text>
+      </controlProperties>
+    </control>
+    <control controlID="313" controlTypeID="com.balsamiq.mockups::Paragraph" x="276" y="421" w="159" h="24" measuredW="275" measuredH="80" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>14</size>
+        <text>12%20horas%20e%2043%20minutos</text>
+      </controlProperties>
+    </control>
+    <control controlID="314" controlTypeID="com.balsamiq.mockups::Paragraph" x="197" y="352" w="492" h="28" measuredW="275" measuredH="80" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Informa%E7%F5es%20gerais</text>
+      </controlProperties>
+    </control>
+    <control controlID="315" controlTypeID="com.balsamiq.mockups::Paragraph" x="198" y="443" w="202" h="24" measuredW="275" measuredH="80" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>14</size>
+        <text>TEMPO%20M%C9DIO%20DA%20VISITA</text>
+      </controlProperties>
+    </control>
+    <control controlID="316" controlTypeID="com.balsamiq.mockups::Paragraph" x="376" y="443" w="159" h="24" measuredW="275" measuredH="80" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>14</size>
+        <text>4%20horas%20e%2010%20minutos</text>
+      </controlProperties>
+    </control>
+    <control controlID="317" controlTypeID="com.balsamiq.mockups::Paragraph" x="196" y="379" w="48" h="24" measuredW="275" measuredH="80" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>14</size>
+        <text>DATA</text>
+      </controlProperties>
+    </control>
+    <control controlID="318" controlTypeID="com.balsamiq.mockups::Paragraph" x="234" y="379" w="167" h="24" measuredW="275" measuredH="80" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>14</size>
+        <text>10/10/2014%20-%2011/10/2014</text>
+      </controlProperties>
+    </control>
+    <control controlID="319" controlTypeID="com.balsamiq.mockups::Label" x="992" y="208" w="-1" h="-1" measuredW="47" measuredH="21" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6989903</color>
+        <text>%3C%20voltar</text>
+      </controlProperties>
+    </control>
+    <control controlID="320" controlTypeID="com.balsamiq.mockups::Paragraph" x="197" y="536" w="918" h="28" measuredW="275" measuredH="80" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>18</size>
+        <text>Fluxo%20de%20entrada%3A%20hora%20x%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="321" controlTypeID="com.balsamiq.mockups::LineChart" x="199" y="580" w="916" h="290" measuredW="187" measuredH="175" zOrder="18" locked="false" isInGroup="-1"/>
+    <control controlID="342" controlTypeID="__group__" x="440" y="899" w="474" h="31" measuredW="474" measuredH="31" zOrder="19" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Paragraph" x="192" y="3" w="40" h="28" measuredW="275" measuredH="80" zOrder="0" locked="false" isInGroup="342">
+          <controlProperties>
+            <align>left</align>
+            <size>18</size>
+            <text>at%E9</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="183" h="-1" measuredW="170" measuredH="27" zOrder="1" locked="false" isInGroup="342">
+          <controlProperties>
+            <text>10/10/2014%20%20%20%20%20%E0s%20%20%20%20%2020%3A00</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::VRule" x="77" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="2" locked="false" isInGroup="342"/>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::VRule" x="115" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="3" locked="false" isInGroup="342"/>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="230" y="0" w="183" h="-1" measuredW="171" measuredH="27" zOrder="4" locked="false" isInGroup="342">
+          <controlProperties>
+            <text>11/10/2014%20%20%20%20%20%E0s%20%20%20%20%20%2004%3A00</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::VRule" x="307" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="5" locked="false" isInGroup="342"/>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::VRule" x="345" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="6" locked="false" isInGroup="342"/>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="428" y="0" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="7" locked="false" isInGroup="342">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <text>filtrar</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="343" controlTypeID="com.balsamiq.mockups::HRule" x="196" y="965" w="919" h="-1" measuredW="100" measuredH="10" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+      </controlProperties>
+    </control>
+    <control controlID="344" controlTypeID="com.balsamiq.mockups::Paragraph" x="197" y="998" w="918" h="28" measuredW="275" measuredH="80" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>18</size>
+        <text>Fluxo%20de%20sa%EDda%3A%20hora%20x%20visitante</text>
+      </controlProperties>
+    </control>
+    <control controlID="345" controlTypeID="com.balsamiq.mockups::LineChart" x="199" y="1042" w="916" h="290" measuredW="187" measuredH="175" zOrder="22" locked="false" isInGroup="-1"/>
+    <control controlID="346" controlTypeID="__group__" x="440" y="1361" w="474" h="31" measuredW="474" measuredH="31" zOrder="23" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Paragraph" x="192" y="3" w="40" h="28" measuredW="275" measuredH="80" zOrder="0" locked="false" isInGroup="346">
+          <controlProperties>
+            <align>left</align>
+            <size>18</size>
+            <text>at%E9</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="0" w="183" h="-1" measuredW="170" measuredH="27" zOrder="1" locked="false" isInGroup="346">
+          <controlProperties>
+            <text>10/10/2014%20%20%20%20%20%E0s%20%20%20%20%2020%3A00</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::VRule" x="77" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="2" locked="false" isInGroup="346"/>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::VRule" x="115" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="3" locked="false" isInGroup="346"/>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::TextInput" x="230" y="0" w="183" h="-1" measuredW="171" measuredH="27" zOrder="4" locked="false" isInGroup="346">
+          <controlProperties>
+            <text>11/10/2014%20%20%20%20%20%E0s%20%20%20%20%20%2004%3A00</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::VRule" x="307" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="5" locked="false" isInGroup="346"/>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::VRule" x="345" y="0" w="-1" h="27" measuredW="10" measuredH="100" zOrder="6" locked="false" isInGroup="346"/>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="428" y="0" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="7" locked="false" isInGroup="346">
+          <controlProperties>
+            <borderColor>6989903</borderColor>
+            <color>6989903</color>
+            <text>filtrar</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="347" controlTypeID="com.balsamiq.mockups::StickyNote" x="386" y="1689" w="235" h="203" measuredW="109" measuredH="123" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Biblioteca%20de%20gr%E1fico%0ANesse%20primeiro%20momento%2C%20n%E3o%20existe%20nenhuma%20restri%E7%E3o%20do%20design%20quanto%20a%20isso.%20O%20usu%E1rio%20precisa%20acessar%20as%20informa%E7%F5es%20atrav%E9s%20do%20tablet%20%281024+%29%2C%20Desktop.%20Al%E9m%20disso%2C%20todo%20o%20relat%F3rio%20precisa%20ser%20impresso%20com%20facilidade.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

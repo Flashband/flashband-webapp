@@ -65,6 +65,15 @@ module.exports.connections = {
     database: 'flashband_dev'
   },
 
+  mongoProduction: {
+    adapter: 'sails-mongo',
+    host: 'localhost',
+    port: 27017,
+    // user: 'username',
+    // password: 'password',
+    database: 'flashband_production'
+  },
+
   /***************************************************************************
   *                                                                          *
   * PostgreSQL is another officially supported relational database.          *
