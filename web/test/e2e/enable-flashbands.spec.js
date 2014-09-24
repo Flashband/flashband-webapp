@@ -33,16 +33,6 @@ describe('The login view', function () {
 
     var msg = element(by.css('div[translate="FLASHBAND.MESSAGE.ERROR.VALIDATION"]'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Campos obrigatórios!");
-  });
-
-  it('should redirect page to start enable flashbands when click cancel button', function() {
-    var enableFlashbandPage = require('../pages/enable.flashband.page');
-    enableFlashbandPage.goUploadFlashbands();
-
-    var btnNewImport = element(by.css('a[translate="FLASHBAND.ENABLE.CANCEL"]'));
-    btnNewImport.click();
-
-    expect(browser.getCurrentUrl()).toContain('#/flashbands-enable');
+    expect(msg.getText()).toBe("Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.");
   });
 });

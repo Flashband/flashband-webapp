@@ -22,8 +22,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   }).state('finish-flashbands', {
     parent: dashboardAbstract,
     controller: 'EnableFlashbandsCtrl',
-    url: '/flashbands-finish',
-    templateUrl: 'partials/flashbands-finish.html',
+    url: '/flashbands-finish/:state',
+    templateUrl: 'partials/flashbands-enable.html',
     data: { isPublic: AuthenticateAccess.deny }
   });
 
@@ -54,12 +54,23 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "TITLE": "Cadastre um lote de pulseiras.",
         "TEXT": "Seja bem vindo. Você ainda não possui nenhuma pulseira cadastrada. Para começar, é só clicar em adicionar pulseiras.",
         "BUTTON": "Cadastrar pulseiras &raquo;",
-        "SAVE": "Cadstrar",
+        "SAVE": "Importar arquivo e cadstrar flashbands",
         "CANCEL": "Cancelar",
+        "PLACEHOLDER": "Digite o nome do lote de pulseiras",
+        "FILE": "Arquivo que será importado: <b>{{nameFile}}</b>"
+      },
+      "UPLOAD": {
+        "BTN": "Carregar arquivo .csv",
+        "TEXT": "Você pode cadastrar todo o lote de pulseiras recebidas de uma só vez.",
+        "CANCEL": "Cancelar Upload"
       },
       "MESSAGE": {
+        "SUCCESS": "O lote foi cadastrado e 2328903 pulseiras foram adicionadas com sucesso!",
+        "TOTAL": "Você possui {{totalFlashbands}} pulseiras cadastradas. Para cadastrar um novo lote, é só clicar em adicionar pulseiras.",
          "ERROR": {
-           "VALIDATION": "Campos obrigatórios!"
+           "VALIDATION": "Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.",
+           "UPLOAD": "Ocorreu algum erro na importação do arquivo. <p>Por favor verifique se o arquivo é o correto ou entre em contato com a equipe da 4ON</p>",
+           "FILE": "Arquivo inválido. Por favor informe um arquivo CSV com as flashbands corretas."
          }
       }
     }

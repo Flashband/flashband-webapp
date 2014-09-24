@@ -1,48 +1,60 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function ($scope, $upload) {
+angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function ($scope, $upload, $state, $stateParams) {
+  $scope.files = []
+  $scope.nameBatch = ""
   $scope.message = false;
+  $scope.totFlashbands = 0;
+  $scope.uploadPercent = false;
+  $scope.messageSuccess = false;
+  $scope.errorExtension = false;
 
-  $scope.uploadFile = function() {
-    $scope.message = {
-      type: "warning",
-      text: "FLASHBAND.MESSAGE.ERROR.VALIDATION"
-    };
+  if ($stateParams && $stateParams["state"]) {
+    $scope.messageSuccess = $stateParams["state"] === "success";
+    $scope.totFlashbands = 123.123;
+  }
+
+  $scope.setFile = function(files) {
+    if (_.isEmpty(files)) return;
+    $scope.errorExtension = files[0].name.substring(files[0].name.length-3) !== "csv";
+    if (!$scope.errorExtension) $scope.files = files;
   };
 
-  $scope.onFileSelect = function($files) {
-    $scope.flashbandsEnabled = false;
-    var onSuccess = function(data) { //(data, status, headers, config)
-      $scope.flashbandsEnabled = true;
-      $scope.message = data.message;
-    };
+  $scope.saveFlashbands = function() {
+    $scope.message = false;
 
-    var onProgress = function(evt) {
-      console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-    };
-
-    //$files: an array of files selected, each file has name, size, and type.
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      $scope.upload = $upload.upload({
-        method: 'POST',
-        url: 'http://localhost:1337/flashband/enable',
-        data: { name: $scope.name },
-        file: file, // or list of files ($files) for html5 only
-        fileFormDataName: 'flashbands' //or a list of names for multiple files (html5). Default is 'file', customize file formData name ('Content-Disposition'), server side file variable name.
-        //fileName: 'flashbands-to-enable.csv', // or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-        //headers: {'header-key': 'header-value'},
-        //withCredentials: true,
-        //formDataAppender: function(formData, key, val){} //customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-      }).progress(onProgress).success(onSuccess);
-      //.error(...)
-      //.then(success, error, progress);
-      // access or attach event listeners to the underlying XMLHttpRequest.
-      //.xhr(function(xhr){xhr.upload.addEventListener(...)})
+    if (_.isEmpty($scope.files) || _.isEmpty($scope.nameBatch)) {
+      return $scope.message = {
+        type: "warning",
+        text: "FLASHBAND.MESSAGE.ERROR.VALIDATION"
+      };
     }
-    /* alternative way of uploading, send the file binary with the file's content-type.
-       Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.
-       It could also be used to monitor the progress of a normal http post/put request with large data*/
-    // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
+
+    if ($scope.errorExtension) return;
+
+    var onSuccessUpload = function() {
+      $scope.uploadPercent = false;
+      $state.go("finish-flashbands", {state: "success"});
+    };
+
+    var onProgressUpload = function(evt) {
+      $scope.uploadPercent = parseInt(100.0 * evt.loaded / evt.total);
+    };
+
+    var onErrorUpload = function() {
+      $scope.uploadPercent = false;
+      $scope.message = {
+        type: "danger",
+        text: "FLASHBAND.MESSAGE.ERROR.UPLOAD"
+      };
+    };
+
+    $scope.upload = $upload.upload({
+      method: 'POST',
+      url: 'http://localhost:1337/flashband/enable',
+      data: { name: $scope.nameBatch },
+      file: $scope.files,
+      fileFormDataName: 'flashbands'
+    }).then(onSuccessUpload, onErrorUpload, onProgressUpload);
   };
 });
