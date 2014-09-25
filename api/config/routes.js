@@ -29,5 +29,6 @@ module.exports.routes = {
   'post /authenticate': 'AuthenticateController.authenticate',
 
   'put /flashband/:tag/block': 'FlashbandController.block',
-  'post /flashband/enable': 'FlashbandController.enable'
+  'post /flashband/enable': 'FlashbandController.enable',
+  'get /flashband/enable': 'FlashbandController.summary'
 };

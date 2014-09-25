@@ -31,10 +31,6 @@ module.exports.policies = {
   AuthenticateController: {
     login: true,
     authenticate: true
-  },
-
-  FlashbandController: {
-    enable: true
   }
 
   /***************************************************************************

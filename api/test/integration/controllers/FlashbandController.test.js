@@ -2,20 +2,23 @@ var request      = require('supertest');
 var shared       = require('../shared-specs');
 var passwordHash = require('password-hash');
 var FlashbandHelper = require('../../helpers/FlashbandHelper');
+var databaseHelper = require('../../helpers/DatabaseHelper');
 
 describe('FlashbandController', function() {
 
   var serialToken;
 
   shared.shoudRequestNotFound('/flashband/000000000000/block', ['GET', 'POST', 'DELETE']);
-  shared.shoudRequestNotFound('/flashband/enable', ['GET', 'PUT', 'DELETE']);
+  //shared.shoudRequestNotFound('/flashband/enable', ['PUT', 'DELETE']);
 
   describe('with authenticated user', function() {
     beforeEach(function(done) {
       User.create({password: '123123123'}).then(function(user) {
         serialToken = passwordHash.generate(user.id);
         user.tokens.add({ token: serialToken });
-        user.save(done);
+        user.save().then(function() {
+          databaseHelper.emptyModels([Flashband, FlashbandBatch]).then(done).fail(done);
+        }).fail(done);
       }).fail(done);
     });
 
@@ -55,9 +58,22 @@ describe('FlashbandController', function() {
           .attach('flashbands', 'test/fixtures/one-valid-flashband.csv')
           .send({name: '1st flashband batch'})
           .set('Authorization', 'Token token='.concat(serialToken))
-          .expect(201, { message: 'Flashbands enabled successfully.' })
+          .expect(201, { flashbands_enabled: 1, message: 'Flashbands enabled successfully.' })
           .expect('Content-Type', /application\/json/)
           .end(done);
+      });
+    });
+
+    describe('GET /flashband/enable', function() {
+      it('should return total of enabled flashbands', function(done) {
+        FlashbandHelper.createSuccess().then(function() {
+          request(sails.hooks.http.app)
+            .get('/flashband/enable')
+            .set('Authorization', 'Token token='.concat(serialToken))
+            .expect(200, { total: 1 })
+            .expect('Content-Type', /application\/json/)
+            .end(done);
+        }).fail(done);
       });
     });
   });
