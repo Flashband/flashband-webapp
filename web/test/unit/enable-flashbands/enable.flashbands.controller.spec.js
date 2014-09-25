@@ -40,6 +40,9 @@ describe('Controller: EnableFlashbandsCtrl', function(){
   });
 
   describe('#saveFlashbands', function() {
+    beforeEach(function() {
+      $httpBackend.whenGET('http://localhost:1337/flashband/enable').respond(200, {total: 0});
+    });
     it ('should view message error when not fill file to import', function() {
       scope.nameBatch = "Arquivo de pulseiras para importação.";
       expect(scope.message).toBeFalsy();

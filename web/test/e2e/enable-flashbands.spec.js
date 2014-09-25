@@ -12,8 +12,8 @@ describe('The login view', function () {
     expect(titlePage.getText()).toBe("Cadastre um lote de pulseiras.");
 
     var textPage = element(by.css('p[translate="FLASHBAND.ENABLE.TEXT"]'));
-    expect(textPage.isDisplayed()).toBeTruthy();
-    expect(textPage.getText()).toBe("Seja bem vindo. Você ainda não possui nenhuma pulseira cadastrada. Para começar, é só clicar em adicionar pulseiras.");
+    expect(textPage.isDisplayed()).toBeFalsy();
+    //expect(textPage.getText()).toBe("Seja bem vindo. Você ainda não possui nenhuma pulseira cadastrada. Para começar, é só clicar em adicionar pulseiras.");
 
     var btnSubmit = element(by.css('a[translate="FLASHBAND.ENABLE.BUTTON"]'));
     expect(btnSubmit.isDisplayed()).toBeTruthy();

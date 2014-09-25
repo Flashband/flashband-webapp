@@ -9,7 +9,11 @@ angular.module('flashbandWebapp').service("FlashbandSessionSrvc", function (Flas
     },
 
     getToken: function () {
-      return FlashbandStorageSrvc.get(keySession).token;
+      try {
+        return FlashbandStorageSrvc.get(keySession).token;
+      } catch(e) {
+        return '';
+      }
     },
 
     clearSession: function() {
