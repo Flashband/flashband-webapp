@@ -35,8 +35,8 @@ var registerProtractor = function(mode, done) {
   return gulp.src(testFiles).pipe($.protractor.protractor(cfg)).on('error', function (err) {
     throw err;
   }).on('end', function () {
-    browserSync.exit();
     if (flashbandServer) flashbandServer.kill('SIGTERM');
+    browserSync.exit();
     done();
   });
 };

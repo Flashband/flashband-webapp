@@ -29,11 +29,11 @@ var registerProtractor = function(done) {
   return gulp.src(testFiles).pipe($.protractor.protractor(cfg)).on('error', function (err) {
     throw err;
   }).on('end', function () {
-    browserSync.exit();
     if (phantomjs) {
       console.log('Terminating PhantomJS --webdriver');
       phantomjs.kill('SIGTERM');
     }
+    browserSync.exit();
     done();
   });
 };
