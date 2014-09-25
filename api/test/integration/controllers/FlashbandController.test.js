@@ -50,10 +50,10 @@ describe('FlashbandController', function() {
     });
     describe('POST /flashband/enable', function() {
       it ('return received content', function(done) {
-        var fileContent = [ { tag: '110011', serial: '1' }, { tag:'220022', serial: 2 } ];
         request(sails.hooks.http.app)
           .post('/flashband/enable')
-          .send(fileContent)
+          .attach('flashbands', 'test/fixtures/one-valid-flashband.csv')
+          .send({name: '1st flashband batch'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .expect(201, { message: 'Flashbands enabled successfully.' })
           .expect('Content-Type', /application\/json/)
