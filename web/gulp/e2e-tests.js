@@ -1,10 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
-
 var $ = require('gulp-load-plugins')();
-
 var browserSync = require('browser-sync');
+var childProcess = require('child_process');
 
 gulp.task('webdriver-update', $.protractor.webdriver_update);
 
@@ -14,18 +13,30 @@ var API = "api";
 var MOCKED = "mocked";
 
 var registerProtractor = function(mode, done) {
+  var flashbandServer = false;
   var testFiles = [
     'test/e2e/**/*.js'
   ];
 
   var cfg = {};
   if (mode === API) cfg.configFile = 'test/protractor.conf.api.js';
-  if (mode === MOCKED) cfg.configFile = 'test/protractor.conf.mocked.js';
+
+  if (mode === MOCKED) {
+    cfg.configFile = 'test/protractor.conf.mocked.js';
+
+    console.log('Starting Flashband API Server');
+    flashbandServer = childProcess.spawn('../api/node_modules/.bin/sails', ['lift'], {cwd: '../api/'}).on('error', function(err) {
+      throw err;
+    }).on('end', function() {
+      console.log('Flashband API Server terminated.');
+    });
+  }
 
   return gulp.src(testFiles).pipe($.protractor.protractor(cfg)).on('error', function (err) {
     throw err;
   }).on('end', function () {
     browserSync.exit();
+    if (flashbandServer) flashbandServer.kill('SIGTERM');
     done();
   });
 };
