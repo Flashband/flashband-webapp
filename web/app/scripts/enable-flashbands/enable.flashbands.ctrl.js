@@ -10,8 +10,9 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function ($
   $scope.errorExtension = false;
 
   if ($stateParams && $stateParams["state"]) {
-    $scope.messageSuccess = $stateParams["state"] === "success";
-    $scope.totFlashbands = 123.123;
+    var flashbands_enabled = parseInt($stateParams['state'], 10);
+    $scope.messageSuccess = flashbands_enabled > 0;
+    $scope.totFlashbands = flashbands_enabled;
   }
 
   $scope.setFile = function(files) {
@@ -32,9 +33,9 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function ($
 
     if ($scope.errorExtension) return;
 
-    var onSuccessUpload = function() {
+    var onSuccessUpload = function(res) {
       $scope.uploadPercent = false;
-      $state.go("finish-flashbands", {state: "success"});
+      $state.go("finish-flashbands", {state: res.data.flashbands_enabled});
     };
 
     var onProgressUpload = function(evt) {
