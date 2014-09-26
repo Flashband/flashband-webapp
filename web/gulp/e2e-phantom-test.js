@@ -44,4 +44,4 @@ gulp.task(onlyProtractorMocked, ['webdriver-update', 'wiredep-dev'], function (d
   registerProtractor(done);
 });
 
-gulp.task('protractor:phantomjs', ['serve:e2e', onlyProtractorMocked]);
+gulp.task('protractor:phantomjs', ['api:start', 'serve:e2e', onlyProtractorMocked, 'api:stop']);
