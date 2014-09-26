@@ -3,19 +3,20 @@ var sinon = require('sinon');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 var flashbandServiceExistsStub;
 
-var stubFlashbandExists = function(exists) {
-  var deferred = Q.defer();
-  deferred.resolve(exists);
-
-  flashbandServiceExistsStub = sinon.stub(FlashbandService, 'exists').returns(deferred.promise);
-};
-
 describe('FrontdoorService', function() {
   describe('#register', function() {
     beforeEach(function(done) {
       flashbandServiceExistsStub = null;
       Entrance.drop(done);
     });
+
+    var stubFlashbandExists = function(exists) {
+      var deferred = Q.defer();
+      deferred.resolve(exists);
+
+      flashbandServiceExistsStub = sinon.stub(FlashbandService, 'exists').returns(deferred.promise);
+    };
+
 
     it('should create an Entrance', function (done) {
       stubFlashbandExists(true);

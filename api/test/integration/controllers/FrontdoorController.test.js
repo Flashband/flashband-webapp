@@ -10,9 +10,6 @@ var args;
 var serialToken;
 
 describe('FrontdoorController', function() {
-  shared.shoudRequestNotFound('/frontdoor/enter', ['GET', 'PUT', 'DELETE']);
-  shared.shoudRequestNotFound('/frontdoor/leave', ['GET', 'PUT', 'DELETE']);
-
   beforeEach(function(done) {
     args = {tag: '1234'};
     Entrance.drop();
@@ -20,14 +17,16 @@ describe('FrontdoorController', function() {
     inputSuccessful  = {door: 'in', message: 'Input successful.'};
     outputSuccessful = {door: 'out', message: 'Output successful.'};
 
-    User.create({password: '123123123'}, function(err, user) {
+    User.create({password: '123123123'}).then(function(user) {
       serialToken = passwordHash.generate(user.id);
       user.tokens.add({ token: serialToken });
       user.save(done);
-    });
+    }).fail(done);
   });
 
   describe('POST /frontdoor/enter', function() {
+    shared.shoudRequestNotFound('/frontdoor/enter', ['GET', 'PUT', 'DELETE']);
+
     it('should register a valid flashband', function (done) {
       var verifyRegister = function(flashband) {
         request(sails.hooks.http.app)
@@ -78,6 +77,8 @@ describe('FrontdoorController', function() {
   });
 
   describe('POST /frontdoor/leave', function() {
+    shared.shoudRequestNotFound('/frontdoor/leave', ['GET', 'PUT', 'DELETE']);
+
     it('should leave a valid flashband', function (done) {
       var verifyLeave = function(entrance) {
         request(sails.hooks.http.app)

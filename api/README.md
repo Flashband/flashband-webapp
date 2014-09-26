@@ -6,18 +6,40 @@ flashband-api
 Install API
 ==========
     $ git clone git@github.com:oncast-labs/flashband-webapp.git flashband
+
     $ cd flashband/api/
+
     $ npm install
+
 
 Run Tests
 ==========
     $ npm test
+
+    or
+
+    $ grunt test
+
+Run Code Coverage
+=================
+  $ mocha --require blanket -R html-cov > [path-to-output.html]
+  
+  or
+
+  $ grunt cov > [path-to-output.html]
+
+
+  INFO: 
+
+    instrumentation paths are defined in config.blanket from package.json
 
 
 Run Code Analysis
 =================
     $ npm run-script jshint
 
+
 Start Server
 =========
     $ npm start
+
