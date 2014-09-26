@@ -17,6 +17,16 @@ var validate = function(flashbands) {
 
   for (var i = 0; i < flashbands.length; i++) {
     var flashband = flashbands[i];
+    if (!flashband.tag) {
+      result.ok = false;
+      result.error = 'Missing UID.';
+      return result;
+    }
+    if (!flashband.serial) {
+      result.ok = false;
+      result.error = 'Missing Qrcode.';
+      return result;
+    }
     if (tags.indexOf(flashband.tag) > -1) {
       result.ok = false;
       result.error = 'Duplicated UID.';
@@ -25,7 +35,7 @@ var validate = function(flashbands) {
     tags.push(flashband.tag);
     if (serials.indexOf(flashband.serial) > -1) {
       result.ok = false;
-      result.error = 'Duplicated Serial.';
+      result.error = 'Duplicated Qrcode.';
       return result;
     }
     serials.push(flashband.serial);
@@ -39,7 +49,7 @@ module.exports = {
     var parser = csv.parse({columns: true, trim: true, delimiter: ';'});
     var flashbands = [];
     var transformer = csv.transform(function(record) {
-      if (!(record.UID || record.Serial))
+      if (!(record.UID || record.Qrcode))
         return;
       var tag = record.UID.replace(/ /g, '');
       var serial = record.Qrcode;

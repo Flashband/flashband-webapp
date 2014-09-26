@@ -52,13 +52,23 @@ describe('FlashbandController', function() {
       });
     });
     describe('POST /flashband/enable', function() {
-      it ('return received content', function(done) {
+      it ('should enable flashbands from valid file', function(done) {
         request(sails.hooks.http.app)
           .post('/flashband/enable')
           .attach('flashbands', 'test/fixtures/one-valid-flashband.csv')
           .send({name: '1st flashband batch'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .expect(201, { flashbands_enabled: 1, message: 'Flashbands enabled successfully.' })
+          .expect('Content-Type', /application\/json/)
+          .end(done);
+      });
+      it ('should reject corrupted file (flashband without UID) ', function(done) {
+        request(sails.hooks.http.app)
+          .post('/flashband/enable')
+          .attach('flashbands', 'test/fixtures/flashband-without-uid.csv')
+          .send({name: '1st flashband batch'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .expect(400)
           .expect('Content-Type', /application\/json/)
           .end(done);
       });

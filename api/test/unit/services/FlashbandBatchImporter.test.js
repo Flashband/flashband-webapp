@@ -21,15 +21,25 @@ describe('FlashbandBatchImporter', function () {
       var importFile = stringReadableStream.createReadableStream(fileContent);
       expect(FlashbandBatchImporter.parse(importFile)).to.be.rejectedWith('Duplicated UID.').and.notify(done);
     });
-    it('should reject files with duplicated Serial', function(done) {
+    it('should reject files with duplicated Qrcode', function(done) {
       var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04 88\n000001;00 00 00 00 00 00 00 00';
       var importFile = stringReadableStream.createReadableStream(fileContent);
-      expect(FlashbandBatchImporter.parse(importFile)).to.be.rejectedWith('Duplicated Serial.').and.notify(done);
+      expect(FlashbandBatchImporter.parse(importFile)).to.be.rejectedWith('Duplicated Qrcode.').and.notify(done);
     });
     it('should reject empty file', function(done) {
       var fileContent = '';
       var importFile = stringReadableStream.createReadableStream(fileContent);
       expect(FlashbandBatchImporter.parse(importFile)).to.be.rejectedWith('No flashbands found.').and.notify(done);
+    });
+    it('should reject invalid flashbands (without UID)', function(done) {
+      var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04 88\n000002;';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.be.rejectedWith('Missing UID.').and.notify(done);
+    });
+    it('should reject invalid flashbands (without Qrcode)', function(done) {
+      var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04 88\n;11 22 33 44 55 66 77 88';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.be.rejectedWith('Missing Qrcode.').and.notify(done);
     });
     it('should reject file without flashbands', function(done) {
       var fileContent = 'Qrcode      ;UID ';
