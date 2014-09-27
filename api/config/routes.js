@@ -21,13 +21,14 @@
  */
 
 module.exports.routes = {
-  '/': {
-    view: 'homepage'
-  },
-
   'post /frontdoor/enter': 'FrontdoorController.enter',
   'post /frontdoor/leave': 'FrontdoorController.leave',
   'post /frontdoor/cross': 'FrontdoorController.cross',
-  'post /authenticate': 'AuthenticateController.create',
-  'put /flashband/:tag/block': 'FlashbandController.block'
+
+  'post /login': 'AuthenticateController.login',
+  'post /authenticate': 'AuthenticateController.authenticate',
+
+  'put /flashband/:tag/block': 'FlashbandController.block',
+  'post /flashband/enable': 'FlashbandController.enable',
+  'get /flashband/enable': 'FlashbandController.summary'
 };

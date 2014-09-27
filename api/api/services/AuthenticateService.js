@@ -1,48 +1,50 @@
 var Q = require('q');
 var tokenHasher = require('password-hash');
-var loadUserByPass = require('./LoadUserByPass');
 
-module.exports = {
-  login: function(password) {
-    var deferred = Q.defer();
+var auth = function(argsFind) {
+  var deferred = Q.defer();
 
-    var generateToken = function(user) {
-      var args = {
-        token: tokenHasher.generate(user.id)
-      };
-
-      user.tokens.add(args);
-      user.save(function() {
-        deferred.resolve(args);
-      });
+  var generateToken = function(user) {
+    var args = {
+      token: tokenHasher.generate(user.id)
     };
 
-    loadUserByPass(password).then(generateToken).fail(function(error) {
-      deferred.reject(error);
+    user.tokens.add(args);
+    user.save(function() {
+      args.user = user;
+      deferred.resolve(args);
     });
+  };
 
-    return deferred.promise;
+  User.findOne(argsFind).then(generateToken).fail(deferred.reject);
+
+  return deferred.promise;
+};
+
+module.exports = {
+  webLogin: function(email, password) {
+    return auth({email: email, webpassword: password});
+  },
+
+  mobileLogin: function(password) {
+    return auth({mobpassword: password});
   },
 
   checkTokenValid: function(accessToken) {
     var deferred = Q.defer();
 
-    if (!accessToken) {
+    if (accessToken && tokenHasher.isHashed(accessToken)) {
+      var resolve = function(err, theToken) {
+        if (err)       return deferred.resolve(false);
+        if (!theToken) return deferred.resolve(false);
+
+        deferred.resolve(theToken.token === accessToken);
+      };
+
+      Token.findOne({token: accessToken}).exec(resolve);
+    } else {
       deferred.resolve(false);
-      return deferred.promise;
     }
-
-    if (!tokenHasher.isHashed(accessToken)) {
-      deferred.resolve(false);
-      return deferred.promise;
-    }
-
-    Token.findOne({token: accessToken}).exec(function(err, theToken) {
-      if (err)    return deferred.resolve(false);
-      if (!theToken) return deferred.resolve(false);
-
-      deferred.resolve(theToken.token === accessToken);
-    });
 
     return deferred.promise;
   }
