@@ -81,6 +81,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
            "FILE": "Arquivo inválido. Por favor informe um arquivo CSV com as flashbands corretas."
          }
       },
+      "MENU": {
+        "FLASHBANDS": "Pulseiras",
+        "SHOWGOER": "Showgoer"
+
+      },
       "SHOWGOER": {
         "TITLE": "Cadastre um showgoer",
         "TEXT": "Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.",

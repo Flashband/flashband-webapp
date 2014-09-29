@@ -19,4 +19,11 @@ describe('The Show goer view', function () {
     expect(pageText.getText()).toBe("Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.");
     expect(pageButton.getText()).toBe("Cadastrar showgoer"); 
   });
+
+  it('should have link to /showgoer', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    var linkToShowgoer = element(by.css('a[translate="FLASHBAND.MENU.SHOWGOER"]'));
+    linkToShowgoer.click();
+    expect(browser.getCurrentUrl()).toContain('#/showgoer');
+  });
 });

@@ -7,10 +7,10 @@ angular.module('flashbandWebapp').directive('flashbandMenu', function() {
     link: function(scope, elem, attrs) {
       scope.menus = [{
         sref: 'enable-flashbands',
-        label: 'pulseiras'
+        label: 'FLASHBAND.MENU.FLASHBANDS'
       }, {
-        sref: 'dashboard',
-        label: 'item do menu'
+        sref: 'showgoer',
+        label: 'FLASHBAND.MENU.SHOWGOER'
       }, {
         sref: 'dashboard',
         label: 'outro item do menu'

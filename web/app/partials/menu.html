@@ -1,9 +1,7 @@
 <div class="navbar-collapse collapse">
   <ul class="nav navbar-nav">
     <li ng-repeat="menu in menus">
-      <a ui-sref="{{menu.sref}}">
-        {{menu.label}}
-      </a>
+      <a ui-sref="{{menu.sref}}" translate="{{menu.label}}"></a>
     </li>
   </ul>
 </div>
