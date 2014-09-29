@@ -1,14 +1,3 @@
 machine:
   node:
-    version: 0.10.29
-
-dependencies:
-  override:
-    - cd api/ && npm install
-
-test:
-  override:
-    - cd api/ && npm test
-
-  post:
-    - cd api/ && bash coverage.sh
+    version: 0.10.31

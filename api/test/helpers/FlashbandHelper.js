@@ -1,26 +1,17 @@
-var Q = require('q');
-var promiseTarget = require('./PromiseTarget');
+var prepareArgs = function(tag, serial, blockedAt) {
+  var newTag = tag ? tag : ''.concat((new Date()).getTime());
+  var newSerial = serial ? serial : 1;
+  return {tag: newTag, serial: newSerial, blockedAt: blockedAt};
+};
 
 module.exports = {
-  createBlocked: function() {
-    var deferred = Q.defer();
-    var d = new Date();
-    var randonTag = ''.concat(d.getTime());
-    var args = {tag: randonTag, serial: 1, blockedAt: new Date()};
-
-    Flashband.create(args).then(deferred.resolve, deferred.reject);
-
-    return promiseTarget(deferred);
+  createBlocked: function(tag, serial) {
+    var args = prepareArgs(tag, serial, new Date());
+    return Flashband.create(args);
   },
 
-  createSuccess: function() {
-    var deferred = Q.defer();
-    var d = new Date();
-    var randonTag = ''.concat(d.getTime());
-    var args = {tag: randonTag, serial: 1, blockedAt: null};
-
-    Flashband.create(args).then(deferred.resolve, deferred.reject);
-
-    return promiseTarget(deferred);
+  createSuccess: function(tag, serial) {
+    var args = prepareArgs(tag, serial, null);
+    return Flashband.create(args);
   }
 };

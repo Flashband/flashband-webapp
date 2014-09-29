@@ -1,0 +1,34 @@
+<div ng-show="message" class="alert alert-{{message.type}}" translate="{{message.text}}"></div>
+
+<h1 translate="FLASHBAND.ENABLE.TITLE"></h1>
+<p translate="FLASHBAND.UPLOAD.TEXT"></p>
+
+<br>
+
+<form role="form" ng-submit="saveFlashbands()">
+  <div class="form-group">
+    <input type="text" class="form-control" ng-model="nameBatch" name="nameBatch" placeholder="{{'FLASHBAND.ENABLE.PLACEHOLDER' | translate}}">
+  </div>
+
+  <div class="form-group">
+    <div class="btn btn-default" ng-file-select="setFile($files)" data-multiple="false">
+      {{"FLASHBAND.UPLOAD.BTN" | translate}}
+    </div>
+
+    <div ng-show="files.length > 0" class="alert" translate="FLASHBAND.ENABLE.FILE" translate-values="{nameFile: files[0].name}"></div>
+    <div ng-show="errorExtension" class="alert alert-danger" translate="FLASHBAND.MESSAGE.ERROR.FILE"></div>
+  </div>
+
+  <div ng-show="uploadPercent" class="form-group">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{uploadPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{uploadPercent}}%;">
+        {{uploadPercent}}%
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-default btn-xs" ng-click="upload.abort()" translate="FLASHBAND.UPLOAD.CANCEL"></button>
+  </div>
+
+  <a type="button" class="btn btn-link" ui-sref="enable-flashbands" translate="FLASHBAND.ENABLE.CANCEL"></a>
+  <button type="submit" class="btn btn-success" translate="FLASHBAND.ENABLE.SAVE"></button>
+</form>
