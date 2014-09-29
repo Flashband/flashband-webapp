@@ -37,7 +37,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   $stateProvider.state('showgoer', {
     parent: dashboardAbstract,
     url: '/showgoer',
-    templateUrl: 'partials/showgoer.html',
+    templateUrl: 'partials/showgoer-start.html',
     controller: 'ShowgoerCtrl',
     data: { isPublic: AuthenticateAccess.deny }
   }).state('showgoer-new', {
@@ -94,8 +94,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       },
       "SHOWGOER": {
         "TITLE": "Cadastre um showgoer",
+        "NEW": "Para começar, basta informar o nome do showgoer. Depois escolha o tipo de documento e informe o número do documento.",
         "TEXT": "Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.",
-        "BUTTON": "Cadastrar showgoer"
+        "BUTTON": "Cadastrar showgoer",
+        "SAVE": "Cadastrar",
+        "CANCEL": "Cancelar"
       }
     }
   });

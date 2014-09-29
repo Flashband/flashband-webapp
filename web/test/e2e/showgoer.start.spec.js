@@ -2,8 +2,8 @@
 
 var loginPage = require('../pages/login.page');
 
-describe('The Show goer view', function () {
-  it('should contains welcome message', function() {
+describe('The Showgoer view', function () {
+  it('should visible info and inputs', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer');
 
@@ -34,5 +34,4 @@ describe('The Show goer view', function () {
     linkToNewShowgoer.click();
     expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
   });
-
 });
