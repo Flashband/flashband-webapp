@@ -26,4 +26,13 @@ describe('The Show goer view', function () {
     linkToShowgoer.click();
     expect(browser.getCurrentUrl()).toContain('#/showgoer');
   });
+
+  it('should link to /showgoer/new', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer');    
+    var linkToNewShowgoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON"]'));
+    linkToNewShowgoer.click();
+    expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
+  });
+
 });

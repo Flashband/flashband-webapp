@@ -40,6 +40,12 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     templateUrl: 'partials/showgoer.html',
     controller: 'ShowgoerCtrl',
     data: { isPublic: AuthenticateAccess.deny }
+  }).state('showgoer-new', {
+    parent: dashboardAbstract,
+    url: '/showgoer/new',
+    templateUrl: 'partials/showgoer-new.html',
+    controller: 'ShowgoerCtrl',
+    data: { isPublic: AuthenticateAccess.deny }
   });
 
   $stateProvider.state('login', {
