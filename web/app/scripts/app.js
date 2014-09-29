@@ -34,6 +34,14 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     data: { isPublic: AuthenticateAccess.deny }
   });
 
+  $stateProvider.state('showgoer', {
+    parent: dashboardAbstract,
+    url: '/showgoer',
+    templateUrl: 'partials/showgoer.html',
+    controller: 'ShowgoerCtrl',
+    data: { isPublic: AuthenticateAccess.deny }
+  });
+
   $stateProvider.state('login', {
     url: '/login',
     templateUrl: 'partials/login.html',
@@ -72,6 +80,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
            "UPLOAD": "Ocorreu algum erro na importação do arquivo. <p>Por favor verifique se o arquivo é o correto ou entre em contato com a equipe da 4ON</p>",
            "FILE": "Arquivo inválido. Por favor informe um arquivo CSV com as flashbands corretas."
          }
+      },
+      "SHOWGOER": {
+        "TITLE": "Cadastre um showgoer",
+        "TEXT": "Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.",
+        "BUTTON": "Cadastrar showgoer"
       }
     }
   });
