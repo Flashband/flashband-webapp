@@ -3,7 +3,7 @@ var q = require('q');
 var inactivate = function(flashbandBatches) {
   flashbandBatches.forEach(function(flashbandBatch) {
     flashbandBatch.inactivate();
-    flashbandBatch.save().fail(function(err) { throw err; });
+    flashbandBatch.save();
   });
 };
 
@@ -24,30 +24,46 @@ module.exports = {
   },
   enable: function(flashbands, name, file) {
     var defer = q.defer();
-    Flashband.destroy().then(function() {
+    Flashband.destroy().exec(function(err) {
+      if (err) {
+        defer.reject(err);
+        return;
+      }
       var newFlashbands = [];
       var createFlashband = function(args, next) {
-        Flashband.create(args).then(function (flashband) { 
+        Flashband.create(args).exec(function (err, flashband) { 
+          if (err) {
+            next(err);
+            return;
+          }
           newFlashbands.push(flashband); 
           next();
-        }).fail(next);
+        });
       };
       async.each(flashbands, createFlashband, function(err) {
         if (err) {
           defer.reject(err instanceof Error ? err : new Error(err));
         } else {
-          FlashbandBatch.find({active: true}).then(function(flashbandBatches) {
+          FlashbandBatch.find({active: true}).exec(function(err, flashbandBatches) {
+            if (err) {
+              defer.reject(err);
+              return;
+            }
             inactivate(flashbandBatches);
-            FlashbandBatch.create({name: name, file: file, active: true}).then(function(flashbandBatch) {
+            FlashbandBatch.create({name: name, file: file, active: true}).exec(function(err, flashbandBatch) {
+              if (err) {
+                defer.reject(err);
+                return;
+              }
               newFlashbands.forEach(function(flashband) {
                 flashbandBatch.flashbands.add(flashband.id);
               });
               flashbandBatch.save().then(defer.resolve, defer.reject);
-            }).fail(defer.reject);
-          }).fail(defer.reject);
+            });
+          });
         }
       });
-    }).fail(defer.reject);
+    });
     return defer.promise;
   }
 };

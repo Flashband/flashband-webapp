@@ -13,13 +13,14 @@ describe('FlashbandController', function() {
 
   describe('with authenticated user', function() {
     beforeEach(function(done) {
-      User.create({password: '123123123'}).then(function(user) {
+      User.create({password: '123123123'}).exec(function(err, user) {
+        if (err) return done(err);
         serialToken = passwordHash.generate(user.id);
         user.tokens.add({ token: serialToken });
         user.save().then(function() {
           databaseHelper.emptyModels([Flashband, FlashbandBatch]).then(done).fail(done);
-        }).fail(done);
-      }).fail(done);
+        });
+      });
     });
 
     describe('PUT /flashband/{tag}/block', function() {
@@ -76,7 +77,7 @@ describe('FlashbandController', function() {
 
     describe('GET /flashband/enable', function() {
       it('should return total of enabled flashbands', function(done) {
-        FlashbandHelper.createSuccess().then(function() {
+        FlashbandHelper.createSuccess().then(function(flashband) {
           request(sails.hooks.http.app)
             .get('/flashband/enable')
             .set('Authorization', 'Token token='.concat(serialToken))

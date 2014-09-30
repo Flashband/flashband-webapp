@@ -25,8 +25,9 @@ module.exports = {
   },
 
   summary: function summary(req, res) {
-    Flashband.count().then(function(count) {
+    Flashband.count().exec(function(err, count) {
+      if (err) return res.serverError(err);
       res.ok({total: count});
-    }).fail(res.serverError);
+    });
   }
 };
