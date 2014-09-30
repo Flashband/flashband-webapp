@@ -31,7 +31,7 @@ describe('The login view', function () {
     var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.SAVE"]'));
     btnNewImport.click();
 
-    var msg = element(by.css('div[translate="FLASHBAND.MESSAGE.ERROR.VALIDATION"]'));
+    var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
     expect(msg.getText()).toBe("Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.");
   });

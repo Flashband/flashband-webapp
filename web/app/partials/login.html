@@ -1,10 +1,18 @@
-<div class="container" ng-init="credencials = {}">
-  <div ng-show="message" class="alert alert-danger" role="{{message.type}}" translate="{{message.text}}"></div>
+<div class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="login">Flashband</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate}}</div>
 
   <form class="form-signin" role="form" ng-submit="login(credencials)">
-    <h2 class="form-signin-heading" translate="LOGIN.TEXT"></h2>
-    <input type="email" class="form-control" placeholder="Email address" required autofocus ng-model="credencials.email">
-    <input type="password" class="form-control" placeholder="Password" required ng-model="credencials.password">
+    <h1 class="form-signin-heading" translate="LOGIN.TEXT"></h1>
+    <input type="email" class="form-control" placeholder="{{'LOGIN.PLACEHOLDER.EMAIL' | translate}}" required autofocus ng-model="credencials.email">
+    <input type="password" class="form-control" placeholder="{{'LOGIN.PLACEHOLDER.PASSWORD' | translate}}" required ng-model="credencials.password">
 
     <button class="btn btn-lg btn-primary btn-block" type="submit" translate="LOGIN.BUTTON"></button>
   </form>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').directive('flashbandMenu', function() {
+angular.module('flashbandWebapp').directive('flashbandMenu', function flashbandMenu () {
   return {
     restrict: 'AE',
     templateUrl: 'partials/menu.html',
@@ -11,10 +11,12 @@ angular.module('flashbandWebapp').directive('flashbandMenu', function() {
       }, {
         sref: 'showgoer',
         label: 'FLASHBAND.MENU.SHOWGOER'
-      }, {
-        sref: 'dashboard',
-        label: 'outro item do menu'
       }];
+
+      scope.menus.push({
+        sref: 'logout',
+        label: 'sair'
+      });
     }
   };
 });

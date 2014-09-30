@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('DashboardCtrl', function ($scope) {
+angular.module('flashbandWebapp').controller('DashboardCtrl', function DashboardCtrl ($scope) {
   $scope.awesomeThings = [
     {
       'key': 'angular',

@@ -6,11 +6,11 @@ describe('Controller: EnableFlashbandsCtrl', function(){
 
   beforeEach(module('flashbandWebapp'));
 
-  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, $state, _FlashbandSessionSrvc_) {
+  beforeEach(inject(function(_$httpBackend_, $rootScope, $controller, $state, _FlashbandSessionFact_) {
     browserState = $state;
     $httpBackend = _$httpBackend_;
 
-    _FlashbandSessionSrvc_.setSession({
+    _FlashbandSessionFact_.setSession({
       "token": "sha1$814c71c9$1$0a5f89d5a5c6327658c1619bc761a38b10a110b8",
       "user": {
         "email": "admin@flashband.com",
@@ -43,6 +43,7 @@ describe('Controller: EnableFlashbandsCtrl', function(){
     beforeEach(function() {
       $httpBackend.whenGET('http://localhost:1337/flashband/enable').respond(200, {total: 0});
     });
+
     it ('should view message error when not fill file to import', function() {
       scope.nameBatch = "Arquivo de pulseiras para importação.";
       expect(scope.message).toBeFalsy();
