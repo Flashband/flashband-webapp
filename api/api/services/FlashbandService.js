@@ -25,21 +25,16 @@ module.exports = {
   enable: function(flashbands, name, file) {
     var defer = q.defer();
     Flashband.destroy().exec(function(err) {
-      if (err) {
-        defer.reject(err);
-        return;
-      }
+      if (err) return defer.reject(err);
+
       var newFlashbands = [];
       var createFlashband = function(args, next) {
-        Flashband.create(args).exec(function (err, flashband) { 
-          if (err) {
-            next(err);
-            return;
-          }
-          newFlashbands.push(flashband); 
+        Flashband.create(args).then(function (flashband) {
+          newFlashbands.push(flashband);
           next();
         });
       };
+
       async.each(flashbands, createFlashband, function(err) {
         if (err) {
           defer.reject(err instanceof Error ? err : new Error(err));

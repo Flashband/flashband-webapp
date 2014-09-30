@@ -9,7 +9,10 @@ describe('AuthenticateController', function() {
 
   describe('POST /authenticate', function() {
     it('should allow authentication with valid user data', function (done) {
-      var verifyAuthenticate = function(user) {
+      var verifyAuthenticate = function(err, user) {
+        if (err) return done(err);
+        if (!user) return done(user);
+
         request(sails.hooks.http.app)
         .post('/authenticate')
         .send({password: user.mobpassword})
@@ -22,7 +25,7 @@ describe('AuthenticateController', function() {
         });
       };
 
-      UserHelper.createAnonymous().then(verifyAuthenticate);
+      UserHelper.createAnonymous().exec(verifyAuthenticate);
     });
 
     it('should deny authentication with invalid user data', function (done) {
@@ -37,7 +40,10 @@ describe('AuthenticateController', function() {
 
   describe('POST /login', function() {
     it('should allow with valid user data', function (done) {
-      var verifyAuthenticate = function(user) {
+      var verifyAuthenticate = function(err, user) {
+        if (err) return done(err);
+        if (!user) return done(user);
+
         request(sails.hooks.http.app)
         .post('/login')
         .send({email: user.email, password: user.webpassword})
@@ -50,7 +56,7 @@ describe('AuthenticateController', function() {
         });
       };
 
-      UserHelper.createAnonymous().then(verifyAuthenticate);
+      UserHelper.createAnonymous().exec(verifyAuthenticate);
     });
 
     it('should deny login with invalid user data', function (done) {
