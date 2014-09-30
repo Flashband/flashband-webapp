@@ -4,7 +4,10 @@ var tokenHasher = require('password-hash');
 var auth = function(argsFind) {
   var deferred = Q.defer();
 
-  var generateToken = function(user) {
+  var generateToken = function(err, user) {
+    if (err) return deferred.reject(err);
+    if (!user) return deferred.reject("user not found");
+
     var args = {
       token: tokenHasher.generate(user.id)
     };
@@ -16,7 +19,7 @@ var auth = function(argsFind) {
     });
   };
 
-  User.findOne(argsFind).then(generateToken).fail(deferred.reject);
+  User.findOne(argsFind).exec(generateToken);
 
   return deferred.promise;
 };

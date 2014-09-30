@@ -10,69 +10,77 @@ describe('FlashbandService', function() {
     });
 
     it('should associate flashband in', function(done) {
-      var expectAssociation = function(flashbandBatch) {
-        FlashbandBatch.findOne(flashbandBatch.id).populate('flashbands').then(function(saved) {
+      var expectAssociation = function(err, flashbandBatch) {
+        if (err) return done(err);
+        FlashbandBatch.findOne(flashbandBatch.id).populate('flashbands').exec(function(err, saved) {
+          if (err) return done(err);
           expect(saved).to.be.ok;
+          expect(flashbandBatch).to.have.property('flashbands');
           expect(saved.flashbands).to.have.length(1, 'wrong number of associated flashbands');
           expect(saved.flashbands[0]).to.have.property('tag', '123456');
-          FlashbandBatch.findOne(flashbandBatch.id).then(function(flashbandBatch) {
-            expect(flashbandBatch).to.not.have.property('flashbands');
-          });
           done();
-        }).fail(done);
+        });
       };
       FlashbandService.enable([ {tag: '123456', serial: 1} ], 'lote 1').then(function() {
-          FlashbandBatch.findOne({name:'lote 1'}).then(expectAssociation).fail(done);
-        })
-      .fail(done);
+        FlashbandBatch.findOne({name:'lote 1'}).exec(expectAssociation);
+      }).fail(done);
     });
     it('should ensure use waterline association FlashbandBatch -> Flashband', function(done) {
       FlashbandService.enable([{ tag: '123456', serial: 1 }], 'lote 1', 'batch-file-content').then(function() {
-          FlashbandBatch.findOne({name:'lote 1'}).then(function(flashbandBatch) {
+          FlashbandBatch.findOne({name:'lote 1'}).exec(function(err, flashbandBatch) {
+            if (err) return done(err);
             expect(flashbandBatch.flashbands).to.have.length(0);
             done();
-          }).fail(done);
+          });
         }).fail(done);
     });
     it('should save received batch file', function(done) {
       FlashbandService.enable([{ tag: '123456', serial: 1 }], 'lote 1', 'batch-file-content').then(function() {
-          FlashbandBatch.findOne({name:'lote 1'}).then(function(flashbandBatch) {
+          FlashbandBatch.findOne({name:'lote 1'}).exec(function(err, flashbandBatch) {
+            if (err) return done(err);
             expect(flashbandBatch).to.have.property('file', 'batch-file-content');
             done();
-          }).fail(done);
+          });
         }).fail(done);
     });
     it('should activate created flashbandBatch', function(done) {
       FlashbandService.enable([{ tag: '123456', serial: 1 }], 'lote 1').then(function() {
-          FlashbandBatch.findOne({name:'lote 1'}).then(function(flashbandBatch) {
+          FlashbandBatch.findOne({name:'lote 1'}).exec(function(err, flashbandBatch) {
+            if (err) return done(err);
             expect(flashbandBatch.active).to.be.ok;
             done();
-          }).fail(done);
+          });
         }).fail(done);
     });
     it('should inactivate prior active flashband batch', function (done) {
       flashbandBatchHelper.createActive('lote 1').then(function(priorFlashbandBatch) {
         FlashbandService.enable([{ tag: '123456', serial: 1 }], 'lote 2').then(function() {
-          FlashbandBatch.findOne(priorFlashbandBatch.id).then(function(flashbandBatch) {
+          FlashbandBatch.findOne(priorFlashbandBatch.id).exec(function(err, flashbandBatch) {
+            if (err) return done(err);
             expect(flashbandBatch.active).to.be.not.ok;
             done();
-          }).fail(done);
+          });
         }).fail(done);
-      }).fail(done);
+      });
     });
     it('should destroy existing flashbands', function (done) {
+      var fim = function(err) {
+        done(err);
+      };
       flashbandHelper.createSuccess('123456').then(function(flashband) {
         FlashbandService.enable([{ tag: '234567', serial: 1 }], 'lote 1').then(function() {
-          Flashband.findOne({tag: '123456'}).then(function(savedFlashband) {
+          Flashband.findOne({tag: '123456'}).exec(function(err, savedFlashband) {
+            if (err) return done(err);
             expect(savedFlashband).to.be.not.ok;
-            Flashband.find().then(function(flashbands) {
+            Flashband.find().exec(function(err, flashbands) {
+              if (err) return done(err);
               expect(flashbands).to.have.length(1);
               expect(flashbands[0]).to.have.property('tag', '234567');
               done();
-            }).fail(done);
-          }).fail(done);
-        }).fail(done);
-      }).fail(done);
+            });
+          });
+        }).fail(fim);
+      });
     });
     it('should reject duplicated flashbands', function(done) {
       var flashbands = [ { tag: '123456', serial: 1 }, { tag: '123456', serial: 1 } ];

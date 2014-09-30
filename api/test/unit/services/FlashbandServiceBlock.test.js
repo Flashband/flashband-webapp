@@ -30,11 +30,12 @@ describe('FlashbandService', function() {
         .to.be.rejectedWith('Flashband already blocked.')
         .and.notify(function(err) {
           if (err) return done(err);
-          Flashband.findOne({tag: blockedFlashband.tag}).then(function(flashband) {
+          Flashband.findOne({tag: blockedFlashband.tag}).exec(function(err, flashband) {
+            if (err) return done(err);
             if (!flashband) throw 'saved flashband not found! :-/';
             expect(flashband.blockedAt).to.eql(originalBlockedAt);
             done();
-          }).fail(done);
+          });
         });
       }).fail(done);
     });

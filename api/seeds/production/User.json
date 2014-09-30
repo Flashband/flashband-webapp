@@ -1,5 +1,7 @@
 [
   {
-    "password": "123123"
+    "email": "admin@flashband.com",
+    "mobpassword": "123123",
+    "webpassword": "123123"
   }
 ]

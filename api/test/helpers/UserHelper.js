@@ -1,9 +1,9 @@
 module.exports = {
   createAnonymous: function() {
     return User.create({
-      email: "admin@flashband.com",
-      mobpassword: "123123",
-      webpassword: "124124"
+      email: "addadmin@flashband.com",
+      mobpassword: "222222",
+      webpassword: "333333"
     });
   }
 };
