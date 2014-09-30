@@ -79,10 +79,10 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   $translateProvider.preferredLanguage('pt-BR')
 
   $urlRouterProvider.otherwise('/login');
-}).run(function ($rootScope, FlashbandSessionSrvc, $state) {
+}).run(function ($rootScope, FlashbandSessionFact, $state) {
   $rootScope.$on('$stateChangeStart', function (event, next) {
     if (next.data.isPublic) return;
-    if (FlashbandSessionSrvc.hasUserAuthenticated()) return;
+    if (FlashbandSessionFact.hasUserAuthenticated()) return;
 
     event.preventDefault();
     $state.go('login');

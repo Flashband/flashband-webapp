@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').directive('flashbandMenu', function() {
+angular.module('flashbandWebapp').directive('flashbandMenu', function flashbandMenu () {
   return {
     restrict: 'AE',
     templateUrl: 'partials/menu.html',
