@@ -20,8 +20,8 @@ describe('The login view', function () {
     loginPage.tryAuthenticateFail();
     expect(browser.getCurrentUrl()).toContain('#/login');
 
-    var msg = element(by.css('div[translate="LOGIN.MESSAGE.ERROR"]'));
+    var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Invalid credencials!");
+    expect(msg.getText()).toBe("Usuário ou senha não conferem. Por favor, corrija e tente novamente.");
   });
 });

@@ -39,14 +39,24 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     templateUrl: 'partials/login.html',
     controller: 'AuthenticateCtrl',
     data: { isPublic: AuthenticateAccess.allow }
+  }).state('logout', {
+    url: '/logout',
+    templateUrl: 'partials/login.html',
+    controller: 'AuthenticateCtrl',
+    data: { isPublic: AuthenticateAccess.deny }
   });
 
   $translateProvider.translations('pt-BR', {
     "LOGIN": {
-      "TEXT": "Please sign in",
-      "BUTTON": "Sign in",
+      "TEXT": "Seja bem vindo!",
+      "BUTTON": "entrar",
+      "PLACEHOLDER": {
+        "EMAIL": "Digite seu email",
+        "PASSWORD": "Digite sua senha"
+      },
       "MESSAGE": {
-        "ERROR": "Invalid credencials!"
+        "ERROR": "Usuário ou senha não conferem. Por favor, corrija e tente novamente.",
+        "LOGOUT": "Sua sessão foi finalizada com sucesso. Obrigado!"
       }
     },
     "FLASHBAND": {

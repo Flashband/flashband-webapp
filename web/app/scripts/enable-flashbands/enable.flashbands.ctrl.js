@@ -4,7 +4,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
   $scope.files = []
   $scope.nameBatch = ""
   $scope.message = false;
-  $scope.totFlashbands = 0;
+  $scope.totFlashbands = false;
   $scope.uploadPercent = false;
   $scope.messageSuccess = false;
   $scope.errorExtension = false;

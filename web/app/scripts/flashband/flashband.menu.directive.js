@@ -8,13 +8,12 @@ angular.module('flashbandWebapp').directive('flashbandMenu', function flashbandM
       scope.menus = [{
         sref: 'enable-flashbands',
         label: 'pulseiras'
-      }, {
-        sref: 'dashboard',
-        label: 'item do menu'
-      }, {
-        sref: 'dashboard',
-        label: 'outro item do menu'
       }];
+
+      scope.menus.push({
+        sref: 'logout',
+        label: 'sair'
+      });
     }
   };
 });

@@ -50,7 +50,7 @@ describe('Controller: Login', function(){
     $httpBackend.flush();
 
     expect(scope.message).toEqual({
-      type: 'alert',
+      type: 'warning',
       text: 'LOGIN.MESSAGE.ERROR'
     });
   });

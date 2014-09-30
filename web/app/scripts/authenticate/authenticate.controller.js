@@ -2,6 +2,18 @@
 
 angular.module('flashbandWebapp').controller('AuthenticateCtrl', function AuthenticateCtrl ($scope, $state, FlashbandRestFact, FlashbandSessionFact) {
   $scope.message = false;
+  $scope.showLougoutMessage = false;
+
+  var isLogout = $state.current.name == "logout";
+
+  if (isLogout) {
+    FlashbandSessionFact.clearSession();
+
+    $scope.message = {
+      type: 'info',
+      text: 'LOGIN.MESSAGE.LOGOUT'
+    };
+  };
 
   $scope.login = function(credencials) {
     var successfully = function(session) {
@@ -11,7 +23,7 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function Authen
 
     var loginFail = function(rason) {
       $scope.message = {
-        type: 'alert',
+        type: 'warning',
         text: 'LOGIN.MESSAGE.ERROR'
       };
     };
