@@ -15,12 +15,20 @@ module.exports = {
   },
 
   block: function(flashbandUid) {
-    return Flashband.findOne({ tag: flashbandUid }).then(function(flashband) {
-      if (!flashband) throw 'Flashband not found.';
-      if (flashband.blockedAt) throw 'Flashband already blocked.';
+    var defer = q.defer();
+    Flashband.findOne({ tag: flashbandUid }).exec(function(err, flashband) {
+      if (err) return defer.reject(err);
+      if (!flashband) return defer.reject(new Error('Flashband not found.'));
+      if (flashband.blockedAt) return defer.reject(new Error('Flashband already blocked.'));
       flashband.blockedAt = new Date();
-      return flashband.save();
+      flashband.save(function(err, flashband) {
+        if (err)
+          defer.reject(err);
+        else
+          defer.resolve(flashband);
+      });
     });
+    return defer.promise;
   },
   enable: function(flashbands, name, file) {
     var defer = q.defer();
@@ -29,7 +37,8 @@ module.exports = {
 
       var newFlashbands = [];
       var createFlashband = function(args, next) {
-        Flashband.create(args).then(function (flashband) {
+        Flashband.create(args, function(err, flashband) {
+          if (err) return defer.reject(err);
           newFlashbands.push(flashband);
           next();
         });

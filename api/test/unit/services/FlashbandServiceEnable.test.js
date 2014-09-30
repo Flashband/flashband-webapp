@@ -65,7 +65,6 @@ describe('FlashbandService', function() {
     });
     it('should destroy existing flashbands', function (done) {
       var fim = function(err) {
-        console.log(err);
         done(err);
       };
       flashbandHelper.createSuccess('123456').then(function(flashband) {
