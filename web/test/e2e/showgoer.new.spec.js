@@ -29,7 +29,18 @@ describe('The new Showgoer view', function () {
     expect(pageSaveButton.getText()).toBe("Cadastrar");
     expect(pageCancelButton.getText()).toBe("Cancelar");
   });
-  //it ('should return to first step when cancel', function()) {
-  
-  //});
+  it('should display document number input when document type is selected', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/new');
+
+    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+
+    expect(pageDocNumberInput.isDisplayed()).toBeFalsy();
+
+    pageDocTypeCpfOption.click();
+
+
+    expect(pageDocNumberInput.isDisplayed()).toBeTruthy();
+  });
 });
