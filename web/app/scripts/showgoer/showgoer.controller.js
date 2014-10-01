@@ -2,11 +2,11 @@
 
 angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope) {
   $scope.showgoer = {
-    doctype: "",
+    doctype: undefined,
     docnumber: ""
   };
   $scope.docTypes = [{
-    type: "",
+    type: undefined,
     name: "Selecione o documento"
   }, {
     type: "cpf",

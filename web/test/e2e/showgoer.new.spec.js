@@ -43,4 +43,19 @@ describe('The new Showgoer view', function () {
 
     expect(pageDocNumberInput.isDisplayed()).toBeTruthy();
   });
+  it('should not add an empty docType option when a docType is selected and then return to default prompt option', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/new');
+
+    var pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="0"]'));
+    var inicialText = pageDocTypePromptOption.getText();
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+
+    pageDocTypeCpfOption.click();
+    pageDocTypePromptOption.click();
+
+    pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.doctype"] option:checked'));
+
+    expect(pageDocTypePromptOption.getText()).toBe("Selecione o documento");
+  });
 });
