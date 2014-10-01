@@ -3,7 +3,8 @@ exports.config = {
   // The address of a running selenium server.
   //seleniumAddress: 'http://localhost:4444/wd/hub',
   seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-2.43.1.jar', // Make use you check the version in the folder
-
+  sauceUser: 'luizamorim',
+  sauceKey: '372b714c-04d6-4068-9323-8ca88b6171ad',
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome',
