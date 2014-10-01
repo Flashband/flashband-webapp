@@ -23,11 +23,19 @@ module.exports = {
     }
 
     var showgoer = {};
-    showgoer.name = showgoerParams.name;
     showgoer[showgoerParams.doctype] = showgoerParams.docnumber;
 
-    Showgoer.create(showgoer).exec(function(err, model) {
-      defer.resolve(model);
+
+    Showgoer.findOne(showgoer).exec(function(err, saved) {
+      if (saved){
+        return defer.reject(new Error('Duplicated document.'));
+      }
+
+      showgoer.name = showgoerParams.name;
+
+      Showgoer.create(showgoer).exec(function(err, model) {
+        defer.resolve(model);
+      });
     });
     return defer.promise;
   }

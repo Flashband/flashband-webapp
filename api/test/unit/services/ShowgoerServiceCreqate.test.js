@@ -41,5 +41,11 @@ describe('ShowgoerService', function() {
       var showgoer = {name: 'Fulano de Tal', doctype: 'inv', docnumber: 'invalid-doctype'};
       expect(ShowgoerService.create(showgoer)).to.eventually.be.rejectedWith('Invalid document type.').and.notify(done);
     });
+    it('should reject duplicated document number and type', function(done) {
+      var showgoer = {name: 'Fulano de Tal', doctype: 'rg', docnumber: 'some-rg'};
+      ShowgoerService.create(showgoer).then(function() {
+        expect(ShowgoerService.create(showgoer)).to.eventually.be.rejectedWith('Duplicated document.').and.notify(done);
+      }).fail(done);
+    });
   });
 });
