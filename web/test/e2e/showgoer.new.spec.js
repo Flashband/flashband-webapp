@@ -13,6 +13,7 @@ describe('The new Showgoer view', function () {
     var pageCancelButton = element(by.css('a[translate="FLASHBAND.SHOWGOER.CANCEL"]'));
     var pageNameInput = element(by.model('showgoer.name'));
     var pageDocTypeSelect = element(by.model('showgoer.doctype'));
+    var pageDocTypeOptions = element.all(by.options('doc.type as doc.name for doc in docTypes'));
 
     expect(pageTitle.isDisplayed()).toBeTruthy();
     expect(pageText.isDisplayed()).toBeTruthy();
@@ -20,11 +21,15 @@ describe('The new Showgoer view', function () {
     expect(pageCancelButton.isDisplayed()).toBeTruthy();
     expect(pageNameInput.isDisplayed()).toBeTruthy();
     expect(pageDocTypeSelect.isDisplayed()).toBeTruthy();
+    expect(pageDocTypeOptions.first().isSelected()).toBeTruthy();
 
     expect(pageTitle.getText()).toBe("Cadastre um showgoer");
     expect(pageText.getText()).toBe("Para começar, basta informar o nome do showgoer. Depois escolha o tipo de documento e informe o número do documento.");
-    expect(pageDocTypeSelect.getText()).toBe("Selecione o documento");
+    expect(pageDocTypeOptions.first().getText()).toBe("Selecione o documento");
     expect(pageSaveButton.getText()).toBe("Cadastrar");
     expect(pageCancelButton.getText()).toBe("Cancelar");
   });
+  //it ('should return to first step when cancel', function()) {
+  
+  //});
 });
