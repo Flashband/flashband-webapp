@@ -117,7 +117,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "CANCEL": "Cancelar",
         "MESSAGES": {
           "SAVED": "Showgoer cadastrado com sucesso.",
-          "REQUIRED": "Todos os campso são obrigatórios. Verifique e tente novamente."
+          "REQUIRED": "Todos os campso são obrigatórios. Verifique e tente novamente.",
+          "DUPLICATED": "Showgoer já cadastrado."
         }
       }
     }

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $state, $stateParams) {
+angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $state, $stateParams, FlashbandRestFact) {
   $scope.message = false;
 
   $scope.showgoer = {
@@ -18,11 +18,21 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
 
   $scope.saveShowgoer = function() {
     console.log($scope.showgoerForm);
-    if ($scope.showgoerForm.$valid) return $state.go('showgoer-saved', {message: 'saved'}); 
-    $scope.message = {
-      type: 'warning',
-      text: 'FLASHBAND.SHOWGOER.MESSAGES.REQUIRED'
+    if ($scope.showgoerForm.$invalid) 
+      return $scope.message = {
+        type: 'warning',
+        text: 'FLASHBAND.SHOWGOER.MESSAGES.REQUIRED'
+      };
+    var successfully = function() {
+      $state.go('showgoer-saved', {message: 'saved'}); 
     };
+    var saveFail = function() {
+      $scope.message = {
+        type: 'warning',
+        text: 'FLASHBAND.SHOWGOER.MESSAGES.DUPLICATED'
+      };
+    };
+    FlashbandRestFact.getConnection().service('showgoer').post($scope.showgoer).then(successfully, saveFail);
   };
 
   if ($stateParams && $stateParams["message"]) {
