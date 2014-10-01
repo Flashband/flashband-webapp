@@ -65,16 +65,9 @@ describe('The new Showgoer view', function () {
 
     
     var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocTypeSelect = element(by.model('showgoer.doctype'));
-    var pageDocTypeOptions = element.all(by.options('doc.type as doc.name for doc in docTypes'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
     var pageDocNumberInput = element(by.model('showgoer.docnumber'));
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.SAVE"]'));
-
-    var pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="0"]'));
-    var inicialText = pageDocTypePromptOption.getText();
     var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
-
 
     pageNameInput.sendKeys('Fulano de Tal');
     pageDocTypeCpfOption.click();
@@ -87,5 +80,45 @@ describe('The new Showgoer view', function () {
     var msg = element(by.className('alert-success'));
     expect(msg.isDisplayed()).toBeTruthy();
     expect(msg.getText()).toBe("Showgoer cadastrado com sucesso.");
+  });
+
+  it('validate required fields', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/new');
+
+    
+    var pageNameInput = element(by.model('showgoer.name'));
+    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.SAVE"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+
+    pageSaveButton.click();
+
+    expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
+
+    var msg = element(by.className('alert-warning'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe("Todos os campso são obrigatórios. Verifique e tente novamente.");
+  });
+
+  it('validate required showgoer document number is required when displayed', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/new');
+
+    
+    var pageNameInput = element(by.model('showgoer.name'));
+    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.SAVE"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+
+    pageNameInput.sendKeys('Fulano de Tal');
+    pageDocTypeCpfOption.click();
+    pageSaveButton.click();
+
+    expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
+
+    var msg = element(by.className('alert-warning'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe("Todos os campso são obrigatórios. Verifique e tente novamente.");
   });
 });

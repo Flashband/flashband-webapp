@@ -17,7 +17,12 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
   }];
 
   $scope.saveShowgoer = function() {
-    $state.go('showgoer-saved', {message: 'saved'});
+    console.log($scope.showgoerForm);
+    if ($scope.showgoerForm.$valid) return $state.go('showgoer-saved', {message: 'saved'}); 
+    $scope.message = {
+      type: 'warning',
+      text: 'FLASHBAND.SHOWGOER.MESSAGES.REQUIRED'
+    };
   };
 
   if ($stateParams && $stateParams["message"]) {
