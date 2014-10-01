@@ -58,4 +58,34 @@ describe('The new Showgoer view', function () {
 
     expect(pageDocTypePromptOption.getText()).toBe("Selecione o documento");
   });
+
+  it('should save showgoer when valid input', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/new');
+
+    
+    var pageNameInput = element(by.model('showgoer.name'));
+    var pageDocTypeSelect = element(by.model('showgoer.doctype'));
+    var pageDocTypeOptions = element.all(by.options('doc.type as doc.name for doc in docTypes'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.SAVE"]'));
+
+    var pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="0"]'));
+    var inicialText = pageDocTypePromptOption.getText();
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+
+
+    pageNameInput.sendKeys('Fulano de Tal');
+    pageDocTypeCpfOption.click();
+    pageDocNumberInput.sendKeys('000.000.000-00');
+    pageSaveButton.click();
+
+
+    expect(browser.getCurrentUrl()).toContain('#/showgoer');
+
+    var msg = element(by.className('alert-success'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe("Showgoer cadastrado com sucesso.");
+  });
 });
