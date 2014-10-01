@@ -17,6 +17,10 @@ module.exports = {
       defer.reject(new Error('Document number is required.'));
       return defer.promise;
     }
+    if (['cpf', 'rg', 'cnh', 'passport'].indexOf(showgoerParams.doctype) < 0) {
+      defer.reject(new Error('Invalid document type.'));
+      return defer.promise;
+    }
 
     var showgoer = {};
     showgoer.name = showgoerParams.name;
