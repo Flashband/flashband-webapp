@@ -106,7 +106,6 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       "MENU": {
         "FLASHBANDS": "Pulseiras",
         "SHOWGOER": "Showgoer"
-
       },
       "SHOWGOER": {
         "TITLE": "Cadastre um showgoer",
@@ -119,6 +118,16 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
           "SAVED": "Showgoer cadastrado com sucesso.",
           "REQUIRED": "Todos os campso são obrigatórios. Verifique e tente novamente.",
           "DUPLICATED": "Showgoer já cadastrado."
+        },
+        "PLACEHOLDER": {
+          "NAME": "Informe o nome do Showgoer",
+          "DOCTYPE": "Selecione o documento",
+          "DOCNUMBER": {
+            "cpf": "Informe o número do CPF",
+            "rg": "Informe o número do RG",
+            "cnh": "Informe o número da carteira de motorista",
+            "passport": "Informe o número do passaporte"
+          }
         }
       }
     }

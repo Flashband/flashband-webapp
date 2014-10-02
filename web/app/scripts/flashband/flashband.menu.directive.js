@@ -4,7 +4,7 @@ angular.module('flashbandWebapp').directive('flashbandMenu', function flashbandM
   return {
     restrict: 'AE',
     templateUrl: 'partials/menu.html',
-    link: function(scope, elem, attrs) {
+    link: function(scope) {
       scope.menus = [{
         sref: 'enable-flashbands',
         label: 'FLASHBAND.MENU.FLASHBANDS'

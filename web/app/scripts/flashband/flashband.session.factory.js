@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('flashbandWebapp').factory("FlashbandSessionFact", function FlashbandSessionFact (FlashbandStorageFact) {
-  var keySession = "session";
+angular.module('flashbandWebapp').factory('FlashbandSessionFact', function FlashbandSessionFact (FlashbandStorageFact) {
+  var keySession = 'session';
 
   return {
     getUser: function () {

@@ -5,39 +5,57 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
 
   $scope.showgoer = {
     doctype: undefined,
-    docnumber: ""
+    docnumber: ''
   };
-  
-  $scope.docTypes = [{
-    type: undefined,
-    name: "Selecione o documento"
-  }, {
-    type: "cpf",
-    name: "CPF"
-  }];
 
-  $scope.saveShowgoer = function() {
+  $scope.docTypes = [
+    {
+      type: undefined,
+      name: 'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCTYPE'
+    },
+    {
+      type: 'cpf',
+      name: 'CPF'
+    },
+    {
+      type: 'rg',
+      name: 'RG'
+    },
+    {
+      type: 'cnh',
+      name: 'CNH'
+    },
+    {
+      type: 'passport',
+      name: 'Passaporte'
+    }
+  ];
+
+  $scope.saveShowgoer = function () {
     console.log($scope.showgoerForm);
-    if ($scope.showgoerForm.$invalid) 
+    if ($scope.showgoerForm.$invalid)
       return $scope.message = {
         type: 'warning',
         text: 'FLASHBAND.SHOWGOER.MESSAGES.REQUIRED'
       };
-    var successfully = function() {
-      $state.go('showgoer-saved', {message: 'saved'}); 
+
+    var successfully = function () {
+      $state.go('showgoer-saved', {message: 'saved'});
     };
-    var saveFail = function() {
+
+    var saveFail = function () {
       $scope.message = {
         type: 'warning',
         text: 'FLASHBAND.SHOWGOER.MESSAGES.DUPLICATED'
       };
     };
+
     FlashbandRestFact.getConnection().service('showgoer').post($scope.showgoer).then(successfully, saveFail);
   };
 
-  if ($stateParams && $stateParams["message"]) {
+  if ($stateParams && $stateParams['message']) {
     var stateMessage = $stateParams['message'].toUpperCase();
-    
+
     $scope.message = {
       type: 'success',
       text: 'FLASHBAND.SHOWGOER.MESSAGES.'.concat(stateMessage)

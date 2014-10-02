@@ -5,5 +5,5 @@ module.exports = function sendAccepted(data) {
   sails.log.silly('res.accepted() :: Sending 202 ("Accepted") response');
 
   res.status(202);
-  return res.json(data);
+  return res.jsonx(data);
 };

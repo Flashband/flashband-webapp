@@ -13,7 +13,7 @@ describe('The new Showgoer view', function () {
     var pageCancelButton = element(by.css('a[translate="FLASHBAND.SHOWGOER.CANCEL"]'));
     var pageNameInput = element(by.model('showgoer.name'));
     var pageDocTypeSelect = element(by.model('showgoer.doctype'));
-    var pageDocTypeOptions = element.all(by.options('doc.type as doc.name for doc in docTypes'));
+    var pageDocTypeOptions = element.all(by.options('doc.type as (doc.name|translate) for doc in docTypes'));
 
     expect(pageTitle.isDisplayed()).toBeTruthy();
     expect(pageText.isDisplayed()).toBeTruthy();
