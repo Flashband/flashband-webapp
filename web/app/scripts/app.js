@@ -75,7 +75,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "CANCEL": "Cancelar Upload"
       },
       "MESSAGE": {
-        "SUCCESS": "O lote foi cadastrado e {{totalFlashbands}} pulseiras foram adicionadas com sucesso!",
+        "SUCCESS": "O lote foi cadastrado e {{totalFlashbands}} pulseira{{plural}} adicionada{{plural}} com sucesso!",
         "TOTAL": "Você possui {{totalFlashbands}} pulseira{{plural}} cadastrada{{plural}}. Para cadastrar um novo lote, é só clicar em adicionar pulseiras.",
          "ERROR": {
            "VALIDATION": "Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.",
