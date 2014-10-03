@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function EnableFlashbandsCtrl ($scope, $upload, $state, $stateParams, FlashbandSessionFact, FlashbandRestFact) {
-  $scope.files = []
-  $scope.nameBatch = ""
+angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function EnableFlashbandsCtrl ($scope, $upload, $state, $stateParams, FlashbandSessionFact, FlashbandRestFact, flashbandApiServer) {
+  $scope.files = [];
+  $scope.nameBatch = '';
   $scope.message = false;
   $scope.totFlashbands = false;
   $scope.uploadPercent = false;
@@ -13,7 +13,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
     $scope.totFlashbands = res.total;
   });
 
-  if ($stateParams && $stateParams["state"]) {
+  if ($stateParams && $stateParams['state']) {
     var flashbands_enabled = parseInt($stateParams['state'], 10);
     $scope.messageSuccess = flashbands_enabled > 0;
     $scope.totFlashbands = flashbands_enabled;
@@ -21,7 +21,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
 
   $scope.setFile = function(files) {
     if (_.isEmpty(files)) return;
-    $scope.errorExtension = files[0].name.substring(files[0].name.length-3) !== "csv";
+    $scope.errorExtension = files[0].name.substring(files[0].name.length-3) !== 'csv';
     if (!$scope.errorExtension) $scope.files = files;
   };
 
@@ -30,8 +30,8 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
 
     if (_.isEmpty($scope.files) || _.isEmpty($scope.nameBatch)) {
       return $scope.message = {
-        type: "warning",
-        text: "FLASHBAND.MESSAGE.ERROR.VALIDATION"
+        type: 'warning',
+        text: 'FLASHBAND.MESSAGE.ERROR.VALIDATION'
       };
     }
 
@@ -39,7 +39,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
 
     var onSuccessUpload = function(res) {
       $scope.uploadPercent = false;
-      $state.go("finish-flashbands", {state: res.data.flashbands_enabled});
+      $state.go('finish-flashbands', {state: res.data.flashbands_enabled});
     };
 
     var onProgressUpload = function(evt) {
@@ -56,7 +56,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
 
     $scope.upload = $upload.upload({
       method: 'POST',
-      url: 'http://localhost:1337/flashband/enable',
+      url: flashbandApiServer.concat('/flashband/enable'),
       headers: {'Authorization': 'Token token='.concat(FlashbandSessionFact.getToken())},
       data: { name: $scope.nameBatch },
       file: $scope.files,

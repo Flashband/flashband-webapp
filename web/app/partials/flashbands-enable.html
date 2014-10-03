@@ -3,7 +3,7 @@
 <h1 translate="FLASHBAND.ENABLE.TITLE"></h1>
 
 <p ng-hide="totFlashbands" translate="FLASHBAND.ENABLE.TEXT"></p>
-<p ng-show="totFlashbands" translate="FLASHBAND.MESSAGE.TOTAL" translate-values="{totalFlashbands: totFlashbands}"></p>
+<p ng-show="totFlashbands" translate="FLASHBAND.MESSAGE.TOTAL" translate-values="{totalFlashbands: totFlashbands, plural: (totFlashbands > 1 ? 's' : '')}"></p>
 
 <p>
   <a class="btn btn-success" ui-sref="upload-flashbands" role="button" translate="FLASHBAND.ENABLE.BUTTON"></a>

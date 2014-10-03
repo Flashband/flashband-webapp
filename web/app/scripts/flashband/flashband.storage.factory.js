@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').factory("FlashbandStorageFact", function FlashbandStorageFact ($cookieStore) {
+angular.module('flashbandWebapp').factory('FlashbandStorageFact', function FlashbandStorageFact ($cookieStore) {
   var domain = 'flshbnd.strg.';
 
   return {

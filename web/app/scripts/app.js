@@ -76,17 +76,17 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       },
       "MESSAGE": {
         "SUCCESS": "O lote foi cadastrado e {{totalFlashbands}} pulseiras foram adicionadas com sucesso!",
-        "TOTAL": "Você possui {{totalFlashbands}} pulseiras cadastradas. Para cadastrar um novo lote, é só clicar em adicionar pulseiras.",
+        "TOTAL": "Você possui {{totalFlashbands}} pulseira{{plural}} cadastrada{{plural}}. Para cadastrar um novo lote, é só clicar em adicionar pulseiras.",
          "ERROR": {
            "VALIDATION": "Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.",
-           "UPLOAD": "Ocorreu algum erro na importação do arquivo. <p>Por favor verifique se o arquivo é o correto ou entre em contato com a equipe da 4ON</p>",
+           "UPLOAD": "Ocorreu algum erro na importação do arquivo. Por favor verifique se o arquivo é o correto ou entre em contato com a equipe da 4ON",
            "FILE": "Arquivo inválido. Por favor informe um arquivo CSV com as flashbands corretas."
          }
       }
     }
   });
 
-  $translateProvider.preferredLanguage('pt-BR')
+  $translateProvider.preferredLanguage('pt-BR');
 
   $urlRouterProvider.otherwise('/login');
 }).run(function ($rootScope, FlashbandSessionFact, $state) {
