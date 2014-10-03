@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function EnableFlashbandsCtrl ($scope, $upload, $state, $stateParams, FlashbandSessionFact, FlashbandRestFact) {
+angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function EnableFlashbandsCtrl ($scope, $upload, $state, $stateParams, FlashbandSessionFact, FlashbandRestFact, flashbandApiServer) {
   $scope.files = [];
   $scope.nameBatch = '';
   $scope.message = false;
@@ -9,7 +9,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
   $scope.messageSuccess = false;
   $scope.errorExtension = false;
 
-  FlashbandRestFact.getConnection().one('flashband').one('enable').get().then(function(res) {
+  FlashbandRestFact.getConnection().one('flashband').one('summary').get().then(function(res) {
     $scope.totFlashbands = res.total;
   });
 
@@ -56,7 +56,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
 
     $scope.upload = $upload.upload({
       method: 'POST',
-      url: 'http://localhost:1337/flashband/enable',
+      url: flashbandApiServer.concat('/flashband/enable'),
       headers: {'Authorization': 'Token token='.concat(FlashbandSessionFact.getToken())},
       data: { name: $scope.nameBatch },
       file: $scope.files,

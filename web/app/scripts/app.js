@@ -95,11 +95,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "CANCEL": "Cancelar Upload"
       },
       "MESSAGE": {
-        "SUCCESS": "O lote foi cadastrado e {{totalFlashbands}} pulseiras foram adicionadas com sucesso!",
-        "TOTAL": "Você possui {{totalFlashbands}} pulseiras cadastradas. Para cadastrar um novo lote, é só clicar em adicionar pulseiras.",
+        "SUCCESS": "O lote foi cadastrado e {{totalFlashbands}} pulseira{{plural}} adicionada{{plural}} com sucesso!",
+        "TOTAL": "Você possui {{totalFlashbands}} pulseira{{plural}} cadastrada{{plural}}. Para cadastrar um novo lote, é só clicar em adicionar pulseiras.",
          "ERROR": {
            "VALIDATION": "Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.",
-           "UPLOAD": "Ocorreu algum erro na importação do arquivo. <p>Por favor verifique se o arquivo é o correto ou entre em contato com a equipe da 4ON</p>",
+           "UPLOAD": "Ocorreu algum erro na importação do arquivo. Por favor verifique se o arquivo é o correto ou entre em contato com a equipe da 4ON",
            "FILE": "Arquivo inválido. Por favor informe um arquivo CSV com as flashbands corretas."
          }
       },
@@ -108,16 +108,22 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "SHOWGOER": "Showgoer"
       },
       "SHOWGOER": {
-        "TITLE": "Cadastre um showgoer",
-        "NEW": "Para começar, basta informar o nome do showgoer. Depois escolha o tipo de documento e informe o número do documento.",
-        "TEXT": "Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.",
-        "BUTTON": "Cadastrar showgoer",
-        "SAVE": "Cadastrar",
-        "CANCEL": "Cancelar",
+        "TEXT": {
+          "TITLE": "Cadastre um showgoer",
+          "START": "Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.",
+          "CREATED": "Você possui {{totalShowgoers}} shogower{{plural}} cadastrado{{plural}}. Para adicionar um novo showgoer, é só clicar em cadastrar showgoer. Para vincular um showgoer cadastrado a uma pulseira, é só clicar em vincular showgoer.",
+          "NEW": "Para começar, basta informar o nome do showgoer. Depois escolha o tipo de documento e informe o número do documento."
+        },
+        "BUTTON": {
+          "SAVE": "Cadastrar",
+          "CANCEL": "Cancelar",
+          "NEW": "Cadastrar showgoer",
+          "ASSOCIATE": "Vincular showgoer"
+        },
         "MESSAGES": {
           "SAVED": "Showgoer cadastrado com sucesso.",
           "REQUIRED": "Todos os campso são obrigatórios. Verifique e tente novamente.",
-          "DUPLICATED": "Showgoer já cadastrado."
+          "DUPLICATED": "Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro Showgoer."
         },
         "PLACEHOLDER": {
           "NAME": "Informe o nome do Showgoer",
@@ -133,7 +139,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     }
   });
 
-  $translateProvider.preferredLanguage('pt-BR')
+  $translateProvider.preferredLanguage('pt-BR');
 
   $urlRouterProvider.otherwise('/login');
 }).run(function ($rootScope, FlashbandSessionFact, $state) {

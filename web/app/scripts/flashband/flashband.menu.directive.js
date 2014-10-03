@@ -11,6 +11,9 @@ angular.module('flashbandWebapp').directive('flashbandMenu', function flashbandM
       }, {
         sref: 'showgoer',
         label: 'FLASHBAND.MENU.SHOWGOER'
+      }, {
+        sref: 'dashboard',
+        label: 'outro item do menu'
       }];
 
       scope.menus.push({

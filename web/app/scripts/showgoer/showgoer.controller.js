@@ -1,38 +1,21 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $state, $stateParams, FlashbandRestFact) {
+angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $state, $stateParams, FlashbandRestFact, docTypes) {
   $scope.message = false;
+  $scope.totShowgoers = 0;
 
   $scope.showgoer = {
     doctype: undefined,
-    docnumber: ''
+    docnumber: null
   };
 
-  $scope.docTypes = [
-    {
-      type: undefined,
-      name: 'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCTYPE'
-    },
-    {
-      type: 'cpf',
-      name: 'CPF'
-    },
-    {
-      type: 'rg',
-      name: 'RG'
-    },
-    {
-      type: 'cnh',
-      name: 'CNH'
-    },
-    {
-      type: 'passport',
-      name: 'Passaporte'
-    }
-  ];
+  FlashbandRestFact.getConnection().one('showgoer').one('summary').get().then(function(res) {
+    $scope.totShowgoers = res.total;
+  });
+
+  $scope.docTypes = docTypes;
 
   $scope.saveShowgoer = function () {
-    console.log($scope.showgoerForm);
     if ($scope.showgoerForm.$invalid)
       return $scope.message = {
         type: 'warning',

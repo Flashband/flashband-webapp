@@ -3,7 +3,7 @@
 var fs = require('fs');
 
 module.exports = {
-  block: function blockFlashbands(req, res) {
+  block: function block (req, res) {
     FlashbandService.block(req.param('tag')).then(function() {
       res.ok({ message: 'Flashband blocked.' });
     }).fail(function(err) {
@@ -11,7 +11,7 @@ module.exports = {
     });
   },
 
-  enable: function enableFlashbands(req, res) {
+  enable: function enable(req, res) {
     req.file('flashbands').upload(function (err, files) {
       if (err) {
         return res.serverError(err);

@@ -1,8 +1,8 @@
 <div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate}}</div>
 
-<h1 translate="FLASHBAND.SHOWGOER.TITLE"></h1>
+<h1 translate="FLASHBAND.SHOWGOER.TEXT.TITLE"></h1>
 
-<p translate="FLASHBAND.SHOWGOER.NEW"></p>
+<p translate="FLASHBAND.SHOWGOER.TEXT.NEW"></p>
 
 <br>
 
@@ -19,6 +19,6 @@
     <input type="text" class="form-control" ng-required="true" ng-model="showgoer.docnumber" name="docnumber" placeholder="{{'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCNUMBER.'.concat(showgoer.doctype)|translate}}">
   </div>
 
-  <a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.SHOWGOER.CANCEL"></a>
-  <button type="submit" class="btn btn-success" translate="FLASHBAND.SHOWGOER.SAVE"></button>
+  <a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.SHOWGOER.BUTTON.CANCEL"></a>
+  <button type="submit" class="btn btn-success" translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"></button>
 </form>

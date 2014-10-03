@@ -60,6 +60,7 @@ describe('Controller: EnableFlashbandsCtrl', function(){
       scope.saveFlashbands();
 
       $httpBackend.whenPOST('http://localhost:1337/flashband/enable').respond(201, {});
+      $httpBackend.whenGET('http://localhost:1337/flashband/summary').respond(201, {total: 0});
       $httpBackend.whenGET('partials/login.html').respond(201);
       $httpBackend.whenGET('partials/dashboard.html').respond(201);
       $httpBackend.whenGET('partials/flashbands-enable.html').respond(201);
@@ -74,6 +75,7 @@ describe('Controller: EnableFlashbandsCtrl', function(){
       scope.setFile([{"name": "flashbands.csv"}]);
 
       $httpBackend.whenPOST('http://localhost:1337/flashband/enable').respond(400, {});
+      $httpBackend.whenGET('http://localhost:1337/flashband/summary').respond(201, {total: 0});
       $httpBackend.whenGET('partials/login.html').respond(201);
       $httpBackend.whenGET('partials/dashboard.html').respond(201);
       expect(scope.message).toBeFalsy();
