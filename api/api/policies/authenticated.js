@@ -1,4 +1,6 @@
 module.exports = function (req, res, next) {
+  if (!req.headers.authorization) return res.unauthorized();
+
   var spliter = req.headers.authorization.split("Token token=");
   var token = false;
 
