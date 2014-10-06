@@ -13,15 +13,10 @@ module.exports = {
     });
   },
 
-  index: function index (req, res) {
-    res.ok([{
-      name: "Showoger para Vinculação",
-      doctype: "cpf",
-      docnumber: "999.000.222-22"
-    }]);
-  },
-
-  find: function(req, res) {
-    res.ok({});
+  index: function(req, res) {
+    Showgoer.find().exec(function(err, showgoers) {
+      if (err) return res.badRequest(err);
+      res.ok(showgoers);
+    });
   }
 };
