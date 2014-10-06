@@ -33,5 +33,6 @@ module.exports.routes = {
   'post /flashband/enable':     'FlashbandController.enable',
 
   'post /showgoer':         'ShowgoerController.create',
-  'get  /showgoer/summary': 'ShowgoerController.summary'
+  'get  /showgoer/summary': 'ShowgoerController.summary',
+  'get  /showgoer':         'ShowgoerController.find'
 };
