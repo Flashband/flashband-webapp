@@ -11,5 +11,13 @@ module.exports = {
       if (err) return res.serverError(err);
       res.ok({total: count});
     });
+  },
+
+  index: function index (req, res) {
+    res.ok([{
+      name: "Showoger para Vinculação",
+      doctype: "cpf",
+      docnumber: "999.000.222-22"
+    }]);
   }
 };

@@ -6,29 +6,32 @@
 
 <div class="form-group">
   <div class="input-group">
-    <input required ng-model="showgoerSearch" name="showgoerSearch" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.SHOWGOER'|translate}}">
+    <input required ng-model="showGoerSearch" name="showGoerSearch" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.SHOWGOER'|translate}}">
 
     <span class="input-group-btn">
-      <button ng-disabled="!showgoerSearch.length" class="btn btn-default btn-success" type="button">buscar</button>
+      <button ng-click="searchByArg()" ng-disabled="!showGoerSearch.length" class="btn btn-default btn-success" type="button" translate="FLASHBAND.ASSOCIATE.BUTTON.SEARCH"></button>
     </span>
   </div>
 </div>
 
-<div ng-show="listShowgoers.length" class="form-group">
+<div ng-show="showGoerSearch.length && listShowgoers.length" class="form-group">
   <div class="table-responsive">
-    <table class="table">
+    <table class="table table-bordered">
       <thead>
         <tr>
-          <th translate="'FLASHBAND.ASSOCIATE.TABLE.NAME"></th>
-          <th translate="'FLASHBAND.ASSOCIATE.TABLE.DOCTYPE"></th>
-          <th translate="'FLASHBAND.ASSOCIATE.TABLE.DOCNUMBER"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.SEL"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.NAME"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.DOCTYPE"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.DOCNUMBER"></th>
         </tr>
       </thead>
+
       <tbody>
         <tr ng-repeat="sg in listShowgoers">
+          <td style="text-align: center"><input type="checkbox"></td>
           <td>{{sg.name}}</td>
-          <td>{{sg.doctype}}</td>
-          <td>{{sg.docnumber}}</td>
+          <td style="text-align: center">{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.doctype.toUpperCase())|translate}}</td>
+          <td style="text-align: right">{{sg.docnumber}}</td>
         </tr>
       </tbody>
     </table>

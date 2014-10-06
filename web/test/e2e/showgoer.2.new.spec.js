@@ -2,7 +2,7 @@
 
 var loginPage = require('../pages/login.page');
 
-describe('The new Showgoer view', function () {
+describe('The new ShowGoer view', function () {
   it('should contains welcome message', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
@@ -23,8 +23,8 @@ describe('The new Showgoer view', function () {
     expect(pageDocTypeSelect.isDisplayed()).toBeTruthy();
     expect(pageDocTypeOptions.first().isSelected()).toBeTruthy();
 
-    expect(pageTitle.getText()).toBe("Cadastre um showgoer");
-    expect(pageText.getText()).toBe("Para começar, basta informar o nome do showgoer. Depois escolha o tipo de documento e informe o número do documento.");
+    expect(pageTitle.getText()).toBe("Cadastre um ShowGoer");
+    expect(pageText.getText()).toBe("Para começar, basta informar o nome do ShowGoer. Depois escolha o tipo de documento e informe o número do documento.");
     expect(pageDocTypeOptions.first().getText()).toBe("Selecione o documento");
     expect(pageSaveButton.getText()).toBe("Cadastrar");
     expect(pageCancelButton.getText()).toBe("Cancelar");
@@ -62,7 +62,7 @@ describe('The new Showgoer view', function () {
     expect(pageDocTypePromptOption.getText()).toBe("Selecione o documento");
   });
 
-  it('should save showgoer when valid input', function() {
+  it('should save ShowGoer when valid input', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
 
@@ -81,7 +81,7 @@ describe('The new Showgoer view', function () {
 
     var msg = element(by.className('alert-success'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Showgoer cadastrado com sucesso.");
+    expect(msg.getText()).toBe("ShowGoer cadastrado com sucesso.");
   });
 
   it('validate required fields', function() {
@@ -100,7 +100,7 @@ describe('The new Showgoer view', function () {
     expect(msg.getText()).toBe("Todos os campso são obrigatórios. Verifique e tente novamente.");
   });
 
-  it('validate required showgoer document number is required when displayed', function() {
+  it('validate required ShowGoer document number is required when displayed', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
 
@@ -119,7 +119,7 @@ describe('The new Showgoer view', function () {
     expect(msg.getText()).toBe("Todos os campso são obrigatórios. Verifique e tente novamente.");
   });
 
-  it('should not register duplicated showgoer', function() {
+  it('should not register duplicated ShowGoer', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
     
@@ -149,7 +149,7 @@ describe('The new Showgoer view', function () {
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro Showgoer.');
+    expect(msg.getText()).toBe('Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer.');
   });
 
   it('should display message and associate flashband button', function() {
@@ -167,8 +167,8 @@ describe('The new Showgoer view', function () {
     pageSaveButton.click();
     browser.waitForAngular();
 
-    var linkToNewShowgoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.NEW"]'));
-    linkToNewShowgoer.click();
+    var linkToNewShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.NEW"]'));
+    linkToNewShowGoer.click();
     browser.waitForAngular();
 
     pageNameInput.sendKeys('Beltrano de Tal');
@@ -188,7 +188,7 @@ describe('The new Showgoer view', function () {
     expect(pageButtonNew.isDisplayed()).toBeTruthy();
     expect(pageButtonAssociate.isDisplayed()).toBeTruthy();
 
-    expect(pageTextCreated.getText()).toBe("Você possui 3 shogowers cadastrados. Para adicionar um novo showgoer, é só clicar em cadastrar showgoer. Para vincular um showgoer cadastrado a uma pulseira, é só clicar em vincular showgoer.");
-    expect(pageButtonAssociate.getText()).toBe("Vincular showgoer");
+    expect(pageTextCreated.getText()).toBe('Você possui 3 ShowGoers cadastrados. Para adicionar um novo ShowGoer, é só clicar em cadastrar ShowGoer. Para vincular um ShowGoer cadastrado a uma pulseira, é só clicar em vincular ShowGoer.');
+    expect(pageButtonAssociate.getText()).toBe('Vincular ShowGoer');
   });
 });

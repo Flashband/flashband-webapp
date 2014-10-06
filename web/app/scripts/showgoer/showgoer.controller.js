@@ -16,11 +16,12 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
   $scope.docTypes = docTypes;
 
   $scope.saveShowgoer = function () {
-    if ($scope.showgoerForm.$invalid)
+    if ($scope.showgoerForm.$invalid) {
       return $scope.message = {
         type: 'warning',
         text: 'FLASHBAND.SHOWGOER.MESSAGES.REQUIRED'
       };
+    }
 
     var successfully = function () {
       $state.go('showgoer-saved', {message: 'saved'});

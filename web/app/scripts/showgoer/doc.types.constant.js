@@ -3,22 +3,22 @@
 angular.module('flashbandWebapp').constant('docTypes', [
   {
     type: undefined,
-    name: 'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCTYPE'
+    name: 'FLASHBAND.SHOWGOER.DOCTYPE.UNDEFINED'
   },
   {
     type: 'cpf',
-    name: 'CPF'
+    name: 'FLASHBAND.SHOWGOER.DOCTYPE.CPF'
   },
   {
     type: 'rg',
-    name: 'RG'
+    name: 'FLASHBAND.SHOWGOER.DOCTYPE.RG'
   },
   {
     type: 'cnh',
-    name: 'CNH'
+    name: 'FLASHBAND.SHOWGOER.DOCTYPE.CNH'
   },
   {
     type: 'passport',
-    name: 'Passaporte'
+    name: 'FLASHBAND.SHOWGOER.DOCTYPE.PASSPORT'
   }
 ]);

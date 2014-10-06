@@ -118,24 +118,24 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
 
       "SHOWGOER": {
         "TEXT": {
-          "TITLE": "Cadastre um showgoer",
-          "START": "Você ainda não possui nenhum showgoer cadastrado. Para começar é só clicar em cadastrar showgoer.",
-          "CREATED": "Você possui {{totalShowgoers}} shogower{{plural}} cadastrado{{plural}}. Para adicionar um novo showgoer, é só clicar em cadastrar showgoer. Para vincular um showgoer cadastrado a uma pulseira, é só clicar em vincular showgoer.",
-          "NEW": "Para começar, basta informar o nome do showgoer. Depois escolha o tipo de documento e informe o número do documento."
+          "TITLE": "Cadastre um ShowGoer",
+          "START": "Você ainda não possui nenhum ShowGoer cadastrado. Para começar é só clicar em cadastrar ShowGoer.",
+          "CREATED": "Você possui {{totalShowgoers}} ShowGoer{{plural}} cadastrado{{plural}}. Para adicionar um novo ShowGoer, é só clicar em cadastrar ShowGoer. Para vincular um ShowGoer cadastrado a uma pulseira, é só clicar em vincular ShowGoer.",
+          "NEW": "Para começar, basta informar o nome do ShowGoer. Depois escolha o tipo de documento e informe o número do documento."
         },
         "BUTTON": {
           "SAVE": "Cadastrar",
           "CANCEL": "Cancelar",
-          "NEW": "Cadastrar showgoer",
-          "ASSOCIATE": "Vincular showgoer"
+          "NEW": "Cadastrar ShowGoer",
+          "ASSOCIATE": "Vincular ShowGoer"
         },
         "MESSAGES": {
-          "SAVED": "Showgoer cadastrado com sucesso.",
+          "SAVED": "ShowGoer cadastrado com sucesso.",
           "REQUIRED": "Todos os campso são obrigatórios. Verifique e tente novamente.",
-          "DUPLICATED": "Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro Showgoer."
+          "DUPLICATED": "Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer."
         },
         "PLACEHOLDER": {
-          "NAME": "Informe o nome do Showgoer",
+          "NAME": "Informe o nome do ShowGoer",
           "DOCTYPE": "Selecione o documento",
           "DOCNUMBER": {
             "cpf": "Informe o número do CPF",
@@ -143,17 +143,31 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
             "cnh": "Informe o número da carteira de motorista",
             "passport": "Informe o número do passaporte"
           }
+        },
+        "DOCTYPE": {
+          "RG": "RG",
+          "CPF": "CPF",
+          "CNH": "Carteira de motorista",
+          "PASSPORT": "Passaporte",
+          "UNDEFINED": "Selecione o documento"
         }
       },
 
       "ASSOCIATE": {
         "TEXT": {
-          "TITLE": "Vincular showgoer",
-          "NEW": "Para Vincular um showgoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor."
+          "TITLE": "Vincular ShowGoer",
+          "NEW": "Para Vincular um ShowGoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor."
+        },
+        "TABLE": {
+          "SEL": "Selecionar",
+          "NAME": "Showoger",
+          "DOCTYPE": "Documento",
+          "DOCNUMBER": "Número"
         },
         "BUTTON": {
           "CANCEL": "Cancelar",
-          "ASSOCIATE": "Vincular"
+          "ASSOCIATE": "Vincular",
+          "SEARCH": "buscar"
         },
         "PLACEHOLDER": {
           "SHOWGOER": "Digite o nome ou documento do visitante."
