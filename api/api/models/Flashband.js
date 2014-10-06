@@ -12,6 +12,9 @@ module.exports = {
       type: 'string',
       unique: true
     },
+    showgoer: {
+      model: 'Showgoer'
+    },
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
 
