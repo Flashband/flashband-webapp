@@ -46,19 +46,23 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     templateUrl: 'partials/showgoer-new.html',
     controller: 'ShowgoerCtrl',
     data: { isPublic: AuthenticateAccess.deny }
+  }).state('showgoer-search', {
+    parent: dashboardAbstract,
+    url: '/showgoer/search',
+    templateUrl: 'partials/showgoer-search.html',
+    controller: 'AssociateCtrl',
+    data: { isPublic: AuthenticateAccess.deny }
+  }).state('showgoer-associate', {
+    parent: dashboardAbstract,
+    url: '/showgoer/:showgoer/associate',
+    templateUrl: 'partials/showgoer-associate.html',
+    controller: 'AssociateCtrl',
+    data: { isPublic: AuthenticateAccess.deny }
   }).state('showgoer-saved', {
     parent: dashboardAbstract,
     url: '/showgoer/:message',
     templateUrl: 'partials/showgoer-start.html',
     controller: 'ShowgoerCtrl',
-    data: { isPublic: AuthenticateAccess.deny }
-  });
-
-  $stateProvider.state('associate-search', {
-    parent: dashboardAbstract,
-    url: '/associate/search',
-    templateUrl: 'partials/associate-search.html',
-    controller: 'AssociateCtrl',
     data: { isPublic: AuthenticateAccess.deny }
   });
 
@@ -156,7 +160,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       "ASSOCIATE": {
         "TEXT": {
           "TITLE": "Vincular ShowGoer",
-          "NEW": "Para Vincular um ShowGoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor."
+          "NEW": "Para vincular um ShowGoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor."
         },
         "TABLE": {
           "SEL": "Selecionar",

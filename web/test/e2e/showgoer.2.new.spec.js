@@ -2,7 +2,7 @@
 
 var loginPage = require('../pages/login.page');
 
-describe('The new ShowGoer view', function () {
+describe('New ShowGoer View', function () {
   it('should contains welcome message', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
@@ -12,7 +12,7 @@ describe('The new ShowGoer view', function () {
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
     var pageCancelButton = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.CANCEL"]'));
     var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocTypeSelect = element(by.model('showgoer.doctype'));
+    var pageDocTypeSelect = element(by.model('showgoer.docType'));
     var pageDocTypeOptions = element.all(by.options('doc.type as (doc.name|translate) for doc in docTypes'));
 
     expect(pageTitle.isDisplayed()).toBeTruthy();
@@ -34,8 +34,8 @@ describe('The new ShowGoer view', function () {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
 
-    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     expect(pageDocNumberInput.isDisplayed()).toBeFalsy();
 
@@ -48,8 +48,8 @@ describe('The new ShowGoer view', function () {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
 
-    var pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="0"]'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.docType"] option[value="0"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     pageDocTypeCpfOption.click();
     browser.waitForAngular();
@@ -57,7 +57,7 @@ describe('The new ShowGoer view', function () {
     pageDocTypePromptOption.click();
     browser.waitForAngular();
 
-    pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.doctype"] option:checked'));
+    pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.docType"] option:checked'));
 
     expect(pageDocTypePromptOption.getText()).toBe("Selecione o documento");
   });
@@ -67,9 +67,9 @@ describe('The new ShowGoer view', function () {
     browser.get('#/showgoer/new');
 
     var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     pageNameInput.sendKeys('Fulano de Tal');
     pageDocTypeCpfOption.click();
@@ -106,7 +106,7 @@ describe('The new ShowGoer view', function () {
 
     var pageNameInput = element(by.model('showgoer.name'));
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     pageNameInput.sendKeys('Fulano de Tal');
     pageDocTypeCpfOption.click();
@@ -124,9 +124,9 @@ describe('The new ShowGoer view', function () {
     browser.get('#/showgoer/new');
     
     var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     pageNameInput.sendKeys('Fulano de Tal');
     pageDocTypeCpfOption.click();
@@ -137,9 +137,9 @@ describe('The new ShowGoer view', function () {
     browser.get('#/showgoer/new');
 
     pageNameInput = element(by.model('showgoer.name'));
-    pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    pageDocNumberInput = element(by.model('showgoer.docNumber'));
     pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     pageNameInput.sendKeys('Beltrano de Tal');
     pageDocTypeCpfOption.click();
@@ -157,9 +157,9 @@ describe('The new ShowGoer view', function () {
     browser.get('#/showgoer/new');
 
     var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocNumberInput = element(by.model('showgoer.docnumber'));
+    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.doctype"] option[value="1"]'));
+    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
 
     pageNameInput.sendKeys('Fulano de Tal');
     pageDocTypeCpfOption.click();
@@ -177,10 +177,10 @@ describe('The new ShowGoer view', function () {
     pageSaveButton.click();
     browser.waitForAngular();
 
-    var pageTextStart = element(by.css('p[translate="FLASHBAND.SHOWGOER.TEXT.START"]'));
-    var pageTextCreated = element(by.css('p[translate="FLASHBAND.SHOWGOER.TEXT.CREATED"]'));
-    var pageButtonNew = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.NEW"]'));
-    var pageButtonAssociate = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
+    var pageTextStart = element(by.css('p[translate=\'FLASHBAND.SHOWGOER.TEXT.START\']'));
+    var pageTextCreated = element(by.css('p[translate=\'FLASHBAND.SHOWGOER.TEXT.CREATED\']'));
+    var pageButtonNew = element(by.css('a[translate=\'FLASHBAND.SHOWGOER.BUTTON.NEW\']'));
+    var pageButtonAssociate = element(by.css('a[translate=\'FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE\']'));
 
     expect(pageTextStart.isDisplayed()).toBeFalsy();
     expect(pageTextCreated.isDisplayed()).toBeTruthy();

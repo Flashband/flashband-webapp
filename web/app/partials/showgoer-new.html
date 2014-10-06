@@ -12,11 +12,11 @@
   </div>
 
   <div class="form-group">
-    <select class="form-control" ng-model="showgoer.doctype" name="doctype" ng-required="true" ng-options="doc.type as (doc.name|translate) for doc in docTypes"></select>
+    <select class="form-control" ng-model="showgoer.docType" name="docType" ng-required="true" ng-options="doc.type as (doc.name|translate) for doc in docTypes"></select>
   </div>
 
-  <div class="form-group" ng-show="showgoer.doctype">
-    <input type="text" class="form-control" ng-required="true" ng-model="showgoer.docnumber" name="docnumber" placeholder="{{'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCNUMBER.'.concat(showgoer.doctype)|translate}}">
+  <div class="form-group" ng-show="showgoer.docType">
+    <input type="text" class="form-control" ng-required="true" ng-model="showgoer.docNumber" name="docNumber" placeholder="{{'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCNUMBER.'.concat(showgoer.docType)|translate}}">
   </div>
 
   <a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.SHOWGOER.BUTTON.CANCEL"></a>

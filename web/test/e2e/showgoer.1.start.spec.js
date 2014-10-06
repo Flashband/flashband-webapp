@@ -2,7 +2,7 @@
 
 var loginPage = require('../pages/login.page');
 
-describe('The ShowGoer view', function () {
+describe('Start ShowGoer View', function () {
   it('should visible info and inputs', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer');

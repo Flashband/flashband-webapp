@@ -28,10 +28,10 @@
 
       <tbody>
         <tr ng-repeat="sg in listShowgoers">
-          <td style="text-align: center"><input type="checkbox"></td>
+          <td style="text-align: center"><input name="showGoerId" ng-value="sg.id" ng-click="changeShowGoer(sg)" type="radio"></td>
           <td>{{sg.name}}</td>
-          <td style="text-align: center">{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.doctype.toUpperCase())|translate}}</td>
-          <td style="text-align: right">{{sg.docnumber}}</td>
+          <td style="text-align: center">{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.docType.toUpperCase())|translate}}</td>
+          <td style="text-align: right">{{sg.docNumber}}</td>
         </tr>
       </tbody>
     </table>
@@ -39,4 +39,4 @@
 </div>
 
 <a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.ASSOCIATE.BUTTON.CANCEL"></a>
-<button ng-disabled="!listShowgoers.length" type="submit" class="btn btn-success" translate="FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE"></button>
+<button ng-disabled="!listShowgoers.length || !showGoerSelected" type="submit" class="btn btn-success" ng-click="associateShowGoer()" translate="FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE"></button>
