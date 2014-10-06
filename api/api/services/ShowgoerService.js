@@ -1,5 +1,4 @@
 var q = require('q');
-//var tokenHasher = require('password-hash');
 
 module.exports = {
   create: function(showgoerParams) {
@@ -27,7 +26,7 @@ module.exports = {
 
 
     Showgoer.findOne(showgoer).exec(function(err, saved) {
-      if (saved){
+      if (saved) {
         return defer.reject(new Error('Duplicated document.'));
       }
 
