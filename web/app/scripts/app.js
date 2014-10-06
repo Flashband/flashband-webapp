@@ -35,11 +35,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   });
 
   $stateProvider.state('showgoer', {
-    parent: dashboardAbstract,
-    url: '/showgoer',
-    templateUrl: 'partials/showgoer-start.html',
-    controller: 'ShowgoerCtrl',
-    data: { isPublic: AuthenticateAccess.deny }
+      parent: dashboardAbstract,
+      url: '/showgoer',
+      templateUrl: 'partials/showgoer-start.html',
+      controller: 'ShowgoerCtrl',
+      data: { isPublic: AuthenticateAccess.deny }
   }).state('showgoer-new', {
     parent: dashboardAbstract,
     url: '/showgoer/new',
@@ -51,6 +51,14 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     url: '/showgoer/:message',
     templateUrl: 'partials/showgoer-start.html',
     controller: 'ShowgoerCtrl',
+    data: { isPublic: AuthenticateAccess.deny }
+  });
+
+  $stateProvider.state('associate-search', {
+    parent: dashboardAbstract,
+    url: '/associate/search',
+    templateUrl: 'partials/associate-search.html',
+    controller: 'AssociateCtrl',
     data: { isPublic: AuthenticateAccess.deny }
   });
 
@@ -107,6 +115,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "FLASHBANDS": "Pulseiras",
         "SHOWGOER": "Showgoer"
       },
+
       "SHOWGOER": {
         "TEXT": {
           "TITLE": "Cadastre um showgoer",
@@ -134,6 +143,20 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
             "cnh": "Informe o número da carteira de motorista",
             "passport": "Informe o número do passaporte"
           }
+        }
+      },
+
+      "ASSOCIATE": {
+        "TEXT": {
+          "TITLE": "Vincular showgoer",
+          "NEW": "Para Vincular um showgoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor."
+        },
+        "BUTTON": {
+          "CANCEL": "Cancelar",
+          "ASSOCIATE": "Vincular"
+        },
+        "PLACEHOLDER": {
+          "SHOWGOER": "Digite o nome ou documento do visitante."
         }
       }
     }

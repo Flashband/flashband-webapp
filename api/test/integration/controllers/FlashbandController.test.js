@@ -5,7 +5,6 @@ var FlashbandHelper = require('../../helpers/FlashbandHelper');
 var databaseHelper = require('../../helpers/DatabaseHelper');
 
 describe('FlashbandController', function() {
-
   var serialToken;
 
   shared.shoudRequestNotFound('/flashband/000000000000/block', ['GET', 'POST', 'DELETE']);
@@ -52,6 +51,7 @@ describe('FlashbandController', function() {
         }).fail(done);
       });
     });
+
     describe('POST /flashband/enable', function() {
       it ('should enable flashbands from valid file', function(done) {
         request(sails.hooks.http.app)
@@ -63,6 +63,7 @@ describe('FlashbandController', function() {
           .expect('Content-Type', /application\/json/)
           .end(done);
       });
+
       it ('should reject corrupted file (flashband without UID) ', function(done) {
         request(sails.hooks.http.app)
           .post('/flashband/enable')
@@ -79,7 +80,7 @@ describe('FlashbandController', function() {
       it('should return total of enabled flashbands', function(done) {
         FlashbandHelper.createSuccess().then(function(flashband) {
           request(sails.hooks.http.app)
-            .get('/flashband/enable')
+            .get('/flashband/summary')
             .set('Authorization', 'Token token='.concat(serialToken))
             .expect(200, { total: 1 })
             .expect('Content-Type', /application\/json/)
@@ -88,5 +89,4 @@ describe('FlashbandController', function() {
       });
     });
   });
-
 });

@@ -1,0 +1,39 @@
+<h1 translate="FLASHBAND.ASSOCIATE.TEXT.TITLE"></h1>
+
+<p translate="FLASHBAND.ASSOCIATE.TEXT.NEW"></p>
+
+<br>
+
+<div class="form-group">
+  <div class="input-group">
+    <input required ng-model="showgoerSearch" name="showgoerSearch" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.SHOWGOER'|translate}}">
+
+    <span class="input-group-btn">
+      <button ng-disabled="!showgoerSearch.length" class="btn btn-default btn-success" type="button">buscar</button>
+    </span>
+  </div>
+</div>
+
+<div ng-show="listShowgoers.length" class="form-group">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th translate="'FLASHBAND.ASSOCIATE.TABLE.NAME"></th>
+          <th translate="'FLASHBAND.ASSOCIATE.TABLE.DOCTYPE"></th>
+          <th translate="'FLASHBAND.ASSOCIATE.TABLE.DOCNUMBER"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="sg in listShowgoers">
+          <td>{{sg.name}}</td>
+          <td>{{sg.doctype}}</td>
+          <td>{{sg.docnumber}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.ASSOCIATE.BUTTON.CANCEL"></a>
+<button ng-disabled="!listShowgoers.length" type="submit" class="btn btn-success" translate="FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE"></button>
