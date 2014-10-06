@@ -13,8 +13,12 @@ module.exports = {
     });
   },
 
-  index: function(req, res) {
-    Showgoer.find().exec(function(err, showgoers) {
+  index: function index (req, res) {
+    var args;
+    if (req.query.s) {
+      args = { name: { 'contains': req.query.s } };
+    }
+    Showgoer.find(args).exec(function(err, showgoers) {
       if (err) return res.badRequest(err);
       res.ok(showgoers);
     });
