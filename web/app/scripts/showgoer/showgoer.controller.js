@@ -37,12 +37,21 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
     FlashbandRestFact.getConnection().service('showgoer').post($scope.showgoer).then(successfully, saveFail);
   };
 
-  if ($stateParams && $stateParams['message']) {
-    var stateMessage = $stateParams['message'].toUpperCase();
+  if ($stateParams) {
+    if ($stateParams['message']) {
+      var stateMessage = $stateParams['message'].toUpperCase();
 
-    $scope.message = {
-      type: 'success',
-      text: 'FLASHBAND.SHOWGOER.MESSAGES.'.concat(stateMessage)
-    };
+      $scope.message = {
+        type: 'success',
+        text: 'FLASHBAND.SHOWGOER.MESSAGES.'.concat(stateMessage)
+      };
+    }
+
+    if ($stateParams['showgoer']) {
+      $scope.message = {
+        type: 'success',
+        text: 'FLASHBAND.ASSOCIATE.MESSAGES.SUCCESS'
+      };
+    }
   }
 });

@@ -162,6 +162,9 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
           "TITLE": "Vincular ShowGoer",
           "NEW": "Para vincular um ShowGoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor."
         },
+        "MESSAGES": {
+          "SUCCESS": "ShowGoer vinculado com sucesso."
+        },
         "TABLE": {
           "SEL": "Selecionar",
           "NAME": "Showoger",

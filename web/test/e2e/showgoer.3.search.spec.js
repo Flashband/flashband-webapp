@@ -108,6 +108,10 @@ describe('Search ShowGoer View', function () {
       browser.waitForAngular();
 
       expect(browser.getCurrentUrl()).toContain('#/showgoer/'.concat(showGoerId, '/associate'));
+
+      var msg = element(by.className('alert-success'));
+      expect(msg.isDisplayed()).toBeTruthy();
+      expect(msg.getText()).toBe('ShowGoer vinculado com sucesso.');
     });
   });
 });
