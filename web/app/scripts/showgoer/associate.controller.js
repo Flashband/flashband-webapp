@@ -5,6 +5,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   $scope.showGoerSearch = "";
   $scope.showGoerSelected = false;
   $scope.showMessageNewShowGoer = false;
+  $scope.flashbandTag = "";
 
   $scope.changeShowGoer = function(showGoer) {
     $scope.message = false;
@@ -32,9 +33,9 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
 
   $scope.associateShowGoer = function() {
     var showgoerId = $scope.showGoerSelected.id;
-    var flashbandTag = "04760b3a532880";
 
-    FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', flashbandTag).post().then(function() {
+    console.log($scope.flashbandTag);
+    FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
       $state.go('showgoer-associate', {showgoer: showgoerId});
     }, function() {
       $scope.message = {

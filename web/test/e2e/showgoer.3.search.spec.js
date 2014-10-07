@@ -106,6 +106,10 @@ describe('Search ShowGoer View', function () {
     var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
 
     elRadioSelection.getAttribute('value').then(function(showGoerId) {
+      var tag = element(by.model('flashbandTag'));
+      var validFlashband = '053400020b9555';
+      tag.sendKeys(validFlashband);
+
       pageAssociateButton.click();
       browser.waitForAngular();
 
@@ -150,6 +154,10 @@ describe('Search ShowGoer View', function () {
     var elRadioSelection = trShowGoer.element(by.css('input'));
     elRadioSelection.click();
     browser.waitForAngular();
+
+    var tag = element(by.model('flashbandTag'));
+    var validFlashband = '053400020b9555';
+    tag.sendKeys(validFlashband);
 
     var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
     pageAssociateButton.click();

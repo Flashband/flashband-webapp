@@ -180,7 +180,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
           "SHOWGOER": "cadastre um novo visitante."
         },
         "PLACEHOLDER": {
-          "SHOWGOER": "Digite o nome ou documento do visitante."
+          "SHOWGOER": "Digite o nome ou documento do visitante.",
+          "TAG": "Digite o número da flashband aqui"
         }
       }
     }
