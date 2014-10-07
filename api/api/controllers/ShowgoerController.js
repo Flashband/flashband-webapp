@@ -7,20 +7,27 @@ module.exports = {
   },
 
   summary: function(req, res) {
-    Showgoer.count().exec(function(err, count) {
-      if (err) return res.serverError(err);
-      res.ok({total: count});
-    });
+    ShowgoerService.summary().then(res.ok).fail(res.badRequest);
   },
 
   index: function index (req, res) {
     var args;
+
     if (req.query.s) {
-      args = { name: { 'contains': req.query.s } };
+      args = {
+        name: {
+          'contains': req.query.s
+        }
+      };
     }
-    Showgoer.find(args).exec(function(err, showgoers) {
-      if (err) return res.badRequest(err);
-      res.ok(showgoers);
-    });
+
+    ShowgoerService.search(args).then(res.ok).fail(res.badRequest);
+  },
+
+  associate: function(req, res) {
+    var showGoerId = req.param('showgoerId');
+    var flashBandTag = req.param('tag');
+
+    ShowgoerService.associate(showGoerId, flashBandTag).then(res.ok).fail(res.badRequest);
   }
 };

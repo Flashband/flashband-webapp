@@ -114,4 +114,57 @@ describe('Search ShowGoer View', function () {
       expect(msg.getText()).toBe('ShowGoer vinculado com sucesso.');
     });
   });
+
+  it('should reject associations already associated to showgoer.', function () {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/new');
+
+    var pageNameInput = element(by.model('showgoer.name'));
+    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
+    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
+    var pageDocTypeCNHOption = element(by.css('select[ng-model="showgoer.docType"] option[value="3"]'));
+
+    var showGoerName = 'Showoger com carteira de motorista para Vinculação';
+    var showGoerCNH = '555.444.222.111';
+
+    pageNameInput.sendKeys(showGoerName);
+    pageDocTypeCNHOption.click();
+    pageDocNumberInput.sendKeys(showGoerCNH);
+    pageSaveButton.click();
+    browser.waitForAngular();
+
+    var linkToAssociateShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
+    linkToAssociateShowGoer.click();
+    browser.waitForAngular();
+
+    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
+    pageShowGoerSearchInput.sendKeys(showGoerName);
+
+    var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
+    pageSearchButton.click();
+    browser.waitForAngular();
+
+    var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
+    var elRadioSelection = trShowGoer.element(by.css('input'));
+    elRadioSelection.click();
+    browser.waitForAngular();
+
+    var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
+    pageAssociateButton.click();
+    browser.waitForAngular();
+
+    linkToAssociateShowGoer.click();
+    browser.waitForAngular();
+
+    pageShowGoerSearchInput.sendKeys(showGoerName);
+    pageSearchButton.click();
+    browser.waitForAngular();
+
+    elRadioSelection.click();
+    browser.waitForAngular();
+
+    var msg = element(by.className('alert-warning'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+  });
 });

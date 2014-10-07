@@ -6,6 +6,16 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   $scope.showGoerSelected = false;
 
   $scope.changeShowGoer = function(showGoer) {
+    $scope.message = false;
+    $scope.showGoerSelected = false;
+
+    if (showGoer.flashband) {
+      return $scope.message = {
+        type: 'warning',
+        text: 'FLASHBAND.ASSOCIATE.MESSAGES.ASSOCIATED'
+      };
+    }
+
     $scope.showGoerSelected = showGoer;
   };
 
@@ -19,6 +29,16 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   };
 
   $scope.associateShowGoer = function() {
-    $state.go('showgoer-associate', {showgoer: $scope.showGoerSelected.id});
+    var showgoerId = $scope.showGoerSelected.id;
+    var flashbandTag = "04760b3a532880";
+
+    FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', flashbandTag).post().then(function() {
+      $state.go('showgoer-associate', {showgoer: showgoerId});
+    }, function() {
+      $scope.message = {
+        type: 'warning',
+        text: 'FLASHBAND.ASSOCIATE.MESSAGES.ERROR'
+      };
+    });
   };
 });

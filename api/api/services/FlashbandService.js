@@ -30,12 +30,34 @@ module.exports = {
     });
     return defer.promise;
   },
+
+  findAssociations: function flashbandFindAssociations(listShowGoers) {
+    var defer = q.defer();
+
+    var findAssociation = function(showGoer, next) {
+      Flashband.findOne({ user: showGoer.id, blockedAt: null }).exec(function(err, flashband) {
+        showGoer.flashband = "";
+        if (flashband) showGoer.flashband = flashband.tag;
+        next();
+      });
+    };
+
+    async.each(listShowGoers, findAssociation, function(err) {
+      if (err) return defer.reject(err);
+      defer.resolve(listShowGoers);
+    });
+
+    return defer.promise;
+  },
+
   enable: function(flashbands, name, file) {
     var defer = q.defer();
+
     Flashband.destroy().exec(function(err) {
       if (err) return defer.reject(err);
 
       var newFlashbands = [];
+
       var createFlashband = function(args, next) {
         Flashband.create(args, function(err, flashband) {
           if (err) return defer.reject(err);
@@ -53,7 +75,9 @@ module.exports = {
               defer.reject(err);
               return;
             }
+
             inactivate(flashbandBatches);
+
             FlashbandBatch.create({name: name, file: file, active: true}).exec(function(err, flashbandBatch) {
               if (err) {
                 defer.reject(err);
@@ -62,12 +86,14 @@ module.exports = {
               newFlashbands.forEach(function(flashband) {
                 flashbandBatch.flashbands.add(flashband.id);
               });
+
               flashbandBatch.save().then(defer.resolve, defer.reject);
             });
           });
         }
       });
     });
+
     return defer.promise;
   }
 };

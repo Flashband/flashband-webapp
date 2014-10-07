@@ -2,30 +2,35 @@
   {
     "tag": "04760b3a532880",
     "serial": "1",
-    "blockedAt": null
+    "blockedAt": null,
+    "user": null
   },
 
   {
     "tag": "04750b3a532880",
     "serial": "1",
-    "blockedAt": null
+    "blockedAt": null,
+    "user": null
   },
 
   {
     "tag": "04740b3a532880",
     "serial": "1",
-    "blockedAt": "09/04/2014 01:15:27 AM (-0300)"
+    "blockedAt": "09/04/2014 01:15:27 AM (-0300)",
+    "user": null
   },
 
   {
     "tag": "053400020b9349",
     "serial": "1",
-    "blockedAt": "09/04/2014 01:15:27 AM (-0300)"
+    "blockedAt": "09/04/2014 01:15:27 AM (-0300)",
+    "user": null
   },
 
   {
     "tag": "053400020b9555",
     "serial": "1",
-    "blockedAt": null
+    "blockedAt": null,
+    "user": null
   }
 ]

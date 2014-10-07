@@ -9,5 +9,5 @@ module.exports = {
     inactivate: function() {
       this.active = false;
     }
-  },
+  }
 };

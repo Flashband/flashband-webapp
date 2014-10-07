@@ -13,5 +13,6 @@ module.exports.routes = {
 
   'post /showgoer':         'ShowgoerController.create',
   'get /showgoer':          'ShowgoerController.index',
-  'get  /showgoer/summary': 'ShowgoerController.summary'
+  'get  /showgoer/summary': 'ShowgoerController.summary',
+  'post /showgoer/:showgoerId/associate/:tag': 'ShowgoerController.associate'
 };
