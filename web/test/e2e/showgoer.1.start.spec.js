@@ -37,6 +37,7 @@ describe('Start ShowGoer View', function () {
     browser.get('#/showgoer');
     var linkToNewShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.NEW"]'));
     linkToNewShowGoer.click();
+
     expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
   });
 });

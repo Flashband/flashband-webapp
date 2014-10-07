@@ -10,15 +10,17 @@ describe('Search ShowGoer View', function () {
     var pageTitle = element(by.css('h1[translate=\'FLASHBAND.ASSOCIATE.TEXT.TITLE\']'));
     var pageText = element(by.css('p[translate=\'FLASHBAND.ASSOCIATE.TEXT.NEW\']'));
     var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
+    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
     var pageCancelButton = element(by.css('a[translate=\'FLASHBAND.ASSOCIATE.BUTTON.CANCEL\']'));
-    var pageShowGoerInput = element(by.model('showGoerSearch'));
     var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
+    var msgNewShowGoer = element(by.className('new-showgoer-message'));
 
+    expect(msgNewShowGoer.isDisplayed()).toBeFalsy();
     expect(pageTitle.isDisplayed()).toBeTruthy();
     expect(pageText.isDisplayed()).toBeTruthy();
     expect(pageCancelButton.isDisplayed()).toBeTruthy();
     expect(pageSearchButton.isDisplayed()).toBeTruthy();
-    expect(pageShowGoerInput.isDisplayed()).toBeTruthy();
+    expect(pageShowGoerSearchInput.isDisplayed()).toBeTruthy();
     expect(pageAssociateButton.isDisplayed()).toBeTruthy();
 
     expect(pageTitle.getText()).toBe('Vincular ShowGoer');
@@ -166,5 +168,27 @@ describe('Search ShowGoer View', function () {
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
     expect(msg.getText()).toBe('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+  });
+
+  it('should view message of new showgoer when not found for association', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/showgoer/search');
+
+    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
+    var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
+
+    pageShowGoerSearchInput.sendKeys("Invalid ShowGoer");
+    pageSearchButton.click();
+    browser.waitForAngular();
+
+    var msgNewShowGoer = element(by.className('new-showgoer-message'));
+    expect(msgNewShowGoer.isDisplayed()).toBeTruthy();
+    expect(msgNewShowGoer.getText()).toContain('Não existem visitantes cadastrados com esse nome ou documento.');
+
+    var linkNewShowGoer = element(by.css('a[ui-sref=\'showgoer-new\']'));
+    linkNewShowGoer.click();
+    browser.waitForAngular();
+
+    expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
   });
 });

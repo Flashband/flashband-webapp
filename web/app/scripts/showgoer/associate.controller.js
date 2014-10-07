@@ -4,6 +4,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   $scope.listShowgoers = [];
   $scope.showGoerSearch = "";
   $scope.showGoerSelected = false;
+  $scope.showMessageNewShowGoer = false;
 
   $scope.changeShowGoer = function(showGoer) {
     $scope.message = false;
@@ -21,6 +22,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
 
   $scope.searchByArg = function() {
     var listSuccessfully = function(showGoers) {
+      $scope.showMessageNewShowGoer = !showGoers.length;
       $scope.listShowgoers = showGoers;
       $scope.showGoerSelected = false;
     };

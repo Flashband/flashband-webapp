@@ -16,8 +16,9 @@
   </div>
 </div>
 
-<div ng-show="showGoerSearch.length && listShowgoers.length" class="form-group">
+<div ng-show="listShowgoers.length" class="form-group">
   <div class="table-responsive">
+
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -37,6 +38,13 @@
         </tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="panel panel-default" ng-show="showMessageNewShowGoer">
+  <div class="panel-body new-showgoer-message">
+    {{'FLASHBAND.ASSOCIATE.MESSAGES.SHOWGOER'|translate}}
+    <a ui-sref="showgoer-new" translate>FLASHBAND.ASSOCIATE.BUTTON.SHOWGOER</a>
   </div>
 </div>
 

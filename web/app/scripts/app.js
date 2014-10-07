@@ -164,7 +164,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         },
         "MESSAGES": {
           "SUCCESS": "ShowGoer vinculado com sucesso.",
-          "ASSOCIATED": "Opa, esse ShowGoer já foi vinculado a uma pulseira."
+          "ASSOCIATED": "Opa, esse ShowGoer já foi vinculado a uma pulseira.",
+          "SHOWGOER": "Não existem visitantes cadastrados com esse nome ou documento. Por favor, corrija ou"
         },
         "TABLE": {
           "SEL": "Selecionar",
@@ -175,7 +176,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         "BUTTON": {
           "CANCEL": "Cancelar",
           "ASSOCIATE": "Vincular",
-          "SEARCH": "buscar"
+          "SEARCH": "buscar",
+          "SHOWGOER": "cadastre um novo visitante."
         },
         "PLACEHOLDER": {
           "SHOWGOER": "Digite o nome ou documento do visitante."
