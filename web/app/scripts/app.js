@@ -55,8 +55,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   }).state('showgoer-associate', {
     parent: dashboardAbstract,
     url: '/showgoer/:showgoer/associate',
-    templateUrl: 'partials/showgoer-associate.html',
-    controller: 'AssociateCtrl',
+    templateUrl: 'partials/showgoer-start.html',
+    controller: 'ShowgoerCtrl',
     data: { isPublic: AuthenticateAccess.deny }
   }).state('showgoer-saved', {
     parent: dashboardAbstract,
