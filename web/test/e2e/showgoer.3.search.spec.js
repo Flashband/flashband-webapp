@@ -1,11 +1,15 @@
 'use strict';
 
 var loginPage = require('../pages/login.page');
+var showGoerPage = require('../pages/showgoer.page');
 
 describe('Search ShowGoer View', function () {
-  it('should contains help message', function() {
+  beforeEach(function() {
     loginPage.tryAuthenticateSuccessfully();
-    browser.get('#/showgoer/search');
+  });
+
+  it('should contains help message', function() {
+    showGoerPage.goToSearchShowGoerPage();
 
     var pageTitle = element(by.css('h1[translate=\'FLASHBAND.ASSOCIATE.TEXT.TITLE\']'));
     var pageText = element(by.css('p[translate=\'FLASHBAND.ASSOCIATE.TEXT.NEW\']'));
@@ -31,22 +35,12 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should find by name ShowGoer before associating', function() {
-    loginPage.tryAuthenticateSuccessfully();
-    browser.get('#/showgoer/new');
-
-    var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
-    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeCpfOption = element(by.css('select[ng-model="showgoer.docType"] option[value="1"]'));
+    showGoerPage.goToNewShowGoerPage();
 
     var showGoerName = 'ShowGoer com CPF para Vinculação';
     var showGoerCPF = '999.000.222-22';
 
-    pageNameInput.sendKeys(showGoerName);
-    pageDocTypeCpfOption.click();
-    pageDocNumberInput.sendKeys(showGoerCPF);
-    pageSaveButton.click();
-    browser.waitForAngular();
+    showGoerPage.saveNewShowGoerWithCPF(showGoerName, showGoerCPF);
 
     var linkToAssociateShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
     linkToAssociateShowGoer.click();
@@ -70,22 +64,12 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should redirect to view associate after selecting user', function() {
-    loginPage.tryAuthenticateSuccessfully();
-    browser.get('#/showgoer/new');
-
-    var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
-    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeRgOption = element(by.css('select[ng-model="showgoer.docType"] option[value="2"]'));
+    showGoerPage.goToNewShowGoerPage();
 
     var showGoerName = 'Showoger com RG para Vinculação';
     var showGoerRG = '555.777.111-33';
 
-    pageNameInput.sendKeys(showGoerName);
-    pageDocTypeRgOption.click();
-    pageDocNumberInput.sendKeys(showGoerRG);
-    pageSaveButton.click();
-    browser.waitForAngular();
+    showGoerPage.saveNewShowGoerWithRG(showGoerName, showGoerRG);
 
     var linkToAssociateShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
     linkToAssociateShowGoer.click();
@@ -122,8 +106,7 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should reject associations already associated to ShowGoer.', function () {
-    loginPage.tryAuthenticateSuccessfully();
-    browser.get('#/showgoer/new');
+    showGoerPage.goToNewShowGoerPage();
 
     var pageNameInput = element(by.model('showgoer.name'));
     var pageDocNumberInput = element(by.model('showgoer.docNumber'));
@@ -179,8 +162,7 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should view message of new ShowGoer when not found for association', function() {
-    loginPage.tryAuthenticateSuccessfully();
-    browser.get('#/showgoer/search');
+    showGoerPage.goToSearchShowGoerPage();
 
     var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
     var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
