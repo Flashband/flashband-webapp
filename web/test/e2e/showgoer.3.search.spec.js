@@ -2,10 +2,12 @@
 
 var loginPage = require('../pages/login.page');
 var showGoerPage = require('../pages/showgoer.page');
+var validFlashBand;
 
 describe('Search ShowGoer View', function () {
   beforeEach(function() {
     loginPage.tryAuthenticateSuccessfully();
+    validFlashBand = '053400020b9555';
   });
 
   it('should contains help message', function() {
@@ -35,23 +37,13 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should find by name ShowGoer before associating', function() {
-    showGoerPage.goToNewShowGoerPage();
-
     var showGoerName = 'ShowGoer com CPF para Vinculação';
     var showGoerCPF = '999.000.222-22';
 
+    showGoerPage.goToNewShowGoerPage();
     showGoerPage.saveNewShowGoerWithCPF(showGoerName, showGoerCPF);
-
-    var linkToAssociateShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
-    linkToAssociateShowGoer.click();
-    browser.waitForAngular();
-
-    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
-    pageShowGoerSearchInput.sendKeys(showGoerName);
-
-    var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
-    pageSearchButton.click();
-    browser.waitForAngular();
+    showGoerPage.goToSearchShowGoerPage();
+    showGoerPage.searchShowGoer(showGoerName);
 
     var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
     var elShowGoerName = trShowGoer.element(by.binding('sg.name'));
@@ -64,38 +56,15 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should redirect to view associate after selecting user', function() {
-    showGoerPage.goToNewShowGoerPage();
-
     var showGoerName = 'Showoger com RG para Vinculação';
     var showGoerRG = '555.777.111-33';
 
+    showGoerPage.goToNewShowGoerPage();
     showGoerPage.saveNewShowGoerWithRG(showGoerName, showGoerRG);
-
-    var linkToAssociateShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
-    linkToAssociateShowGoer.click();
-    browser.waitForAngular();
-
-    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
-    pageShowGoerSearchInput.sendKeys(showGoerName);
-
-    var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
-    pageSearchButton.click();
-    browser.waitForAngular();
-
-    var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
-    var elRadioSelection = trShowGoer.element(by.css('input'));
-    elRadioSelection.click();
-    browser.waitForAngular();
-
-    var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
-
-    elRadioSelection.getAttribute('value').then(function(showGoerId) {
-      var tag = element(by.model('flashbandTag'));
-      var validFlashBand = '053400020b9555';
-      tag.sendKeys(validFlashBand);
-
-      pageAssociateButton.click();
-      browser.waitForAngular();
+    showGoerPage.goToSearchShowGoerPage();
+    showGoerPage.searchShowGoer(showGoerName);
+    showGoerPage.selectFirstShowGoer().getAttribute('value').then(function(showGoerId) {
+      showGoerPage.saveAssociationWithFlashBand(validFlashBand);
 
       expect(browser.getCurrentUrl()).toContain('#/showgoer/'.concat(showGoerId, '/associate'));
 
@@ -106,55 +75,19 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should reject associations already associated to ShowGoer.', function () {
-    showGoerPage.goToNewShowGoerPage();
-
-    var pageNameInput = element(by.model('showgoer.name'));
-    var pageDocNumberInput = element(by.model('showgoer.docNumber'));
-    var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
-    var pageDocTypeCNHOption = element(by.css('select[ng-model="showgoer.docType"] option[value="3"]'));
-
     var showGoerName = 'Showoger com carteira de motorista para Vinculação';
     var showGoerCNH = '555.444.222.111';
 
-    pageNameInput.sendKeys(showGoerName);
-    pageDocTypeCNHOption.click();
-    pageDocNumberInput.sendKeys(showGoerCNH);
-    pageSaveButton.click();
-    browser.waitForAngular();
+    showGoerPage.goToNewShowGoerPage();
+    showGoerPage.saveNewShowGoerWithCNH(showGoerName, showGoerCNH);
+    showGoerPage.goToSearchShowGoerPage();
+    showGoerPage.searchShowGoer(showGoerName);
+    showGoerPage.selectFirstShowGoer();
+    showGoerPage.saveAssociationWithFlashBand(validFlashBand);
 
-    var linkToAssociateShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE"]'));
-    linkToAssociateShowGoer.click();
-    browser.waitForAngular();
-
-    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
-    pageShowGoerSearchInput.sendKeys(showGoerName);
-
-    var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
-    pageSearchButton.click();
-    browser.waitForAngular();
-
-    var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
-    var elRadioSelection = trShowGoer.element(by.css('input'));
-    elRadioSelection.click();
-    browser.waitForAngular();
-
-    var tag = element(by.model('flashbandTag'));
-    var validFlashBand = '053400020b9555';
-    tag.sendKeys(validFlashBand);
-
-    var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
-    pageAssociateButton.click();
-    browser.waitForAngular();
-
-    linkToAssociateShowGoer.click();
-    browser.waitForAngular();
-
-    pageShowGoerSearchInput.sendKeys(showGoerName);
-    pageSearchButton.click();
-    browser.waitForAngular();
-
-    elRadioSelection.click();
-    browser.waitForAngular();
+    showGoerPage.goToSearchShowGoerPage();
+    showGoerPage.searchShowGoer(showGoerName);
+    showGoerPage.selectFirstShowGoer();
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
@@ -163,13 +96,7 @@ describe('Search ShowGoer View', function () {
 
   it('should view message of new ShowGoer when not found for association', function() {
     showGoerPage.goToSearchShowGoerPage();
-
-    var pageShowGoerSearchInput = element(by.model('showGoerSearch'));
-    var pageSearchButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.SEARCH\']'));
-
-    pageShowGoerSearchInput.sendKeys("Invalid ShowGoer");
-    pageSearchButton.click();
-    browser.waitForAngular();
+    showGoerPage.searchShowGoer("Invalid showgoer");
 
     var msgNewShowGoer = element(by.className('new-showgoer-message'));
     expect(msgNewShowGoer.isDisplayed()).toBeTruthy();
