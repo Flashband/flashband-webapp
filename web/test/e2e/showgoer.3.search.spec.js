@@ -108,4 +108,21 @@ describe('Search ShowGoer View', function () {
 
     expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
   });
+
+  it ('should show a message when flashband is blocked.', function() {
+    var showGoerName = 'Showoger para Vinculação de pulseira bloqueada';
+    var showGoerCNH = '777.555.222.111';
+    var blockedFlashBand = '053400020b9349';
+
+    showGoerPage.goToNewShowGoerPage();
+    showGoerPage.saveNewShowGoerWithCNH(showGoerName, showGoerCNH);
+    showGoerPage.goToSearchShowGoerPage();
+    showGoerPage.searchShowGoer(showGoerName);
+    showGoerPage.selectFirstShowGoer();
+    showGoerPage.saveAssociationWithFlashBand(blockedFlashBand);
+
+    var msg = element(by.className('alert-warning'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe('Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.');
+  });
 });

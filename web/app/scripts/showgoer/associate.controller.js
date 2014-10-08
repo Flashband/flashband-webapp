@@ -34,14 +34,14 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   $scope.associateShowGoer = function() {
     var showgoerId = $scope.showGoerSelected.id;
 
-    console.log($scope.flashbandTag);
     FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
       $state.go('showgoer-associate', {showgoer: showgoerId});
-    }, function() {
+    }, function(err) {
       $scope.message = {
         type: 'warning',
-        text: 'FLASHBAND.ASSOCIATE.MESSAGES.ERROR'
+        text: err.data
       };
     });
   };
 });
+

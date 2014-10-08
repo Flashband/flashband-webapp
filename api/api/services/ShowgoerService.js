@@ -72,6 +72,8 @@ module.exports = {
     var defer = q.defer();
 
     Flashband.findOne({tag: flashBandTag}).exec(function(err, flashband) {
+      if (flashband.blocked()) return defer.reject(new Error("Blocked Flashband"));
+
       flashband.user = showGoerId;
       flashband.save().then(defer.resolve, defer.reject);
     });

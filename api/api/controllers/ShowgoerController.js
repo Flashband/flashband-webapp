@@ -28,6 +28,8 @@ module.exports = {
     var showGoerId = req.param('showgoerId');
     var flashBandTag = req.param('tag');
 
-    ShowgoerService.associate(showGoerId, flashBandTag).then(res.ok).fail(res.badRequest);
+    ShowgoerService.associate(showGoerId, flashBandTag).then(res.ok, function(ranson) {
+      res.badRequest(ranson.message);
+    });
   }
 };
