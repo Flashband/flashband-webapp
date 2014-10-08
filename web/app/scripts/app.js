@@ -135,7 +135,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         },
         "MESSAGES": {
           "SAVED": "ShowGoer cadastrado com sucesso.",
-          "REQUIRED": "Todos os campso são obrigatórios. Verifique e tente novamente.",
+          "REQUIRED": "Todos os campos são obrigatórios. Verifique e tente novamente.",
           "DUPLICATED": "Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer."
         },
         "PLACEHOLDER": {

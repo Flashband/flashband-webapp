@@ -97,7 +97,7 @@ describe('New ShowGoer View', function () {
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Todos os campso são obrigatórios. Verifique e tente novamente.");
+    expect(msg.getText()).toBe("Todos os campos são obrigatórios. Verifique e tente novamente.");
   });
 
   it('validate required ShowGoer document number is required when displayed', function() {
@@ -116,13 +116,13 @@ describe('New ShowGoer View', function () {
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Todos os campso são obrigatórios. Verifique e tente novamente.");
+    expect(msg.getText()).toBe("Todos os campos são obrigatórios. Verifique e tente novamente.");
   });
 
   it('should not register duplicated ShowGoer', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
-    
+
     var pageNameInput = element(by.model('showgoer.name'));
     var pageDocNumberInput = element(by.model('showgoer.docNumber'));
     var pageSaveButton = element(by.css('button[translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"]'));
