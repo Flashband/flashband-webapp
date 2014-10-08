@@ -107,8 +107,8 @@ describe('Search ShowGoer View', function () {
 
     elRadioSelection.getAttribute('value').then(function(showGoerId) {
       var tag = element(by.model('flashbandTag'));
-      var validFlashband = '053400020b9555';
-      tag.sendKeys(validFlashband);
+      var validFlashBand = '053400020b9555';
+      tag.sendKeys(validFlashBand);
 
       pageAssociateButton.click();
       browser.waitForAngular();
@@ -121,7 +121,7 @@ describe('Search ShowGoer View', function () {
     });
   });
 
-  it('should reject associations already associated to showgoer.', function () {
+  it('should reject associations already associated to ShowGoer.', function () {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/new');
 
@@ -156,8 +156,8 @@ describe('Search ShowGoer View', function () {
     browser.waitForAngular();
 
     var tag = element(by.model('flashbandTag'));
-    var validFlashband = '053400020b9555';
-    tag.sendKeys(validFlashband);
+    var validFlashBand = '053400020b9555';
+    tag.sendKeys(validFlashBand);
 
     var pageAssociateButton = element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
     pageAssociateButton.click();
@@ -178,7 +178,7 @@ describe('Search ShowGoer View', function () {
     expect(msg.getText()).toBe('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
   });
 
-  it('should view message of new showgoer when not found for association', function() {
+  it('should view message of new ShowGoer when not found for association', function() {
     loginPage.tryAuthenticateSuccessfully();
     browser.get('#/showgoer/search');
 
