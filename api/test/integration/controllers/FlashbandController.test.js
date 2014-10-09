@@ -85,10 +85,12 @@ describe('FlashbandController', function() {
       });
 
       it ('should delete old flashbands when enable a new batch', function(done) {
+        var flashbandNumber = '8028533A0A830488';
+
         importBatch('3st flashband batch', 'one-valid-flashband.csv').end(function() {
-          expect(FlashbandService.exists('8028533A0A830488')).to.eventually.be.equal(true).and.notify(function() {
+          expect(FlashbandService.exists(flashbandNumber)).to.eventually.have.property('tag', flashbandNumber).and.notify(function() {
             importBatch('4st flashband batch', 'two-valid-flashband.csv').end(function() {
-              expect(FlashbandService.exists('8028533A0A830488')).to.eventually.be.equal(false).and.notify(done);
+              expect(FlashbandService.exists(flashbandNumber)).to.be.rejectedWith('Flashband not found').and.notify(done);
             });
           });
         });

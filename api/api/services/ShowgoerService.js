@@ -4,8 +4,6 @@ var q = require('q');
 
 module.exports = {
   create: function(showGoerParams) {
-    var defer = q.defer();
-
     var saveShowGoer = function() {
       var showgoer = {
         name: showGoerParams.name,
@@ -13,38 +11,31 @@ module.exports = {
         docNumber: showGoerParams.docNumber
       };
 
-      Showgoer.create(showgoer).exec(function(err, model) {
-        defer.resolve(model);
+      return Showgoer.create(showgoer).then(function(model) {
+        return model;
       });
     };
 
-    this.isValidForSave(showGoerParams).then(saveShowGoer).fail(defer.reject);
-
-    return defer.promise;
+    return this.isValidForSave(showGoerParams).then(saveShowGoer);
   },
 
   summary: function() {
-    var defer = q.defer();
-
-    Showgoer.count().exec(function(err, count) {
-      if (err) { return defer.reject(err); }
-      defer.resolve({total: count});
+    return Showgoer.count().then(function(count) {
+      return {total: count};
     });
-
-    return defer.promise;
   },
 
   isValidForSave: function(showGoerParams) {
     var defer = q.defer();
 
     try {
-      if (!showGoerParams.name)      { throw 'Name is required.';            }
-      if (!showGoerParams.docType)   { throw 'Document type is required.';   }
-      if (!showGoerParams.docNumber) { throw 'Document number is required.'; }
+      if (!showGoerParams.name)      { throw new Error('Name is required.');            }
+      if (!showGoerParams.docType)   { throw new Error('Document type is required.');   }
+      if (!showGoerParams.docNumber) { throw new Error('Document number is required.'); }
 
       var validTypes = ['cpf', 'rg', 'cnh', 'passport'];
       var typeIsInvalid = validTypes.indexOf(showGoerParams.docType) < 0;
-      if (typeIsInvalid) { throw 'Invalid document type.'; }
+      if (typeIsInvalid) { throw new Error('Invalid document type.'); }
 
       Showgoer.findOne({docType: showGoerParams.docType, docNumber: showGoerParams.docNumber}).exec(function (err, saved) {
         if (saved) { return defer.reject(new Error('Duplicated document.')); }
@@ -52,34 +43,24 @@ module.exports = {
       });
 
     } catch (err) {
-      defer.reject(new Error(err));
+      defer.reject(err);
     }
 
     return defer.promise;
   },
 
   search: function(args) {
-    var defer = q.defer();
-
-    Showgoer.find(args).exec(function(err, listShowGoers) {
-      if (err) { return defer.reject(err); }
-
-      FlashbandService.findAssociations(listShowGoers).then(defer.resolve).fail(defer.reject);
+    return Showgoer.find(args).then(function(listShowGoers) {
+      return FlashbandService.findAssociations(listShowGoers);
     });
-
-    return defer.promise;
   },
 
   associate: function(showGoerId, flashBandTag) {
-    var defer = q.defer();
-
-    Flashband.findOne({tag: flashBandTag}).exec(function(err, flashband) {
-      if (flashband.blocked()) { return defer.reject(new Error('Blocked Flashband')); }
+    return FlashbandService.exists(flashBandTag).then(function(flashband) {
+      if (flashband.blocked()) { throw new Error('Blocked Flashband'); }
 
       flashband.user = showGoerId;
-      flashband.save().then(defer.resolve, defer.reject);
+      return flashband.save();
     });
-
-    return defer.promise;
   }
 };

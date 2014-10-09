@@ -10,35 +10,35 @@ var inactivate = function(flashbandBatches) {
 };
 
 module.exports = {
+  findOne: function(flashbandUid) {
+    return Flashband.findOne({ tag: flashbandUid, imported: true });
+  },
+
+  findByShowgoer: function(showgoerId) {
+    return Flashband.findOne({ user: showgoerId, blockedAt: null, imported: true  });
+  },
+
   exists: function(flashbandUid) {
-    return Flashband.count({ tag: flashbandUid, imported: true }).then(function (count) {
-      return !!count && count > 0;
+    return this.findOne(flashbandUid).then(function(flashband) {
+      if (!flashband) { throw new Error('Flashband not found.'); }
+      return flashband;
     });
   },
 
   block: function(flashbandUid) {
-    var defer = q.defer();
-
-    Flashband.findOne({ tag: flashbandUid, imported: true }).exec(function(err, flashband) {
-      if (err) { return defer.reject(err); }
-      if (!flashband) { return defer.reject(new Error('Flashband not found.')); }
-      if (flashband.blockedAt) { return defer.reject(new Error('Flashband already blocked.')); }
+    return this.exists(flashbandUid).then(function(flashband) {
+      if (flashband.blocked()) { throw new Error('Flashband already blocked.'); }
 
       flashband.blockedAt = new Date();
-      flashband.save(function(err, flashband) {
-        if (err) { return defer.reject(err); }
-        defer.resolve(flashband);
-      });
+      return flashband.save();
     });
-
-    return defer.promise;
   },
 
   findAssociations: function(listShowGoers) {
     var defer = q.defer();
 
     var findAssociation = function(showGoer, next) {
-      Flashband.findOne({ user: showGoer.id, blockedAt: null, imported: true  }).exec(function(err, flashband) {
+      FlashbandService.findByShowgoer(showGoer.id).exec(function(err, flashband) {
         showGoer.flashband = '';
         if (flashband) { showGoer.flashband = flashband.tag; }
         next();
@@ -54,14 +54,9 @@ module.exports = {
   },
 
   deleteAllFlashbands: function() {
-    var defer = q.defer();
-
-    Flashband.update({imported: true}, {imported: false}).exec(function afterDeleteAllFlashbands(err, updateds) {
-      if (err) { return defer.reject(err); }
-      defer.resolve(updateds);
+    return Flashband.update({imported: true}, {imported: false}).then(function(updateds) {
+      return updateds;
     });
-
-    return defer.promise;
   },
 
   enable: function(flashbands, name, file) {

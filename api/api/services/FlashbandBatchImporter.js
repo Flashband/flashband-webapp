@@ -48,6 +48,7 @@ var validate = function(flashbands) {
 module.exports = {
   parse: function(input) {
     var defer = q.defer();
+
     var parser = csv.parse({columns: true, trim: true, delimiter: ';'});
     var flashbands = [];
     var transformer = csv.transform(function(record) {
@@ -57,6 +58,7 @@ module.exports = {
       var serial = record.Qrcode;
       flashbands.push({tag: tag, serial: serial});
     });
+
     transformer.on('finish', function() {
       var validation = validate(flashbands);
       if (validation.ok) { return defer.resolve(flashbands); }
@@ -69,6 +71,7 @@ module.exports = {
     });
 
     input.pipe(parser).pipe(transformer);
+
     return defer.promise;
   }
 };

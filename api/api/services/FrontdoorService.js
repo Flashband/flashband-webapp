@@ -1,65 +1,50 @@
 'use strict';
 
-var Q = require('q');
-var validateBeforeRegister = require('./ValidateBeforeRegister');
+var validate = function(flashbandUid) {
+  return FlashbandService.exists(flashbandUid).then(function(flashband) {
+    if (flashband.blocked()) { throw new Error('Blocked flashband.'); }
+    return flashband;
+  });
+};
 
 module.exports = {
   registerEnter: function(flashbandUid) {
-    var deferred = Q.defer();
+    return validate(flashbandUid).then(function(flashband) {
+      return FrontdoorService.checkRegistered(flashband.tag).then(function(registered) {
+        if (registered) { throw new Error('Duplicated entrance.'); }
 
-    var registerEntrance = function(results) {
-      if (!results.flashbandImported) { return deferred.reject(new Error('Flashband not found.')); }
-      if (results.blockedFlashband)   { return deferred.reject(new Error('Blocked flashband.'));   }
-      if (results.entranceAlreadyIn)  { return deferred.reject(new Error('Duplicated entrance.')); }
-
-      Entrance.create({ tag: flashbandUid }, function(err, entranceModel) {
-        deferred.resolve(entranceModel);
+        return Entrance.create({ tag: flashbandUid }).then(function(entranceModel) {
+          return entranceModel;
+        });
       });
-    };
-
-    validateBeforeRegister.enter(flashbandUid).then(registerEntrance);
-
-    return deferred.promise;
+    });
   },
 
   registerLeave: function(flashbandUid) {
-    var deferred = Q.defer();
+    return validate(flashbandUid).then(function(flashband) {
+      return FrontdoorService.checkAlreadyOut(flashband.tag).then(function(alreadyOut) {
+        if (alreadyOut) { throw new Error('Duplicated exit.'); }
 
-    var registerExit = function(results) {
-      if (!results.imported)  { return deferred.reject(new Error('Flashband not found.')); }
-      if (results.blocked)    { return deferred.reject(new Error('Blocked flashband.'));   }
-      if (results.alreadyOut) { return deferred.reject(new Error('Duplicated exit.'));     }
+        return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(entranceModel) {
+          entranceModel.leave = new Date();
 
-      Entrance.findOne({ tag: flashbandUid, leave: null }, function(err, entranceModel) {
-        entranceModel.leave = new Date();
-        entranceModel.save(function(err, mdl) {
-          deferred.resolve(mdl);
+          return entranceModel.save().then(function(mdl) {
+            return mdl;
+          });
         });
       });
-    };
-
-    validateBeforeRegister.leave(flashbandUid).then(registerExit);
-
-    return deferred.promise;
+    });
   },
 
   checkRegistered: function(flashbandUid) {
-    var deferred = Q.defer();
-
-    Entrance.findOne({ tag: flashbandUid, leave: null }, function(err, found) {
-      deferred.resolve(Boolean(found));
+    return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(found) {
+      return Boolean(found);
     });
-
-    return deferred.promise;
   },
 
   checkAlreadyOut: function(flashbandUid) {
-    var deferred = Q.defer();
-
-    Entrance.findOne({ tag: flashbandUid, leave: null }, function(err, found) {
-      deferred.resolve(!Boolean(found));
+    return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(found) {
+      return !Boolean(found);
     });
-
-    return deferred.promise;
   }
 };
