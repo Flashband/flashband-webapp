@@ -9,7 +9,9 @@ module.exports = {
   },
 
   summary: function(req, res) {
-    ShowgoerService.summary().then(res.ok).fail(res.badRequest);
+    ShowgoerService.summary().then(res.ok, function(ranson) {
+      res.badRequest(ranson.message);
+    });
   },
 
   index: function index (req, res) {
@@ -23,7 +25,9 @@ module.exports = {
       };
     }
 
-    ShowgoerService.search(args).then(res.ok).fail(res.badRequest);
+    ShowgoerService.search(args).then(res.ok, function(ranson) {
+      res.badRequest(ranson.message);
+    });
   },
 
   associate: function(req, res) {

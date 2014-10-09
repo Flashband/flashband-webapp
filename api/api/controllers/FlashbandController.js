@@ -27,7 +27,7 @@ module.exports = {
   },
 
   summary: function(req, res) {
-    Flashband.count().exec(function(err, count) {
+    Flashband.count({imported: true}).exec(function(err, count) {
       if (err) { return res.serverError(err); }
       res.ok({total: count});
     });
