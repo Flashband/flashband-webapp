@@ -1,8 +1,8 @@
 'use strict';
 
 var Q = require('q');
-var fbHelp = require('../../helpers/FlashbandHelper');
-var fdHelp = require('../../helpers/FrontdoorHelper');
+var fbHelp = require('../../../helpers/FlashbandHelper');
+var fdHelp = require('../../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerEnter', function() {

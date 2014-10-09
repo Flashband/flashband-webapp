@@ -19,9 +19,8 @@ module.exports = {
 
     if (req.query.s) {
       args = {
-        name: {
-          'contains': req.query.s
-        }
+        or: [{ name: { 'contains': req.query.s }},
+             { docNumber: { 'contains': req.query.s }}]
       };
     }
 

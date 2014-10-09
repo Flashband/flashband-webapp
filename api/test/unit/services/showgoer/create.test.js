@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var dbHelp = require('../../helpers/DatabaseHelper');
+var dbHelp = require('../../../helpers/DatabaseHelper');
 
 describe('ShowgoerService', function() {
   describe('#create', function() {

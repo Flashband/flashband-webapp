@@ -1,8 +1,8 @@
 'use strict';
 
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var fbHelp = require('../../helpers/FlashbandHelper');
-var sgHelp = require('../../helpers/ShowgoerHelper');
+var fbHelp = require('../../../helpers/FlashbandHelper');
+var sgHelp = require('../../../helpers/ShowgoerHelper');
 
 describe('FlashbandService', function() {
   describe('#associate', function() {

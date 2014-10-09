@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var stringReadableStream = require('../../helpers/StringReadableStream');
+var stringReadableStream = require('../../../helpers/StringReadableStream');
 
 describe('FlashbandBatchImporter', function () {
 

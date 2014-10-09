@@ -1,7 +1,7 @@
 'use strict';
 
 var Q = require('q');
-var fdHelp = require('../../helpers/FrontdoorHelper');
+var fdHelp = require('../../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerLeave', function() {

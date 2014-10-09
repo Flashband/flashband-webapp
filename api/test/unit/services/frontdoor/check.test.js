@@ -1,7 +1,7 @@
 'use strict';
 
 require('chai').use(require('chai-as-promised')).should();
-var fdHelp = require('../../helpers/FrontdoorHelper');
+var fdHelp = require('../../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#checkRegistered', function() {

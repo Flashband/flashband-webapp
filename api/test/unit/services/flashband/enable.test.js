@@ -1,9 +1,9 @@
 'use strict';
 
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var databaseHelper = require('../../helpers/DatabaseHelper');
-var flashbandBatchHelper = require('../../helpers/FlashbandBatchHelper');
-var flashbandHelper = require('../../helpers/FlashbandHelper');
+var databaseHelper = require('../../../helpers/DatabaseHelper');
+var flashbandBatchHelper = require('../../../helpers/FlashbandBatchHelper');
+var flashbandHelper = require('../../../helpers/FlashbandHelper');
 
 describe('FlashbandService', function() {
   describe('#enable', function() {
