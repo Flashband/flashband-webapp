@@ -1,3 +1,5 @@
+'use strict';
+
 var getFlashbandTag = function(req) {
   return req.param('tag');
 };
@@ -9,16 +11,16 @@ module.exports = {
   enter: function enter (req, res) {
     FrontdoorService.registerEnter(getFlashbandTag(req)).then(function() {
       res.created(inputSuccessful);
-    }).fail(function (error) {
-      res.forbidden(error);
+    }).fail(function(ranson) {
+      res.forbidden(ranson.message);
     });
   },
 
   leave: function leave (req, res) {
     FrontdoorService.registerLeave(getFlashbandTag(req)).then(function() {
       res.created(outputSuccessful);
-    }).fail(function (error) {
-      res.forbidden(error);
+    }).fail(function(ranson) {
+      res.forbidden(ranson.message);
     });
   },
 
@@ -27,9 +29,13 @@ module.exports = {
 
     FrontdoorService.checkRegistered(tag).then(function (inside) {
       FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag).then(function () {
-        if (inside) return res.created(outputSuccessful);
+        if (inside) { return res.created(outputSuccessful); }
         res.created(inputSuccessful);
-      }).catch(res.forbidden);
+      }).fail(function(ranson) {
+        res.forbidden(ranson.message);
+      });
+    }).fail(function(ranson) {
+      res.forbidden(ranson.message);
     });
   }
 };

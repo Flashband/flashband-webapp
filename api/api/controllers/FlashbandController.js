@@ -1,5 +1,5 @@
-/*globals FlashbandService, FlashbandBatch, FlashbandBatchImporter, Flashband*/
 'use strict';
+
 var fs = require('fs');
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
       var csvFile = fs.createReadStream(file.fd);
       FlashbandBatchImporter.parse(csvFile).then(function(flashbands) {
         FlashbandService.enable(flashbands, req.body.name, fs.readFileSync(file.fd)).then(function(flashbandBatch) {
-          return res.created({flashbands_enabled: flashbandBatch.flashbands.length, message: 'Flashbands enabled successfully.' });
+          return res.created({flashbandsEnabled: flashbandBatch.flashbands.length, message: 'Flashbands enabled successfully.' });
         }).fail(res.badRequest);
       }).fail(res.badRequest);
     });
@@ -28,7 +28,7 @@ module.exports = {
 
   summary: function summary(req, res) {
     Flashband.count().exec(function(err, count) {
-      if (err) return res.serverError(err);
+      if (err) { return res.serverError(err); }
       res.ok({total: count});
     });
   }

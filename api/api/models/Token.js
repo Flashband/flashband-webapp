@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   autoCreatedAt: true,
   attributes: {
@@ -5,4 +7,3 @@ module.exports = {
     token: { type: 'string' }
   }
 };
-

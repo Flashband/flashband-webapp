@@ -1,5 +1,7 @@
+'use strict';
+
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var FlashbandHelper = require('../../helpers/FlashbandHelper');
+var fbHelp = require('../../helpers/FlashbandHelper');
 
 describe('FlashbandService', function() {
   describe('#exists', function() {
@@ -8,7 +10,7 @@ describe('FlashbandService', function() {
         expect(FlashbandService.exists(flashSuccess.tag)).to.eventually.be.equal(true).and.notify(done);
       };
 
-      FlashbandHelper.createSuccess().then(verifyFlashbandExists, done);
+      fbHelp.createSuccess().then(verifyFlashbandExists, done);
     });
 
     it('should check for a flashband that not exists', function(done) {

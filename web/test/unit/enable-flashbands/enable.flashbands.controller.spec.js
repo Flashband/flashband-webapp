@@ -1,4 +1,3 @@
-/*globals describe, beforeEach, it, expect, inject*/
 'use strict';
 
 describe('Controller: EnableFlashbandsCtrl', function(){

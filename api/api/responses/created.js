@@ -1,10 +1,12 @@
-module.exports = function sendCreated(data, options) {
+'use strict';
+
+module.exports = function sendCreated (data) {
+  this.req._sails.log.silly('Sending 201 ("Created") response: \n', data);
+
   var res = this.res;
-  var sails = this.req._sails;
-
-  sails.log.silly('res.created() :: Sending 201 ("Created") response');
-
   res.status(201);
 
-  return res.jsonx(data);
+  if (typeof data === 'object') { return res.json(data); }
+  if ((data) && (data.name) && (data.name.toString() === 'Error')) { return res.json(data.message); }
+  res.jsonx(data);
 };

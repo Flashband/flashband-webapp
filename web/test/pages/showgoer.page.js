@@ -131,5 +131,15 @@ module.exports = {
     expect(browser.getCurrentUrl()).toContain('#/showgoer/'.concat(showGoerId, '/associate'));
     this.expectAlertSuccess('ShowGoer vinculado com sucesso.');
     return this;
+  },
+
+  expectUrlPageNew: function() {
+    expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
+    return this;
+  },
+
+  expectUrlPageStart: function() {
+    expect(browser.getCurrentUrl()).toContain('#/showgoer');
+    return this;
   }
 };

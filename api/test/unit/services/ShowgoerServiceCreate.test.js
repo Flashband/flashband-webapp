@@ -1,10 +1,12 @@
+'use strict';
+
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var databaseHelper = require('../../helpers/DatabaseHelper');
+var dbHelp = require('../../helpers/DatabaseHelper');
 
 describe('ShowgoerService', function() {
   describe('#create', function() {
     beforeEach(function(done) {
-      databaseHelper.emptyModels([Showgoer]).then(done).fail(done);
+      dbHelp.emptyModels([Showgoer]).then(done).fail(done);
     });
 
     it('should save showgoer', function(done) {

@@ -1,9 +1,11 @@
-var request      = require('supertest');
-var shared       = require('../shared-specs');
-var passwordHash = require('password-hash');
-var FlashbandHelper = require('../../helpers/FlashbandHelper');
-var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
-var databaseHelper = require('../../helpers/DatabaseHelper');
+'use strict';
+
+var request = require('supertest');
+var shared  = require('../shared-specs');
+var pwHash  = require('password-hash');
+var fbHelp  = require('../../helpers/FlashbandHelper');
+var fdHelp  = require('../../helpers/FrontdoorHelper');
+var dbHelp  = require('../../helpers/DatabaseHelper');
 
 var outputSuccessful;
 var inputSuccessful;
@@ -13,12 +15,12 @@ var serialToken;
 describe('FrontdoorController', function() {
   beforeEach(function(done) {
     args = {tag: '1234'};
-    databaseHelper.emptyModels([Entrance, Flashband]).then(function() {
+    dbHelp.emptyModels([Entrance, Flashband]).then(function() {
       inputSuccessful  = {door: 'in', message: 'Input successful.'};
       outputSuccessful = {door: 'out', message: 'Output successful.'};
 
       User.create({password: '123123123'}).then(function(user) {
-        serialToken = passwordHash.generate(user.id);
+        serialToken = pwHash.generate(user.id);
         user.tokens.add({ token: serialToken });
         user.save(done);
       }).fail(done);
@@ -33,12 +35,13 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
           .send({tag: flashband.tag})
+          .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
-      FlashbandHelper.createSuccess().then(verifyRegister);
+      fbHelp.createSuccess().then(verifyRegister);
     });
 
     it('should reject a invalid flashband', function (done) {
@@ -60,7 +63,7 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      FrontdoorHelper.createEntrance().then(verifyDuplicated, done);
+      fdHelp.createEntrance().then(verifyDuplicated, done);
     });
 
     it('should reject blocked flashband', function (done) {
@@ -73,7 +76,7 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      FlashbandHelper.createBlocked().then(verifyFlashBandBlocked);
+      fbHelp.createBlocked().then(verifyFlashBandBlocked);
     });
   });
 
@@ -85,12 +88,13 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
           .send({tag: entrance.tag})
+          .expect('Content-type', /application\/json/)
           .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
-      FrontdoorHelper.createEntrance().then(verifyLeave, done);
+      fdHelp.createEntrance().then(verifyLeave, done);
     });
 
     it('should reject a invalid flashband', function (done) {
@@ -112,7 +116,7 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
+      fdHelp.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
     });
 
     it('should reject duplicated flashband', function (done) {
@@ -125,7 +129,7 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      FrontdoorHelper.createLeave().then(verifyDuplicated, done);
+      fdHelp.createLeave().then(verifyDuplicated, done);
     });
   });
 
@@ -135,12 +139,13 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
           .send({tag: flashband.tag})
+          .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
-      FlashbandHelper.createSuccess().then(verifyRegister);
+      fbHelp.createSuccess().then(verifyRegister);
     });
 
     it('should leave a valid flashband', function (done) {
@@ -148,12 +153,13 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
           .send({tag: entrance.tag})
+          .expect('Content-type', /application\/json/)
           .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
-      FrontdoorHelper.createEntrance().then(verifyLeave, done);
+      fdHelp.createEntrance().then(verifyLeave, done);
     });
 
     it('should reject a invalid flashband', function (done) {
@@ -175,7 +181,7 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
+      fdHelp.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
     });
 
     it('should register a valid flashband after exit', function (done) {
@@ -183,12 +189,13 @@ describe('FrontdoorController', function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
           .send({tag: entrance.tag})
+          .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
-      FrontdoorHelper.createLeave().then(verifyRegister);
+      fdHelp.createLeave().then(verifyRegister);
     });
 
     it('should register output after entering 2x', function (done) {
@@ -201,13 +208,14 @@ describe('FrontdoorController', function() {
             request(sails.hooks.http.app)
               .post('/frontdoor/cross')
               .send({tag: entrance.tag})
+              .expect('Content-type', /application\/json/)
               .expect(201, outputSuccessful)
               .set('Authorization', 'Token token='.concat(serialToken))
               .end(done);
           });
       };
 
-      FrontdoorHelper.createLeave().then(verifyRegister);
+      fdHelp.createLeave().then(verifyRegister);
     });
 
     it('must register the entry after leaving 2x', function (done) {
@@ -225,6 +233,7 @@ describe('FrontdoorController', function() {
                 request(sails.hooks.http.app)
                   .post('/frontdoor/cross')
                   .send({tag: entrance.tag})
+                  .expect('Content-type', /application\/json/)
                   .expect(201, inputSuccessful)
                   .set('Authorization', 'Token token='.concat(serialToken))
                   .end(done);
@@ -232,7 +241,7 @@ describe('FrontdoorController', function() {
           });
       };
 
-      FrontdoorHelper.createLeave().then(verifyRegister);
+      fdHelp.createLeave().then(verifyRegister);
     });
   });
 });

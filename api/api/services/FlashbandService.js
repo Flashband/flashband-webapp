@@ -1,3 +1,5 @@
+'use strict';
+
 var q = require('q');
 
 var inactivate = function(flashbandBatches) {
@@ -16,18 +18,19 @@ module.exports = {
 
   block: function(flashbandUid) {
     var defer = q.defer();
+
     Flashband.findOne({ tag: flashbandUid }).exec(function(err, flashband) {
-      if (err) return defer.reject(err);
-      if (!flashband) return defer.reject(new Error('Flashband not found.'));
-      if (flashband.blockedAt) return defer.reject(new Error('Flashband already blocked.'));
+      if (err) { return defer.reject(err); }
+      if (!flashband) { return defer.reject(new Error('Flashband not found.')); }
+      if (flashband.blockedAt) { return defer.reject(new Error('Flashband already blocked.')); }
+
       flashband.blockedAt = new Date();
       flashband.save(function(err, flashband) {
-        if (err)
-          defer.reject(err);
-        else
-          defer.resolve(flashband);
+        if (err) { return defer.reject(err); }
+        defer.resolve(flashband);
       });
     });
+
     return defer.promise;
   },
 
@@ -36,14 +39,14 @@ module.exports = {
 
     var findAssociation = function(showGoer, next) {
       Flashband.findOne({ user: showGoer.id, blockedAt: null }).exec(function(err, flashband) {
-        showGoer.flashband = "";
-        if (flashband) showGoer.flashband = flashband.tag;
+        showGoer.flashband = '';
+        if (flashband) { showGoer.flashband = flashband.tag; }
         next();
       });
     };
 
     async.each(listShowGoers, findAssociation, function(err) {
-      if (err) return defer.reject(err);
+      if (err) { return defer.reject(err); }
       defer.resolve(listShowGoers);
     });
 
@@ -54,13 +57,13 @@ module.exports = {
     var defer = q.defer();
 
     Flashband.destroy().exec(function(err) {
-      if (err) return defer.reject(err);
+      if (err) { return defer.reject(err); }
 
       var newFlashbands = [];
 
       var createFlashband = function(args, next) {
         Flashband.create(args, function(err, flashband) {
-          if (err) return defer.reject(err);
+          if (err) { return defer.reject(err); }
           newFlashbands.push(flashband);
           next();
         });

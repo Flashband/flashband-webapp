@@ -1,6 +1,8 @@
+'use strict';
+
 var Q = require('q');
-var FlashbandHelper = require('../../helpers/FlashbandHelper');
-var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
+var fbHelp = require('../../helpers/FlashbandHelper');
+var fdHelp = require('../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerEnter', function() {
@@ -9,7 +11,7 @@ describe('FrontdoorService', function() {
         FrontdoorService.registerEnter(flashSuccess.tag).should.be.rejectedWith('Duplicated entrance.').notify(done);
       };
 
-      FrontdoorHelper.createEntrance().then(verifyDuplicated, done);
+      fdHelp.createEntrance().then(verifyDuplicated, done);
     });
 
     it('should not register entrance when ShowGoer blocked flashband', function (done) {
@@ -17,7 +19,7 @@ describe('FrontdoorService', function() {
         FrontdoorService.registerEnter(flashBlocked.tag).should.be.rejectedWith('Blocked flashband.').notify(done);
       };
 
-      FlashbandHelper.createBlocked().then(verifyFlashBandBlocked, done);
+      fbHelp.createBlocked().then(verifyFlashBandBlocked, done);
     });
 
     it('should not register entrance when flashband not imported', function (done) {
@@ -34,7 +36,7 @@ describe('FrontdoorService', function() {
         ]).should.notify(done);
       };
 
-      FlashbandHelper.createSuccess().then(verifyEntrance);
+      fbHelp.createSuccess().then(verifyEntrance);
     });
   });
 });

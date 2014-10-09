@@ -1,7 +1,9 @@
+'use strict';
+
 module.exports = {
   autoCreatedAt: true,
   attributes: {
-    tag: { 
+    tag: {
       type: 'string',
       unique: true
     },

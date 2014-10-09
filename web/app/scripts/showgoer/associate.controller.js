@@ -39,6 +39,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
     FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
       $state.go('showgoer-associate', {showgoer: showgoerId});
     }, function(err) {
+      console.log(err);
       $scope.message = {
         type: 'warning',
         text: err.data

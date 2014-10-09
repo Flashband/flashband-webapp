@@ -41,7 +41,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
 
     var onSuccessUpload = function(res) {
       $scope.uploadPercent = false;
-      $state.go('finish-flashbands', {state: res.data.flashbands_enabled});
+      $state.go('finish-flashbands', {state: res.data.flashbandsEnabled});
     };
 
     var onProgressUpload = function(evt) {

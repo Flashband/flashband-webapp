@@ -1,3 +1,5 @@
+'use strict';
+
 var Q = require('q');
 var validateBeforeRegister = require('./ValidateBeforeRegister');
 
@@ -6,9 +8,9 @@ module.exports = {
     var deferred = Q.defer();
 
     var registerEntrance = function(results) {
-      if (!results.flashbandImported)   return deferred.reject('Flashband not found.');
-      if (results.blockedFlashband)     return deferred.reject('Blocked flashband.');
-      if (results.entranceAlreadyIn)    return deferred.reject('Duplicated entrance.');
+      if (!results.flashbandImported) { return deferred.reject(new Error('Flashband not found.')); }
+      if (results.blockedFlashband)   { return deferred.reject(new Error('Blocked flashband.'));   }
+      if (results.entranceAlreadyIn)  { return deferred.reject(new Error('Duplicated entrance.')); }
 
       Entrance.create({ tag: flashbandUid }, function(err, entranceModel) {
         deferred.resolve(entranceModel);
@@ -24,9 +26,9 @@ module.exports = {
     var deferred = Q.defer();
 
     var registerExit = function(results) {
-      if (!results.imported)  return deferred.reject('Flashband not found.');
-      if (results.blocked)    return deferred.reject('Blocked flashband.');
-      if (results.alreadyOut) return deferred.reject('Duplicated exit.');
+      if (!results.imported)  { return deferred.reject(new Error('Flashband not found.')); }
+      if (results.blocked)    { return deferred.reject(new Error('Blocked flashband.'));   }
+      if (results.alreadyOut) { return deferred.reject(new Error('Duplicated exit.'));     }
 
       Entrance.findOne({ tag: flashbandUid, leave: null }, function(err, entranceModel) {
         entranceModel.leave = new Date();

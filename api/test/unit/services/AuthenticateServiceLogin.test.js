@@ -1,5 +1,7 @@
+'use strict';
+
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var FlashbandHelper = require('../../helpers/FlashbandHelper');
+var fbHelp = require('../../helpers/FlashbandHelper');
 
 describe('AuthenticateService', function() {
   describe('#login', function() {
@@ -8,7 +10,7 @@ describe('AuthenticateService', function() {
         expect(FlashbandService.exists(flashSuccess.tag)).to.eventually.be.equal(true).and.notify(done);
       };
 
-      FlashbandHelper.createSuccess().then(verifyFlashbandExists, done);
+      fbHelp.createSuccess().then(verifyFlashbandExists, done);
     });
   });
 });

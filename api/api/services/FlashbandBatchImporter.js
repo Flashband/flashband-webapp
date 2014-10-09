@@ -1,3 +1,5 @@
+'use strict';
+
 var csv = require('csv');
 var q = require('q');
 
@@ -49,22 +51,23 @@ module.exports = {
     var parser = csv.parse({columns: true, trim: true, delimiter: ';'});
     var flashbands = [];
     var transformer = csv.transform(function(record) {
-      if (!(record.UID || record.Qrcode))
-        return;
+      if (!(record.UID || record.Qrcode)) { return; }
+
       var tag = record.UID.replace(/ /g, '');
       var serial = record.Qrcode;
       flashbands.push({tag: tag, serial: serial});
     });
     transformer.on('finish', function() {
       var validation = validate(flashbands);
-      if (validation.ok)
-        defer.resolve(flashbands);
-      else
-        defer.reject(new Error(validation.error));
+      if (validation.ok) { return defer.resolve(flashbands); }
+
+      defer.reject(new Error(validation.error));
     });
+
     transformer.on('error', function(err) {
       defer.reject(err);
     });
+
     input.pipe(parser).pipe(transformer);
     return defer.promise;
   }

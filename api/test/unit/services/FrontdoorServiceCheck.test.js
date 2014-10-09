@@ -1,5 +1,7 @@
+'use strict';
+
 require('chai').use(require('chai-as-promised')).should();
-var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
+var fdHelp = require('../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#checkRegistered', function() {
@@ -8,7 +10,7 @@ describe('FrontdoorService', function() {
     });
 
     it('should return true when ShowGoer ever entry', function (done) {
-      FrontdoorHelper.createEntrance().then(function(entrance) {
+      fdHelp.createEntrance().then(function(entrance) {
         FrontdoorService.checkRegistered(entrance.tag).should.eventually.equal(true).notify(done);
       });
     });

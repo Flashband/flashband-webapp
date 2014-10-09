@@ -2,15 +2,16 @@
 
 var loginPage = require('../pages/login.page');
 var showGoerPage = require('../pages/showgoer.page');
-var showGoerValidName, showGoerValidCPF;
+var validName, otherName, validCPF;
 
 describe('New ShowGoer View', function () {
   beforeEach(function() {
     loginPage.tryAuthenticateSuccessfully();
     showGoerPage.goToNewShowGoerPage();
 
-    showGoerValidName = 'Faluna de Tal';
-    showGoerValidCPF  = showGoerValidCPF;
+    validName = 'Faluna de Tal';
+    validCPF  = '000.000.000-00';
+    otherName = 'Beltrano de Tal';
   });
 
   it('should contains welcome message', function() {
@@ -40,9 +41,9 @@ describe('New ShowGoer View', function () {
 
   it('should display document number input when document type is selected', function() {
     var pageDocNumberInput = showGoerPage.getInputDocNumber();
-    var pageDocTypeCpfOption = showGoerPage.getDocOptionCpf();
+
     expect(pageDocNumberInput.isDisplayed()).toBeFalsy();
-    pageDocTypeCpfOption.click();
+    showGoerPage.getDocOptionCpf().click();
     expect(pageDocNumberInput.isDisplayed()).toBeTruthy();
   });
 
@@ -61,11 +62,9 @@ describe('New ShowGoer View', function () {
   });
 
   it('should save ShowGoer when valid input', function() {
-    showGoerPage.saveNewShowGoerWithCPF(showGoerValidName, showGoerValidCPF);
-    expect(browser.getCurrentUrl()).toContain('#/showgoer');
-    var msg = element(by.className('alert-success'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('ShowGoer cadastrado com sucesso.');
+    showGoerPage.saveNewShowGoerWithCPF(validName, validCPF)
+                .expectUrlPageStart()
+                .expectAlertSuccess('ShowGoer cadastrado com sucesso.');
   });
 
   it('validate required fields', function() {
@@ -75,40 +74,30 @@ describe('New ShowGoer View', function () {
     browser.waitForAngular();
 
     expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
-
-    var msg = element(by.className('alert-warning'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('Todos os campos são obrigatórios. Verifique e tente novamente.');
+    showGoerPage.expectAlertWarning('Todos os campos são obrigatórios. Verifique e tente novamente.');
   });
 
   it('validate required ShowGoer document number is required when displayed', function() {
-    showGoerPage.saveNewShowGoerWithCPF(showGoerValidName, '');
-    expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
-
-    var msg = element(by.className('alert-warning'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('Todos os campos são obrigatórios. Verifique e tente novamente.');
+    showGoerPage.saveNewShowGoerWithCPF(validName, '')
+                .expectUrlPageNew()
+                .expectAlertWarning('Todos os campos são obrigatórios. Verifique e tente novamente.');
   });
 
   it('should not register duplicated ShowGoer', function() {
-    showGoerPage.saveNewShowGoerWithCPF(showGoerValidName, showGoerValidCPF);
-
-    showGoerPage.goToNewShowGoerPage();
-    showGoerPage.saveNewShowGoerWithCPF('Beltrano de Tal', showGoerValidCPF);
-
-    var msg = element(by.className('alert-warning'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer.');
+    showGoerPage.saveNewShowGoerWithCPF(validName, validCPF)
+                .goToNewShowGoerPage()
+                .saveNewShowGoerWithCPF(otherName, validCPF)
+                .expectAlertWarning('Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer.');
   });
 
   it('should display message and associate flashband button', function() {
-    showGoerPage.saveNewShowGoerWithCPF(showGoerValidName, '222.333.444-55');
+    showGoerPage.saveNewShowGoerWithCPF(validName, '222.333.444-55');
 
     var linkToNewShowGoer = element(by.css('a[translate="FLASHBAND.SHOWGOER.BUTTON.NEW"]'));
     linkToNewShowGoer.click();
     browser.waitForAngular();
 
-    showGoerPage.saveNewShowGoerWithCPF('Beltrano de Tal', '444.333.444-11');
+    showGoerPage.saveNewShowGoerWithCPF(otherName, '444.333.444-11');
 
     var pageTextStart = element(by.css('p[translate=\'FLASHBAND.SHOWGOER.TEXT.START\']'));
     var pageTextCreated = element(by.css('p[translate=\'FLASHBAND.SHOWGOER.TEXT.CREATED\']'));

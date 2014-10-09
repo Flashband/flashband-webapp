@@ -1,9 +1,12 @@
-module.exports = function sendOK (data, options) {
+'use strict';
+
+module.exports = function sendOK (data) {
+  this.req._sails.log.silly('Sending 200 ("OK") response: \n', data);
+
   var res = this.res;
-  var sails = this.req._sails;
-
-  sails.log.silly('res.ok() :: Sending 200 ("OK") response');
-
   res.status(200);
-  return res.jsonx(data);
+
+  if (typeof data === 'object') { return res.json(data); }
+  if ((data) && (data.name) && (data.name.toString() === 'Error')) { return res.json(data.message); }
+  res.jsonx(data);
 };

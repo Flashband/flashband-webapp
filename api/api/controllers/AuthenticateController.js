@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   login: function login (req, res) {
     var email = req.param('email');

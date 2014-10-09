@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   create: function(req, res) {
     var showgoerParams = req.body;

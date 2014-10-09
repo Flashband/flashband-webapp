@@ -1,3 +1,5 @@
+'use strict';
+
 var Q = require('q');
 var sinon = require('sinon');
 var expect = require('chai').use(require('chai-as-promised')).expect;
@@ -36,7 +38,7 @@ describe('FrontdoorService', function() {
     });
 
     afterEach(function(done) {
-      if (flashbandServiceExistsStub) flashbandServiceExistsStub.restore();
+      if (flashbandServiceExistsStub) { flashbandServiceExistsStub.restore(); }
       done();
     });
   });
