@@ -40,10 +40,10 @@ describe('Search ShowGoer View', function () {
     var showGoerName = 'ShowGoer com CPF para Vinculação';
     var showGoerCPF = '999.000.222-22';
 
-    showGoerPage.goToNewShowGoerPage();
-    showGoerPage.saveNewShowGoerWithCPF(showGoerName, showGoerCPF);
-    showGoerPage.goToSearchShowGoerPage();
-    showGoerPage.searchShowGoer(showGoerName);
+    showGoerPage.goToNewShowGoerPage()
+                .saveNewShowGoerWithCPF(showGoerName, showGoerCPF)
+                .goToSearchShowGoerPage()
+                .searchShowGoer(showGoerName);
 
     var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
     var elShowGoerName = trShowGoer.element(by.binding('sg.name'));
@@ -55,43 +55,37 @@ describe('Search ShowGoer View', function () {
     expect(elShowGoerDocNumber.getText()).toBe(showGoerCPF);
   });
 
-  it('should redirect to view associate after selecting user', function() {
+  it('should associate showgoer', function() {
     var showGoerName = 'Showoger com RG para Vinculação';
     var showGoerRG = '555.777.111-33';
 
-    showGoerPage.goToNewShowGoerPage();
-    showGoerPage.saveNewShowGoerWithRG(showGoerName, showGoerRG);
-    showGoerPage.goToSearchShowGoerPage();
-    showGoerPage.searchShowGoer(showGoerName);
-    showGoerPage.selectFirstShowGoer().getAttribute('value').then(function(showGoerId) {
-      showGoerPage.saveAssociationWithFlashBand(validFlashBand);
-
-      expect(browser.getCurrentUrl()).toContain('#/showgoer/'.concat(showGoerId, '/associate'));
-
-      var msg = element(by.className('alert-success'));
-      expect(msg.isDisplayed()).toBeTruthy();
-      expect(msg.getText()).toBe('ShowGoer vinculado com sucesso.');
-    });
+    showGoerPage.goToNewShowGoerPage()
+                .saveNewShowGoerWithRG(showGoerName, showGoerRG)
+                .goToSearchShowGoerPage()
+                .searchShowGoer(showGoerName)
+                .selectFirstShowGoer().then(function(showGoerId) {
+                  showGoerPage.saveAssociationWithFlashBand(validFlashBand)
+                              .expectShowgoerAssociated(showGoerId);
+                });
   });
 
   it('should reject associations already associated to ShowGoer.', function () {
     var showGoerName = 'Showoger com carteira de motorista para Vinculação';
     var showGoerCNH = '555.444.222.111';
 
-    showGoerPage.goToNewShowGoerPage();
-    showGoerPage.saveNewShowGoerWithCNH(showGoerName, showGoerCNH);
-    showGoerPage.goToSearchShowGoerPage();
-    showGoerPage.searchShowGoer(showGoerName);
-    showGoerPage.selectFirstShowGoer();
-    showGoerPage.saveAssociationWithFlashBand(validFlashBand);
-
-    showGoerPage.goToSearchShowGoerPage();
-    showGoerPage.searchShowGoer(showGoerName);
-    showGoerPage.selectFirstShowGoer();
-
-    var msg = element(by.className('alert-warning'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+    showGoerPage.goToNewShowGoerPage()
+                .saveNewShowGoerWithCNH(showGoerName, showGoerCNH)
+                .goToSearchShowGoerPage()
+                .searchShowGoer(showGoerName)
+                .selectFirstShowGoer().then(function(showGoerId) {
+                  showGoerPage.saveAssociationWithFlashBand(validFlashBand)
+                              .expectShowgoerAssociated(showGoerId)
+                              .goToSearchShowGoerPage()
+                              .searchShowGoer(showGoerName)
+                              .selectFirstShowGoer().then(function() {
+                                showGoerPage.expectAlertWarning('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+                              });
+                });
   });
 
   it('should view message of new ShowGoer when not found for association', function() {
@@ -109,20 +103,18 @@ describe('Search ShowGoer View', function () {
     expect(browser.getCurrentUrl()).toContain('#/showgoer/new');
   });
 
-  it ('should show a message when flashband is blocked.', function() {
+  it('should show a message error when flashband is blocked.', function() {
     var showGoerName = 'Showoger para Vinculação de pulseira bloqueada';
     var showGoerCNH = '777.555.222.111';
     var blockedFlashBand = '053400020b9349';
 
-    showGoerPage.goToNewShowGoerPage();
-    showGoerPage.saveNewShowGoerWithCNH(showGoerName, showGoerCNH);
-    showGoerPage.goToSearchShowGoerPage();
-    showGoerPage.searchShowGoer(showGoerName);
-    showGoerPage.selectFirstShowGoer();
-    showGoerPage.saveAssociationWithFlashBand(blockedFlashBand);
-
-    var msg = element(by.className('alert-warning'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe('Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.');
+    showGoerPage.goToNewShowGoerPage()
+                .saveNewShowGoerWithCNH(showGoerName, showGoerCNH)
+                .goToSearchShowGoerPage()
+                .searchShowGoer(showGoerName)
+                .selectFirstShowGoer().then(function() {
+                  showGoerPage.saveAssociationWithFlashBand(blockedFlashBand)
+                              .expectAlertWarning('Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.');
+                });
   });
 });

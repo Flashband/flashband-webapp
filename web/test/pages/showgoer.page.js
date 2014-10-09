@@ -45,30 +45,6 @@ module.exports = {
     return element(by.css('select[ng-model="showgoer.docType"] option[value="' + option + '"]'));
   },
 
-  saveNewShowGoerWithCNH: function(showGoerName, cnh) {
-    this.getInputName().sendKeys(showGoerName);
-    this.getDocOptionCNH().click();
-    this.getInputDocNumber().sendKeys(cnh);
-    this.getButtonSave().click();
-    browser.waitForAngular();
-  },
-
-  saveNewShowGoerWithCPF: function(showGoerName, cpf) {
-    this.getInputName().sendKeys(showGoerName);
-    this.getDocOptionCpf().click();
-    this.getInputDocNumber().sendKeys(cpf);
-    this.getButtonSave().click();
-    browser.waitForAngular();
-  },
-
-  saveNewShowGoerWithRG: function(showGoerName, rg) {
-    this.getInputName().sendKeys(showGoerName);
-    this.getDocOptionRG().click();
-    this.getInputDocNumber().sendKeys(rg);
-    this.getButtonSave().click();
-    browser.waitForAngular();
-  },
-
   getFlashBandInput: function() {
     return element(by.model('flashbandTag'));
   },
@@ -77,10 +53,38 @@ module.exports = {
     return element(by.css('button[translate=\'FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE\']'));
   },
 
+  saveNewShowGoerWithCNH: function(showGoerName, cnh) {
+    this.getInputName().sendKeys(showGoerName);
+    this.getDocOptionCNH().click();
+    this.getInputDocNumber().sendKeys(cnh);
+    this.getButtonSave().click();
+    browser.waitForAngular();
+    return this;
+  },
+
+  saveNewShowGoerWithCPF: function(showGoerName, cpf) {
+    this.getInputName().sendKeys(showGoerName);
+    this.getDocOptionCpf().click();
+    this.getInputDocNumber().sendKeys(cpf);
+    this.getButtonSave().click();
+    browser.waitForAngular();
+    return this;
+  },
+
+  saveNewShowGoerWithRG: function(showGoerName, rg) {
+    this.getInputName().sendKeys(showGoerName);
+    this.getDocOptionRG().click();
+    this.getInputDocNumber().sendKeys(rg);
+    this.getButtonSave().click();
+    browser.waitForAngular();
+    return this;
+  },
+
   saveAssociationWithFlashBand: function(validFlashBand) {
     this.getFlashBandInput().sendKeys(validFlashBand);
     this.getAssociateButton().click();
     browser.waitForAngular();
+    return this;
   },
 
   selectFirstShowGoer: function() {
@@ -88,20 +92,44 @@ module.exports = {
     var elRadioSelection = trShowGoer.element(by.css('input'));
     elRadioSelection.click();
     browser.waitForAngular();
-    return elRadioSelection;
+    return elRadioSelection.getAttribute('value');
   },
 
   goToNewShowGoerPage: function() {
     browser.get('#/showgoer/new');
+    return this;
   },
 
   goToSearchShowGoerPage: function() {
     browser.get('#/showgoer/search');
+    return this;
   },
 
   searchShowGoer: function(arg) {
     this.getInputSearch().sendKeys(arg);
     this.getButtonSearch().click();
     browser.waitForAngular();
+    return this;
+  },
+
+  expectAlertWarning: function(message) {
+    return this.expectAlert('warning', message);
+  },
+
+  expectAlertSuccess: function(message) {
+    return this.expectAlert('success', message);
+  },
+
+  expectAlert: function(type, message) {
+    var msg = element(by.className('alert-'.concat(type)));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toBe(message);
+    return this;
+  },
+
+  expectShowgoerAssociated: function(showGoerId) {
+    expect(browser.getCurrentUrl()).toContain('#/showgoer/'.concat(showGoerId, '/associate'));
+    this.expectAlertSuccess('ShowGoer vinculado com sucesso.');
+    return this;
   }
 };
