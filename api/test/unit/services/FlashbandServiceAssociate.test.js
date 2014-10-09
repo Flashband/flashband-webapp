@@ -13,5 +13,13 @@ describe('FlashbandService', function() {
         }, done);
       }, done);
     });
+
+    it('should reject flashband blocked', function shouldRejectFlashbandBlocked(done) {
+      sgHelp.create().then(function afterShowgoerCreate(showgoer) {
+        fbHelp.createBlocked().then(function rejectFlashbandBlocked(flashband) {
+          expect(ShowgoerService.associate(showgoer.id, flashband.tag)).to.be.rejectedWith('Blocked Flashband').and.notify(done);
+        }, done);
+      }, done);
+    });
   });
 });
