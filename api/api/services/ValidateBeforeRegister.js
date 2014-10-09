@@ -1,10 +1,10 @@
 'use strict';
 
-var Q = require('q');
+var q = require('q');
 
 module.exports = {
   enter: function(flashbandUid) {
-    var deferred = Q.defer();
+    var deferred = q.defer();
 
     async.series({
       flashbandImported: function(callback){
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   leave: function(flashbandUid) {
-    var deferred = Q.defer();
+    var deferred = q.defer();
 
     async.series({
       imported: function(callback){

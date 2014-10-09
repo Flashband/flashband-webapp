@@ -51,6 +51,7 @@
     "FlashbandHelper": false,
     "before": false,
     "after": false,
-    "afterEach": false
+    "afterEach": false,
+    "ShowogerService": false
   }
 }
