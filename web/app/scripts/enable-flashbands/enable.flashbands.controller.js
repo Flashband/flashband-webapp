@@ -13,29 +13,31 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
     $scope.totFlashbands = res.total;
   });
 
-  if ($stateParams && $stateParams['state']) {
-    var flashbands_enabled = parseInt($stateParams['state'], 10);
-    $scope.messageSuccess = flashbands_enabled > 0;
-    $scope.totFlashbands = flashbands_enabled;
+  if ($stateParams && $stateParams.state) {
+    var flashbandsEnabled = parseInt($stateParams.state);
+    $scope.messageSuccess = flashbandsEnabled > 0;
+    $scope.totFlashbands = flashbandsEnabled;
   }
 
   $scope.setFile = function(files) {
-    if (_.isEmpty(files)) return;
+    if (_.isEmpty(files)) { return; }
     $scope.errorExtension = files[0].name.substring(files[0].name.length-3) !== 'csv';
-    if (!$scope.errorExtension) $scope.files = files;
+    if (!$scope.errorExtension) { $scope.files = files; }
   };
 
   $scope.saveFlashbands = function() {
     $scope.message = false;
 
     if (_.isEmpty($scope.files) || _.isEmpty($scope.nameBatch)) {
-      return $scope.message = {
+      $scope.message = {
         type: 'warning',
         text: 'FLASHBAND.MESSAGE.ERROR.VALIDATION'
       };
+
+      return;
     }
 
-    if ($scope.errorExtension) return;
+    if ($scope.errorExtension) { return; }
 
     var onSuccessUpload = function(res) {
       $scope.uploadPercent = false;

@@ -31,11 +31,11 @@ describe('New ShowGoer View', function () {
     expect(pageDocTypeSelect.isDisplayed()).toBeTruthy();
     expect(pageDocTypeOptions.first().isSelected()).toBeTruthy();
 
-    expect(pageTitle.getText()).toBe("Cadastre um ShowGoer");
-    expect(pageText.getText()).toBe("Para começar, basta informar o nome do ShowGoer. Depois escolha o tipo de documento e informe o número do documento.");
-    expect(pageDocTypeOptions.first().getText()).toBe("Selecione o documento");
-    expect(pageSaveButton.getText()).toBe("Cadastrar");
-    expect(pageCancelButton.getText()).toBe("Cancelar");
+    expect(pageTitle.getText()).toBe('Cadastre um ShowGoer');
+    expect(pageText.getText()).toBe('Para começar, basta informar o nome do ShowGoer. Depois escolha o tipo de documento e informe o número do documento.');
+    expect(pageDocTypeOptions.first().getText()).toBe('Selecione o documento');
+    expect(pageSaveButton.getText()).toBe('Cadastrar');
+    expect(pageCancelButton.getText()).toBe('Cancelar');
   });
 
   it('should display document number input when document type is selected', function() {
@@ -57,7 +57,7 @@ describe('New ShowGoer View', function () {
     browser.waitForAngular();
 
     pageDocTypePromptOption = element(by.css('select[ng-model="showgoer.docType"] option:checked'));
-    expect(pageDocTypePromptOption.getText()).toBe("Selecione o documento");
+    expect(pageDocTypePromptOption.getText()).toBe('Selecione o documento');
   });
 
   it('should save ShowGoer when valid input', function() {
@@ -65,7 +65,7 @@ describe('New ShowGoer View', function () {
     expect(browser.getCurrentUrl()).toContain('#/showgoer');
     var msg = element(by.className('alert-success'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("ShowGoer cadastrado com sucesso.");
+    expect(msg.getText()).toBe('ShowGoer cadastrado com sucesso.');
   });
 
   it('validate required fields', function() {
@@ -78,7 +78,7 @@ describe('New ShowGoer View', function () {
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Todos os campos são obrigatórios. Verifique e tente novamente.");
+    expect(msg.getText()).toBe('Todos os campos são obrigatórios. Verifique e tente novamente.');
   });
 
   it('validate required ShowGoer document number is required when displayed', function() {
@@ -87,7 +87,7 @@ describe('New ShowGoer View', function () {
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Todos os campos são obrigatórios. Verifique e tente novamente.");
+    expect(msg.getText()).toBe('Todos os campos são obrigatórios. Verifique e tente novamente.');
   });
 
   it('should not register duplicated ShowGoer', function() {

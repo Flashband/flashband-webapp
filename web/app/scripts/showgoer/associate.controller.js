@@ -2,20 +2,22 @@
 
 angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, FlashbandRestFact,  $state) {
   $scope.listShowgoers = [];
-  $scope.showGoerSearch = "";
+  $scope.showGoerSearch = '';
   $scope.showGoerSelected = false;
   $scope.showMessageNewShowGoer = false;
-  $scope.flashbandTag = "";
+  $scope.flashbandTag = '';
 
   $scope.changeShowGoer = function(showGoer) {
     $scope.message = false;
     $scope.showGoerSelected = false;
 
     if (showGoer.flashband) {
-      return $scope.message = {
+      $scope.message = {
         type: 'warning',
         text: 'FLASHBAND.ASSOCIATE.MESSAGES.ASSOCIATED'
       };
+
+      return;
     }
 
     $scope.showGoerSelected = showGoer;
@@ -44,4 +46,3 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
     });
   };
 });
-

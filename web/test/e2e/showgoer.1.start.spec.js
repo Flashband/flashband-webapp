@@ -20,9 +20,9 @@ describe('Start ShowGoer View', function () {
     expect(pageButtonNew.isDisplayed()).toBeTruthy();
     expect(pageButtonAssociate.isDisplayed()).toBeFalsy();
 
-    expect(pageTitle.getText()).toBe("Cadastre um ShowGoer");
-    expect(pageTextStart.getText()).toBe("Você ainda não possui nenhum ShowGoer cadastrado. Para começar é só clicar em cadastrar ShowGoer.");
-    expect(pageButtonNew.getText()).toBe("Cadastrar ShowGoer");
+    expect(pageTitle.getText()).toBe('Cadastre um ShowGoer');
+    expect(pageTextStart.getText()).toBe('Você ainda não possui nenhum ShowGoer cadastrado. Para começar é só clicar em cadastrar ShowGoer.');
+    expect(pageButtonNew.getText()).toBe('Cadastrar ShowGoer');
   });
 
   it('should have link to /ShowGoer', function() {

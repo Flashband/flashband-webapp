@@ -96,7 +96,7 @@ describe('Search ShowGoer View', function () {
 
   it('should view message of new ShowGoer when not found for association', function() {
     showGoerPage.goToSearchShowGoerPage();
-    showGoerPage.searchShowGoer("Invalid showgoer");
+    showGoerPage.searchShowGoer('Invalid showgoer');
 
     var msgNewShowGoer = element(by.className('new-showgoer-message'));
     expect(msgNewShowGoer.isDisplayed()).toBeTruthy();

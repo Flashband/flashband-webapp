@@ -17,10 +17,11 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
 
   $scope.saveShowgoer = function () {
     if ($scope.showgoerForm.$invalid) {
-      return $scope.message = {
+      $scope.message = {
         type: 'warning',
         text: 'FLASHBAND.SHOWGOER.MESSAGES.REQUIRED'
       };
+      return;
     }
 
     var successfully = function () {
@@ -38,8 +39,8 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
   };
 
   if ($stateParams) {
-    if ($stateParams['message']) {
-      var stateMessage = $stateParams['message'].toUpperCase();
+    if ($stateParams.message) {
+      var stateMessage = $stateParams.message.toUpperCase();
 
       $scope.message = {
         type: 'success',
@@ -47,7 +48,7 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
       };
     }
 
-    if ($stateParams['showgoer']) {
+    if ($stateParams.showgoer) {
       $scope.message = {
         type: 'success',
         text: 'FLASHBAND.ASSOCIATE.MESSAGES.SUCCESS'
