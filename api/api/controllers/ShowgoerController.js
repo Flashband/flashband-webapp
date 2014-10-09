@@ -14,7 +14,7 @@ module.exports = {
     });
   },
 
-  index: function index (req, res) {
+  index: function(req, res) {
     var args;
 
     if (req.query.s) {

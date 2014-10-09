@@ -8,7 +8,7 @@ var inputSuccessful  = {door: 'in',  message: 'Input successful.'};
 var outputSuccessful = {door: 'out', message: 'Output successful.'};
 
 module.exports = {
-  enter: function enter (req, res) {
+  enter: function(req, res) {
     FrontdoorService.registerEnter(getFlashbandTag(req)).then(function() {
       res.created(inputSuccessful);
     }).fail(function(ranson) {
@@ -16,7 +16,7 @@ module.exports = {
     });
   },
 
-  leave: function leave (req, res) {
+  leave: function(req, res) {
     FrontdoorService.registerLeave(getFlashbandTag(req)).then(function() {
       res.created(outputSuccessful);
     }).fail(function(ranson) {
@@ -24,7 +24,7 @@ module.exports = {
     });
   },
 
-  cross: function cross (req, res) {
+  cross: function(req, res) {
     var tag = getFlashbandTag(req);
 
     FrontdoorService.checkRegistered(tag).then(function (inside) {
