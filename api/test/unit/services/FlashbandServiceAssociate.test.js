@@ -21,5 +21,19 @@ describe('FlashbandService', function() {
         }, done);
       }, done);
     });
+
+    it('should associate a new flashband when old flashband be blocked', function shouldRejectFlashbandBlocked(done) {
+      sgHelp.create().then(function afterShowgoerCreate(showgoer) {
+        fbHelp.createSuccess().then(function rejectFlashbandBlocked(flashband) {
+          ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
+            FlashbandService.block(associated.tag).then(function() { //function(blocked)
+              fbHelp.createSuccess().then(function associateShowGoerAndFlashband(newFlashband) {
+                expect(ShowgoerService.associate(showgoer.id, newFlashband.tag)).to.eventually.have.property('user', showgoer.id).and.notify(done);
+              }, done);
+            }, done);
+          }, done);
+        }, done);
+      }, done);
+    });
   });
 });
