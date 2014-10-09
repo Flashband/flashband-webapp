@@ -5,6 +5,7 @@ var shared  = require('../shared-specs');
 var pwHash  = require('password-hash');
 var fbHelp  = require('../../helpers/FlashbandHelper');
 var dbHelp  = require('../../helpers/DatabaseHelper');
+var expect  = require('chai').use(require('chai-as-promised')).expect;
 
 describe('FlashbandController', function() {
   var serialToken;
@@ -55,26 +56,42 @@ describe('FlashbandController', function() {
     });
 
     describe('POST /flashband/enable', function() {
+      var importBatch;
+
+      beforeEach(function(done) {
+        importBatch = function(nameBatch, attachFile) {
+          return request(sails.hooks.http.app)
+            .post('/flashband/enable')
+            .attach('flashbands', 'test/fixtures/'.concat(attachFile))
+            .send({name: nameBatch})
+            .set('Authorization', 'Token token='.concat(serialToken));
+        };
+
+        done();
+      });
+
       it ('should enable flashbands from valid file', function(done) {
-        request(sails.hooks.http.app)
-          .post('/flashband/enable')
-          .attach('flashbands', 'test/fixtures/one-valid-flashband.csv')
-          .send({name: '1st flashband batch'})
-          .set('Authorization', 'Token token='.concat(serialToken))
+        importBatch('1st flashband batch', 'one-valid-flashband.csv')
           .expect('Content-type', /application\/json/)
           .expect(201, { flashbandsEnabled: 1, message: 'Flashbands enabled successfully.' })
           .end(done);
       });
 
       it ('should reject corrupted file (flashband without UID) ', function(done) {
-        request(sails.hooks.http.app)
-          .post('/flashband/enable')
-          .attach('flashbands', 'test/fixtures/flashband-without-uid.csv')
-          .send({name: '1st flashband batch'})
+        importBatch('2st flashband batch', 'flashband-without-uid.csv')
           .expect('Content-type', /application\/json/)
-          .set('Authorization', 'Token token='.concat(serialToken))
           .expect(400)
           .end(done);
+      });
+
+      it ('should delete old flashbands when enable a new batch', function(done) {
+        importBatch('3st flashband batch', 'one-valid-flashband.csv').end(function() {
+          expect(FlashbandService.exists('8028533A0A830488')).to.eventually.be.equal(true).and.notify(function() {
+            importBatch('4st flashband batch', 'two-valid-flashband.csv').end(function() {
+              expect(FlashbandService.exists('8028533A0A830488')).to.eventually.be.equal(false).and.notify(done);
+            });
+          });
+        });
       });
     });
 

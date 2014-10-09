@@ -7,6 +7,12 @@ module.exports = {
       type: 'string',
       unique: true
     },
+
+    imported: {
+      type: 'boolean',
+      defaultsTo: true
+    },
+
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
 
