@@ -1,5 +1,7 @@
+'use strict';
+
 var Q = require('q');
-var FrontdoorHelper = require('../../helpers/FrontdoorHelper');
+var fdHelp = require('../../../helpers/FrontdoorHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerLeave', function() {
@@ -12,7 +14,7 @@ describe('FrontdoorService', function() {
         FrontdoorService.registerLeave(flashBlocked.tag).should.be.rejectedWith('Blocked flashband.').notify(done);
       };
 
-      FrontdoorHelper.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
+      fdHelp.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
     });
 
     it('should register leave when ShowGoer go home', function (done) {
@@ -25,7 +27,7 @@ describe('FrontdoorService', function() {
         ]).should.notify(done);
       };
 
-      FrontdoorHelper.createEntrance().then(verifyLeave, done);
+      fdHelp.createEntrance().then(verifyLeave, done);
     });
 
     it('should not register leave when ShowGoer already out', function (done) {
@@ -33,7 +35,7 @@ describe('FrontdoorService', function() {
         FrontdoorService.registerLeave(entrance.tag).should.be.rejectedWith('Duplicated exit.').notify(done);
       };
 
-      FrontdoorHelper.createLeave().then(verifyDuplicated, done);
+      fdHelp.createLeave().then(verifyDuplicated, done);
     });
   });
 });

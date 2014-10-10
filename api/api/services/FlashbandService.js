@@ -1,3 +1,5 @@
+'use strict';
+
 var q = require('q');
 
 var inactivate = function(flashbandBatches) {
@@ -8,37 +10,71 @@ var inactivate = function(flashbandBatches) {
 };
 
 module.exports = {
+  findOne: function(flashbandUid) {
+    return Flashband.findOne({ tag: flashbandUid.replace(/\s/g, '').toUpperCase(), imported: true });
+  },
+
+  findByShowgoer: function(showgoerId) {
+    return Flashband.findOne({ showgoer: showgoerId, blockedAt: null, imported: true  });
+  },
+
   exists: function(flashbandUid) {
-    return Flashband.count({ tag: flashbandUid }).then(function (count) {
-      return !!count && count > 0;
+    return this.findOne(flashbandUid).then(function(flashband) {
+      if (!flashband) { throw new Error('Flashband not found.'); }
+      return flashband;
     });
   },
 
   block: function(flashbandUid) {
-    var defer = q.defer();
-    Flashband.findOne({ tag: flashbandUid }).exec(function(err, flashband) {
-      if (err) return defer.reject(err);
-      if (!flashband) return defer.reject(new Error('Flashband not found.'));
-      if (flashband.blockedAt) return defer.reject(new Error('Flashband already blocked.'));
+    return this.exists(flashbandUid).then(function(flashband) {
+      if (flashband.blocked()) { throw new Error('Flashband already blocked.'); }
+
       flashband.blockedAt = new Date();
-      flashband.save(function(err, flashband) {
-        if (err)
-          defer.reject(err);
-        else
-          defer.resolve(flashband);
-      });
+      return flashband.save();
     });
+  },
+
+  findAssociations: function(listShowGoers) {
+    var defer = q.defer();
+
+    var findAssociation = function(showGoer, next) {
+      FlashbandService.findByShowgoer(showGoer.id).exec(function(err, flashband) {
+        showGoer.flashband = '';
+        if (flashband) { showGoer.flashband = flashband.tag; }
+        next();
+      });
+    };
+
+    async.each(listShowGoers, findAssociation, function(err) {
+      if (err) { return defer.reject(err); }
+      defer.resolve(listShowGoers);
+    });
+
     return defer.promise;
   },
+
+  deleteAllFlashbands: function() {
+    return Flashband.update({imported: true}, {imported: false}).then(function(updateds) {
+      return updateds;
+    });
+  },
+
   enable: function(flashbands, name, file) {
     var defer = q.defer();
-    Flashband.destroy().exec(function(err) {
-      if (err) return defer.reject(err);
 
+    this.deleteAllFlashbands().then(function afterLogicallyDeleteRecords() {
       var newFlashbands = [];
-      var createFlashband = function(args, next) {
-        Flashband.create(args, function(err, flashband) {
-          if (err) return defer.reject(err);
+
+      var createFlashband = function(arg, next) {
+        var create = {
+          tag: arg.tag,
+          imported: true,
+          blockedAt: null,
+          showgoer: null
+        };
+
+        Flashband.findOrCreate(arg, create, function(err, flashband) {
+          if (err) { return defer.reject(err); }
           newFlashbands.push(flashband);
           next();
         });
@@ -47,27 +83,33 @@ module.exports = {
       async.each(flashbands, createFlashband, function(err) {
         if (err) {
           defer.reject(err instanceof Error ? err : new Error(err));
-        } else {
-          FlashbandBatch.find({active: true}).exec(function(err, flashbandBatches) {
+          return;
+        }
+
+        FlashbandBatch.find({active: true}).exec(function(err, flashbandBatches) {
+          if (err) {
+            defer.reject(err);
+            return;
+          }
+
+          inactivate(flashbandBatches);
+
+          FlashbandBatch.create({name: name, file: file, active: true}).exec(function(err, flashbandBatch) {
             if (err) {
               defer.reject(err);
               return;
             }
-            inactivate(flashbandBatches);
-            FlashbandBatch.create({name: name, file: file, active: true}).exec(function(err, flashbandBatch) {
-              if (err) {
-                defer.reject(err);
-                return;
-              }
-              newFlashbands.forEach(function(flashband) {
-                flashbandBatch.flashbands.add(flashband.id);
-              });
-              flashbandBatch.save().then(defer.resolve, defer.reject);
+
+            newFlashbands.forEach(function(flashband) {
+              flashbandBatch.flashbands.add(flashband.id);
             });
+
+            flashbandBatch.save().then(defer.resolve, defer.reject);
           });
-        }
+        });
       });
-    });
+    }, defer.reject);
+
     return defer.promise;
   }
 };

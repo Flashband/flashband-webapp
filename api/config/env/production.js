@@ -1,7 +1,6 @@
 module.exports = {
-
   models: {
-    connection: 'mongoProduction',
+    connection: 'cProd',
     migrate: 'safe'
   }
 };

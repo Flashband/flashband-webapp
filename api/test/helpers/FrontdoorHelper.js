@@ -1,8 +1,10 @@
-var FlashbandHelper = require('./FlashbandHelper');
+'use strict';
+
+var fbHelp = require('./FlashbandHelper');
 
 module.exports = {
   createEntrance: function() {
-    return FlashbandHelper.createSuccess().then(function(flashSuccess) {
+    return fbHelp.createSuccess().then(function(flashSuccess) {
       return Entrance.create({tag: flashSuccess.tag});
     });
   },

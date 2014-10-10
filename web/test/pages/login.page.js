@@ -13,10 +13,10 @@ module.exports = {
   },
 
   tryAuthenticateSuccessfully: function() {
-    return this.tryAuthenticate("admin@flashband.com", "123123");
+    return this.tryAuthenticate('admin@flashband.com', '123123');
   },
 
   tryAuthenticateFail: function() {
-    return this.tryAuthenticate("admin@flashband.com", "123123123123");
+    return this.tryAuthenticate('admin@flashband.com', '123123123123');
   }
 };

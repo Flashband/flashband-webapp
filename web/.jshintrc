@@ -18,7 +18,17 @@
   "trailing": true,
   "smarttabs": true,
   "white": true,
+  "maxcomplexity": 6,
   "globals": {
-    "angular": false
+    "_": false,
+    "it": false,
+    "by": false,
+    "inject": false,
+    "expect": false,
+    "browser": false,
+    "element": false,
+    "angular": false,
+    "describe": false,
+    "beforeEach": false
   }
 }

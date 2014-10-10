@@ -4,7 +4,7 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function Authen
   $scope.message = false;
   $scope.showLougoutMessage = false;
 
-  var isLogout = $state.current.name == 'logout';
+  var isLogout = $state.current.name === 'logout';
 
   if (isLogout) {
     FlashbandSessionFact.clearSession();
@@ -13,7 +13,7 @@ angular.module('flashbandWebapp').controller('AuthenticateCtrl', function Authen
       type: 'info',
       text: 'LOGIN.MESSAGE.LOGOUT'
     };
-  };
+  }
 
   $scope.login = function(credencials) {
     var successfully = function(session) {

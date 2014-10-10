@@ -1,3 +1,5 @@
+'use strict';
+
 var request = require('supertest');
 var shared = require('../shared-specs');
 var expect = require('chai').use(require('chai-as-promised')).expect;
@@ -10,19 +12,19 @@ describe('AuthenticateController', function() {
   describe('POST /authenticate', function() {
     it('should allow authentication with valid user data', function (done) {
       var verifyAuthenticate = function(err, user) {
-        if (err) return done(err);
-        if (!user) return done(user);
+        if (err)   { return done(err);  }
+        if (!user) { return done(user); }
 
         request(sails.hooks.http.app)
-        .post('/authenticate')
-        .send({password: user.mobpassword})
-        .expect('Content-type', /application\/json/)
-        .expect(202)
-        .end(function(err, res) {
-          expect(res.body).to.have.property('token').and.is.a('string').and.match(/^sha1.*/);
-          expect(res.body).to.have.property('user').and.is.a('object').and.to.have.property('email', user.email);
-          done(err);
-        });
+          .post('/authenticate')
+          .send({password: user.mobpassword})
+          .expect('Content-type', /application\/json/)
+          .expect(202)
+          .end(function(err, res) {
+            expect(res.body).to.have.property('token').and.is.a('string').and.match(/^sha1.*/);
+            expect(res.body).to.have.property('user').and.is.a('object').and.to.have.property('email', user.email);
+            done(err);
+          });
       };
 
       UserHelper.createAnonymous().exec(verifyAuthenticate);
@@ -41,19 +43,19 @@ describe('AuthenticateController', function() {
   describe('POST /login', function() {
     it('should allow with valid user data', function (done) {
       var verifyAuthenticate = function(err, user) {
-        if (err) return done(err);
-        if (!user) return done(user);
+        if (err)   { return done(err);  }
+        if (!user) { return done(user); }
 
         request(sails.hooks.http.app)
-        .post('/login')
-        .send({email: user.email, password: user.webpassword})
-        .expect('Content-type', /application\/json/)
-        .expect(202)
-        .end(function(err, res) {
-          expect(res.body).to.have.property('token').and.is.a('string').and.match(/^sha1.*/);
-          expect(res.body).to.have.property('user').and.is.a('object').and.to.have.property('email', user.email);
-          done(err);
-        });
+          .post('/login')
+          .send({email: user.email, password: user.webpassword})
+          .expect('Content-type', /application\/json/)
+          .expect(202)
+          .end(function(err, res) {
+            expect(res.body).to.have.property('token').and.is.a('string').and.match(/^sha1.*/);
+            expect(res.body).to.have.property('user').and.is.a('object').and.to.have.property('email', user.email);
+            done(err);
+          });
       };
 
       UserHelper.createAnonymous().exec(verifyAuthenticate);
@@ -61,11 +63,11 @@ describe('AuthenticateController', function() {
 
     it('should deny login with invalid user data', function (done) {
       request(sails.hooks.http.app)
-      .post('/login')
-      .send({email: "admin@flashband.com", password: 'invalidPassword'})
-      .expect(401)
-      .expect('Content-Type', /application\/json/)
-      .end(done);
+        .post('/login')
+        .send({email: 'admin@flashband.com', password: 'invalidPassword'})
+        .expect(401)
+        .expect('Content-Type', /application\/json/)
+        .end(done);
     });
   });
 });

@@ -1,3 +1,5 @@
+'use strict';
+
 var Sails = require('sails');
 var databaseHelper = require('./helpers/DatabaseHelper');
 

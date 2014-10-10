@@ -22,6 +22,6 @@ describe('The login view', function () {
 
     var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Usuário ou senha não conferem. Por favor, corrija e tente novamente.");
+    expect(msg.getText()).toBe('Usuário ou senha não conferem. Por favor, corrija e tente novamente.');
   });
 });
