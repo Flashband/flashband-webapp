@@ -58,12 +58,12 @@ module.exports = {
   associate: function(showGoerId, flashBandTag) {
     return FlashbandService.exists(flashBandTag).then(function(flashband) {
       if (flashband.blocked()) { throw new Error('Blocked Flashband'); }
-      if (flashband.user) { throw new Error('Flashband ever associated'); }
+      if (flashband.showgoer) { throw new Error('Flashband ever associated'); }
 
       return FlashbandService.findByShowgoer(showGoerId).then(function(flashbandAssocieted) {
         if (flashbandAssocieted) { throw new Error('Showgoer ever associated'); }
 
-        flashband.user = showGoerId;
+        flashband.showgoer = showGoerId;
         return flashband.save();
       });
     });

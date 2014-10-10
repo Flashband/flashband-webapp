@@ -61,7 +61,7 @@ describe('ShowgoerController', function() {
         var searchTerm = 'Beltrano de Tal';
         ShowgoerHelper.create([showgoer1, showgoer2]).then(function() {
           request(sails.hooks.http.app)
-            .get('/showgoer/?s=' + searchTerm)
+            .get('/showgoer/search/?s=' + searchTerm)
             .set('Authorization', 'Token token='.concat(serialToken))
             .end(function(err, res) {
               if (err) { return done(err); }
@@ -87,7 +87,7 @@ describe('ShowgoerController', function() {
         var searchTerm = 'ULAN';
         ShowgoerHelper.create([showgoer1, showgoer2]).then(function() {
           request(sails.hooks.http.app)
-            .get('/showgoer/?s=' + searchTerm)
+            .get('/showgoer/search/?s=' + searchTerm)
             .set('Authorization', 'Token token='.concat(serialToken))
             .end(function(err, res) {
               if (err) { return done(err); }
@@ -113,7 +113,7 @@ describe('ShowgoerController', function() {
 
         ShowgoerHelper.create([showgoer1, showgoer2]).then(function() {
           request(sails.hooks.http.app)
-            .get('/showgoer/?s=' + searchTerm)
+            .get('/showgoer/search/?s=' + searchTerm)
             .set('Authorization', 'Token token='.concat(serialToken))
             .end(function(err, res) {
               if (err) { return done(err); }

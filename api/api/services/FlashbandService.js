@@ -15,7 +15,7 @@ module.exports = {
   },
 
   findByShowgoer: function(showgoerId) {
-    return Flashband.findOne({ user: showgoerId, blockedAt: null, imported: true  });
+    return Flashband.findOne({ showgoer: showgoerId, blockedAt: null, imported: true  });
   },
 
   exists: function(flashbandUid) {
@@ -70,7 +70,7 @@ module.exports = {
           tag: arg.tag,
           imported: true,
           blockedAt: null,
-          user: null
+          showgoer: null
         };
 
         Flashband.findOrCreate(arg, create, function(err, flashband) {

@@ -30,7 +30,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
       $scope.showGoerSelected = false;
     };
 
-    FlashbandRestFact.getConnection().service('showgoer').getList({s: $scope.showGoerSearch}).then(listSuccessfully);
+    FlashbandRestFact.getConnection().service('showgoer/search').getList({s: $scope.showGoerSearch}).then(listSuccessfully);
   };
 
   $scope.associateShowGoer = function() {

@@ -1,7 +1,13 @@
 'use strict';
 
 module.exports = {
-  create: function(req, res) {
+  find: function (req, res) {
+    ShowgoerService.search(req.query).then(res.ok, function(ranson) {
+      res.badRequest(ranson.message);
+    });
+  },
+
+  create: function create (req, res) {
     var showgoerParams = req.body;
     ShowgoerService.create(showgoerParams).then(res.created, function(ranson) {
       res.badRequest(ranson.message);
@@ -14,7 +20,7 @@ module.exports = {
     });
   },
 
-  index: function(req, res) {
+  search: function(req, res) {
     var args;
 
     if (req.query.s) {

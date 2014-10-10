@@ -3,15 +3,15 @@
     "tag": "04760b3a532880",
     "serial": "1",
     "blockedAt": null,
-    "user": null,
-    "imported": true
+    "imported": true,
+    "showgoer": null
   },
 
   {
     "tag": "04750b3a532880",
     "serial": "1",
     "blockedAt": null,
-    "user": null,
+    "showgoer": null,
     "imported": true
   },
 
@@ -19,7 +19,7 @@
     "tag": "04740b3a532880",
     "serial": "1",
     "blockedAt": "09/04/2014 01:15:27 AM (-0300)",
-    "user": null,
+    "showgoer": null,
     "imported": true
   },
 
@@ -27,7 +27,7 @@
     "tag": "053400020b9349",
     "serial": "1",
     "blockedAt": "09/04/2014 01:15:27 AM (-0300)",
-    "user": null,
+    "showgoer": null,
     "imported": true
   },
 
@@ -35,7 +35,7 @@
     "tag": "053400020b9555",
     "serial": "1",
     "blockedAt": null,
-    "user": null,
+    "showgoer": null,
     "imported": true
   }
 ]

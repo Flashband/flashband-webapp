@@ -13,6 +13,10 @@ module.exports = {
       defaultsTo: true
     },
 
+    showgoer: {
+      type: 'string'
+    },
+
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
 

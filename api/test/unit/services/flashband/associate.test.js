@@ -9,7 +9,7 @@ describe('FlashbandService', function() {
     it('should associate a showgoer', function shouldAssociateShowgoer(done) {
       sgHelp.create().then(function afterShowgoerCreate(showgoer) {
         fbHelp.createSuccess().then(function expectAssociateShowGoer(flashband) {
-          expect(ShowgoerService.associate(showgoer.id, flashband.tag)).to.eventually.have.property('user', showgoer.id).and.notify(done);
+          expect(ShowgoerService.associate(showgoer.id, flashband.tag)).to.eventually.have.property('showgoer', showgoer.id).and.notify(done);
         }, done);
       }, done);
     });
@@ -27,7 +27,7 @@ describe('FlashbandService', function() {
         fbHelp.createSuccess().then(function expectAssociateShowGoer(flashband) {
           ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
             fbHelp.createSuccess().then(function expectAssociateShowGoer(newFlashband) {
-              expect(ShowgoerService.associate(associated.user, newFlashband.tag)).to.be.rejectedWith('Showgoer ever associated').and.notify(done);
+              expect(ShowgoerService.associate(associated.showgoer, newFlashband.tag)).to.be.rejectedWith('Showgoer ever associated').and.notify(done);
             }, done);
           }, done);
         }, done);
@@ -52,7 +52,7 @@ describe('FlashbandService', function() {
           ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
             FlashbandService.block(associated.tag).then(function() { //function(blocked)
               fbHelp.createSuccess().then(function expectAssociateShowGoer(newFlashband) {
-                expect(ShowgoerService.associate(showgoer.id, newFlashband.tag)).to.eventually.have.property('user', showgoer.id).and.notify(done);
+                expect(ShowgoerService.associate(showgoer.id, newFlashband.tag)).to.eventually.have.property('showgoer', showgoer.id).and.notify(done);
               }, done);
             }, done);
           }, done);
