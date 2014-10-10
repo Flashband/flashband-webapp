@@ -36,14 +36,34 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   $scope.associateShowGoer = function() {
     var showgoerId = $scope.showGoerSelected.id;
 
-    FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
-      $state.go('showgoer-associate', {showgoer: showgoerId});
-    }, function(err) {
+    var handleErr = function(err) {
       console.log(err);
       $scope.message = {
         type: 'warning',
         text: err.data
       };
+    };
+
+    var finishAssociation = function() {
+      FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
+        $state.go('showgoer-associate', {showgoer: showgoerId});
+      }, handleErr);
+    };
+
+    chrome.runtime.sendMessage('jhfidpmidmpiioaeciiejpecfddbfphb', {action: 'read', timeout: 5000}, function(nfc) {
+      if (!nfc) {
+        return finishAssociation();
+      }
+
+      if (nfc.success) {
+        $scope.flashbandTag = nfc.data.tag;
+        return finishAssociation();
+      } 
+      $scope.flashbandTag = '';
+      if (nfc.error && nfc.error.timeout) {
+        return handleErr({data: 'Tempo esgotado.'});
+      }
+      handleErr({data: nfc.error});
     });
   };
 });
