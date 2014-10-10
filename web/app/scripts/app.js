@@ -1,6 +1,15 @@
 'use strict';
 
-var dependencies = ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'restangular', 'ui.router', 'angularFileUpload', 'pascalprecht.translate'];
+var dependencies = [
+  'ngAnimate',
+  'ngCookies',
+  'ngTouch',
+  'ngSanitize',
+  'restangular',
+  'ui.router',
+  'ui.keypress',
+  'angularFileUpload',
+  'pascalprecht.translate'];
 
 angular.module('flashbandWebapp', dependencies).config(function ($translateProvider, $stateProvider, $urlRouterProvider, AuthenticateAccess, dashboardAbstract) {
   $stateProvider.state(dashboardAbstract, {
