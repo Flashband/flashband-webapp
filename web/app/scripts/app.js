@@ -81,7 +81,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   $translateProvider.translations('pt-BR', {
     'Blocked Flashband': 'Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.',
     'Flashband ever associated': 'Opa, essa flashband está vinculada a um showgoer.',
-    'Flashband not found.': 'Opa, essa flashband está disponível.',
+    'Flashband not found.': 'Opa, essa flashband não está disponível.',
     'LOGIN': {
       'TEXT': 'Seja bem vindo!',
       'BUTTON': 'entrar',
