@@ -110,7 +110,7 @@ describe('New ShowGoer View', function () {
     expect(pageButtonNew.isDisplayed()).toBeTruthy();
     expect(pageButtonAssociate.isDisplayed()).toBeTruthy();
 
-    expect(pageTextCreated.getText()).toBe('Você possui 3 ShowGoers cadastrados. Para adicionar um novo ShowGoer, é só clicar em cadastrar ShowGoer. Para vincular um ShowGoer cadastrado a uma pulseira, é só clicar em vincular ShowGoer.');
+    expect(pageTextCreated.getText()).toBe('Você possui 5 ShowGoers cadastrados. Para adicionar um novo ShowGoer, é só clicar em cadastrar ShowGoer. Para vincular um ShowGoer cadastrado a uma pulseira, é só clicar em vincular ShowGoer.');
     expect(pageButtonAssociate.getText()).toBe('Vincular ShowGoer');
   });
 });

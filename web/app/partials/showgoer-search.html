@@ -8,7 +8,7 @@
 
 <div class="form-group">
   <div class="input-group">
-    <input required ng-model="showGoerSearch" name="showGoerSearch" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.SHOWGOER'|translate}}">
+    <input ui-keypress="{13:'searchByArg()'}" required ng-model="showGoerSearch" name="showGoerSearch" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.SHOWGOER'|translate}}">
 
     <span class="input-group-btn">
       <button ng-click="searchByArg()" ng-disabled="!showGoerSearch.length" class="btn btn-default btn-success" type="button" translate="FLASHBAND.ASSOCIATE.BUTTON.SEARCH"></button>
