@@ -68,7 +68,8 @@ module.exports = {
       var createFlashband = function(arg, next) {
         var create = {
           tag: arg.tag,
-          imported: true
+          imported: true,
+          blockedAt: null
         };
 
         Flashband.findOrCreate(arg, create, function(err, flashband) {

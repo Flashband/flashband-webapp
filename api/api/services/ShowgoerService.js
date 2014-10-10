@@ -59,8 +59,12 @@ module.exports = {
     return FlashbandService.exists(flashBandTag).then(function(flashband) {
       if (flashband.blocked()) { throw new Error('Blocked Flashband'); }
 
-      flashband.user = showGoerId;
-      return flashband.save();
+      return FlashbandService.findByShowgoer(showGoerId).then(function(flashbandAssocieted) {
+        if (flashbandAssocieted) { throw new Error('Showgoer ever associated'); }
+
+        flashband.user = showGoerId;
+        return flashband.save();
+      });
     });
   }
 };
