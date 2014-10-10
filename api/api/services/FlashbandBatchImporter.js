@@ -54,7 +54,7 @@ module.exports = {
     var transformer = csv.transform(function(record) {
       if (!(record.UID || record.Qrcode)) { return; }
 
-      var tag = record.UID.replace(/ /g, '');
+      var tag = record.UID.replace(/\s/g, '').toUpperCase();
       var serial = record.Qrcode;
       flashbands.push({tag: tag, serial: serial});
     });

@@ -34,6 +34,18 @@ describe('FlashbandService', function() {
       }, done);
     });
 
+    it('should reject a flashband ever associated', function shouldRejectShowgoerEverAssociated(done) {
+      sgHelp.create().then(function afterShowgoerCreate(showgoer) {
+        fbHelp.createSuccess().then(function expectAssociateShowGoer(flashband) {
+          ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
+            sgHelp.create().then(function afterShowgoerCreate(newShowgoer) {
+              expect(ShowgoerService.associate(newShowgoer.id, associated.tag)).to.be.rejectedWith('Flashband ever associated').and.notify(done);
+            }, done);
+          }, done);
+        }, done);
+      }, done);
+    });
+
     it('should associate a new flashband when old flashband be blocked', function shouldRejectFlashbandBlocked(done) {
       sgHelp.create().then(function afterShowgoerCreate(showgoer) {
         fbHelp.createSuccess().then(function rejectFlashbandBlocked(flashband) {

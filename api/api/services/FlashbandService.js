@@ -11,7 +11,7 @@ var inactivate = function(flashbandBatches) {
 
 module.exports = {
   findOne: function(flashbandUid) {
-    return Flashband.findOne({ tag: flashbandUid, imported: true });
+    return Flashband.findOne({ tag: flashbandUid.replace(/\s/g, '').toUpperCase(), imported: true });
   },
 
   findByShowgoer: function(showgoerId) {

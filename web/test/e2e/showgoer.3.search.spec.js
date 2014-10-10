@@ -2,12 +2,10 @@
 
 var loginPage = require('../pages/login.page');
 var showGoerPage = require('../pages/showgoer.page');
-var validFlashBand;
 
 describe('Search ShowGoer View', function () {
   beforeEach(function() {
     loginPage.tryAuthenticateSuccessfully();
-    validFlashBand = '053400020b9555';
   });
 
   it('should contains help message', function() {
@@ -64,7 +62,7 @@ describe('Search ShowGoer View', function () {
                 .goToSearchShowGoerPage()
                 .searchShowGoer(showGoerName)
                 .selectFirstShowGoer().then(function(showGoerId) {
-                  showGoerPage.saveAssociationWithFlashBand(validFlashBand)
+                  showGoerPage.saveAssociationWithFlashBand('053400020b9555')
                               .expectShowgoerAssociated(showGoerId);
                 });
   });
@@ -78,7 +76,7 @@ describe('Search ShowGoer View', function () {
                 .goToSearchShowGoerPage()
                 .searchShowGoer(showGoerName)
                 .selectFirstShowGoer().then(function(showGoerId) {
-                  showGoerPage.saveAssociationWithFlashBand(validFlashBand)
+                  showGoerPage.saveAssociationWithFlashBand('04750b3a532880')
                               .expectShowgoerAssociated(showGoerId)
                               .goToSearchShowGoerPage()
                               .searchShowGoer(showGoerName)
