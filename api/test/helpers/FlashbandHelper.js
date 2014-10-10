@@ -1,3 +1,5 @@
+'use strict';
+
 var q = require('q');
 var prepareArgs = function(tag, serial, blockedAt) {
   var newTag = tag ? tag : ''.concat((new Date()).getTime());

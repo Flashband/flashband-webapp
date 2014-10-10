@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   autoCreatedAt: true,
   attributes: {
@@ -9,5 +11,5 @@ module.exports = {
     inactivate: function() {
       this.active = false;
     }
-  },
+  }
 };

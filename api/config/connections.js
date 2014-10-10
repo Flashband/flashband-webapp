@@ -65,13 +65,11 @@ module.exports.connections = {
     database: 'flashband_dev'
   },
 
-  mongoProduction: {
+  cProd: {
     adapter: 'sails-mongo',
     host: 'localhost',
     port: 27017,
-    // user: 'username',
-    // password: 'password',
-    database: 'flashband_production'
+    database: 'fbProd'
   },
 
   /***************************************************************************

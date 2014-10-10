@@ -1,16 +1,12 @@
-module.exports = function unauthorized(data) {
-  var res = this.res;
-  var sails = this.req._sails;
+'use strict';
 
-  // Set status code
+module.exports = function sendUnauthorized (data) {
+  this.req._sails.log.silly('Sending 401 ("Unauthorized") response: \n', data);
+
+  var res = this.res;
   res.status(401);
 
-  // Log error to console
-  if (data !== undefined)
-    sails.log.verbose('Sending 401 ("Unauthorized") response: \n',data);
-  else
-    sails.log.verbose('Sending 401 ("Unauthorized") response');
-
-  return res.json(data);
+  if (typeof data === 'object') { return res.json(data); }
+  if ((data) && (data.name) && (data.name.toString() === 'Error')) { return res.json(data.message); }
+  res.jsonx(data);
 };
-

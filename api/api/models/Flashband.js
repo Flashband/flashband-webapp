@@ -1,22 +1,27 @@
-/**
-* Flashband.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+'use strict';
 
 module.exports = {
   autoCreatedAt: true,
   attributes: {
-    tag: { 
+    tag: {
       type: 'string',
       unique: true
     },
+
+    imported: {
+      type: 'boolean',
+      defaultsTo: true
+    },
+
+    showgoer: {
+      type: 'string'
+    },
+
     serial: { type: 'string', columnName: 'srl' },
     blockedAt: { type: 'datetime', columnName: 'blkd_at' },
 
     blocked: function() {
       return Boolean(this.blockedAt);
     }
-  },
+  }
 };

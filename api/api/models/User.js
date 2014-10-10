@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   autoCreatedAt: true,
   attributes: {

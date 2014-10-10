@@ -1,15 +1,17 @@
+'use strict';
+
 var expect = require('chai').use(require('chai-as-promised')).expect;
-var FlashbandHelper = require('../../helpers/FlashbandHelper');
+var fbHelp = require('../../../helpers/FlashbandHelper');
 
 describe('FlashbandService', function() {
   describe('#block', function() {
     it('should set flashband blockedAt', function(done) {
-      FlashbandHelper.createSuccess().then(function(flashband) {
+      fbHelp.createSuccess().then(function(flashband) {
         expect(FlashbandService.block(flashband.tag))
         .to.eventually.have.property('blockedAt')
         .and.be.ok
         .and.notify(function(err) {
-          if (err) return done(err);
+          if (err) { return done(err); }
           expect(Flashband.findOne({ tag: flashband.tag }))
           .to.eventually.have.property('blockedAt')
           .and.be.ok.and.notify(done);
@@ -24,15 +26,15 @@ describe('FlashbandService', function() {
     });
 
     it('should not block an already blocked flashband', function(done) {
-      FlashbandHelper.createBlocked().then(function(blockedFlashband) {
+      fbHelp.createBlocked().then(function(blockedFlashband) {
         var originalBlockedAt = blockedFlashband.blockedAt;
         expect(FlashbandService.block(blockedFlashband.tag))
         .to.be.rejectedWith('Flashband already blocked.')
         .and.notify(function(err) {
-          if (err) return done(err);
+          if (err) { return done(err); }
           Flashband.findOne({tag: blockedFlashband.tag}).exec(function(err, flashband) {
-            if (err) return done(err);
-            if (!flashband) throw 'saved flashband not found! :-/';
+            if (err) { return done(err); }
+            if (!flashband) { throw 'saved flashband not found! :-/'; }
             expect(flashband.blockedAt).to.eql(originalBlockedAt);
             done();
           });
