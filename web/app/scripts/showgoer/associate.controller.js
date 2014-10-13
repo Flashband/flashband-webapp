@@ -50,7 +50,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
       }, handleErr);
     };
 
-    chrome.runtime.sendMessage('jhfidpmidmpiioaeciiejpecfddbfphb', {action: 'read', timeout: 5000}, function(nfc) {
+    chrome.runtime.sendMessage('fkfgecahkennniedpofdbikdlgpllfpb', {action: 'read', timeout: 5000}, function(nfc) {
       if (!nfc) {
         return finishAssociation();
       }
