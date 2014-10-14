@@ -15,8 +15,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   $stateProvider.state(dashboardAbstract, {
     abstract: true,
     templateUrl: 'partials/dashboard.html',
-    data: { isPublic: AuthenticateAccess.deny }
-  }).state('enable-flashbands', {
+    data: { isPublic: AuthenticateAccess.deny } }).state('enable-flashbands', {
     parent: dashboardAbstract,
     controller: 'EnableFlashbandsCtrl',
     url: '/flashbands-enable',
@@ -177,7 +176,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         'MESSAGES': {
           'SUCCESS': 'ShowGoer vinculado com sucesso.',
           'ASSOCIATED': 'Opa, esse ShowGoer já foi vinculado a uma pulseira.',
-          'SHOWGOER': 'Não existem visitantes cadastrados com esse nome ou documento. Por favor, corrija ou'
+          'SHOWGOER': 'Não existem visitantes cadastrados com esse nome ou documento. Por favor, corrija ou',
+          'TIMEOUT': 'Tempo esgotado aguardando leitura da Flashband.'
         },
         'TABLE': {
           'SEL': 'Selecionar',

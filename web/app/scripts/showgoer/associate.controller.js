@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, FlashbandRestFact,  $state) {
+angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, FlashbandRestFact,  $state, flashbandNfcReader) {
   $scope.listShowgoers = [];
   $scope.showGoerSearch = '';
   $scope.showGoerSelected = false;
@@ -36,7 +36,7 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
   $scope.associateShowGoer = function() {
     var showgoerId = $scope.showGoerSelected.id;
 
-    var handleErr = function(err) {
+    var handleMessage = function(err) {
       console.log(err);
       $scope.message = {
         type: 'warning',
@@ -47,23 +47,25 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
     var finishAssociation = function() {
       FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
         $state.go('showgoer-associate', {showgoer: showgoerId});
-      }, handleErr);
+      }, handleMessage);
     };
 
-    chrome.runtime.sendMessage('fkfgecahkennniedpofdbikdlgpllfpb', {action: 'read', timeout: 5000}, function(nfc) {
-      if (!nfc) {
-        return finishAssociation();
-      }
+    chrome.runtime.sendMessage(flashbandNfcReader.appId, {action: 'read', params: { timeout: flashbandNfcReader.timeout }}, function(nfc) {
+      $scope.$apply(function() {
+        if (!nfc) {
+          return finishAssociation();
+        }
 
-      if (nfc.success) {
-        $scope.flashbandTag = nfc.data.tag;
-        return finishAssociation();
-      } 
-      $scope.flashbandTag = '';
-      if (nfc.error && nfc.error.timeout) {
-        return handleErr({data: 'Tempo esgotado.'});
-      }
-      handleErr({data: nfc.error});
+        if (nfc.success) {
+          $scope.flashbandTag = nfc.data.tag;
+          return finishAssociation();
+        } 
+        $scope.flashbandTag = '';
+        if (nfc.error && nfc.error.timeout) {
+          return handleMessage({data: 'FLASHBAND.ASSOCIATE.MESSAGES.TIMEOUT'});
+        }
+        handleMessage({data: nfc.error});
+      });
     });
   };
 });
