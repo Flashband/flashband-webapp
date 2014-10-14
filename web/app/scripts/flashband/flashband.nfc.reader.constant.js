@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('flashbandWebapp').constant('flashbandNfcReader', { appId: 'jhfidpmidmpiioaeciiejpecfddbfphb', timeout: 5000 });
+angular.module('flashbandWebapp').constant('flashbandNfcReader', { appId: 'fkfgecahkennniedpofdbikdlgpllfpb', timeout: 5000 });
