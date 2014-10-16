@@ -6,6 +6,7 @@ var pwHash  = require('password-hash');
 var fbHelp  = require('../../helpers/FlashbandHelper');
 var fdHelp  = require('../../helpers/FrontdoorHelper');
 var dbHelp  = require('../../helpers/DatabaseHelper');
+var expect  = require('chai').expect;
 
 var outputSuccessful;
 var inputSuccessful;
@@ -285,6 +286,33 @@ describe('FrontdoorController', function() {
               .expect(201, inputSuccessful)
               .set('Authorization', 'Token token='.concat(serialToken))
               .end(done);
+          });
+      };
+
+      fdHelp.createLeave().then(verifyZoneEmpty, done);
+    });
+
+    it('should leave old entrance when entrance in different zone', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag, zone: '1'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/enter')
+              .send({tag: entrance.tag, zone: '2'})
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(function() {
+                Entrance.findOne({tag: entrance.tag, zone: '1'}).then(function (oldEntrance) {
+                  expect(oldEntrance.leave).to.be.ok;
+
+                  Entrance.findOne({tag: entrance.tag, zone: '2'}).then(function (actualEntrance) {
+                    expect(actualEntrance.leave).to.not.be.ok;
+                    done();
+                  });
+                });
+              });
           });
       };
 
