@@ -87,6 +87,12 @@ module.exports = {
     return this;
   },
 
+  saveAssociationWithoutFlashBand: function() {
+    this.getAssociateButton().click();
+    browser.waitForAngular();
+    return this;
+  },
+
   selectFirstShowGoer: function() {
     var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
     var elRadioSelection = trShowGoer.element(by.css('input'));
@@ -141,5 +147,10 @@ module.exports = {
   expectUrlPageStart: function() {
     expect(browser.getCurrentUrl()).toContain('#/showgoer');
     return this;
-  }
+  },
+
+  expectEmptyInputTag: function() {
+    var flashbandTag = element(by.model('flashbandTag'));
+    expect(flashbandTag.getAttribute('value')).toBe('');
+  },
 };
