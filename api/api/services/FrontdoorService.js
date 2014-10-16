@@ -15,7 +15,10 @@ module.exports = {
     return validate(crossArgs).then(function() {
       return FrontdoorService.checkRegistered(crossArgs).then(function(registered) {
         if (registered) { throw new Error('Duplicated entrance.'); }
-        return Entrance.create(crossArgs);
+
+        return Entrance.update({ tag: crossArgs.tag, leave: null }, { leave: new Date() }).then(function() {
+          return Entrance.create(crossArgs);
+        });
       });
     });
   },

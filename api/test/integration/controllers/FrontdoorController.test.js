@@ -80,6 +80,66 @@ describe('FrontdoorController', function() {
 
       fbHelp.createBlocked().then(verifyFlashBandBlocked);
     });
+
+    it('should reject when zone not filled', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag})
+          .expect(403, 'Zone not filled.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+    });
+
+    it('should allow entrance when zone is different', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag, zone: '1'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/enter')
+              .send({tag: entrance.tag, zone: '2'})
+              .expect('Content-type', /application\/json/)
+              .expect(201, inputSuccessful)
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(done);
+          });
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+    });
+
+    it('should leave old entrance when entrance in different zone', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag, zone: '1'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/enter')
+              .send({tag: entrance.tag, zone: '2'})
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(function() {
+                Entrance.findOne({tag: entrance.tag, zone: '1'}).then(function (oldEntrance) {
+                  expect(oldEntrance.leave).to.be.ok;
+
+                  Entrance.findOne({tag: entrance.tag, zone: '2'}).then(function (actualEntrance) {
+                    expect(actualEntrance.leave).to.not.be.ok;
+                    done();
+                  });
+                });
+              });
+          });
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+    });
   });
 
   describe('POST /frontdoor/leave', function() {
@@ -132,6 +192,19 @@ describe('FrontdoorController', function() {
       };
 
       fdHelp.createLeave().then(verifyDuplicated, done);
+    });
+
+    it('should reject when zone not filled', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/leave')
+          .send({tag: entrance.tag})
+          .expect(403, 'Zone not filled.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
     });
   });
 
@@ -256,31 +329,18 @@ describe('FrontdoorController', function() {
           .end(done);
       };
 
-      fdHelp.createLeave().then(verifyZoneEmpty, done);
-    });
-
-    it('should reject when zone not filled', function (done) {
-      var verifyZoneEmpty = function(entrance) {
-        request(sails.hooks.http.app)
-          .post('/frontdoor/cross')
-          .send({tag: entrance.tag})
-          .expect(403, 'Zone not filled.')
-          .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
-      };
-
-      fdHelp.createLeave().then(verifyZoneEmpty, done);
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
     });
 
     it('should allow entrance when zone is different', function (done) {
       var verifyZoneEmpty = function(entrance) {
         request(sails.hooks.http.app)
-          .post('/frontdoor/enter')
+          .post('/frontdoor/cross')
           .send({tag: entrance.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(function() {
             request(sails.hooks.http.app)
-              .post('/frontdoor/enter')
+              .post('/frontdoor/cross')
               .send({tag: entrance.tag, zone: '2'})
               .expect('Content-type', /application\/json/)
               .expect(201, inputSuccessful)
@@ -289,18 +349,18 @@ describe('FrontdoorController', function() {
           });
       };
 
-      fdHelp.createLeave().then(verifyZoneEmpty, done);
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
     });
 
     it('should leave old entrance when entrance in different zone', function (done) {
       var verifyZoneEmpty = function(entrance) {
         request(sails.hooks.http.app)
-          .post('/frontdoor/enter')
+          .post('/frontdoor/cross')
           .send({tag: entrance.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(function() {
             request(sails.hooks.http.app)
-              .post('/frontdoor/enter')
+              .post('/frontdoor/cross')
               .send({tag: entrance.tag, zone: '2'})
               .set('Authorization', 'Token token='.concat(serialToken))
               .end(function() {
@@ -310,13 +370,13 @@ describe('FrontdoorController', function() {
                   Entrance.findOne({tag: entrance.tag, zone: '2'}).then(function (actualEntrance) {
                     expect(actualEntrance.leave).to.not.be.ok;
                     done();
-                  });
-                });
+                  }, done);
+                }, done);
               });
           });
       };
 
-      fdHelp.createLeave().then(verifyZoneEmpty, done);
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
     });
   });
 });
