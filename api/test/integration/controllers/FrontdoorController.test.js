@@ -257,5 +257,38 @@ describe('FrontdoorController', function() {
 
       fdHelp.createLeave().then(verifyZoneEmpty, done);
     });
+
+    it('should reject when zone not filled', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .expect(403, 'Zone not filled.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fdHelp.createLeave().then(verifyZoneEmpty, done);
+    });
+
+    it('should allow entrance when zone is different', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag, zone: '1'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/enter')
+              .send({tag: entrance.tag, zone: '2'})
+              .expect('Content-type', /application\/json/)
+              .expect(201, inputSuccessful)
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(done);
+          });
+      };
+
+      fdHelp.createLeave().then(verifyZoneEmpty, done);
+    });
   });
 });
