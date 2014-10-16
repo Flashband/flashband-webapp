@@ -43,8 +43,9 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
 
     var handleMessage = function(err) {
       console.log(err);
+
       $scope.message = {
-        type: 'warning',
+        type: err.type,
         text: err.data
       };
     };
@@ -52,66 +53,65 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
     var finishAssociation = function() {
       FlashbandRestFact.getConnection().service('showgoer').one(showgoerId).one('associate', $scope.flashbandTag).post().then(function() {
         $state.go('showgoer-associate', {showgoer: showgoerId});
-      }, handleMessage);
+      }, function(err) {
+        err.type = 'warning';
+        handleMessage(err);
+        $scope.flashbandTag = '';
+      });
     };
 
-    var nfcReader = function(nfc) {
+    var nfcReaderResponse = function(nfc) {
       $scope.$apply(function() {
         $scope.reading = false;
         if (!nfc) {
-          $scope.message = {
-            type: 'danger',
-            text: 'Not Found'
-          }
-          return;
+          return handleMessage({type: 'danger', data: 'Not Found'});
         }
 
         if (nfc.success) {
-          $scope.flashbandTag = nfc.data.tag;
+            $scope.flashbandTag = nfc.data.tag;
           return finishAssociation();
         }
         $scope.flashbandTag = '';
 
         if (nfc.error && nfc.error.timeout) {
-          return handleMessage({data: 'FLASHBAND.ASSOCIATE.MESSAGES.TIMEOUT'});
+          return handleMessage({type: 'warning', data: 'FLASHBAND.ASSOCIATE.MESSAGES.TIMEOUT'});
         }
-        handleMessage({data: nfc.error});
+        handleMessage({type: 'warning', data: nfc.error});
       });
     }
 
-    if ($scope.flashbandTag.length !== 0) {
+    var chromeSendMessage = function() {
+      $scope.reading = true;
+
+      chrome.runtime.sendMessage(flashbandNfcReader.appId, {
+        action: 'read',
+        params: {
+          timeout: flashbandNfcReader.timeout
+        }
+      }, nfcReaderResponse);
+
+      $scope.timeout = 5;
+      $scope.onTimeout = function(){
+        $scope.timeout--;
+        if ($scope.timeout > 0) {
+            nfcReaderTimeout = $timeout($scope.onTimeout,1000);
+        }
+        else if($scope.reading) {
+          $scope.reading = false;
+          handleMessage({type: 'danger', data: 'Not Found'});
+        }
+      }
+
+      var nfcReaderTimeout = $timeout($scope.onTimeout,1000);
+      handleMessage({type: 'info', data: 'FLASHBAND.ASSOCIATE.MESSAGES.READING'});
+    }
+
+    if ($scope.flashbandTag.length > 0) {
       return finishAssociation();
     }
 
-    $scope.reading = true;
+    chromeSendMessage();
 
-    chrome.runtime.sendMessage(flashbandNfcReader.appId, {
-      action: 'read',
-      params: {
-        timeout: flashbandNfcReader.timeout
-      }
-    }, nfcReader);
-
-    $scope.timeout = 5;
-    $scope.onTimeout = function(){
-      $scope.timeout--;
-      if ($scope.timeout > 0) {
-          nfcReaderTimeout = $timeout($scope.onTimeout,1000);
-      }
-      else if($scope.reading) {
-        $scope.reading = false;
-        $scope.message = {
-          type: 'danger',
-          text: 'Not Found'
-        }
-      }
-    }
-    var nfcReaderTimeout = $timeout($scope.onTimeout,1000);
-
-    $scope.message = {
-      type: 'success',
-      text: 'FLASHBAND.ASSOCIATE.MESSAGES.READING'
-    }
 
   };
 });

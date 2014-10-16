@@ -148,4 +148,9 @@ module.exports = {
     expect(browser.getCurrentUrl()).toContain('#/showgoer');
     return this;
   },
+
+  expectEmptyInputTag: function() {
+    var flashbandTag = element(by.model('flashbandTag'));
+    expect(flashbandTag.getAttribute('value')).toBe('');
+  },
 };

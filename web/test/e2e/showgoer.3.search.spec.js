@@ -82,6 +82,7 @@ describe('Search ShowGoer View', function () {
                               .searchShowGoer(showGoerName)
                               .selectFirstShowGoer().then(function() {
                                 showGoerPage.expectAlertWarning('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+                                showGoerPage.expectEmptyInputTag();
                               });
                 });
   });
