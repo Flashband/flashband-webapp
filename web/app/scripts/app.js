@@ -90,6 +90,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     'Blocked Flashband': 'Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.',
     'Flashband ever associated': 'Opa, essa flashband está vinculada a um showgoer.',
     'Flashband not found.': 'Opa, essa flashband não está disponível.',
+    'Not Found': 'Verifique se o Leitor de NFC está conectado ao computador',
     'LOGIN': {
       'TEXT': 'Seja bem vindo!',
       'BUTTON': 'entrar',

@@ -59,7 +59,11 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
       $scope.$apply(function() {
         $scope.reading = false;
         if (!nfc) {
-          return finishAssociation();
+          $scope.message = {
+            type: 'danger',
+            text: 'Not Found'
+          }
+          return;
         }
 
         if (nfc.success) {
@@ -81,12 +85,26 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
 
     $scope.reading = true;
 
-    $scope.counter = 5;
+    chrome.runtime.sendMessage(flashbandNfcReader.appId, {
+      action: 'read',
+      params: {
+        timeout: flashbandNfcReader.timeout
+      }
+    }, nfcReader);
+
+    $scope.timeout = 5;
     $scope.onTimeout = function(){
-        $scope.counter--;
-        if ($scope.counter > 0) {
-            nfcReaderTimeout = $timeout($scope.onTimeout,1000);
+      $scope.timeout--;
+      if ($scope.timeout > 0) {
+          nfcReaderTimeout = $timeout($scope.onTimeout,1000);
+      }
+      else if($scope.reading) {
+        $scope.reading = false;
+        $scope.message = {
+          type: 'danger',
+          text: 'Not Found'
         }
+      }
     }
     var nfcReaderTimeout = $timeout($scope.onTimeout,1000);
 
@@ -94,13 +112,6 @@ angular.module('flashbandWebapp').controller('AssociateCtrl', function ($scope, 
       type: 'success',
       text: 'FLASHBAND.ASSOCIATE.MESSAGES.READING'
     }
-
-    chrome.runtime.sendMessage(flashbandNfcReader.appId, {
-      action: 'read',
-      params: {
-        timeout: flashbandNfcReader.timeout
-      }
-    }, nfcReader);
 
   };
 });

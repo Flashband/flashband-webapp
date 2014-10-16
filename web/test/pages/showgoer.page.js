@@ -148,11 +148,4 @@ module.exports = {
     expect(browser.getCurrentUrl()).toContain('#/showgoer');
     return this;
   },
-
-  expectReadingAlert: function(message) {
-    var msg = element(by.className('alert-success'));
-    expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toContain(message);
-    return this;
-  }
 };

@@ -1,4 +1,4 @@
-<div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate:'{ counter: " ( " + counter + " )" }' }}</div>
+<div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate:'{ counter: " ( " + timeout + " )" }' }}</div>
 
 <h1 translate="FLASHBAND.ASSOCIATE.TEXT.TITLE"></h1>
 
@@ -54,4 +54,4 @@
 </div>
 
 <a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.ASSOCIATE.BUTTON.CANCEL"></a>
-<button ng-disabled="!listShowgoers.length || reading || !showGoerSelected || showGoerSelected.flashband && flashbandTag" type="button" class="btn btn-success" ng-click="associateShowGoer()" translate="FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE"></button>
+<button data-loading-text="Loading..." ng-disabled="!listShowgoers.length || reading || !showGoerSelected || showGoerSelected.flashband && flashbandTag" type="button" class="btn btn-success" ng-click="associateShowGoer()" translate="FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE"></button>
