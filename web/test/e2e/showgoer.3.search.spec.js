@@ -115,4 +115,18 @@ describe('Search ShowGoer View', function () {
                               .expectAlertWarning('Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.');
                 });
   });
+
+  // it('should show reading message when try to vinculate without a flashband number.', function() {
+  //   var showGoerName = 'Showoger para Vinculação pelo leitor de NFC';
+  //   var showGoerCNH = '777.555.222.112';
+  //
+  //   showGoerPage.goToNewShowGoerPage()
+  //               .saveNewShowGoerWithCNH(showGoerName, showGoerCNH)
+  //               .goToSearchShowGoerPage()
+  //               .searchShowGoer(showGoerName)
+  //               .selectFirstShowGoer().then(function() {
+  //                 showGoerPage.saveAssociationWithoutFlashBand()
+  //                     .expectReadingAlert('Vinculando visitante... Por favor, aproxime a pulseira do leitor.');
+  //               });
+  // });
 });

@@ -177,7 +177,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
           'SUCCESS': 'ShowGoer vinculado com sucesso.',
           'ASSOCIATED': 'Opa, esse ShowGoer já foi vinculado a uma pulseira.',
           'SHOWGOER': 'Não existem visitantes cadastrados com esse nome ou documento. Por favor, corrija ou',
-          'TIMEOUT': 'Tempo esgotado aguardando leitura da Flashband.'
+          'TIMEOUT': 'Tempo esgotado aguardando leitura da Flashband.',
+          'READING': 'Vinculando visitante... Por favor, aproxime a pulseira do leitor. {{counter}}'
         },
         'TABLE': {
           'SEL': 'Selecionar',

@@ -87,6 +87,12 @@ module.exports = {
     return this;
   },
 
+  saveAssociationWithoutFlashBand: function() {
+    this.getAssociateButton().click();
+    browser.waitForAngular();
+    return this;
+  },
+
   selectFirstShowGoer: function() {
     var trShowGoer = element(by.repeater('sg in listShowgoers').row(0));
     var elRadioSelection = trShowGoer.element(by.css('input'));
@@ -140,6 +146,13 @@ module.exports = {
 
   expectUrlPageStart: function() {
     expect(browser.getCurrentUrl()).toContain('#/showgoer');
+    return this;
+  },
+
+  expectReadingAlert: function(message) {
+    var msg = element(by.className('alert-success'));
+    expect(msg.isDisplayed()).toBeTruthy();
+    expect(msg.getText()).toContain(message);
     return this;
   }
 };
