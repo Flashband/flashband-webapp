@@ -14,7 +14,8 @@ var serialToken;
 
 describe('FrontdoorController', function() {
   beforeEach(function(done) {
-    args = {tag: '1234'};
+    args = {tag: '1234', zone: '1'};
+
     dbHelp.emptyModels([Entrance, Flashband]).then(function() {
       inputSuccessful  = {door: 'in', message: 'Input successful.'};
       outputSuccessful = {door: 'out', message: 'Output successful.'};
@@ -34,7 +35,7 @@ describe('FrontdoorController', function() {
       var verifyRegister = function(flashband) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: flashband.tag})
+          .send({tag: flashband.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -47,7 +48,7 @@ describe('FrontdoorController', function() {
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/enter')
-        .send({tag: '123123123123'})
+        .send({tag: '123123123123', zone: '1'})
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -57,7 +58,7 @@ describe('FrontdoorController', function() {
       var verifyDuplicated = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Duplicated entrance.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -70,7 +71,7 @@ describe('FrontdoorController', function() {
       var verifyFlashBandBlocked = function(flashBlocked ) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: flashBlocked.tag})
+          .send({tag: flashBlocked.tag, zone: '1'})
           .expect(403, 'Blocked flashband.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -87,7 +88,7 @@ describe('FrontdoorController', function() {
       var verifyLeave = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -100,7 +101,7 @@ describe('FrontdoorController', function() {
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/leave')
-        .send({tag: '123123123123'})
+        .send({tag: '123123123123', zone: '1'})
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -110,7 +111,7 @@ describe('FrontdoorController', function() {
       var verifyFlashBandBlocked = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Blocked flashband.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -123,7 +124,7 @@ describe('FrontdoorController', function() {
       var verifyDuplicated = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Duplicated exit.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -138,7 +139,7 @@ describe('FrontdoorController', function() {
       var verifyRegister = function(flashband) {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
-          .send({tag: flashband.tag})
+          .send({tag: flashband.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -152,7 +153,7 @@ describe('FrontdoorController', function() {
       var verifyLeave = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -165,7 +166,7 @@ describe('FrontdoorController', function() {
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/cross')
-        .send({tag: '123123123123'})
+        .send({tag: '123123123123', zone: '1'})
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -175,7 +176,7 @@ describe('FrontdoorController', function() {
       var verifyFlashBandBlocked = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Blocked flashband.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -188,7 +189,7 @@ describe('FrontdoorController', function() {
       var verifyRegister = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -202,12 +203,12 @@ describe('FrontdoorController', function() {
       var verifyRegister = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(function() {
             request(sails.hooks.http.app)
               .post('/frontdoor/cross')
-              .send({tag: entrance.tag})
+              .send({tag: entrance.tag, zone: '1'})
               .expect('Content-type', /application\/json/)
               .expect(201, outputSuccessful)
               .set('Authorization', 'Token token='.concat(serialToken))
@@ -222,17 +223,17 @@ describe('FrontdoorController', function() {
       var verifyRegister = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/cross')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(function() {
             request(sails.hooks.http.app)
               .post('/frontdoor/cross')
-              .send({tag: entrance.tag})
+              .send({tag: entrance.tag, zone: '1'})
               .set('Authorization', 'Token token='.concat(serialToken))
               .end(function() {
                 request(sails.hooks.http.app)
                   .post('/frontdoor/cross')
-                  .send({tag: entrance.tag})
+                  .send({tag: entrance.tag, zone: '1'})
                   .expect('Content-type', /application\/json/)
                   .expect(201, inputSuccessful)
                   .set('Authorization', 'Token token='.concat(serialToken))
@@ -242,6 +243,19 @@ describe('FrontdoorController', function() {
       };
 
       fdHelp.createLeave().then(verifyRegister);
+    });
+
+    it('should reject when zone not filled', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .expect(403, 'Zone not filled.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fdHelp.createLeave().then(verifyZoneEmpty, done);
     });
   });
 });

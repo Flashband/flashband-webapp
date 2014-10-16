@@ -1,50 +1,47 @@
 'use strict';
 
-var validate = function(flashbandUid) {
-  return FlashbandService.exists(flashbandUid).then(function(flashband) {
+var validate = function(crossArgs) {
+  return FlashbandService.exists(crossArgs.tag).then(function(flashband) {
     if (flashband.blocked()) { throw new Error('Blocked flashband.'); }
+    return flashband;
+  }).then(function(flashband) {
+    if (!crossArgs.zone) { throw new Error('Zone not filled.'); }
     return flashband;
   });
 };
 
 module.exports = {
-  registerEnter: function(flashbandUid) {
-    return validate(flashbandUid).then(function(flashband) {
-      return FrontdoorService.checkRegistered(flashband.tag).then(function(registered) {
+  registerEnter: function(crossArgs) {
+    return validate(crossArgs).then(function() {
+      return FrontdoorService.checkRegistered(crossArgs).then(function(registered) {
         if (registered) { throw new Error('Duplicated entrance.'); }
-
-        return Entrance.create({ tag: flashbandUid }).then(function(entranceModel) {
-          return entranceModel;
-        });
+        return Entrance.create(crossArgs);
       });
     });
   },
 
-  registerLeave: function(flashbandUid) {
-    return validate(flashbandUid).then(function(flashband) {
-      return FrontdoorService.checkAlreadyOut(flashband.tag).then(function(alreadyOut) {
+  registerLeave: function(crossArgs) {
+    return validate(crossArgs).then(function() {
+      return FrontdoorService.checkAlreadyOut(crossArgs).then(function(alreadyOut) {
         if (alreadyOut) { throw new Error('Duplicated exit.'); }
 
-        return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(entranceModel) {
+        return Entrance.findOne({ tag: crossArgs.tag, zone: crossArgs.zone, leave: null }).then(function(entranceModel) {
           entranceModel.leave = new Date();
-
-          return entranceModel.save().then(function(mdl) {
-            return mdl;
-          });
+          return entranceModel.save();
         });
       });
     });
   },
 
-  checkRegistered: function(flashbandUid) {
-    return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(found) {
+  checkRegistered: function(crossArgs) {
+    return Entrance.findOne({ tag: crossArgs.tag, zone: crossArgs.zone, leave: null }).then(function(found) {
       return Boolean(found);
     });
   },
 
-  checkAlreadyOut: function(flashbandUid) {
-    return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(found) {
-      return !Boolean(found);
+  checkAlreadyOut: function(crossArgs) {
+    return this.checkRegistered(crossArgs).then(function(found) {
+      return !found;
     });
   }
 };
