@@ -4,14 +4,11 @@ var csv = require('csv');
 var q = require('q');
 
 var validate = function(flashbands) {
-  var result = {
-    ok: true,
-    error: false
-  };
-  if (flashbands.length === 0) {
-    result.ok = false;
-    result.error = 'No flashbands found.';
-    return result;
+  var errors = [];
+
+  if (!flashbands.length) {
+    errors.push({line: 1, error: 'No flashbands found.'});
+    return errors;
   }
 
   var tags = [];
@@ -19,30 +16,27 @@ var validate = function(flashbands) {
 
   for (var i = 0; i < flashbands.length; i++) {
     var flashband = flashbands[i];
-    if (!flashband.tag) {
-      result.ok = false;
-      result.error = 'Missing UID.';
-      return result;
+    if (!flashband.tag) { errors.push({line: i+2, error: 'Missing UID.'}); }
+    if (!flashband.serial) { errors.push({line: i+2, error: 'Missing Qrcode.'}); }
+
+    if (flashband.tag) {
+      if (tags.indexOf(flashband.tag) > -1) {
+        errors.push({line: i+2, error: 'Duplicated UID.'});
+      }
+
+      tags.push(flashband.tag);
     }
-    if (!flashband.serial) {
-      result.ok = false;
-      result.error = 'Missing Qrcode.';
-      return result;
+
+    if (flashband.tag) {
+      if (serials.indexOf(flashband.serial) > -1) {
+        errors.push({line: i+2, error: 'Duplicated Qrcode.'});
+      }
+
+      serials.push(flashband.serial);
     }
-    if (tags.indexOf(flashband.tag) > -1) {
-      result.ok = false;
-      result.error = 'Duplicated UID.';
-      return result;
-    }
-    tags.push(flashband.tag);
-    if (serials.indexOf(flashband.serial) > -1) {
-      result.ok = false;
-      result.error = 'Duplicated Qrcode.';
-      return result;
-    }
-    serials.push(flashband.serial);
   }
-  return result;
+
+  return errors;
 };
 
 module.exports = {
@@ -60,10 +54,13 @@ module.exports = {
     });
 
     transformer.on('finish', function() {
-      var validation = validate(flashbands);
-      if (validation.ok) { return defer.resolve(flashbands); }
+      var errors = validate(flashbands);
 
-      defer.reject(new Error(validation.error));
+      if (errors.length) {
+        defer.reject(errors);
+      } else {
+        defer.resolve(flashbands);
+      }
     });
 
     transformer.on('error', function(err) {
