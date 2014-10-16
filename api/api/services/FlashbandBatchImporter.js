@@ -16,15 +16,27 @@ var validate = function(flashbands) {
 
   for (var i = 0; i < flashbands.length; i++) {
     var flashband = flashbands[i];
-    if (!flashband.tag) { errors.push({line: i+2, error: 'Missing UID.'}); }
+
+    if (flashband.error) {
+      continue;
+    }
+
     if (!flashband.serial) { errors.push({line: i+2, error: 'Missing Qrcode.'}); }
 
-    if (flashband.tag) {
-      if (tags.indexOf(flashband.tag) > -1) {
-        errors.push({line: i+2, error: 'Duplicated UID.'});
-      }
+    if (flashband.tag.trim()) {
+      var defaultPairs = flashband.tag.replace(/\s/g, '').toUpperCase().length === 14;
 
-      tags.push(flashband.tag);
+      if (defaultPairs) {
+        if (tags.indexOf(flashband.tag) > -1) {
+          errors.push({line: i+2, error: 'Duplicated UID.'});
+        }
+
+        tags.push(flashband.tag);
+      } else {
+        errors.push({line: i+2, error: 'Number of pairs nonstandard.'});
+      }
+    } else {
+      errors.push({line: i+2, error: 'Missing UID.'});
     }
 
     if (flashband.tag) {
@@ -46,11 +58,14 @@ module.exports = {
     var parser = csv.parse({columns: true, trim: true, delimiter: ';'});
     var flashbands = [];
     var transformer = csv.transform(function(record) {
-      if (!(record.UID || record.Qrcode)) { return; }
+      if (!(record.UID || record.Qrcode)) {
+        flashbands.push({tag: false, serial: false, error: true});
+        return;
+      }
 
       var tag = record.UID.replace(/\s/g, '').toUpperCase();
       var serial = record.Qrcode;
-      flashbands.push({tag: tag, serial: serial});
+      flashbands.push({tag: tag, serial: serial, error: false});
     });
 
     transformer.on('finish', function() {
@@ -59,7 +74,18 @@ module.exports = {
       if (errors.length) {
         defer.reject(errors);
       } else {
-        defer.resolve(flashbands);
+        var newList = [];
+        flashbands.forEach(function(f) {
+          if (!f.error) {
+            newList.push({ tag: f.tag, serial: f.serial});
+          }
+        });
+
+        if (!newList.length) {
+          return defer.reject([{line: 1, error: 'No flashbands found.'}]);
+        }
+
+        defer.resolve(newList);
       }
     });
 
