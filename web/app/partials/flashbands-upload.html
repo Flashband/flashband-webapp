@@ -1,5 +1,27 @@
 <div ng-show="message" class="alert alert-{{message.type}}">{{message.text | translate}}</div>
 
+<div ng-show="listErrors.length" class="form-group">
+  <div class="table-responsive">
+
+    <table class="table  table-striped">
+      <thead>
+        <tr>
+          <th style="text-align: center" translate="Linha"></th>
+          <th translate="Aviso"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="em in listErrors">
+          <td style="text-align: center">{{ em.line }}</td>
+          <td>{{ em.error | translate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 <h1 translate="FLASHBAND.ENABLE.TITLE"></h1>
 <p translate="FLASHBAND.UPLOAD.TEXT"></p>
 

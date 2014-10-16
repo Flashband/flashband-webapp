@@ -87,6 +87,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
   });
 
   $translateProvider.translations('pt-BR', {
+    'Missing Qrcode.': 'Qrcode não informado.',
+    'Missing UID.': 'Tag não informado.',
+    'Duplicated Qrcode.': 'Qrcode duplicado',
+    'Duplicated UID.': 'Tag duplicada',
+    'Number of pairs nonstandard.': 'Número de pares fora do padrão',
     'Blocked Flashband': 'Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.',
     'Flashband ever associated': 'Opa, essa flashband está vinculada a um showgoer.',
     'Flashband not found.': 'Opa, essa flashband não está disponível.',

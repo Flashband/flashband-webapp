@@ -117,7 +117,7 @@ describe('Search ShowGoer View', function () {
                 });
   });
 
-  iit('should not found the NFC Reader when try to associate with a showgoer.', function() {
+  it('should not found the NFC Reader when try to associate with a showgoer.', function() {
     var showGoerName = 'Showoger para Vinculação pelo leitor de NFC';
     var showGoerCNH = '777.555.222.112';
 

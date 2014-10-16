@@ -8,6 +8,7 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
   $scope.uploadPercent = false;
   $scope.messageSuccess = false;
   $scope.errorExtension = false;
+  $scope.listErrors = [];
 
   FlashbandRestFact.getConnection().one('flashband').one('summary').get().then(function(res) {
     $scope.totFlashbands = res.total;
@@ -48,12 +49,14 @@ angular.module('flashbandWebapp').controller('EnableFlashbandsCtrl', function En
       $scope.uploadPercent = parseInt(100.0 * evt.loaded / evt.total);
     };
 
-    var onErrorUpload = function() {
+    var onErrorUpload = function(ranson) {
       $scope.uploadPercent = false;
       $scope.message = {
         type: 'danger',
         text: 'FLASHBAND.MESSAGE.ERROR.UPLOAD'
       };
+
+      $scope.listErrors = ranson.data;
     };
 
     $scope.upload = $upload.upload({

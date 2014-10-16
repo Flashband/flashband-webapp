@@ -85,7 +85,7 @@ describe('FlashbandController', function() {
       });
 
       it ('should delete old flashbands when enable a new batch', function(done) {
-        var flashbandNumber = '8028533A0A830488';
+        var flashbandNumber = '8028533A0A8304';
 
         importBatch('3st flashband batch', 'one-valid-flashband.csv').end(function() {
           expect(FlashbandService.exists(flashbandNumber)).to.eventually.have.property('tag', flashbandNumber).and.notify(function() {
