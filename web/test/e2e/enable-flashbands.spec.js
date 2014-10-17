@@ -9,7 +9,7 @@ describe('The login view', function () {
 
     var titlePage = element(by.css('h1[translate="FLASHBAND.ENABLE.TITLE"]'));
     expect(titlePage.isDisplayed()).toBeTruthy();
-    expect(titlePage.getText()).toBe("Cadastre um lote de pulseiras.");
+    expect(titlePage.getText()).toBe('Cadastre um lote de pulseiras.');
 
     var textPage = element(by.css('p[translate="FLASHBAND.ENABLE.TEXT"]'));
     expect(textPage.isDisplayed()).toBeFalsy();
@@ -17,7 +17,7 @@ describe('The login view', function () {
 
     var btnSubmit = element(by.css('a[translate="FLASHBAND.ENABLE.BUTTON"]'));
     expect(btnSubmit.isDisplayed()).toBeTruthy();
-    expect(btnSubmit.getText()).toBe("Cadastrar pulseiras »");
+    expect(btnSubmit.getText()).toBe('Cadastrar pulseiras »');
     btnSubmit.click();
     browser.waitForAngular();
 
@@ -31,8 +31,8 @@ describe('The login view', function () {
     var btnNewImport = element(by.css('button[translate="FLASHBAND.ENABLE.SAVE"]'));
     btnNewImport.click();
 
-    var msg = element(by.css('div[translate="FLASHBAND.MESSAGE.ERROR.VALIDATION"]'));
+    var msg = element(by.className('alert-warning'));
     expect(msg.isDisplayed()).toBeTruthy();
-    expect(msg.getText()).toBe("Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.");
+    expect(msg.getText()).toBe('Campos obrigatórios! Nome do lote ou arquivo para importação não foi informado.');
   });
 });

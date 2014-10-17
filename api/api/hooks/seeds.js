@@ -1,11 +1,4 @@
-/**
- * Database Seeds
- *
- * Some environments will require for the database to be seeded
- * upon bootstraping. This hook will look into the 'seeds' directory
- * to find environment-based seeds.
- * 
- */
+'use strict';
 
 var glob  = require('glob'),
     path  = require('path'),

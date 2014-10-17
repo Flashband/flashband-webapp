@@ -1,9 +1,9 @@
-<div class="navbar-collapse collapse">
-  <ul class="nav navbar-nav">
-    <li ng-repeat="menu in menus">
-      <a ui-sref="{{menu.sref}}">
-        {{menu.label}}
-      </a>
-    </li>
-  </ul>
+<div class="navbar-collapse">
+  <div class="navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li ng-repeat="menu in menus">
+        <a ui-sref="{{menu.sref}}" translate="{{menu.label}}"></a>
+      </li>
+    </ul>
+  </div>
 </div>

@@ -1,0 +1,57 @@
+<div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate}}</div>
+
+<h1 translate="FLASHBAND.ASSOCIATE.TEXT.TITLE"></h1>
+
+<p translate="FLASHBAND.ASSOCIATE.TEXT.NEW"></p>
+
+<br>
+
+<div class="form-group">
+  <div class="input-group">
+    <input ui-keypress="{13:'searchByArg()'}" required ng-model="showGoerSearch" name="showGoerSearch" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.SHOWGOER'|translate}}">
+
+    <span class="input-group-btn">
+      <button ng-click="searchByArg()" ng-disabled="!showGoerSearch.length" class="btn btn-default btn-success" type="button" translate="FLASHBAND.ASSOCIATE.BUTTON.SEARCH"></button>
+    </span>
+  </div>
+</div>
+
+<div ng-show="listShowgoers.length" class="form-group">
+  <div class="table-responsive">
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.SEL"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.NAME"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.DOCTYPE"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.DOCNUMBER"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="sg in listShowgoers">
+          <td style="text-align: center"><input name="showGoerId" ng-value="sg.id" ng-click="changeShowGoer(sg)" type="radio"></td>
+          <td>{{sg.name}}</td>
+          <td style="text-align: center">{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.docType.toUpperCase())|translate}}</td>
+          <td style="text-align: right">{{sg.docNumber}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div ng-show="showGoerSelected && !showGoerSelected.flashband" class="form-group">
+  <label>Flashband</label>
+  <input required ng-model="flashbandTag" name="flashbandTag" type="text" class="form-control" placeholder="{{'FLASHBAND.ASSOCIATE.PLACEHOLDER.TAG'|translate}}">
+</div>
+
+<div class="panel panel-default" ng-show="showMessageNewShowGoer">
+  <div class="panel-body new-showgoer-message">
+    {{'FLASHBAND.ASSOCIATE.MESSAGES.SHOWGOER'|translate}}
+    <a ui-sref="showgoer-new" translate>FLASHBAND.ASSOCIATE.BUTTON.SHOWGOER</a>
+  </div>
+</div>
+
+<a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.ASSOCIATE.BUTTON.CANCEL"></a>
+<button ng-disabled="!listShowgoers.length || !showGoerSelected || showGoerSelected.flashband && flashbandTag" type="submit" class="btn btn-success" ng-click="associateShowGoer()" translate="FLASHBAND.ASSOCIATE.BUTTON.ASSOCIATE"></button>

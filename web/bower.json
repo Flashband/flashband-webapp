@@ -14,7 +14,8 @@
     "angular-ui-router": "0.2.x",
     "bootstrap-sass-official": "3.2.x",
     "ng-file-upload": "~1.6.5",
-    "angular-translate": "~2.3.0"
+    "angular-translate": "~2.3.0",
+    "angular-ui-utils": "bower-keypress"
   },
   "devDependencies": {
     "angular-mocks": "1.2.x"

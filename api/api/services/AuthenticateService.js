@@ -1,24 +1,24 @@
+'use strict';
+
 var Q = require('q');
 var tokenHasher = require('password-hash');
 
 var auth = function(argsFind) {
-  var deferred = Q.defer();
-
   var generateToken = function(user) {
+    if (!user) { throw new Error('user not found'); }
+
     var args = {
       token: tokenHasher.generate(user.id)
     };
 
     user.tokens.add(args);
-    user.save(function() {
+    return user.save().then(function() {
       args.user = user;
-      deferred.resolve(args);
+      return args;
     });
   };
 
-  User.findOne(argsFind).then(generateToken).fail(deferred.reject);
-
-  return deferred.promise;
+  return User.findOne(argsFind).then(generateToken);
 };
 
 module.exports = {
@@ -35,8 +35,8 @@ module.exports = {
 
     if (accessToken && tokenHasher.isHashed(accessToken)) {
       var resolve = function(err, theToken) {
-        if (err)       return deferred.resolve(false);
-        if (!theToken) return deferred.resolve(false);
+        if (err) { return deferred.resolve(false); }
+        if (!theToken) { return deferred.resolve(false); }
 
         deferred.resolve(theToken.token === accessToken);
       };

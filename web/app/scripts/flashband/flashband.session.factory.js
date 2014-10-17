@@ -1,34 +1,34 @@
 'use strict';
 
-angular.module('flashbandWebapp').service("FlashbandSessionSrvc", function (FlashbandStorageSrvc) {
-  var keySession = "session";
+angular.module('flashbandWebapp').factory('FlashbandSessionFact', function FlashbandSessionFact (FlashbandStorageFact) {
+  var keySession = 'session';
 
   return {
     getUser: function () {
-      return FlashbandStorageSrvc.get(keySession).user;
+      return FlashbandStorageFact.get(keySession).user;
     },
 
     getToken: function () {
       try {
-        return FlashbandStorageSrvc.get(keySession).token;
+        return FlashbandStorageFact.get(keySession).token;
       } catch(e) {
         return '';
       }
     },
 
     clearSession: function() {
-      return FlashbandStorageSrvc.set(keySession, null);
+      return FlashbandStorageFact.set(keySession, null);
     },
 
     setSession: function(session) {
-      return FlashbandStorageSrvc.set(keySession, session);
+      return FlashbandStorageFact.set(keySession, session);
     },
 
     hasUserAuthenticated: function() {
       var logged;
 
       try {
-        var session = FlashbandStorageSrvc.get(keySession);
+        var session = FlashbandStorageFact.get(keySession);
         logged = (session && session.user && session.token);
       } catch (err) {
         logged = false;

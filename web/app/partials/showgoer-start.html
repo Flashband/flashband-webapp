@@ -1,0 +1,11 @@
+<div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate}}</div>
+
+<h1 translate="FLASHBAND.SHOWGOER.TEXT.TITLE"></h1>
+
+<p ng-hide="totShowgoers" translate="FLASHBAND.SHOWGOER.TEXT.START"></p>
+<p ng-show="totShowgoers" translate="FLASHBAND.SHOWGOER.TEXT.CREATED" translate-values="{totalShowgoers: totShowgoers, plural: ((totShowgoers <= 1) ? '' : 's')}"></p>
+
+<p>
+  <a class="btn btn-success" ui-sref="showgoer-new"    role="button" translate="FLASHBAND.SHOWGOER.BUTTON.NEW"></a>
+  <a class="btn btn-success" ui-sref="showgoer-search" role="button" translate="FLASHBAND.SHOWGOER.BUTTON.ASSOCIATE" ng-show="totShowgoers"></a>
+</p>

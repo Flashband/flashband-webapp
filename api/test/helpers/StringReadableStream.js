@@ -1,4 +1,5 @@
 'use strict';
+
 var Readable = require('stream').Readable;
 var util = require('util');
 
@@ -13,9 +14,9 @@ util.inherits(StringReadableStream, Readable);
 
 StringReadableStream.prototype._read = function() {
   var i = this._index++;
-  if (i > this._max)
+  if (i > this._max) {
     this.push(null);
-  else {
+  } else {
     var buf = new Buffer(this.content, 'utf8');
     this.push(buf);
   }

@@ -1,0 +1,24 @@
+<div ng-show="message" class="alert alert-{{message.type}}" role="{{message.type}}">{{message.text|translate}}</div>
+
+<h1 translate="FLASHBAND.SHOWGOER.TEXT.TITLE"></h1>
+
+<p translate="FLASHBAND.SHOWGOER.TEXT.NEW"></p>
+
+<br>
+
+<form novalidate ng-submit="saveShowgoer()" name="showgoerForm">
+  <div class="form-group">
+    <input type="text" class="form-control" required ng-model="showgoer.name" name="name" placeholder="{{'FLASHBAND.SHOWGOER.PLACEHOLDER.NAME'|translate}}">
+  </div>
+
+  <div class="form-group">
+    <select class="form-control" ng-model="showgoer.docType" name="docType" ng-required="true" ng-options="doc.type as (doc.name|translate) for doc in docTypes"></select>
+  </div>
+
+  <div class="form-group" ng-show="showgoer.docType">
+    <input type="text" class="form-control" ng-required="true" ng-model="showgoer.docNumber" name="docNumber" placeholder="{{'FLASHBAND.SHOWGOER.PLACEHOLDER.DOCNUMBER.'.concat(showgoer.docType)|translate}}">
+  </div>
+
+  <a type="button" class="btn btn-link" ui-sref="showgoer" translate="FLASHBAND.SHOWGOER.BUTTON.CANCEL"></a>
+  <button type="submit" class="btn btn-success" translate="FLASHBAND.SHOWGOER.BUTTON.SAVE"></button>
+</form>

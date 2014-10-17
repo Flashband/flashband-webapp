@@ -40,7 +40,7 @@
     "main-bower-files": "^2.0.0",
     "phantomjs": "^1.9.7-15",
     "protractor": "^1.0.0",
-    "require-dir": "^0.1",
+    "require-dir": "^0.1.0",
     "uglify-save-license": "^0.4.1",
     "wiredep": "^1.4.3"
   },
