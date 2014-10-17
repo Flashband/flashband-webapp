@@ -4,14 +4,11 @@ var csv = require('csv');
 var q = require('q');
 
 var validate = function(flashbands) {
-  var result = {
-    ok: true,
-    error: false
-  };
-  if (flashbands.length === 0) {
-    result.ok = false;
-    result.error = 'No flashbands found.';
-    return result;
+  var errors = [];
+
+  if (!flashbands.length) {
+    errors.push({line: 1, error: 'No flashbands found.'});
+    return errors;
   }
 
   var tags = [];
@@ -19,30 +16,39 @@ var validate = function(flashbands) {
 
   for (var i = 0; i < flashbands.length; i++) {
     var flashband = flashbands[i];
-    if (!flashband.tag) {
-      result.ok = false;
-      result.error = 'Missing UID.';
-      return result;
+
+    if (flashband.error) {
+      continue;
     }
-    if (!flashband.serial) {
-      result.ok = false;
-      result.error = 'Missing Qrcode.';
-      return result;
+
+    if (!flashband.serial) { errors.push({line: i+2, error: 'Missing Qrcode.'}); }
+
+    if (flashband.tag.trim()) {
+      var defaultPairs = flashband.tag.replace(/\s/g, '').toUpperCase().length === 14;
+
+      if (defaultPairs) {
+        if (tags.indexOf(flashband.tag) > -1) {
+          errors.push({line: i+2, error: 'Duplicated UID.'});
+        }
+
+        tags.push(flashband.tag);
+      } else {
+        errors.push({line: i+2, error: 'Number of pairs nonstandard.'});
+      }
+    } else {
+      errors.push({line: i+2, error: 'Missing UID.'});
     }
-    if (tags.indexOf(flashband.tag) > -1) {
-      result.ok = false;
-      result.error = 'Duplicated UID.';
-      return result;
+
+    if (flashband.tag) {
+      if (serials.indexOf(flashband.serial) > -1) {
+        errors.push({line: i+2, error: 'Duplicated Qrcode.'});
+      }
+
+      serials.push(flashband.serial);
     }
-    tags.push(flashband.tag);
-    if (serials.indexOf(flashband.serial) > -1) {
-      result.ok = false;
-      result.error = 'Duplicated Qrcode.';
-      return result;
-    }
-    serials.push(flashband.serial);
   }
-  return result;
+
+  return errors;
 };
 
 module.exports = {
@@ -52,18 +58,35 @@ module.exports = {
     var parser = csv.parse({columns: true, trim: true, delimiter: ';'});
     var flashbands = [];
     var transformer = csv.transform(function(record) {
-      if (!(record.UID || record.Qrcode)) { return; }
+      if (!(record.UID || record.Qrcode)) {
+        flashbands.push({tag: false, serial: false, error: true});
+        return;
+      }
 
       var tag = record.UID.replace(/\s/g, '').toUpperCase();
       var serial = record.Qrcode;
-      flashbands.push({tag: tag, serial: serial});
+      flashbands.push({tag: tag, serial: serial, error: false});
     });
 
     transformer.on('finish', function() {
-      var validation = validate(flashbands);
-      if (validation.ok) { return defer.resolve(flashbands); }
+      var errors = validate(flashbands);
 
-      defer.reject(new Error(validation.error));
+      if (errors.length) {
+        defer.reject(errors);
+      } else {
+        var newList = [];
+        flashbands.forEach(function(f) {
+          if (!f.error) {
+            newList.push({ tag: f.tag, serial: f.serial});
+          }
+        });
+
+        if (!newList.length) {
+          return defer.reject([{line: 1, error: 'No flashbands found.'}]);
+        }
+
+        defer.resolve(newList);
+      }
     });
 
     transformer.on('error', function(err) {

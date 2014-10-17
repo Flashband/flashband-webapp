@@ -82,6 +82,7 @@ describe('Search ShowGoer View', function () {
                               .searchShowGoer(showGoerName)
                               .selectFirstShowGoer().then(function() {
                                 showGoerPage.expectAlertWarning('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+                                showGoerPage.expectEmptyInputTag();
                               });
                 });
   });
@@ -113,6 +114,20 @@ describe('Search ShowGoer View', function () {
                 .selectFirstShowGoer().then(function() {
                   showGoerPage.saveAssociationWithFlashBand(blockedFlashBand)
                               .expectAlertWarning('Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.');
+                });
+  });
+
+  it('should not found the NFC Reader when try to associate with a showgoer.', function() {
+    var showGoerName = 'Showoger para Vinculação pelo leitor de NFC';
+    var showGoerCNH = '777.555.222.112';
+
+    showGoerPage.goToNewShowGoerPage()
+                .saveNewShowGoerWithCNH(showGoerName, showGoerCNH)
+                .goToSearchShowGoerPage()
+                .searchShowGoer(showGoerName)
+                .selectFirstShowGoer().then(function() {
+                  showGoerPage.saveAssociationWithoutFlashBand()
+                              .expectAlert('danger', 'Verifique se o Leitor de NFC está conectado ao computador');
                 });
   });
 });
