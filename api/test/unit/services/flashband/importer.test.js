@@ -48,10 +48,16 @@ describe('FlashbandBatchImporter', function () {
       expect(FlashbandBatchImporter.parse(importFile)).to.eventually.be.rejected.and.deep.equal([{line: 3, error: 'Missing Qrcode.'}]).and.notify(done);
     });
 
-    it('should reject invalid flashbands (Number of pairs nonstandard)', function(done) {
+    it('should not treat flashbands with missing Qrcode as duplicated', function(done) {
+      var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04\n;11 22 33 44 55 66 77\n;22 33 44 55 66 77 88';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.be.rejected.and.deep.equal([{line: 3, error: 'Missing Qrcode.'}, {line: 4, error: 'Missing Qrcode.'}]).and.notify(done);
+    });
+
+    it('should reject invalid flashbands (Number of tag\'s pairs nonstandard)', function(done) {
       var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04\n000002;80 28 53 3A 0A 83';
       var importFile = stringReadableStream.createReadableStream(fileContent);
-      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.be.rejected.and.deep.equal([{line: 3, error: 'Number of pairs nonstandard.'}]).and.notify(done);
+      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.be.rejected.and.deep.equal([{line: 3, error: 'Number of tag\'s pairs nonstandard.'}]).and.notify(done);
     });
 
     it('should reject file without flashbands', function(done) {

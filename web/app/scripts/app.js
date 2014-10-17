@@ -91,7 +91,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     'Missing UID.': 'Tag não informado.',
     'Duplicated Qrcode.': 'Qrcode duplicado',
     'Duplicated UID.': 'Tag duplicada',
-    'Number of pairs nonstandard.': 'Número de pares fora do padrão',
+    'Number of tag\'s pairs nonstandard.': 'Número de pares da tag fora do padrão',
     'Blocked Flashband': 'Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.',
     'Flashband ever associated': 'Opa, essa flashband está vinculada a um showgoer.',
     'Flashband not found.': 'Opa, essa flashband não está disponível.',

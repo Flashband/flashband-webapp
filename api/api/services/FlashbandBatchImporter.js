@@ -33,7 +33,7 @@ var validate = function(flashbands) {
 
         tags.push(flashband.tag);
       } else {
-        errors.push({line: i+2, error: 'Number of pairs nonstandard.'});
+        errors.push({line: i+2, error: 'Number of tag\'s pairs nonstandard.'});
       }
     } else {
       errors.push({line: i+2, error: 'Missing UID.'});
@@ -44,7 +44,7 @@ var validate = function(flashbands) {
         errors.push({line: i+2, error: 'Duplicated Qrcode.'});
       }
 
-      serials.push(flashband.serial);
+      if (flashband.serial) serials.push(flashband.serial);
     }
   }
 
