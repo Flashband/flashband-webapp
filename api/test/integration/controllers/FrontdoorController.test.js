@@ -5,7 +5,9 @@ var shared  = require('../shared-specs');
 var pwHash  = require('password-hash');
 var fbHelp  = require('../../helpers/FlashbandHelper');
 var fdHelp  = require('../../helpers/FrontdoorHelper');
+var sgHelp  = require('../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../helpers/DatabaseHelper');
+var expect = require('chai').use(require('chai-as-promised')).expect;
 
 var outputSuccessful;
 var inputSuccessful;
@@ -16,8 +18,8 @@ describe('FrontdoorController', function() {
   beforeEach(function(done) {
     args = {tag: '1234'};
     dbHelp.emptyModels([Entrance, Flashband]).then(function() {
-      inputSuccessful  = {door: 'in', message: 'Input successful.'};
-      outputSuccessful = {door: 'out', message: 'Output successful.'};
+      inputSuccessful  = {door: 'in', message: 'Input successful.', showgoer: null};
+      outputSuccessful = {door: 'out', message: 'Output successful.', showgoer: null};
 
       User.create({password: '123123123'}).then(function(user) {
         serialToken = pwHash.generate(user.id);
@@ -148,6 +150,31 @@ describe('FrontdoorController', function() {
       fbHelp.createSuccess().then(verifyRegister);
     });
 
+    it('should include showgoer when register a valid flashband', function (done) {
+      var flashband;
+      var verifyRegister = function() {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: flashband.tag})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function(err, response) {
+            if (err) {
+              done(err);
+            } else {
+              expect(response.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
+              done();
+            }
+          });
+      };
+
+      fbHelp.createSuccess().then(function(f) {
+        flashband = f;
+        sgHelp.create().then(function(showgoer) {
+          ShowgoerService.associate(showgoer.id, flashband.tag).then(verifyRegister).fail(done);
+        });
+      });
+    });
+
     it('should leave a valid flashband', function (done) {
       var verifyLeave = function(entrance) {
         request(sails.hooks.http.app)
@@ -160,6 +187,31 @@ describe('FrontdoorController', function() {
       };
 
       fdHelp.createEntrance().then(verifyLeave, done);
+    });
+
+    it('should include showgoer when leave a valid flashband', function (done) {
+      var entrance;
+      var verifyLeave = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: entrance.tag})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function(err, res) {
+            if (err) {
+              done(err);
+            } else {
+              expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
+              done();
+            }
+          });
+      };
+
+      fdHelp.createEntrance().then(function(e) {
+        entrance = e;
+        sgHelp.create().then(function(showgoer) {
+          ShowgoerService.associate(showgoer.id, entrance.tag).then(verifyLeave).fail(done);
+        });
+      });
     });
 
     it('should reject a invalid flashband', function (done) {
@@ -204,7 +256,8 @@ describe('FrontdoorController', function() {
           .post('/frontdoor/cross')
           .send({tag: entrance.tag})
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(function() {
+          .end(function(err) {
+            if (err) { return done(err); }
             request(sails.hooks.http.app)
               .post('/frontdoor/cross')
               .send({tag: entrance.tag})

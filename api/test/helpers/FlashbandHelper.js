@@ -8,6 +8,11 @@ var prepareArgs = function(tag, serial, blockedAt) {
 };
 
 module.exports = {
+
+  findOne: function(flashbandTag) {
+    return Flashband.findOne(flashbandTag);
+  },
+
   createBlocked: function(tag, serial) {
     var defer = q.defer();
     var args = prepareArgs(tag, serial, new Date());

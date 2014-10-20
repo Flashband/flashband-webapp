@@ -67,5 +67,9 @@ module.exports = {
         return flashband.save();
       });
     });
+  },
+
+  findOne: function(showGoerId) {
+    return Showgoer.findOne(showGoerId);
   }
 };

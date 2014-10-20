@@ -4,23 +4,23 @@ var getFlashbandTag = function(req) {
   return req.param('tag');
 };
 
-var inputSuccessful  = {door: 'in',  message: 'Input successful.'};
-var outputSuccessful = {door: 'out', message: 'Output successful.'};
+var inputSuccessful  = function(showgoer) { return {door: 'in',  message: 'Input successful.', showgoer: showgoer}; };
+var outputSuccessful = function(showgoer) { return {door: 'out', message: 'Output successful.', showgoer: showgoer}; };
 
 module.exports = {
   enter: function(req, res) {
     FrontdoorService.registerEnter(getFlashbandTag(req)).then(function() {
-      res.created(inputSuccessful);
-    }).fail(function(ranson) {
-      res.forbidden(ranson.message);
+      res.created(inputSuccessful(null));
+    }).fail(function(reason) {
+      res.forbidden(reason.message);
     });
   },
 
   leave: function(req, res) {
     FrontdoorService.registerLeave(getFlashbandTag(req)).then(function() {
-      res.created(outputSuccessful);
-    }).fail(function(ranson) {
-      res.forbidden(ranson.message);
+      res.created(outputSuccessful(null));
+    }).fail(function(reason) {
+      res.forbidden(reason.message);
     });
   },
 
@@ -29,13 +29,26 @@ module.exports = {
 
     FrontdoorService.checkRegistered(tag).then(function (inside) {
       FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag).then(function () {
-        if (inside) { return res.created(outputSuccessful); }
-        res.created(inputSuccessful);
-      }).fail(function(ranson) {
-        res.forbidden(ranson.message);
+        FlashbandService.findOne(tag).then(function(flashband) {
+          if (flashband.showgoer) {
+            ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
+              if (inside) { return res.created(outputSuccessful(showgoer)); }
+              res.created(inputSuccessful(showgoer));
+            }).fail(function(reason) {
+              res.forbidden(reason.message);
+            });
+          } else {
+            if (inside) { return res.created(outputSuccessful(null)); }
+            res.created(inputSuccessful(null));
+          }
+        }).fail(function(reason) {
+          res.forbidden(reason.message);
+        });
+      }).fail(function(reason) {
+        res.forbidden(reason.message);
       });
-    }).fail(function(ranson) {
-      res.forbidden(ranson.message);
+    }).fail(function(reason) {
+      res.forbidden(reason.message);
     });
   }
 };

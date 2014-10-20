@@ -24,7 +24,6 @@ module.exports = {
     return validate(flashbandUid).then(function(flashband) {
       return FrontdoorService.checkAlreadyOut(flashband.tag).then(function(alreadyOut) {
         if (alreadyOut) { throw new Error('Duplicated exit.'); }
-
         return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(entranceModel) {
           entranceModel.leave = new Date();
 
