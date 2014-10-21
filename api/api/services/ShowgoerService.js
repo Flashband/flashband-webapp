@@ -11,9 +11,7 @@ module.exports = {
         docNumber: showGoerParams.docNumber
       };
 
-      return Showgoer.create(showgoer).then(function(model) {
-        return model;
-      });
+      return Showgoer.create(showgoer);
     };
 
     return this.isValidForSave(showGoerParams).then(saveShowGoer);
