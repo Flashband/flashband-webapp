@@ -66,6 +66,8 @@
     "mocha-lcov-reporter": "0.0.1",
     "phantomjs": "^1.9.7-15",
     "sinon": "^1.10.3",
-    "supertest": "^0.13.0"
+    "supertest": "^0.13.0",
+    "winston": "^0.8.1",
+    "winston-mongodb": "^0.5.2"
   }
 }
