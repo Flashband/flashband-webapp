@@ -2,26 +2,19 @@
 
 var request = require('supertest');
 var shared  = require('../../shared-specs');
-var pwHash  = require('password-hash');
 var fbHelp  = require('../../../helpers/FlashbandHelper');
-var dbHelp  = require('../../../helpers/DatabaseHelper');
+var fbShared = require('./shared');
 
 describe('FlashbandController /flashband/{flashband.tag}/block', function() {
   var serialToken;
+  var getSerialToken = function(st) {
+    serialToken = st;
+  };
 
   shared.shoudRequestNotFound('/flashband/{flashband.tag}/block', ['GET', 'POST', 'DELETE']);
 
   describe('PUT', function() {
-    beforeEach(function(done) {
-      User.create({password: '123123123'}).exec(function(err, user) {
-        if (err) { return done(err); }
-        serialToken = pwHash.generate(user.id);
-        user.tokens.add({ token: serialToken });
-        user.save().then(function() {
-          dbHelp.emptyModels([Flashband, FlashbandBatch]).then(done).fail(done);
-        });
-      });
-    });
+    beforeEach(fbShared.handleSerialToken(getSerialToken));
 
     it ('should block an existing flashband', function(done) {
       fbHelp.createSuccess().then(function(validFlashband) {

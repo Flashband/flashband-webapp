@@ -1,30 +1,27 @@
 'use strict';
 
 var request = require('supertest');
-var pwHash  = require('password-hash');
 var shared  = require('../../shared-specs');
 var fdHelp  = require('../../../helpers/FrontdoorHelper');
 var sgHelp  = require('../../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 
-var outputSuccessful;
-var serialToken;
-
 describe('FrontdoorController /frontdoor/leave', function() {
+var serialToken;
+var outputSuccessful;
 
   shared.shoudRequestNotFound('/frontdoor/leave', ['GET', 'PUT', 'DELETE']);
 
   describe('POST', function() {
+    var getSerialToken = function(st) {
+      serialToken = st;
+    };
+    beforeEach(shared.authenticateAnd(getSerialToken));
     beforeEach(function(done) {
       dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(function() {
         outputSuccessful = {door: 'out', message: 'Output successful.', showgoer: null};
-
-        User.create({password: '123123123'}).then(function(user) {
-          serialToken = pwHash.generate(user.id);
-          user.tokens.add({ token: serialToken });
-          user.save(done);
-        }).fail(done);
+        done();
       }).fail(done);
     });
 

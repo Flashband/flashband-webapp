@@ -9,24 +9,24 @@ var sgHelp  = require('../../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 
-var inputSuccessful;
-var serialToken;
-
 describe('FrontdoorController /frontdoor/enter', function() {
+var serialToken;
+var inputSuccessful;
 
   shared.shoudRequestNotFound('/frontdoor/enter', ['GET', 'PUT', 'DELETE']);
 
   describe('POST', function() {
+    var getSerialToken = function(st) {
+      serialToken = st;
+    };
+
+    beforeEach(shared.authenticateAnd(getSerialToken));
+
     beforeEach(function(done) {
       dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(function() {
         inputSuccessful  = {door: 'in', message: 'Input successful.', showgoer: null};
-
-        User.create({password: '123123123'}).then(function(user) {
-          serialToken = pwHash.generate(user.id);
-          user.tokens.add({ token: serialToken });
-          user.save(done);
-        }).fail(done);
-      });
+        done();
+      }).fail(done);
     });
 
     it('should register a valid flashband', function (done) {

@@ -2,10 +2,9 @@
 
 var request = require('supertest');
 var shared  = require('../../shared-specs');
-var pwHash  = require('password-hash');
 var fbHelp  = require('../../../helpers/FlashbandHelper');
-var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect  = require('chai').use(require('chai-as-promised')).expect;
+var fbShared = require('./shared');
 
 describe('FlashbandController /flashband/enable', function() {
 
@@ -14,31 +13,20 @@ describe('FlashbandController /flashband/enable', function() {
   describe('with authenticated user', function() {
     var serialToken;
 
-    beforeEach(function(done) {
-      User.create({password: '123123123'}).exec(function(err, user) {
-        if (err) { return done(err); }
-        serialToken = pwHash.generate(user.id);
-        user.tokens.add({ token: serialToken });
-        user.save().then(function() {
-          dbHelp.emptyModels([Flashband, FlashbandBatch]).then(done).fail(done);
-        });
-      });
-    });
+    var getSerialToken = function(st) {
+      serialToken = st;
+    };
+
+    beforeEach(fbShared.handleSerialToken(getSerialToken));
 
     describe('POST', function() {
-      var importBatch;
-
-      beforeEach(function(done) {
-        importBatch = function(nameBatch, attachFile) {
-          return request(sails.hooks.http.app)
-            .post('/flashband/enable')
-            .attach('flashbands', 'test/fixtures/'.concat(attachFile))
-            .send({name: nameBatch})
-            .set('Authorization', 'Token token='.concat(serialToken));
-        };
-
-        done();
-      });
+      var importBatch = function(nameBatch, attachFile) {
+        return request(sails.hooks.http.app)
+          .post('/flashband/enable')
+          .attach('flashbands', 'test/fixtures/'.concat(attachFile))
+          .send({name: nameBatch})
+          .set('Authorization', 'Token token='.concat(serialToken));
+      };
 
       it ('should enable flashbands from valid file', function(done) {
         importBatch('1st flashband batch', 'one-valid-flashband.csv')
