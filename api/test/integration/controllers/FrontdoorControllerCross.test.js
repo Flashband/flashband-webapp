@@ -15,7 +15,7 @@ var serialToken;
 
 describe('FrontdoorController POST /frontdoor/cross', function() {
   beforeEach(function(done) {
-    dbHelp.emptyModels([Entrance, Flashband]).then(function() {
+    dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(function() {
       inputSuccessful  = {door: 'in', message: 'Input successful.', showgoer: null};
       outputSuccessful = {door: 'out', message: 'Output successful.', showgoer: null};
 
@@ -24,7 +24,7 @@ describe('FrontdoorController POST /frontdoor/cross', function() {
         user.tokens.add({ token: serialToken });
         user.save(done);
       }).fail(done);
-    });
+    }).fail(done);
   });
 
   shared.shoudRequestNotFound('/frontdoor/cross', ['GET', 'PUT', 'DELETE']);
@@ -40,7 +40,7 @@ describe('FrontdoorController POST /frontdoor/cross', function() {
         .end(done);
     };
 
-    fbHelp.createSuccess().then(verifyRegister);
+    fbHelp.createSuccess().then(verifyRegister).fail(done);
   });
 
   it('should include showgoer when register a valid flashband', function (done) {
@@ -76,7 +76,7 @@ describe('FrontdoorController POST /frontdoor/cross', function() {
         .end(done);
     };
 
-    fdHelp.createEntrance().then(verifyLeave, done);
+    fdHelp.createEntrance().then(verifyLeave).fail(done);
   });
 
   it('should include showgoer when leave a valid flashband', function (done) {
@@ -123,7 +123,7 @@ describe('FrontdoorController POST /frontdoor/cross', function() {
         .end(done);
     };
 
-    fdHelp.createEntranceAndBlocked().then(verifyFlashBandBlocked, done);
+    fdHelp.createEntranceAndBlocked().then(verifyFlashBandBlocked).fail(done);
   });
 
   it('should register a valid flashband after exit', function (done) {

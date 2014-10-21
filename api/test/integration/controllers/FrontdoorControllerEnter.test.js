@@ -14,7 +14,7 @@ var serialToken;
 
 describe('FrontdoorController POST /frontdoor/enter', function() {
   beforeEach(function(done) {
-    dbHelp.emptyModels([Entrance, Flashband]).then(function() {
+    dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(function() {
       inputSuccessful  = {door: 'in', message: 'Input successful.', showgoer: null};
 
       User.create({password: '123123123'}).then(function(user) {
@@ -59,9 +59,9 @@ describe('FrontdoorController POST /frontdoor/enter', function() {
     fbHelp.createSuccess().then(function(f) {
       flashband = f;
       sgHelp.create().then(function(showgoer) {
-        ShowgoerService.associate(showgoer.id, flashband.tag).then(verifyRegister, done);
-      }, done);
-    }, done);
+        ShowgoerService.associate(showgoer.id, flashband.tag).then(verifyRegister).fail(done);
+      }).fail(done);
+    }).fail(done);
   });
 
   it('should reject a invalid flashband', function (done) {
@@ -83,7 +83,7 @@ describe('FrontdoorController POST /frontdoor/enter', function() {
         .end(done);
     };
 
-    fdHelp.createEntrance().then(verifyDuplicated, done);
+    fdHelp.createEntrance().then(verifyDuplicated).fail(done);
   });
 
   it('should reject blocked flashband', function (done) {
