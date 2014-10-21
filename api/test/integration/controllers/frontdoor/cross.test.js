@@ -1,12 +1,12 @@
 'use strict';
 
 var request = require('supertest');
-var shared  = require('../shared-specs');
 var pwHash  = require('password-hash');
-var fbHelp  = require('../../helpers/FlashbandHelper');
-var fdHelp  = require('../../helpers/FrontdoorHelper');
-var sgHelp  = require('../../helpers/ShowgoerHelper');
-var dbHelp  = require('../../helpers/DatabaseHelper');
+var shared  = require('../../shared-specs');
+var fbHelp  = require('../../../helpers/FlashbandHelper');
+var fdHelp  = require('../../../helpers/FrontdoorHelper');
+var sgHelp  = require('../../../helpers/ShowgoerHelper');
+var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 
 var outputSuccessful;
