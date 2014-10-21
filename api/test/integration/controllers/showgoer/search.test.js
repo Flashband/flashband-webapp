@@ -3,8 +3,9 @@
 var request        = require('supertest');
 var passwordHash   = require('password-hash');
 var expect         = require('chai').expect;
-var ShowgoerHelper = require('../../helpers/ShowgoerHelper');
-var databaseHelper = require('../../helpers/DatabaseHelper');
+var ShowgoerHelper = require('../../../helpers/ShowgoerHelper');
+var databaseHelper = require('../../../helpers/DatabaseHelper');
+var shared = require('../../shared-specs');
 
 describe('ShowgoerController', function() {
   var serialToken;
@@ -22,39 +23,9 @@ describe('ShowgoerController', function() {
       });
     });
 
-    describe('GET /showgoer', function() {
-      it ('should be ok', function(done) {
-        request(sails.hooks.http.app)
-          .get('/showgoer/')
-          .expect('Content-Type', /application\/json/)
-          .expect(200)
-          .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
-      });
+    shared.shoudRequestNotFound('/showgoer/search/', ['POST', 'PUT', 'DELETE']);
 
-      it ('should list showgoers', function(done) {
-        ShowgoerHelper.create({ name: 'Fulano de Tal', docType: 'cpf', docNumber: '111.111.111-11' }).then(function() {
-          request(sails.hooks.http.app)
-            .get('/showgoer/')
-            .set('Authorization', 'Token token='.concat(serialToken))
-            .end(function(err, res) {
-              if (err) { return done(err); }
-
-              var showgoers = res.body;
-              expect(showgoers).to.have.length(1, 'Wrong number of showgoers');
-
-              var showgoer = showgoers[0];
-              expect(showgoer).to.have.property('name', 'Fulano de Tal');
-              expect(showgoer).to.have.property('docType', 'cpf');
-              expect(showgoer).to.have.property('docNumber', '111.111.111-11');
-              expect(showgoer).to.have.property('id');
-              expect(showgoer).to.have.property('createdAt');
-              expect(showgoer).to.have.property('updatedAt');
-              done();
-            });
-        }).fail(done);
-      });
-
+    describe('GET /showgoer/search/s={term}', function() {
       it ('should filter by name', function(done) {
         var showgoer1 = { name: 'Fulano de Tal', docType: 'cpf', docNumber: '222.222.222-22' };
         var showgoer2 = { name: 'Beltrano de Tal', docType: 'cpf', docNumber: '333.333.333-33' };

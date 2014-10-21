@@ -32,7 +32,7 @@ var send = {
 
 module.exports.shoudRequestNotFound = function(path, verbs) {
   aSync.map(verbs, function(verb) {
-    it ('should request not found (404) on ' + verb + ' ' + path, function(done) {
+    it ('should respond Not Found (404) for ' + verb + ' ' + path, function(done) {
       send[verb](path, done);
     });
   });
