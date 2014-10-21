@@ -7,7 +7,7 @@ var ShowgoerHelper = require('../../../helpers/ShowgoerHelper');
 var databaseHelper = require('../../../helpers/DatabaseHelper');
 var shared = require('../../shared-specs');
 
-describe('ShowgoerController', function() {
+describe('ShowgoerController /showgoer', function() {
   var serialToken;
 
   describe('with authenticated user', function() {
@@ -25,7 +25,7 @@ describe('ShowgoerController', function() {
 
     shared.shoudRequestNotFound('/showgoer/', ['PUT', 'DELETE']);
 
-    describe('GET /showgoer', function() {
+    describe('GET', function() {
       it ('should be ok', function(done) {
         request(sails.hooks.http.app)
           .get('/showgoer/')

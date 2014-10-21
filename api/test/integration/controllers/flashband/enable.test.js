@@ -7,12 +7,13 @@ var fbHelp  = require('../../../helpers/FlashbandHelper');
 var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect  = require('chai').use(require('chai-as-promised')).expect;
 
-describe('FlashbandController', function() {
-  var serialToken;
+describe('FlashbandController /flashband/enable', function() {
 
   shared.shoudRequestNotFound('/flashband/enable', ['PUT', 'DELETE']);
 
   describe('with authenticated user', function() {
+    var serialToken;
+
     beforeEach(function(done) {
       User.create({password: '123123123'}).exec(function(err, user) {
         if (err) { return done(err); }
@@ -24,7 +25,7 @@ describe('FlashbandController', function() {
       });
     });
 
-    describe('POST /flashband/enable', function() {
+    describe('POST', function() {
       var importBatch;
 
       beforeEach(function(done) {
@@ -66,7 +67,7 @@ describe('FlashbandController', function() {
       });
     });
 
-    describe('GET /flashband/enable', function() {
+    describe('GET', function() {
       it('should return total of enabled flashbands', function(done) {
         fbHelp.createSuccess().then(function() {
           request(sails.hooks.http.app)

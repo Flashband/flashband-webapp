@@ -5,11 +5,11 @@ var shared = require('../../shared-specs');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 var uHelper = require('../../../helpers/UserHelper');
 
-describe('AuthenticateController', function() {
+describe('AuthenticateController /authenticate', function() {
 
   shared.shoudRequestNotFound('/authenticate', ['GET', 'PUT', 'DELETE']);
 
-  describe('POST /authenticate', function() {
+  describe('POST', function() {
     it('should allow authentication with valid user data', function (done) {
       var verifyAuthenticate = function(err, user) {
         if (err) return done(err);
