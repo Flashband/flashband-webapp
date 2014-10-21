@@ -50,13 +50,10 @@ describe('FrontdoorController POST /frontdoor/cross', function() {
         .post('/frontdoor/cross')
         .send({tag: flashband.tag})
         .set('Authorization', 'Token token='.concat(serialToken))
-        .end(function(err, response) {
-          if (err) {
-            done(err);
-          } else {
-            expect(response.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
-            done();
-          }
+        .end(function(err, res) {
+          if (err) return done(err);
+          expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
+          done();
         });
     };
 

@@ -9,8 +9,22 @@ var outputSuccessful = function(showgoer) { return {door: 'out', message: 'Outpu
 
 module.exports = {
   enter: function(req, res) {
-    FrontdoorService.registerEnter(getFlashbandTag(req)).then(function() {
-      res.created(inputSuccessful(null));
+    var tag = getFlashbandTag(req);
+    FrontdoorService.registerEnter(tag).then(function() {
+      FlashbandService.findOne(tag).then(function(flashband) {
+        if (flashband.showgoer) {
+          ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
+            res.created(inputSuccessful(showgoer));
+          }).fail(function(reason) {
+            res.forbidden(reason.message);
+          });
+        } else {
+          res.created(inputSuccessful(null));
+        }
+
+      }).fail(function(reason) {
+        res.forbidden(reason.message);
+      });
     }).fail(function(reason) {
       res.forbidden(reason.message);
     });

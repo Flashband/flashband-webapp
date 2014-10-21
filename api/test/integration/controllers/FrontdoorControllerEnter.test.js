@@ -5,7 +5,9 @@ var shared  = require('../shared-specs');
 var pwHash  = require('password-hash');
 var fbHelp  = require('../../helpers/FlashbandHelper');
 var fdHelp  = require('../../helpers/FrontdoorHelper');
+var sgHelp  = require('../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../helpers/DatabaseHelper');
+var expect = require('chai').use(require('chai-as-promised')).expect;
 
 var inputSuccessful;
 var serialToken;
@@ -37,6 +39,29 @@ describe('FrontdoorController POST /frontdoor/enter', function() {
     };
 
     fbHelp.createSuccess().then(verifyRegister);
+  });
+
+  it('should include showgoer when register a valid flashband', function (done) {
+    var flashband;
+    var verifyRegister = function() {
+      request(sails.hooks.http.app)
+        .post('/frontdoor/enter')
+        .send({tag: flashband.tag})
+        .set('Authorization', 'Token token='.concat(serialToken))
+        .end(function(err, res) {
+          if (err) return done(err);
+          expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
+          done();
+        });
+    };
+
+    fbHelp.createSuccess().then(verifyRegister);
+    fbHelp.createSuccess().then(function(f) {
+      flashband = f;
+      sgHelp.create().then(function(showgoer) {
+        ShowgoerService.associate(showgoer.id, flashband.tag).then(verifyRegister, done);
+      }, done);
+    }, done);
   });
 
   it('should reject a invalid flashband', function (done) {
