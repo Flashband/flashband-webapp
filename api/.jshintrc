@@ -52,6 +52,7 @@
     "before": false,
     "after": false,
     "afterEach": false,
-    "ShowogerService": false
+    "ShowogerService": false,
+    "_": false
   }
 }

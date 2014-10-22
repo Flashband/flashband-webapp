@@ -33,7 +33,7 @@ var inputSuccessful;
       var verifyRegister = function(flashband) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: flashband.tag})
+          .send({tag: flashband.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, inputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -48,7 +48,7 @@ var inputSuccessful;
       var verifyRegister = function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: flashband.tag})
+          .send({tag: flashband.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(function(err, res) {
             if (err) return done(err);
@@ -69,7 +69,7 @@ var inputSuccessful;
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/enter')
-        .send({tag: '123123123123'})
+        .send({tag: '123123123123', zone: '1'})
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -79,7 +79,7 @@ var inputSuccessful;
       var verifyDuplicated = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Duplicated entrance.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -92,13 +92,73 @@ var inputSuccessful;
       var verifyFlashBandBlocked = function(flashBlocked ) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: flashBlocked.tag})
+          .send({tag: flashBlocked.tag, zone: '1'})
           .expect(403, 'Blocked flashband.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
       fbHelp.createBlocked().then(verifyFlashBandBlocked);
+    });
+
+    it('should reject when zone not filled', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag})
+          .expect(403, 'Zone not filled.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+    });
+
+    it('should allow entrance when zone is different', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag, zone: '1'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/enter')
+              .send({tag: entrance.tag, zone: '2'})
+              .expect('Content-type', /application\/json/)
+              .expect(201, inputSuccessful)
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(done);
+          });
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+    });
+
+    it('should leave old entrance when entrance in different zone', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: entrance.tag, zone: '1'})
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function() {
+            request(sails.hooks.http.app)
+              .post('/frontdoor/enter')
+              .send({tag: entrance.tag, zone: '2'})
+              .set('Authorization', 'Token token='.concat(serialToken))
+              .end(function() {
+                Entrance.findOne({tag: entrance.tag, zone: '1'}).then(function (oldEntrance) {
+                  expect(oldEntrance.leave).to.be.ok;
+
+                  Entrance.findOne({tag: entrance.tag, zone: '2'}).then(function (actualEntrance) {
+                    expect(actualEntrance.leave).to.not.be.ok;
+                    done();
+                  });
+                });
+              });
+          });
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
     });
   });
 });

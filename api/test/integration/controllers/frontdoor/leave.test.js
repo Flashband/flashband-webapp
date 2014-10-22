@@ -2,6 +2,7 @@
 
 var request = require('supertest');
 var shared  = require('../../shared-specs');
+var fbHelp  = require('../../../helpers/FlashbandHelper');
 var fdHelp  = require('../../../helpers/FrontdoorHelper');
 var sgHelp  = require('../../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../../helpers/DatabaseHelper');
@@ -29,7 +30,7 @@ var outputSuccessful;
       var verifyLeave = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
           .expect(201, outputSuccessful)
           .set('Authorization', 'Token token='.concat(serialToken))
@@ -44,7 +45,7 @@ var outputSuccessful;
       var verifyLeave = function() {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(function(err, res) {
             if (err) return done(err);
@@ -64,7 +65,7 @@ var outputSuccessful;
     it('should reject a invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/leave')
-        .send({tag: '123123123123'})
+        .send({tag: '123123123123', zone: '1'})
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
@@ -74,7 +75,7 @@ var outputSuccessful;
       var verifyFlashBandBlocked = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Blocked flashband.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
@@ -87,13 +88,26 @@ var outputSuccessful;
       var verifyDuplicated = function(entrance) {
         request(sails.hooks.http.app)
           .post('/frontdoor/leave')
-          .send({tag: entrance.tag})
+          .send({tag: entrance.tag, zone: '1'})
           .expect(403, 'Duplicated exit.')
           .set('Authorization', 'Token token='.concat(serialToken))
           .end(done);
       };
 
       fdHelp.createLeave().then(verifyDuplicated).fail(done);
+    });
+
+    it('should reject when zone not filled', function (done) {
+      var verifyZoneEmpty = function(entrance) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/leave')
+          .send({tag: entrance.tag})
+          .expect(403, 'Zone not filled.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fbHelp.createSuccess().then(verifyZoneEmpty, done);
     });
   });
 });

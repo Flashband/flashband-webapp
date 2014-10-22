@@ -1,7 +1,10 @@
 'use strict';
 
-var getFlashbandTag = function(req) {
-  return req.param('tag');
+var getFlashbandArgs = function(req) {
+  return {
+    tag: req.param('tag'),
+    zone: req.param('zone')
+  };
 };
 
 var inputSuccessful  = function(showgoer) { return {door: 'in',  message: 'Input successful.', showgoer: showgoer}; };
@@ -9,9 +12,9 @@ var outputSuccessful = function(showgoer) { return {door: 'out', message: 'Outpu
 
 module.exports = {
   enter: function(req, res) {
-    var tag = getFlashbandTag(req);
-    FrontdoorService.registerEnter(tag).then(function() {
-      FlashbandService.findOne(tag).then(function(flashband) {
+    var args = getFlashbandArgs(req);
+    FrontdoorService.registerEnter(args).then(function() {
+      FlashbandService.findOne(args.tag).then(function(flashband) {
         if (flashband.showgoer) {
           ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
             res.created(inputSuccessful(showgoer));
@@ -30,9 +33,9 @@ module.exports = {
   },
 
   leave: function(req, res) {
-    var tag = getFlashbandTag(req);
-    FrontdoorService.registerLeave(tag).then(function() {
-      FlashbandService.findOne(tag).then(function(flashband) {
+    var args = getFlashbandArgs(req);
+    FrontdoorService.registerLeave(args).then(function() {
+      FlashbandService.findOne(args.tag).then(function(flashband) {
         if (flashband.showgoer) {
           ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
             res.created(outputSuccessful(showgoer));
@@ -51,11 +54,11 @@ module.exports = {
   },
 
   cross: function(req, res) {
-    var tag = getFlashbandTag(req);
+    var args = getFlashbandArgs(req);
 
-    FrontdoorService.checkRegistered(tag).then(function (inside) {
-      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](tag).then(function () {
-        FlashbandService.findOne(tag).then(function(flashband) {
+    FrontdoorService.checkRegistered(args).then(function (inside) {
+      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](args).then(function () {
+        FlashbandService.findOne(args.tag).then(function(flashband) {
           if (flashband.showgoer) {
             ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
               if (inside) { return res.created(outputSuccessful(showgoer)); }

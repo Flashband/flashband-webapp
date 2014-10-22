@@ -54,9 +54,7 @@ module.exports = {
   },
 
   deleteAllFlashbands: function() {
-    return Flashband.update({imported: true}, {imported: false}).then(function(updateds) {
-      return updateds;
-    });
+    return Flashband.update({imported: true}, {imported: false});
   },
 
   enable: function(flashbands, name, file) {

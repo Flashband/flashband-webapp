@@ -12,12 +12,12 @@ describe('FrontdoorService', function() {
 
     it('should create an Entrance', function (done) {
       fbHelp.createSuccess().then(function verifyRegisterEntrance(flashband) {
-        expect(FrontdoorService.registerEnter(flashband.tag)).to.eventually.have.property('tag', flashband.tag).and.notify(done);
+        expect(FrontdoorService.registerEnter({tag: flashband.tag, zone: '1'})).to.eventually.have.property('tag', flashband.tag).and.notify(done);
       }, done);
     });
 
     it('should not register entrance when non existing flashband', function (done) {
-      expect(FrontdoorService.registerEnter('5678')).to.be.rejectedWith('Flashband not found.').and.notify(done);
+      expect(FrontdoorService.registerEnter({tag: '5678', zone: '1'})).to.be.rejectedWith('Flashband not found.').and.notify(done);
     });
   });
 });

@@ -1,49 +1,50 @@
 'use strict';
 
-var validate = function(flashbandUid) {
-  return FlashbandService.exists(flashbandUid).then(function(flashband) {
+var validate = function(args) {
+  return FlashbandService.exists(args.tag).then(function(flashband) {
     if (flashband.blocked()) { throw new Error('Blocked flashband.'); }
+    return flashband;
+  }).then(function(flashband) {
+    if (!args.zone) { throw new Error('Zone not filled.'); }
     return flashband;
   });
 };
 
 module.exports = {
-  registerEnter: function(flashbandUid) {
-    return validate(flashbandUid).then(function(flashband) {
-      return FrontdoorService.checkRegistered(flashband.tag).then(function(registered) {
+  registerEnter: function(args) {
+    return validate(args).then(function() {
+      return FrontdoorService.checkRegistered(args).then(function(registered) {
         if (registered) { throw new Error('Duplicated entrance.'); }
 
-        return Entrance.create({ tag: flashbandUid }).then(function(entranceModel) {
-          return entranceModel;
+        return Entrance.update({ tag: args.tag, leave: null }, { leave: new Date() }).then(function() {
+          return Entrance.create(args);
         });
       });
     });
   },
 
-  registerLeave: function(flashbandUid) {
-    return validate(flashbandUid).then(function(flashband) {
-      return FrontdoorService.checkAlreadyOut(flashband.tag).then(function(alreadyOut) {
+  registerLeave: function(args) {
+    return validate(args).then(function() {
+      return FrontdoorService.checkAlreadyOut(args).then(function(alreadyOut) {
         if (alreadyOut) { throw new Error('Duplicated exit.'); }
-        return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(entranceModel) {
-          entranceModel.leave = new Date();
 
-          return entranceModel.save().then(function(mdl) {
-            return mdl;
-          });
+        return Entrance.findOne({ tag: args.tag, zone: args.zone, leave: null }).then(function(entranceModel) {
+          entranceModel.leave = new Date();
+          return entranceModel.save();
         });
       });
     });
   },
 
-  checkRegistered: function(flashbandUid) {
-    return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(found) {
+  checkRegistered: function(args) {
+    return Entrance.findOne({ tag: args.tag, zone: args.zone, leave: null }).then(function(found) {
       return Boolean(found);
     });
   },
 
-  checkAlreadyOut: function(flashbandUid) {
-    return Entrance.findOne({ tag: flashbandUid, leave: null }).then(function(found) {
-      return !Boolean(found);
+  checkAlreadyOut: function(args) {
+    return this.checkRegistered(args).then(function(found) {
+      return !found;
     });
   }
 };
