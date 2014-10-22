@@ -13,20 +13,8 @@ var outputSuccessful = function(showgoer) { return {door: 'out', message: 'Outpu
 module.exports = {
   enter: function(req, res) {
     var args = getFlashbandArgs(req);
-    FrontdoorService.registerEnter(args).then(function() {
-      FlashbandService.findOne(args.tag).then(function(flashband) {
-        if (flashband.showgoer) {
-          ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
-            res.created(inputSuccessful(showgoer));
-          }).fail(function(reason) {
-            res.forbidden(reason.message);
-          });
-        } else {
-          res.created(inputSuccessful(null));
-        }
-      }).fail(function(reason) {
-        res.forbidden(reason.message);
-      });
+    FrontdoorService.registerEnter(args).then(function(entrance) {
+      res.created(inputSuccessful(entrance.showgoer));
     }).fail(function(reason) {
       res.forbidden(reason.message);
     });
@@ -34,20 +22,8 @@ module.exports = {
 
   leave: function(req, res) {
     var args = getFlashbandArgs(req);
-    FrontdoorService.registerLeave(args).then(function() {
-      FlashbandService.findOne(args.tag).then(function(flashband) {
-        if (flashband.showgoer) {
-          ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
-            res.created(outputSuccessful(showgoer));
-          }).fail(function(reason) {
-            res.forbidden(reason.message);
-          });
-        } else {
-          res.created(outputSuccessful(null));
-        }
-      }).fail(function(reason) {
-        res.forbidden(reason.message);
-      });
+    FrontdoorService.registerLeave(args).then(function(entrance) {
+      res.created(outputSuccessful(entrance.showgoer));
     }).fail(function(reason) {
       res.forbidden(reason.message);
     });
@@ -57,22 +33,9 @@ module.exports = {
     var args = getFlashbandArgs(req);
 
     FrontdoorService.checkRegistered(args).then(function (inside) {
-      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](args).then(function () {
-        FlashbandService.findOne(args.tag).then(function(flashband) {
-          if (flashband.showgoer) {
-            ShowgoerService.findOne(flashband.showgoer).then(function(showgoer) {
-              if (inside) { return res.created(outputSuccessful(showgoer)); }
-              res.created(inputSuccessful(showgoer));
-            }).fail(function(reason) {
-              res.forbidden(reason.message);
-            });
-          } else {
-            if (inside) { return res.created(outputSuccessful(null)); }
-            res.created(inputSuccessful(null));
-          }
-        }).fail(function(reason) {
-          res.forbidden(reason.message);
-        });
+      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](args).then(function (entrance) {
+        if (inside) { return res.created(outputSuccessful(entrance.showgoer)); }
+        res.created(inputSuccessful(entrance.showgoer));
       }).fail(function(reason) {
         res.forbidden(reason.message);
       });

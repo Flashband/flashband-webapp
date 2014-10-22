@@ -23,8 +23,8 @@ describe('FrontdoorService', function() {
         var promise = FrontdoorService.registerLeave({tag: entrance.tag, zone: '1'});
 
         Q.all([
-          promise.should.eventually.have.property('leave'),
-          promise.should.eventually.have.property('tag', entrance.tag)
+          promise.should.eventually.have.property('entrance').that.have.property('leave'),
+          promise.should.eventually.have.property('entrance').that.have.property('tag', entrance.tag)
         ]).should.notify(done);
       };
 

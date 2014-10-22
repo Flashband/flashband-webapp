@@ -1,7 +1,6 @@
 'use strict';
 
 var Sails = require('sails');
-var databaseHelper = require('./helpers/DatabaseHelper');
 
 before(function(done) {
   Sails.lift({
@@ -10,10 +9,6 @@ before(function(done) {
       migrate: 'drop'
     }
   }, done);
-});
-
-beforeEach(function(done) {
-  databaseHelper.emptyModels(sails.models).finally(done);
 });
 
 after(function(done) {

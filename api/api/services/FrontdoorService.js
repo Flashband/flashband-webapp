@@ -15,25 +15,33 @@ var validate = function(args) {
 
 module.exports = {
   registerEnter: function(args) {
-    return validate(args).then(function() {
+    return validate(args).then(function(flashband) {
       return FrontdoorService.checkRegistered(args).then(function(registered) {
         if (registered) { throw new Error('Duplicated entrance.'); }
 
         return Entrance.update({ tag: args.tag, leave: null }, { leave: new Date() }).then(function() {
-          return Entrance.create(args);
+          return Showgoer.findOne(flashband.showgoer).then(function(showgoer) {
+            return Entrance.create(args).then(function(entrance) {
+              return { entrance: entrance, showgoer: showgoer };
+            });
+          });
         });
       });
     });
   },
 
   registerLeave: function(args) {
-    return validate(args).then(function() {
+    return validate(args).then(function(flashband) {
       return FrontdoorService.checkAlreadyOut(args).then(function(alreadyOut) {
         if (alreadyOut) { throw new Error('Duplicated exit.'); }
 
-        return Entrance.findOne({ tag: args.tag, zone: args.zone, leave: null }).then(function(entranceModel) {
-          entranceModel.leave = new Date();
-          return entranceModel.save();
+        return Entrance.findOne({ tag: args.tag, zone: args.zone, leave: null }).then(function(entranceToLeave) {
+          return Showgoer.findOne(flashband.showgoer).then(function(showgoer) {
+          entranceToLeave.leave = new Date();
+          return entranceToLeave.save().then(function(entrance) {
+              return { entrance: entrance, showgoer: showgoer };
+            });
+          });
         });
       });
     });

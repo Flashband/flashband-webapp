@@ -40,8 +40,8 @@ describe('FrontdoorService', function() {
         var promisedEntrance = FrontdoorService.registerEnter({tag: flashSuccess.tag, zone: '1'});
 
         Q.all([
-          promisedEntrance.should.eventually.have.property('id'),
-          promisedEntrance.should.eventually.have.property('tag', flashSuccess.tag)
+          promisedEntrance.should.eventually.have.property('entrance').that.have.property('id'),
+          promisedEntrance.should.eventually.have.property('entrance').that.have.property('tag', flashSuccess.tag)
         ]).should.notify(done);
       };
       fbHelp.createSuccess().then(function(flashband) {
