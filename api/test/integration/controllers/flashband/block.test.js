@@ -4,6 +4,7 @@ var request = require('supertest');
 var shared  = require('../../shared-specs');
 var fbHelp  = require('../../../helpers/FlashbandHelper');
 var fbShared = require('./shared');
+var expect = require('chai').expect;
 
 describe('FlashbandController /flashband/{flashband.tag}/block', function() {
   var serialToken;
@@ -16,13 +17,33 @@ describe('FlashbandController /flashband/{flashband.tag}/block', function() {
   describe('PUT', function() {
     beforeEach(fbShared.handleSerialToken(getSerialToken));
 
-    it ('should block an existing flashband', function(done) {
+    it ('should block an existing unassociated flashband', function(done) {
       fbHelp.createSuccess().then(function(validFlashband) {
         request(sails.hooks.http.app)
           .put('/flashband/' + validFlashband.tag + '/block')
-          .expect(200, { message: 'Flashband blocked.' })
+          .expect(200)
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
+          .end(function(err, res) {
+            if (err) return done(err);
+            expect(res.body).to.have.property('message', 'Flashband blocked.');
+            expect(res.body).to.not.have.property('showgoer');
+            done();
+          });
+      }).fail(done);
+    });
+
+    it ('should block an existing associated flashband', function(done) {
+      fbHelp.createAssociated().then(function(validFlashband) {
+        request(sails.hooks.http.app)
+          .put('/flashband/' + validFlashband.tag + '/block')
+          .expect(200)
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(function(err, res) {
+            if (err) return done(err);
+            expect(res.body).to.have.property('message', 'Flashband blocked.');
+            expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
+            done();
+          });
       }).fail(done);
     });
 
