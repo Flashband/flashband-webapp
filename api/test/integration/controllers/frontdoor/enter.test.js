@@ -1,17 +1,15 @@
 'use strict';
 
 var request = require('supertest');
-var pwHash  = require('password-hash');
 var shared  = require('../../shared-specs');
+var fdShared = require('./shared');
 var fbHelp  = require('../../../helpers/FlashbandHelper');
 var fdHelp  = require('../../../helpers/FrontdoorHelper');
-var sgHelp  = require('../../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 
 describe('FrontdoorController /frontdoor/enter', function() {
 var serialToken;
-var inputSuccessful;
 
   shared.shoudRequestNotFound('/frontdoor/enter', ['GET', 'PUT', 'DELETE']);
 
@@ -21,12 +19,8 @@ var inputSuccessful;
     };
 
     beforeEach(shared.authenticateAnd(getSerialToken));
-
     beforeEach(function(done) {
-      dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(function() {
-        inputSuccessful  = {door: 'in', message: 'Input successful.', showgoer: null};
-        done();
-      }).fail(done);
+      dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(done).fail(done);
     });
 
     it('should register a valid flashband', function (done) {
@@ -35,44 +29,34 @@ var inputSuccessful;
           .post('/frontdoor/enter')
           .send({tag: flashband.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
-          .expect(201, inputSuccessful)
+          .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
+          .end(fdShared.verifySuccessfulEnter(done));
       };
 
-      fbHelp.createSuccess().then(verifyRegister);
+      fbHelp.createAssociated().then(verifyRegister);
     });
 
-    it('should include showgoer when register a valid flashband', function (done) {
-      var flashband;
-      var verifyRegister = function() {
-        request(sails.hooks.http.app)
-          .post('/frontdoor/enter')
-          .send({tag: flashband.tag, zone: '1'})
-          .set('Authorization', 'Token token='.concat(serialToken))
-          .end(function(err, res) {
-            if (err) return done(err);
-            expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
-            done();
-          });
-      };
-
-      fbHelp.createSuccess().then(verifyRegister);
-      fbHelp.createSuccess().then(function(f) {
-        flashband = f;
-        sgHelp.create().then(function(showgoer) {
-          ShowgoerService.associate(showgoer.id, flashband.tag).then(verifyRegister).fail(done);
-        }).fail(done);
-      }).fail(done);
-    });
-
-    it('should reject a invalid flashband', function (done) {
+    it('should reject an invalid flashband', function (done) {
       request(sails.hooks.http.app)
         .post('/frontdoor/enter')
         .send({tag: '123123123123', zone: '1'})
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
+    });
+
+    it('should reject an unassociated flashband', function (done) {
+      var verifyUnassociated = function(flashband) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/enter')
+          .send({tag: flashband.tag, zone: '1'})
+          .expect(403, 'Flashband not associated.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fbHelp.createSuccess().then(verifyUnassociated).fail(done);
     });
 
     it('should reject duplicated flashband', function (done) {
@@ -125,31 +109,33 @@ var inputSuccessful;
               .post('/frontdoor/enter')
               .send({tag: entrance.tag, zone: '2'})
               .expect('Content-type', /application\/json/)
-              .expect(201, inputSuccessful)
+              .expect(201)
               .set('Authorization', 'Token token='.concat(serialToken))
-              .end(done);
+              .end(fdShared.verifySuccessfulEnter(done));
           });
       };
 
-      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+      fbHelp.createAssociated().then(verifyZoneEmpty, done);
     });
 
     it('should leave old entrance when entrance in different zone', function (done) {
-      var verifyZoneEmpty = function(entrance) {
+      var verifyZoneEmpty = function(flashband) {
         request(sails.hooks.http.app)
           .post('/frontdoor/enter')
-          .send({tag: entrance.tag, zone: '1'})
+          .send({tag: flashband.tag, zone: '1'})
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(function() {
+          .end(function(err) {
+            if (err) return done(err);
             request(sails.hooks.http.app)
               .post('/frontdoor/enter')
-              .send({tag: entrance.tag, zone: '2'})
+              .send({tag: flashband.tag, zone: '2'})
               .set('Authorization', 'Token token='.concat(serialToken))
-              .end(function() {
-                Entrance.findOne({tag: entrance.tag, zone: '1'}).then(function (oldEntrance) {
+              .end(function(err) {
+                if (err) return done(err);
+                Entrance.findOne({tag: flashband.tag, zone: '1'}).then(function (oldEntrance) {
                   expect(oldEntrance.leave).to.be.ok;
 
-                  Entrance.findOne({tag: entrance.tag, zone: '2'}).then(function (actualEntrance) {
+                  Entrance.findOne({tag: flashband.tag, zone: '2'}).then(function (actualEntrance) {
                     expect(actualEntrance.leave).to.not.be.ok;
                     done();
                   });
@@ -158,7 +144,7 @@ var inputSuccessful;
           });
       };
 
-      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+      fbHelp.createAssociated().then(verifyZoneEmpty).fail(done);
     });
   });
 });

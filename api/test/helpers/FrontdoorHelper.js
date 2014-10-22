@@ -2,11 +2,15 @@
 
 var fbHelp = require('./FlashbandHelper');
 
+var throwErr = function(err) {
+  throw err;
+};
+
 module.exports = {
   createEntrance: function() {
-    return fbHelp.createSuccess().then(function(flashSuccess) {
-      return Entrance.create({tag: flashSuccess.tag, zone: '1'});
-    });
+    return fbHelp.createAssociated().then(function(flashband) {
+      return Entrance.create({tag: flashband.tag, zone: '1'});
+    }).fail(throwErr);
   },
 
   createEntranceAndBlocked: function() {
@@ -14,8 +18,8 @@ module.exports = {
       return Flashband.findOne({tag: entrance.tag}).then(function(flashband) {
         flashband.blockedAt = new Date();
         return flashband.save();
-      });
-    });
+      }).fail(throwErr);
+    }).fail(throwErr);
   },
 
   createLeave: function() {

@@ -1,5 +1,7 @@
 'use strict';
 
+var sgHelp = require('./ShowgoerHelper');
+
 var q = require('q');
 var prepareArgs = function(tag, serial, blockedAt) {
   var newTag = tag ? tag : ''.concat((new Date()).getTime());
@@ -10,7 +12,7 @@ var prepareArgs = function(tag, serial, blockedAt) {
 module.exports = {
 
   findOne: function(flashbandTag) {
-    return Flashband.findOne(flashbandTag);
+    return Flashband.findOne({tag: flashbandTag});
   },
 
   createBlocked: function(tag, serial) {
@@ -29,5 +31,15 @@ module.exports = {
       defer.resolve(flashband);
     });
     return defer.promise;
+  },
+
+  createAssociated: function() {
+    return this.createSuccess().then(function(flashband) {
+      return sgHelp.create().then(function(showgoer) {
+        return ShowgoerService.associate(showgoer.id, flashband.tag).then(function() {
+          return flashband;
+        });
+      });
+    });
   }
 };

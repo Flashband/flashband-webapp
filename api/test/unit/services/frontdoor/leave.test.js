@@ -2,6 +2,7 @@
 
 var Q = require('q');
 var fdHelp = require('../../../helpers/FrontdoorHelper');
+var fbHelp = require('../../../helpers/FlashbandHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerLeave', function() {
@@ -36,6 +37,15 @@ describe('FrontdoorService', function() {
       };
 
       fdHelp.createLeave().then(verifyDuplicated, done);
+    });
+
+    it('should not register leave when flashband is not associated', function (done) {
+      var verifyLeave = function(flashband) {
+        var promisedEntrance = FrontdoorService.registerLeave({tag: flashband.tag, zone: '1'});
+        promisedEntrance.should.be.rejectedWith('Flashband not associated.').and.notify(done);
+      };
+
+      fbHelp.createSuccess().then(verifyLeave, done);
     });
   });
 });

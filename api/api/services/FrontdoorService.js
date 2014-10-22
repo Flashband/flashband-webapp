@@ -2,10 +2,13 @@
 
 var validate = function(args) {
   return FlashbandService.exists(args.tag).then(function(flashband) {
-    if (flashband.blocked()) { throw new Error('Blocked flashband.'); }
+    if (flashband.blocked()) throw new Error('Blocked flashband.');
     return flashband;
   }).then(function(flashband) {
-    if (!args.zone) { throw new Error('Zone not filled.'); }
+    if (!args.zone) throw new Error('Zone not filled.');
+    return flashband;
+  }).then(function(flashband) {
+    if (!flashband.showgoer) throw new Error('Flashband not associated.');
     return flashband;
   });
 };

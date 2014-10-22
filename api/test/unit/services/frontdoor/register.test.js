@@ -11,7 +11,7 @@ describe('FrontdoorService', function() {
     });
 
     it('should create an Entrance', function (done) {
-      fbHelp.createSuccess().then(function verifyRegisterEntrance(flashband) {
+      fbHelp.createAssociated().then(function verifyRegisterEntrance(flashband) {
         expect(FrontdoorService.registerEnter({tag: flashband.tag, zone: '1'})).to.eventually.have.property('tag', flashband.tag).and.notify(done);
       }, done);
     });

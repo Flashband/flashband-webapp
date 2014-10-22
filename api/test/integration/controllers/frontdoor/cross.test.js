@@ -1,18 +1,15 @@
 'use strict';
 
 var request = require('supertest');
-var pwHash  = require('password-hash');
 var shared  = require('../../shared-specs');
+var fdShared = require('./shared');
 var fbHelp  = require('../../../helpers/FlashbandHelper');
 var fdHelp  = require('../../../helpers/FrontdoorHelper');
-var sgHelp  = require('../../../helpers/ShowgoerHelper');
 var dbHelp  = require('../../../helpers/DatabaseHelper');
 var expect = require('chai').use(require('chai-as-promised')).expect;
 
 describe('FrontdoorController /frontdoor/cross', function() {
   var serialToken;
-  var outputSuccessful;
-  var inputSuccessful;
 
   shared.shoudRequestNotFound('/frontdoor/cross', ['GET', 'PUT', 'DELETE']);
 
@@ -22,11 +19,7 @@ describe('FrontdoorController /frontdoor/cross', function() {
     };
     beforeEach(shared.authenticateAnd(getSerialToken));
     beforeEach(function(done) {
-      dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(function() {
-        inputSuccessful  = {door: 'in', message: 'Input successful.', showgoer: null};
-        outputSuccessful = {door: 'out', message: 'Output successful.', showgoer: null};
-        done();
-      }).fail(done);
+      dbHelp.emptyModels([Entrance, Flashband, Showgoer]).then(done).fail(done);
     });
 
     it('should register a valid flashband', function (done) {
@@ -35,34 +28,12 @@ describe('FrontdoorController /frontdoor/cross', function() {
           .post('/frontdoor/cross')
           .send({tag: flashband.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
-          .expect(201, inputSuccessful)
+          .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
+          .end(fdShared.verifySuccessfulEnter(done));
       };
 
-      fbHelp.createSuccess().then(verifyRegister).fail(done);
-    });
-
-    it('should include showgoer when register a valid flashband', function (done) {
-      var flashband;
-      var verifyRegister = function() {
-        request(sails.hooks.http.app)
-          .post('/frontdoor/cross')
-          .send({tag: flashband.tag, zone: '1'})
-          .set('Authorization', 'Token token='.concat(serialToken))
-          .end(function(err, res) {
-            if (err) return done(err);
-            expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
-            done();
-          });
-      };
-
-      fbHelp.createSuccess().then(function(f) {
-        flashband = f;
-        sgHelp.create().then(function(showgoer) {
-          ShowgoerService.associate(showgoer.id, flashband.tag).then(verifyRegister).fail(done);
-        });
-      });
+      fbHelp.createAssociated().then(verifyRegister).fail(done);
     });
 
     it('should leave a valid flashband', function (done) {
@@ -71,37 +42,12 @@ describe('FrontdoorController /frontdoor/cross', function() {
           .post('/frontdoor/cross')
           .send({tag: entrance.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
-          .expect(201, outputSuccessful)
+          .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
+          .end(fdShared.verifySuccessfulLeave(done));
       };
 
       fdHelp.createEntrance().then(verifyLeave).fail(done);
-    });
-
-    it('should include showgoer when leave a valid flashband', function (done) {
-      var entrance;
-      var verifyLeave = function(entrance) {
-        request(sails.hooks.http.app)
-          .post('/frontdoor/cross')
-          .send({tag: entrance.tag, zone: '1'})
-          .set('Authorization', 'Token token='.concat(serialToken))
-          .end(function(err, res) {
-            if (err) {
-              done(err);
-            } else {
-              expect(res.body).to.have.property('showgoer').and.have.property('name', 'Fulano de Tal');
-              done();
-            }
-          });
-      };
-
-      fdHelp.createEntrance().then(function(e) {
-        entrance = e;
-        sgHelp.create().then(function(showgoer) {
-          ShowgoerService.associate(showgoer.id, entrance.tag).then(verifyLeave).fail(done);
-        });
-      });
     });
 
     it('should reject a invalid flashband', function (done) {
@@ -111,6 +57,19 @@ describe('FrontdoorController /frontdoor/cross', function() {
         .expect(403, 'Flashband not found.')
         .set('Authorization', 'Token token='.concat(serialToken))
         .end(done);
+    });
+
+    it('should reject an unassociated flashband', function (done) {
+      var verifyUnassociated = function(flashband) {
+        request(sails.hooks.http.app)
+          .post('/frontdoor/cross')
+          .send({tag: flashband.tag, zone: '1'})
+          .expect(403, 'Flashband not associated.')
+          .set('Authorization', 'Token token='.concat(serialToken))
+          .end(done);
+      };
+
+      fbHelp.createSuccess().then(verifyUnassociated).fail(done);
     });
 
     it('should reject blocked flashband', function (done) {
@@ -132,9 +91,9 @@ describe('FrontdoorController /frontdoor/cross', function() {
           .post('/frontdoor/cross')
           .send({tag: entrance.tag, zone: '1'})
           .expect('Content-type', /application\/json/)
-          .expect(201, inputSuccessful)
+          .expect(201)
           .set('Authorization', 'Token token='.concat(serialToken))
-          .end(done);
+          .end(fdShared.verifySuccessfulEnter(done));
       };
 
       fdHelp.createLeave().then(verifyRegister);
@@ -152,9 +111,9 @@ describe('FrontdoorController /frontdoor/cross', function() {
               .post('/frontdoor/cross')
               .send({tag: entrance.tag, zone: '1'})
               .expect('Content-type', /application\/json/)
-              .expect(201, outputSuccessful)
+              .expect(201)
               .set('Authorization', 'Token token='.concat(serialToken))
-              .end(done);
+              .end(fdShared.verifySuccessfulLeave(done));
           });
       };
 
@@ -177,9 +136,9 @@ describe('FrontdoorController /frontdoor/cross', function() {
                   .post('/frontdoor/cross')
                   .send({tag: entrance.tag, zone: '1'})
                   .expect('Content-type', /application\/json/)
-                  .expect(201, inputSuccessful)
+                  .expect(201)
                   .set('Authorization', 'Token token='.concat(serialToken))
-                  .end(done);
+                  .end(fdShared.verifySuccessfulEnter(done));
               });
           });
       };
@@ -211,13 +170,13 @@ describe('FrontdoorController /frontdoor/cross', function() {
               .post('/frontdoor/cross')
               .send({tag: entrance.tag, zone: '2'})
               .expect('Content-type', /application\/json/)
-              .expect(201, inputSuccessful)
+              .expect(201)
               .set('Authorization', 'Token token='.concat(serialToken))
-              .end(done);
+              .end(fdShared.verifySuccessfulEnter(done));
           });
       };
 
-      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+      fbHelp.createAssociated().then(verifyZoneEmpty, done);
     });
 
     it('should leave old entrance when entrance in different zone', function (done) {
@@ -244,7 +203,7 @@ describe('FrontdoorController /frontdoor/cross', function() {
           });
       };
 
-      fbHelp.createSuccess().then(verifyZoneEmpty, done);
+      fbHelp.createAssociated().then(verifyZoneEmpty, done);
     });
   });
 });

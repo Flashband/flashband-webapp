@@ -12,5 +12,9 @@ module.exports = {
       defer.resolve(showgoer);
     });
     return defer.promise;
+  },
+
+  findOne: function(showgoerId) {
+    return Showgoer.findOne(showgoerId);
   }
 };
