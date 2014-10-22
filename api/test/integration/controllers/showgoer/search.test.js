@@ -1,11 +1,11 @@
 'use strict';
 
 var request        = require('supertest');
-var passwordHash   = require('password-hash');
 var expect         = require('chai').expect;
 var ShowgoerHelper = require('../../../helpers/ShowgoerHelper');
 var databaseHelper = require('../../../helpers/DatabaseHelper');
 var shared = require('../../shared-specs');
+var sgShared = require('./shared');
 
 describe('ShowgoerController /showgoer/search', function() {
 
@@ -14,16 +14,13 @@ describe('ShowgoerController /showgoer/search', function() {
   describe('GET', function() {
     var serialToken;
 
-    beforeEach(function(done) {
-      User.create({password: '123123123'}).exec(function(err, user) {
-        if (err) { return done(err); }
+    var getSerialToken = function(st) {
+      serialToken = st;
+    };
 
-        serialToken = passwordHash.generate(user.id);
-        user.tokens.add({ token: serialToken });
-        user.save().then(function() {
-          databaseHelper.emptyModels([Showgoer]).then(done).fail(done);
-        });
-      });
+    beforeEach(shared.authenticateAnd(getSerialToken));
+    beforeEach(function(done) {
+      databaseHelper.emptyModels([Showgoer]).then(done).fail(done);
     });
 
     it ('should filter by name', function(done) {
@@ -39,14 +36,7 @@ describe('ShowgoerController /showgoer/search', function() {
 
             var showgoers = res.body;
             expect(showgoers).to.have.length(1, 'Wrong number of showgoers');
-
-            var showgoer = showgoers[0];
-            expect(showgoer).to.have.property('name', 'Beltrano de Tal');
-            expect(showgoer).to.have.property('docType', 'cpf');
-            expect(showgoer).to.have.property('docNumber', '333.333.333-33');
-            expect(showgoer).to.have.property('id');
-            expect(showgoer).to.have.property('createdAt');
-            expect(showgoer).to.have.property('updatedAt');
+            sgShared.verifyShowgoer(showgoers[0], showgoer2);
             done();
           });
       }).fail(done);
@@ -65,13 +55,7 @@ describe('ShowgoerController /showgoer/search', function() {
 
             var showgoers = res.body;
             expect(showgoers).to.have.length(1, 'Wrong number of showgoers');
-            var showgoer = showgoers[0];
-            expect(showgoer).to.have.property('name', 'Fulano de Tal');
-            expect(showgoer).to.have.property('docType', 'cpf');
-            expect(showgoer).to.have.property('docNumber', '222.222.222-22');
-            expect(showgoer).to.have.property('id');
-            expect(showgoer).to.have.property('createdAt');
-            expect(showgoer).to.have.property('updatedAt');
+            sgShared.verifyShowgoer(showgoers[0], showgoer1);
             done();
           });
       }).fail(done);
@@ -91,14 +75,7 @@ describe('ShowgoerController /showgoer/search', function() {
 
             var showgoers = res.body;
             expect(showgoers).to.have.length(1, 'Wrong number of showgoers');
-
-            var showgoer = showgoers[0];
-            expect(showgoer).to.have.property('name', 'Fulano de Tal');
-            expect(showgoer).to.have.property('docType', 'cpf');
-            expect(showgoer).to.have.property('docNumber', '222.222.222-22');
-            expect(showgoer).to.have.property('id');
-            expect(showgoer).to.have.property('createdAt');
-            expect(showgoer).to.have.property('updatedAt');
+            sgShared.verifyShowgoer(showgoers[0], showgoer1);
             done();
           });
       }).fail(done);
