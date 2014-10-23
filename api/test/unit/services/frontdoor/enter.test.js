@@ -44,13 +44,7 @@ describe('FrontdoorService', function() {
           promisedEntrance.should.eventually.have.property('entrance').that.have.property('tag', flashSuccess.tag)
         ]).should.notify(done);
       };
-      fbHelp.createSuccess().then(function(flashband) {
-        sgHelp.create().then(function(showgoer) {
-          ShowgoerService.associate(showgoer.id, flashband.tag).then(function() {
-            verifyEntrance(flashband);
-          }).fail(done);
-        }).fail(done);
-      }).fail(done);
+      fbHelp.createAssociated().then(verifyEntrance);
     });
   });
 });

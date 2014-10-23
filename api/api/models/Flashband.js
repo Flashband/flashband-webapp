@@ -14,7 +14,7 @@ module.exports = {
     },
 
     showgoer: {
-      type: 'string'
+      model: 'Showgoer'
     },
 
     serial: { type: 'string', columnName: 'srl' },

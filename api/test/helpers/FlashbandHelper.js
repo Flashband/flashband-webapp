@@ -36,9 +36,7 @@ module.exports = {
   createAssociated: function() {
     return this.createSuccess().then(function(flashband) {
       return sgHelp.create().then(function(showgoer) {
-        return ShowgoerService.associate(showgoer.id, flashband.tag).then(function() {
-          return flashband;
-        });
+        return ShowgoerService.associate(showgoer.id, flashband.tag);
       });
     });
   }

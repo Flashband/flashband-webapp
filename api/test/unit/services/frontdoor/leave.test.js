@@ -24,7 +24,8 @@ describe('FrontdoorService', function() {
 
         Q.all([
           promise.should.eventually.have.property('entrance').that.have.property('leave'),
-          promise.should.eventually.have.property('entrance').that.have.property('tag', entrance.tag)
+          promise.should.eventually.have.property('entrance').that.have.property('tag', entrance.tag),
+          promise.should.eventually.have.property('showgoer').that.have.property('name', 'Fulano de Tal')
         ]).should.notify(done);
       };
 

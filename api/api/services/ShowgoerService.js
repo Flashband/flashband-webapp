@@ -61,8 +61,10 @@ module.exports = {
       return FlashbandService.findByShowgoer(showGoerId).then(function(flashbandAssocieted) {
         if (flashbandAssocieted) { throw new Error('Showgoer ever associated'); }
 
-        flashband.showgoer = showGoerId;
-        return flashband.save();
+        return Showgoer.findOne(showGoerId).then(function(showgoer) {
+          flashband.showgoer = showgoer;
+          return flashband.save();
+        });
       });
     });
   },

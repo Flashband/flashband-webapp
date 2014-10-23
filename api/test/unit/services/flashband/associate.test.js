@@ -7,11 +7,15 @@ var sgHelp = require('../../../helpers/ShowgoerHelper');
 describe('FlashbandService', function() {
   describe('#associate', function() {
     it('should associate a showgoer', function shouldAssociateShowgoer(done) {
+
       sgHelp.create().then(function afterShowgoerCreate(showgoer) {
-        fbHelp.createSuccess().then(function expectAssociateShowGoer(flashband) {
-          expect(ShowgoerService.associate(showgoer.id, flashband.tag)).to.eventually.have.property('showgoer', showgoer.id).and.notify(done);
-        }, done);
-      }, done);
+        fbHelp.createSuccess().then(function(flashband) {
+          expect(ShowgoerService.associate(showgoer.id, flashband.tag)).to.eventually
+            .have.property('showgoer').that
+            .have.property('id', showgoer.id)
+            .and.notify(done);
+        }).fail(done);
+      }).fail(done);
     });
 
     it('should reject a flashband blocked', function shouldRejectFlashbandBlocked(done) {
@@ -22,19 +26,19 @@ describe('FlashbandService', function() {
       }, done);
     });
 
-    it('should reject a showgoer ever associated', function shouldRejectShowgoerEverAssociated(done) {
+    it('should reject a showgoer already associated', function shouldRejectShowgoerEverAssociated(done) {
       sgHelp.create().then(function afterShowgoerCreate(showgoer) {
         fbHelp.createSuccess().then(function expectAssociateShowGoer(flashband) {
           ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
             fbHelp.createSuccess().then(function expectAssociateShowGoer(newFlashband) {
-              expect(ShowgoerService.associate(associated.showgoer, newFlashband.tag)).to.be.rejectedWith('Showgoer ever associated').and.notify(done);
+              expect(ShowgoerService.associate(associated.showgoer.id, newFlashband.tag)).to.be.rejectedWith('Showgoer ever associated').and.notify(done);
             }, done);
           }, done);
         }, done);
       }, done);
     });
 
-    it('should reject a flashband ever associated', function shouldRejectShowgoerEverAssociated(done) {
+    it('should reject a flashband already associated', function shouldRejectShowgoerEverAssociated(done) {
       sgHelp.create().then(function afterShowgoerCreate(showgoer) {
         fbHelp.createSuccess().then(function expectAssociateShowGoer(flashband) {
           ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
@@ -52,7 +56,7 @@ describe('FlashbandService', function() {
           ShowgoerService.associate(showgoer.id, flashband.tag).then(function(associated) {
             FlashbandService.block(associated.tag).then(function() { //function(blocked)
               fbHelp.createSuccess().then(function expectAssociateShowGoer(newFlashband) {
-                expect(ShowgoerService.associate(showgoer.id, newFlashband.tag)).to.eventually.have.property('showgoer', showgoer.id).and.notify(done);
+                expect(ShowgoerService.associate(showgoer.id, newFlashband.tag)).to.eventually.have.property('showgoer').that.have.property('id', showgoer.id).and.notify(done);
               }, done);
             }, done);
           }, done);

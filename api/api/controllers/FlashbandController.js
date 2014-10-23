@@ -5,15 +5,7 @@ var fs = require('fs');
 module.exports = {
   block: function(req, res) {
     FlashbandService.block(req.param('tag')).then(function(flashband) {
-      if (flashband.showgoer) {
-        Showgoer.findOne(flashband.showgoer).then(function(showgoer) {
-          res.ok({ message: 'Flashband blocked.', showgoer: showgoer });
-        }).fail(function(err) {
-          res.forbidden(err.message);
-        });
-      } else {
-        res.ok({ message: 'Flashband blocked.' });
-      }
+      res.ok({ message: 'Flashband blocked.', showgoer: flashband.showgoer });
     }).fail(function(err) {
       res.forbidden(err.message);
     });
