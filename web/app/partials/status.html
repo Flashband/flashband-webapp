@@ -1,0 +1,25 @@
+<h1 translate="FLASHBAND.STATUS.TEXT.TITLE" translate-values="{count: totFlashbands}"></h1>
+
+<div class="form-group">
+  <div class="table-responsive">
+    <table id="showgoers-list" class="table table-bordered">
+      <thead>
+        <tr>
+          <!-- <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.SEL"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.NAME"></th>
+          <th style="text-alig  n: center" translate="FLASHBAND.ASSOCIATE.TABLE.DOCTYPE"></th>
+          <th style="text-align: center" translate="FLASHBAND.ASSOCIATE.TABLE.DOCNUMBER"></th> -->
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="sg in listShowgoers">
+          <!-- <td style="text-align: center"><input name="showGoerId" ng-value="sg.id" ng-click="changeShowGoer(sg)" type="radio"></td>
+          <td>{{sg.name}}</td>
+          <td style="text-align: center">{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.docType.toUpperCase())|translate}}</td>
+          <td style="text-align: right">{{sg.docNumber}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -10,6 +10,19 @@ describe('Access Status View', function () {
     expect(browser.getCurrentUrl()).toContain('#/status');
   });
 
+  iit('should have title of page and list of showgoers', function() {
+    loginPage.tryAuthenticateSuccessfully();
+    browser.get('#/status');
+
+    var pageTitle = element(by.css('h1[translate="FLASHBAND.STATUS.TEXT.TITLE"]'));
+    var pageList = element(by.css('table#showgoers-list'));
+
+    expect(pageTitle.isDisplayed()).toBeTruthy();
+    expect(pageList.isDisplayed()).toBeTruthy();
+
+    expect(pageTitle.getText()).toBe('Flashbands no evento (8)');
+  });
+
   //   loginPage.tryAuthenticateSuccessfully();
   //   browser.get('#/showgoer');
   //

@@ -115,6 +115,11 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       }
     },
     'FLASHBAND': {
+      'STATUS': {
+        'TEXT': {
+          'TITLE': 'Flashbands no evento ({{count}})'
+        }
+      },
       'ENABLE': {
         'TITLE': 'Cadastre um lote de pulseiras.',
         'TEXT': 'Seja bem vindo. Você ainda não possui nenhuma pulseira cadastrada. Para começar, é só clicar em adicionar pulseiras.',

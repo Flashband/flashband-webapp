@@ -29,6 +29,7 @@
     "element": false,
     "angular": false,
     "describe": false,
-    "beforeEach": false
+    "beforeEach": false,
+    "iit": false
   }
 }
