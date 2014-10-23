@@ -30,6 +30,7 @@
     "angular": false,
     "describe": false,
     "beforeEach": false,
-    "iit": false
+    "iit": false,
+    "elements": false
   }
 }
