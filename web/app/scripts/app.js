@@ -42,7 +42,13 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     data: { isPublic: AuthenticateAccess.deny }
   });
 
-  $stateProvider.state('showgoer', {
+  $stateProvider.state('status', {
+      parent: dashboardAbstract,
+      url: '/status',
+      templateUrl: 'partials/status.html',
+      controller: 'StatusCtrl',
+      data: { isPublic: AuthenticateAccess.deny }
+  }).state('showgoer', {
       parent: dashboardAbstract,
       url: '/showgoer',
       templateUrl: 'partials/showgoer-start.html',
@@ -134,7 +140,8 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       },
       'MENU': {
         'FLASHBANDS': 'Pulseiras',
-        'SHOWGOER': 'Showgoer'
+        'SHOWGOER': 'Showgoer',
+        'STATUS': 'Status de acesso'
       },
 
       'SHOWGOER': {

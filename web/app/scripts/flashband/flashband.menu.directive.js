@@ -13,6 +13,10 @@ angular.module('flashbandWebapp').directive('flashbandMenu', function flashbandM
         {
           sref: 'showgoer',
           label: 'FLASHBAND.MENU.SHOWGOER'
+        },
+        {
+          sref: 'status',
+          label: 'FLASHBAND.MENU.STATUS'
         }
       ];
 
