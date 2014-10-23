@@ -61,48 +61,56 @@ module.exports = {
     var defer = q.defer();
 
     this.deleteAllFlashbands().then(function afterLogicallyDeleteRecords() {
-      var newFlashbands = [];
+      var batchFlashbands = [];
 
       var createFlashband = function(arg, next) {
-        var create = {
-          tag: arg.tag,
-          imported: true,
-          blockedAt: null,
-          showgoer: null
+        var appendFlashband = function(flashband) {
+          batchFlashbands.push(flashband);
+          next();
         };
 
-        Flashband.findOrCreate(arg, create, function(err, flashband) {
-          if (err) { return defer.reject(err); }
-          newFlashbands.push(flashband);
+        var rejectBatch = function(reason) {
+          defer.reject(reason);
           next();
+        };
+
+        Flashband.findOne({ tag: arg.tag }).exec(function(err, flashband) {
+          if (err) { return rejectBatch(err); }
+          if (!flashband) {
+            flashband = {
+              tag: arg.tag
+            };
+          }
+          flashband.imported = true;
+          flashband.serial = arg.serial;
+          flashband.blockedAt = null;
+          flashband.showgoer = null;
+          if (flashband.id) {
+            flashband.save().then(appendFlashband).fail(rejectBatch);
+          } else {
+            Flashband.create(flashband).then(appendFlashband).fail(rejectBatch);
+          }
         });
       };
 
       async.each(flashbands, createFlashband, function(err) {
-        if (err) {
-          defer.reject(err instanceof Error ? err : new Error(err));
-          return;
-        }
+        if (err) return defer.reject(err instanceof Error ? err : new Error(err));
 
         FlashbandBatch.find({active: true}).exec(function(err, flashbandBatches) {
-          if (err) {
-            defer.reject(err);
-            return;
-          }
+          if (err) return defer.reject(err);
 
           inactivate(flashbandBatches);
 
           FlashbandBatch.create({name: name, file: file, active: true}).exec(function(err, flashbandBatch) {
-            if (err) {
-              defer.reject(err);
-              return;
-            }
+            if (err) return defer.reject(err);
 
-            newFlashbands.forEach(function(flashband) {
+            batchFlashbands.forEach(function(flashband) {
               flashbandBatch.flashbands.add(flashband.id);
             });
 
-            flashbandBatch.save().then(defer.resolve, defer.reject);
+            flashbandBatch.save().then(function(savedFlashbandBatch) {
+              defer.resolve(savedFlashbandBatch);
+            }).fail(defer.reject);
           });
         });
       });
