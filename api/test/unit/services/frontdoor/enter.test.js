@@ -3,7 +3,6 @@
 var Q = require('q');
 var fbHelp = require('../../../helpers/FlashbandHelper');
 var fdHelp = require('../../../helpers/FrontdoorHelper');
-var sgHelp = require('../../../helpers/ShowgoerHelper');
 
 describe('FrontdoorService', function() {
   describe('#registerEnter', function() {
@@ -41,7 +40,8 @@ describe('FrontdoorService', function() {
 
         Q.all([
           promisedEntrance.should.eventually.have.property('entrance').that.have.property('id'),
-          promisedEntrance.should.eventually.have.property('entrance').that.have.property('tag', flashSuccess.tag)
+          promisedEntrance.should.eventually.have.property('entrance').that.have.property('tag', flashSuccess.tag),
+          promisedEntrance.should.eventually.have.property('showgoer').that.have.property('name', 'Fulano de Tal')
         ]).should.notify(done);
       };
       fbHelp.createAssociated().then(verifyEntrance);
