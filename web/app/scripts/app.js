@@ -9,7 +9,8 @@ var dependencies = [
   'ui.router',
   'ui.keypress',
   'angularFileUpload',
-  'pascalprecht.translate'];
+  'pascalprecht.translate',
+  'datatables'];
 
 angular.module('flashbandWebapp', dependencies).config(function ($translateProvider, $stateProvider, $urlRouterProvider, AuthenticateAccess, dashboardAbstract) {
   $stateProvider.state(dashboardAbstract, {
