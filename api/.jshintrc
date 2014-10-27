@@ -54,6 +54,7 @@
     "afterEach": false,
     "ShowogerService": false,
     "_": false,
-    "iit": false
+    "iit": false,
+    "LoggerService": false
   }
 }
