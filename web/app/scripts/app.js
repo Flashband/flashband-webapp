@@ -100,7 +100,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
     'Duplicated UID.': 'Tag duplicada',
     'Number of tag\'s pairs nonstandard.': 'Número de pares da tag fora do padrão',
     'Blocked Flashband': 'Opa, essa flashband está bloqueada. Utilize outra flashband para fazer vinculação.',
-    'Flashband ever associated': 'Opa, essa flashband está vinculada a um showgoer.',
+    'Flashband ever associated': 'Opa, essa flashband está vinculada a um visitante.',
     'Flashband not found.': 'Opa, essa flashband não está disponível.',
     'Not Found': 'Verifique se o Leitor de NFC está conectado ao computador',
     'LOGIN': {
@@ -146,30 +146,30 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       },
       'MENU': {
         'FLASHBANDS': 'Pulseiras',
-        'SHOWGOER': 'Showgoer',
+        'SHOWGOER': 'visitante',
         'STATUS': 'Status de acesso'
       },
 
       'SHOWGOER': {
         'TEXT': {
-          'TITLE': 'Cadastre um ShowGoer',
-          'START': 'Você ainda não possui nenhum ShowGoer cadastrado. Para começar é só clicar em cadastrar ShowGoer.',
-          'CREATED': 'Você possui {{totalShowgoers}} ShowGoer{{plural}} cadastrado{{plural}}. Para adicionar um novo ShowGoer, é só clicar em cadastrar ShowGoer. Para vincular um ShowGoer cadastrado a uma pulseira, é só clicar em vincular ShowGoer.',
-          'NEW': 'Para começar, basta informar o nome do ShowGoer. Depois escolha o tipo de documento e informe o número do documento.'
+          'TITLE': 'Cadastre um visitante',
+          'START': 'Você ainda não possui nenhum visitante cadastrado. Para começar é só clicar em cadastrar visitante.',
+          'CREATED': 'Você possui {{totalShowgoers}} visitante{{plural}} cadastrado{{plural}}. Para adicionar um novo visitante, é só clicar em cadastrar visitante. Para vincular um visitante cadastrado a uma pulseira, é só clicar em vincular visitante.',
+          'NEW': 'Para começar, basta informar o nome do visitante. Depois escolha o tipo de documento e informe o número do documento.'
         },
         'BUTTON': {
           'SAVE': 'Cadastrar',
           'CANCEL': 'Cancelar',
-          'NEW': 'Cadastrar ShowGoer',
-          'ASSOCIATE': 'Vincular ShowGoer'
+          'NEW': 'Cadastrar visitante',
+          'ASSOCIATE': 'Vincular visitante'
         },
         'MESSAGES': {
-          'SAVED': 'ShowGoer cadastrado com sucesso.',
+          'SAVED': 'Visitante cadastrado com sucesso.',
           'REQUIRED': 'Todos os campos são obrigatórios. Verifique e tente novamente.',
-          'DUPLICATED': 'Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer.'
+          'DUPLICATED': 'Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro visitante.'
         },
         'PLACEHOLDER': {
-          'NAME': 'Informe o nome do ShowGoer',
+          'NAME': 'Informe o nome do visitante',
           'DOCTYPE': 'Selecione o documento',
           'DOCNUMBER': {
             'cpf': 'Informe o número do CPF',
@@ -189,19 +189,19 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
 
       'ASSOCIATE': {
         'TEXT': {
-          'TITLE': 'Vincular ShowGoer',
-          'NEW': 'Para vincular um ShowGoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor.'
+          'TITLE': 'Vincular visitante',
+          'NEW': 'Para vincular um visitante a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor.'
         },
         'MESSAGES': {
-          'SUCCESS': 'ShowGoer vinculado com sucesso.',
-          'ASSOCIATED': 'Opa, esse ShowGoer já foi vinculado a uma pulseira.',
+          'SUCCESS': 'Visitante vinculado com sucesso.',
+          'ASSOCIATED': 'Opa, esse visitante já foi vinculado a uma pulseira.',
           'SHOWGOER': 'Não existem visitantes cadastrados com esse nome ou documento. Por favor, corrija ou',
           'TIMEOUT': 'Tempo esgotado aguardando leitura da Flashband.',
           'READING': 'Vinculando visitante... Por favor, aproxime a pulseira do leitor. {{counter}}'
         },
         'TABLE': {
           'SEL': 'Selecionar',
-          'NAME': 'Showoger',
+          'NAME': 'Visitante',
           'DOCTYPE': 'Documento',
           'DOCNUMBER': 'Número'
         },

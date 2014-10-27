@@ -6,7 +6,7 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, Fla
   $scope.dtOptions = {
     language: {
       'sEmptyTable': 'Nenhum registro encontrado',
-      'sInfo': 'Mostrando de _START_ até _END_ de _TOTAL_ registros',
+      'sInfo': 'Mostrando de _START_ até _END_ de _TOTAL_ visitantes',
       'sInfoEmpty': 'Sem registros.',
       'sInfoFiltered': '(Filtrados de _MAX_ registros)',
       'sInfoPostFix': '',
