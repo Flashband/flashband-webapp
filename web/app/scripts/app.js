@@ -151,6 +151,10 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
       },
 
       'SHOWGOER': {
+        'VIP': {
+          'FALSE': 'Visitante comum',
+          'TRUE': 'Visitante VIP'
+        },
         'TEXT': {
           'TITLE': 'Cadastre um visitante',
           'START': 'Você ainda não possui nenhum visitante cadastrado. Para começar é só clicar em cadastrar visitante.',
@@ -170,6 +174,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
         },
         'PLACEHOLDER': {
           'NAME': 'Informe o nome do visitante',
+          'PHONE': 'Informe o telefone do visitante',
           'DOCTYPE': 'Selecione o documento',
           'DOCNUMBER': {
             'cpf': 'Informe o número do CPF',
@@ -189,7 +194,7 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
           'OUT': 'Fora da Área',
           'IN': 'Dentro da Área',
           'BLK': 'Bloqueado',
-          'NOT': 'Aguardando'
+          'NOT': 'Aguardando chegada'
         }
       },
 
