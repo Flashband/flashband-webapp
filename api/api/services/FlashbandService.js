@@ -2,13 +2,6 @@
 
 var q = require('q');
 
-var inactivate = function(flashbandBatches) {
-  flashbandBatches.forEach(function(flashbandBatch) {
-    flashbandBatch.inactivate();
-    flashbandBatch.save();
-  });
-};
-
 module.exports = {
   findOne: function(flashbandUid) {
     return Flashband.findOne({ tag: flashbandUid.replace(/\s/g, '').toUpperCase(), imported: true }).populate('showgoer');
@@ -53,14 +46,22 @@ module.exports = {
     return defer.promise;
   },
 
-  deleteAllFlashbands: function() {
-    return Flashband.update({imported: true}, {imported: false});
-  },
-
   enable: function(flashbands, name, file) {
     var defer = q.defer();
 
-    this.deleteAllFlashbands().then(function afterLogicallyDeleteRecords() {
+    var deleteAllFlashbands = function() {
+      return Flashband.update({imported: true}, {imported: false});
+    };
+
+    var inactivate = function(flashbandBatches) {
+      flashbandBatches.forEach(function(flashbandBatch) {
+        flashbandBatch.inactivate();
+        flashbandBatch.save();
+      });
+    };
+
+
+    deleteAllFlashbands().then(function() {
       var batchFlashbands = [];
 
       var createFlashband = function(arg, next) {
@@ -92,6 +93,7 @@ module.exports = {
           }
         });
       };
+
 
       async.each(flashbands, createFlashband, function(err) {
         if (err) return defer.reject(err instanceof Error ? err : new Error(err));
