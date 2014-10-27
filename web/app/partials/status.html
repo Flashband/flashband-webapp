@@ -24,7 +24,9 @@
 
 <div class="form-group">
   <div class="table-responsive">
-    <table datatable="ng" dt-options="dtOptions" id="showgoers-list" class="table table-striped table-bordered">
+    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" id="showgoers-list" class="table table-striped table-bordered hover"></table>
+
+    <!-- <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"  class="table table-striped table-bordered">
       <thead>
         <tr>
           <th>Nome</th>
@@ -42,6 +44,6 @@
           <td>{{"FLASHBAND.SHOWGOER.STATUS.".concat(sg.status.toUpperCase())|translate}}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </div>
 </div>

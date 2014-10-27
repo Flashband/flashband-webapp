@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, FlashbandRestFact) {
+angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, FlashbandRestFact, $interval, DTColumnDefBuilder, DTOptionsBuilder, DTColumnBuilder, $translate) {
   $scope.totFlashbands = 0;
   $scope.listShowgoers = [];
 
@@ -20,31 +20,72 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, Fla
    { id: '12', name: 'Entrada/Saída (Agile)'}
   ];
 
-  $scope.dtOptions = {
-    language: {
-      'sEmptyTable': 'Nenhum registro encontrado',
-      'sInfo': 'Mostrando de _START_ até _END_ de _TOTAL_ visitantes',
-      'sInfoEmpty': 'Sem registros.',
-      'sInfoFiltered': '(Filtrados de _MAX_ registros)',
-      'sInfoPostFix': '',
-      'sInfoThousands': '.',
-      'sLengthMenu': '_MENU_ resultados por página',
-      'sLoadingRecords': 'Carregando...',
-      'sProcessing': 'Processando...',
-      'sZeroRecords': 'Nenhum registro encontrado',
-      'sSearch': 'Pesquisar',
-      'oPaginate': {
-          'sNext': 'Próximo',
-          'sPrevious': 'Anterior',
-          'sFirst': 'Primeiro',
-          'sLast': 'Último'
-      },
-      'oAria': {
-          'sSortAscending': ': Ordenar colunas de forma ascendente',
-          'sSortDescending': ': Ordenar colunas de forma descendente'
-      }
+  $scope.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
+    return FlashbandRestFact.getConnection().all('showgoer').getList().then(function(list) {
+      var newList = [];
+
+      if (!list) return newList;
+      if (list.empty) return newList;
+
+      list.forEach(function(item) {
+
+        var validVip = true;
+        if ($scope.vipParam) validVip = item.vip;
+
+        var validZone = true;
+        if ($scope.zoneParam) validZone = item.zone === $scope.zoneParam;
+
+        if (validVip && validZone) {
+          $translate('FLASHBAND.SHOWGOER.DOCTYPE.'.concat(item.docType.toUpperCase())).then(function(t) {
+            item.docNumber = t.concat(': ', item.docNumber);
+          });
+
+          $translate('FLASHBAND.SHOWGOER.STATUS.'.concat(item.status.toUpperCase())).then(function(t) {
+            item.status = t;
+          });
+
+          newList.push(item);
+        }
+      });
+
+      return newList;
+    });
+  });
+
+  $scope.dtOptions.language = {
+    'sEmptyTable': 'Nenhum registro encontrado',
+    'sInfo': 'Mostrando de _START_ até _END_ de _TOTAL_ visitantes',
+    'sInfoEmpty': 'Sem registros.',
+    'sInfoFiltered': '(Filtrados de _MAX_ registros)',
+    'sInfoPostFix': '',
+    'sInfoThousands': '.',
+    'sLengthMenu': '_MENU_ resultados por página',
+    'sLoadingRecords': 'Carregando...',
+    'sProcessing': 'Processando...',
+    'sZeroRecords': 'Nenhum registro encontrado',
+    'sSearch': 'Pesquisar',
+    'oPaginate': {
+        'sNext': 'Próximo',
+        'sPrevious': 'Anterior',
+        'sFirst': 'Primeiro',
+        'sLast': 'Último'
+    },
+    'oAria': {
+        'sSortAscending': ': Ordenar colunas de forma ascendente',
+        'sSortDescending': ': Ordenar colunas de forma descendente'
     }
   };
+
+  $scope.dtColumns = [
+    DTColumnBuilder.newColumn('name').withTitle('Visitante'),
+    DTColumnBuilder.newColumn('docNumber').withTitle('Documento'),
+    DTColumnBuilder.newColumn('phone').withTitle('Telefone'),
+    DTColumnBuilder.newColumn('status').withTitle('Situação')
+  ];
+
+  $interval(function() {
+    $scope.dtOptions.reloadData();
+  }, 1000);
 
   $scope.vipMatch = function(criteria) {
     return function(item) {
@@ -57,10 +98,6 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, Fla
       return !criteria || (item.zone === criteria);
     };
   };
-
-  FlashbandRestFact.getConnection().all('showgoer').getList().then(function(list) {
-    $scope.listShowgoers = list;
-  });
 
   FlashbandRestFact.getConnection().one('flashband').one('summary').get().then(function(res) {
     $scope.totFlashbands = res.total;
