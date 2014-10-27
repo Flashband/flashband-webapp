@@ -57,7 +57,7 @@ module.exports = {
           item.zone   = '';
 
           if (item.flashband) {
-            item.status = 'out'; //did not enter
+            item.status = 'out';
 
             Entrance.findOne({tag: item.flashband, leave: null}).exec(function(err, entrance) {
               if (err) return next();
@@ -65,9 +65,16 @@ module.exports = {
               if (entrance) {
                 item.zone = entrance.zone;
                 item.status = 'in';
-              }
+                next();
+              } else {
+                item.status = 'out';
 
-              next();
+                Entrance.findOne({tag: item.flashband}).exec(function(err, leave) {
+                  if (err) return next();
+                  if (leave) item.zone = leave.zone;
+                  next();
+                });
+              }
             });
           } else {
             next();

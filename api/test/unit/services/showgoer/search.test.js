@@ -59,5 +59,18 @@ describe('ShowgoerService', function() {
         });
       });
     });
+
+    it('showgoers with status: associated and leaved', function(done) {
+      var statusOut = 'out';
+      var zoneOne  = '1';
+
+      ShowgoerService.associate(showgoer.id, flashband.tag).then(function() {
+        FrontdoorService.registerEnter({tag: flashband.tag, zone: zoneOne}).then(function() {
+          FrontdoorService.registerLeave({tag: flashband.tag, zone: zoneOne}).then(function() {
+            expectList(statusOut, zoneOne, done);
+          });
+        });
+      });
+    });
   });
 });
