@@ -135,7 +135,7 @@ module.exports = {
 
   expectShowgoerAssociated: function(showGoerId) {
     expect(browser.getCurrentUrl()).toContain('#/showgoer/'.concat(showGoerId, '/associate'));
-    this.expectAlertSuccess('ShowGoer vinculado com sucesso.');
+    this.expectAlertSuccess('Visitante vinculado com sucesso.');
     return this;
   },
 

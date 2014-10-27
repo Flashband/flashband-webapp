@@ -32,8 +32,8 @@ describe('New ShowGoer View', function () {
     expect(pageDocTypeSelect.isDisplayed()).toBeTruthy();
     expect(pageDocTypeOptions.first().isSelected()).toBeTruthy();
 
-    expect(pageTitle.getText()).toBe('Cadastre um ShowGoer');
-    expect(pageText.getText()).toBe('Para começar, basta informar o nome do ShowGoer. Depois escolha o tipo de documento e informe o número do documento.');
+    expect(pageTitle.getText()).toBe('Cadastre um visitante');
+    expect(pageText.getText()).toBe('Para começar, basta informar o nome do visitante. Depois escolha o tipo de documento e informe o número do documento.');
     expect(pageDocTypeOptions.first().getText()).toBe('Selecione o documento');
     expect(pageSaveButton.getText()).toBe('Cadastrar');
     expect(pageCancelButton.getText()).toBe('Cancelar');
@@ -64,7 +64,7 @@ describe('New ShowGoer View', function () {
   it('should save ShowGoer when valid input', function() {
     showGoerPage.saveNewShowGoerWithCPF(validName, validCPF)
                 .expectUrlPageStart()
-                .expectAlertSuccess('ShowGoer cadastrado com sucesso.');
+                .expectAlertSuccess('Visitante cadastrado com sucesso.');
   });
 
   it('validate required fields', function() {
@@ -77,7 +77,7 @@ describe('New ShowGoer View', function () {
     showGoerPage.expectAlertWarning('Todos os campos são obrigatórios. Verifique e tente novamente.');
   });
 
-  it('validate required ShowGoer document number is required when displayed', function() {
+  it('validate required visitante document number is required when displayed', function() {
     showGoerPage.saveNewShowGoerWithCPF(validName, '')
                 .expectUrlPageNew()
                 .expectAlertWarning('Todos os campos são obrigatórios. Verifique e tente novamente.');
@@ -87,7 +87,7 @@ describe('New ShowGoer View', function () {
     showGoerPage.saveNewShowGoerWithCPF(validName, validCPF)
                 .goToNewShowGoerPage()
                 .saveNewShowGoerWithCPF(otherName, validCPF)
-                .expectAlertWarning('Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro ShowGoer.');
+                .expectAlertWarning('Opa, esse documento já está cadastrado. Talvez você tenha errado o número. Corrija ou cadastre outro visitante.');
   });
 
   it('should display message and associate flashband button', function() {
@@ -110,7 +110,7 @@ describe('New ShowGoer View', function () {
     expect(pageButtonNew.isDisplayed()).toBeTruthy();
     expect(pageButtonAssociate.isDisplayed()).toBeTruthy();
 
-    expect(pageTextCreated.getText()).toBe('Você possui 5 ShowGoers cadastrados. Para adicionar um novo ShowGoer, é só clicar em cadastrar ShowGoer. Para vincular um ShowGoer cadastrado a uma pulseira, é só clicar em vincular ShowGoer.');
-    expect(pageButtonAssociate.getText()).toBe('Vincular ShowGoer');
+    expect(pageTextCreated.getText()).toBe('Você possui 5 visitantes cadastrados. Para adicionar um novo visitante, é só clicar em cadastrar visitante. Para vincular um visitante cadastrado a uma pulseira, é só clicar em vincular visitante.');
+    expect(pageButtonAssociate.getText()).toBe('Vincular visitante');
   });
 });

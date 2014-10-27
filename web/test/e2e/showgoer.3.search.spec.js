@@ -27,15 +27,15 @@ describe('Search ShowGoer View', function () {
     expect(pageShowGoerSearchInput.isDisplayed()).toBeTruthy();
     expect(pageAssociateButton.isDisplayed()).toBeTruthy();
 
-    expect(pageTitle.getText()).toBe('Vincular ShowGoer');
-    expect(pageText.getText()).toBe('Para vincular um ShowGoer a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor.');
+    expect(pageTitle.getText()).toBe('Vincular visitante');
+    expect(pageText.getText()).toBe('Para vincular um visitante a uma pulseira, basta buscar pelo nome ou número do documento cadastrado. Depois é só clicar em vincular e aproximar a pulseira do leitor.');
     expect(pageSearchButton.getText()).toBe('buscar');
     expect(pageCancelButton.getText()).toBe('Cancelar');
     expect(pageAssociateButton.getText()).toBe('Vincular');
   });
 
   it('should find by name ShowGoer before associating', function() {
-    var showGoerName = 'ShowGoer com CPF para Vinculação';
+    var showGoerName = 'Visitante com CPF para Vinculação';
     var showGoerCPF = '999.000.222-22';
 
     showGoerPage.goToNewShowGoerPage()
@@ -54,7 +54,7 @@ describe('Search ShowGoer View', function () {
   });
 
   it('should associate showgoer', function() {
-    var showGoerName = 'Showoger com RG para Vinculação';
+    var showGoerName = 'Visitante com RG para Vinculação';
     var showGoerRG = '555.777.111-33';
 
     showGoerPage.goToNewShowGoerPage()
@@ -67,7 +67,7 @@ describe('Search ShowGoer View', function () {
                 });
   });
 
-  it('should reject associations already associated to ShowGoer.', function () {
+  it('should reject associations already associated to visitante.', function () {
     var showGoerName = 'Showoger com carteira de motorista para Vinculação';
     var showGoerCNH = '555.444.222.111';
 
@@ -81,7 +81,7 @@ describe('Search ShowGoer View', function () {
                               .goToSearchShowGoerPage()
                               .searchShowGoer(showGoerName)
                               .selectFirstShowGoer().then(function() {
-                                showGoerPage.expectAlertWarning('Opa, esse ShowGoer já foi vinculado a uma pulseira.');
+                                showGoerPage.expectAlertWarning('Opa, esse visitante já foi vinculado a uma pulseira.');
                                 showGoerPage.expectEmptyInputTag();
                               });
                 });
@@ -117,7 +117,7 @@ describe('Search ShowGoer View', function () {
                 });
   });
 
-  it('should not found the NFC Reader when try to associate with a showgoer.', function() {
+  it('should not found the NFC Reader when try to associate with a visitante.', function() {
     var showGoerName = 'Showoger para Vinculação pelo leitor de NFC';
     var showGoerCNH = '777.555.222.112';
 

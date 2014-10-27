@@ -3,28 +3,21 @@
 <div class="form-group">
   <div class="row">
     <div class="col-xs-3">
-      <div class="btn-group" data-toggle="buttons" ng-init="vipParam = 'A'">
-        <label class="btn btn-default" ng-class="{active: vipParam == 'A'}">
-          <input ng-model="vipParam" name="vipParam" value="A" type="radio">
+      <div class="btn-group" data-toggle="buttons" ng-init="vipParam = false">
+        <label class="btn btn-default" ng-class="{active: !vipParam}">
+          <input ng-model="vipParam" name="vipParam" ng-value="false" type="radio">
           <span class="glyphicon glyphicon-globe"></span> Todos
         </label>
 
-        <label class="btn btn-default" ng-class="{active: vipParam == 'V'}">
-          <input ng-model="vipParam" name="vipParam" value="V" type="radio">
+        <label class="btn btn-default" ng-class="{active: vipParam}">
+          <input ng-model="vipParam" name="vipParam" ng-value="true" type="radio">
           <span class="glyphicon glyphicon-user"></span> Vips
         </label>
       </div>
     </div>
 
-    <div class="col-xs-3" ng-init="zoneParam">
-      <select ng-model="zoneParam" class="form-control">
-        <option value="">Todas as Áreas</option>
-        <option value="1">Área 1</option>
-        <option value="2">Área 2</option>
-        <option value="3">Área 3</option>
-        <option value="4">Área 4</option>
-        <option value="5">Área 5</option>
-      </select>
+    <div class="col-xs-4" ng-init="zoneParam">
+      <select ng-model="zoneParam" class="form-control" ng-options="zone.id as zone.name for zone in zones"></select>
     </div>
   </div>
 </div>
@@ -46,7 +39,7 @@
           <td>{{sg.name}}</td>
           <td>{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.docType.toUpperCase())|translate}}: {{sg.docNumber}}</td>
           <td>{{sg.phone}}</td>
-          <td>{{sg.status}}</td>
+          <td>{{"FLASHBAND.SHOWGOER.STATUS.".concat(sg.status.toUpperCase())|translate}}</td>
         </tr>
       </tbody>
     </table>

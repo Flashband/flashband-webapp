@@ -184,6 +184,12 @@ angular.module('flashbandWebapp', dependencies).config(function ($translateProvi
           'CNH': 'Carteira de motorista',
           'PASSPORT': 'Passaporte',
           'UNDEFINED': 'Selecione o documento'
+        },
+        'STATUS': {
+          'OUT': 'Fora da Área',
+          'IN': 'Dentro da Área',
+          'BLK': 'Bloqueado',
+          'NOT': 'Aguardando'
         }
       },
 

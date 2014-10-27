@@ -7,6 +7,8 @@ module.exports = {
     var saveShowGoer = function() {
       var showgoer = {
         name: showGoerParams.name,
+        phone: showGoerParams.phone || '',
+        vip: Boolean(showGoerParams.vip),
         docType: showGoerParams.docType,
         docNumber: showGoerParams.docNumber
       };
