@@ -77,7 +77,21 @@ module.exports = {
               }
             });
           } else {
-            next();
+            Flashband.findOne({showgoer: item.id}).exec(function(err, mdl) {
+              if (err) return next();
+
+              if (mdl && mdl.blockedAt) {
+                item.status = 'blk';
+
+                Entrance.findOne({tag: mdl.tag}).exec(function(err, entrance) {
+                  if (err) return next();
+                  if (entrance) item.zone = entrance.zone;
+                  next();
+                });
+              } else {
+                next();
+              }
+            });
           }
         };
 

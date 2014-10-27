@@ -72,5 +72,18 @@ describe('ShowgoerService', function() {
         });
       });
     });
+
+    it('showgoers with status: flashband blocked after enter', function(done) {
+      var statusOut = 'blk';
+      var zoneOne  = '1';
+
+      ShowgoerService.associate(showgoer.id, flashband.tag).then(function() {
+        FrontdoorService.registerEnter({tag: flashband.tag, zone: zoneOne}).then(function() {
+          FlashbandService.block(flashband.tag).then(function() {
+            expectList(statusOut, zoneOne, done);
+          });
+        });
+      });
+    });
   });
 });
