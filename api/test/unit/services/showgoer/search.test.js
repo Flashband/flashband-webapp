@@ -73,6 +73,17 @@ describe('ShowgoerService', function() {
       });
     });
 
+    it('showgoers with status: flashband blocked before enter', function(done) {
+      var statusOut = 'blk';
+      var withoutZone  = '';
+
+      ShowgoerService.associate(showgoer.id, flashband.tag).then(function() {
+        FlashbandService.block(flashband.tag).then(function() {
+          expectList(statusOut, withoutZone, done);
+        });
+      });
+    });
+
     it('showgoers with status: flashband blocked after enter', function(done) {
       var statusOut = 'blk';
       var zoneOne  = '1';
