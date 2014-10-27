@@ -29,6 +29,18 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, Fla
     }
   };
 
+  $scope.vipMatch = function(criteria) {
+    return function(item) {
+      return criteria === 'A' || (criteria === 'V' && item.vip);
+    };
+  };
+
+  $scope.zoneMatch= function(criteria) {
+    return function(item) {
+      return criteria === '' || (item.zone === criteria);
+    };
+  };
+
   FlashbandRestFact.getConnection().all('showgoer').getList().then(function(list) {
     $scope.listShowgoers = list;
   });

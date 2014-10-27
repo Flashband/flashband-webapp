@@ -3,27 +3,27 @@
 <div class="form-group">
   <div class="row">
     <div class="col-xs-3">
-      <div class="btn-group" data-toggle="buttons" ng-init="filterShowgoer = 'A'">
-        <label class="btn btn-default" ng-class="{active: filterShowgoer == 'A'}">
-          <input ng-model="filterShowgoer" name="filterShowgoer" value="A" type="radio">
+      <div class="btn-group" data-toggle="buttons" ng-init="vipParam = 'A'">
+        <label class="btn btn-default" ng-class="{active: vipParam == 'A'}">
+          <input ng-model="vipParam" name="vipParam" value="A" type="radio">
           <span class="glyphicon glyphicon-globe"></span> Todos
         </label>
 
-        <label class="btn btn-default" ng-class="{active: filterShowgoer == 'V'}">
-          <input ng-model="filterShowgoer" name="filterShowgoer" value="V" type="radio">
+        <label class="btn btn-default" ng-class="{active: vipParam == 'V'}">
+          <input ng-model="vipParam" name="vipParam" value="V" type="radio">
           <span class="glyphicon glyphicon-user"></span> Vips
         </label>
       </div>
     </div>
 
-    <div class="col-xs-3">
-      <select class="form-control">
-        <option>Todas as Áreas</option>
-        <option>Área 1</option>
-        <option>Área 2</option>
-        <option>Área 3</option>
-        <option>Área 4</option>
-        <option>Área 5</option>
+    <div class="col-xs-3" ng-init="zoneParam">
+      <select ng-model="zoneParam" class="form-control">
+        <option value="">Todas as Áreas</option>
+        <option value="1">Área 1</option>
+        <option value="2">Área 2</option>
+        <option value="3">Área 3</option>
+        <option value="4">Área 4</option>
+        <option value="5">Área 5</option>
       </select>
     </div>
   </div>
@@ -42,7 +42,7 @@
       </thead>
 
       <tbody>
-        <tr ng-repeat="sg in listShowgoers">
+        <tr ng-repeat="sg in listShowgoers | filter:zoneMatch(zoneParam) | filter:vipMatch(vipParam)">
           <td>{{sg.name}}</td>
           <td>{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.docType.toUpperCase())|translate}}: {{sg.docNumber}}</td>
           <td>{{sg.phone}}</td>
