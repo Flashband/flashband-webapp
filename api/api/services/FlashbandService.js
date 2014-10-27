@@ -27,7 +27,7 @@ module.exports = {
 
   block: function(flashbandUid) {
     return this.exists(flashbandUid).then(function(flashband) {
-      if (flashband.blocked()) { throw new Error('Flashband already blocked.'); }
+      if (flashband.blocked()) throw new Error('Flashband already blocked.');
 
       flashband.blockedAt = new Date();
       return flashband.save();
@@ -40,13 +40,13 @@ module.exports = {
     var findAssociation = function(showGoer, next) {
       FlashbandService.findByShowgoer(showGoer.id).exec(function(err, flashband) {
         showGoer.flashband = '';
-        if (flashband) { showGoer.flashband = flashband.tag; }
+        if (flashband) showGoer.flashband = flashband.tag;
         next();
       });
     };
 
     async.each(listShowGoers, findAssociation, function(err) {
-      if (err) { return defer.reject(err); }
+      if (err) return defer.reject(err);
       defer.resolve(listShowGoers);
     });
 
