@@ -79,7 +79,7 @@ module.exports = {
               }
             });
           } else {
-            Flashband.findOne({showgoer: item.id}).exec(function(err, mdl) {
+            Flashband.findOne({imported: true, showgoer: item.id}).exec(function(err, mdl) {
               if (err) return next();
 
               if (mdl && mdl.blockedAt) {
