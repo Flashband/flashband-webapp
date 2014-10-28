@@ -42,6 +42,7 @@
     "Token": false,
     "async": false,
     "FlashbandBatch": false,
+    "FlashbandBatchValidator": false,
     "Entrance": false,
     "describe": false,
     "it": false,

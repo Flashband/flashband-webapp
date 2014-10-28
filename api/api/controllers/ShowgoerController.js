@@ -1,23 +1,23 @@
 'use strict';
 
+var processError = function(res) {
+  return function(reason) {
+    res.badRequest(reason.message);
+  };
+};
+
 module.exports = {
   find: function (req, res) {
-    ShowgoerService.search(req.query).then(res.ok, function(ranson) {
-      res.badRequest(ranson.message);
-    });
+    ShowgoerService.search(req.query).then(res.ok).fail(processError(res));
   },
 
   create: function create (req, res) {
     var showgoerParams = req.body;
-    ShowgoerService.create(showgoerParams).then(res.created, function(ranson) {
-      res.badRequest(ranson.message);
-    });
+    ShowgoerService.create(showgoerParams).then(res.created).fail(processError(res));
   },
 
   summary: function(req, res) {
-    ShowgoerService.summary().then(res.ok, function(ranson) {
-      res.badRequest(ranson.message);
-    });
+    ShowgoerService.summary().then(res.ok).fail(processError(res));
   },
 
   search: function(req, res) {
@@ -39,8 +39,6 @@ module.exports = {
     var showGoerId = req.param('showgoerId');
     var flashBandTag = req.param('tag');
 
-    ShowgoerService.associate(showGoerId, flashBandTag).then(res.ok, function(ranson) {
-      res.badRequest(ranson.message);
-    });
+    ShowgoerService.associate(showGoerId, flashBandTag).then(res.ok).fail(processError(res));
   }
 };
