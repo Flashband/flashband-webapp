@@ -35,6 +35,11 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, Fla
         var validZone = true;
         if ($scope.zoneParam) validZone = item.zone === $scope.zoneParam;
 
+        if (item.vip)
+          item.vipst = 'Sim';
+        else
+          item.vipst = 'Não';
+
         if (validVip && validZone) {
           $translate('FLASHBAND.SHOWGOER.DOCTYPE.'.concat(item.docType.toUpperCase())).then(function(t) {
             item.docNumber = t.concat(': ', item.docNumber);
@@ -78,6 +83,7 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, Fla
 
   $scope.dtColumns = [
     DTColumnBuilder.newColumn('name').withTitle('Visitante'),
+    DTColumnBuilder.newColumn('vipst').withTitle('Vip'),
     DTColumnBuilder.newColumn('docNumber').withTitle('Documento'),
     DTColumnBuilder.newColumn('phone').withTitle('Telefone'),
     DTColumnBuilder.newColumn('status').withTitle('Situação')
