@@ -6,7 +6,9 @@ angular.module('flashbandWebapp').controller('ShowgoerCtrl', function ($scope, $
 
   $scope.showgoer = {
     docType: undefined,
-    docNumber: null
+    docNumber: null,
+    phone: '',
+    vip: false
   };
 
   FlashbandRestFact.getConnection().one('showgoer').one('summary').get().then(function(res) {

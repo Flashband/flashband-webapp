@@ -1,0 +1,49 @@
+<h1 translate="FLASHBAND.STATUS.TEXT.TITLE" translate-values="{count: totFlashbands}"></h1>
+
+<div class="form-group">
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="btn-group" data-toggle="buttons" ng-init="vipParam = false">
+        <label class="btn btn-default" ng-class="{active: !vipParam}">
+          <input ng-model="vipParam" name="vipParam" ng-value="false" type="radio">
+          <span class="glyphicon glyphicon-globe"></span> Todos
+        </label>
+
+        <label class="btn btn-default" ng-class="{active: vipParam}">
+          <input ng-model="vipParam" name="vipParam" ng-value="true" type="radio">
+          <span class="glyphicon glyphicon-user"></span> Vips
+        </label>
+      </div>
+    </div>
+
+    <div class="col-xs-4" ng-init="zoneParam">
+      <select ng-model="zoneParam" class="form-control" ng-options="zone.id as zone.name for zone in zones"></select>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="table-responsive">
+    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" id="showgoers-list" class="table table-striped table-bordered hover"></table>
+
+    <!-- <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"  class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Documento</th>
+          <th>Telefone</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="sg in listShowgoers | filter:zoneMatch(zoneParam) | filter:vipMatch(vipParam)">
+          <td>{{sg.name}}</td>
+          <td>{{"FLASHBAND.SHOWGOER.DOCTYPE.".concat(sg.docType.toUpperCase())|translate}}: {{sg.docNumber}}</td>
+          <td>{{sg.phone}}</td>
+          <td>{{"FLASHBAND.SHOWGOER.STATUS.".concat(sg.status.toUpperCase())|translate}}</td>
+        </tr>
+      </tbody>
+    </table> -->
+  </div>
+</div>

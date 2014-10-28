@@ -7,6 +7,8 @@ module.exports = {
     var saveShowGoer = function() {
       var showgoer = {
         name: showGoerParams.name,
+        phone: showGoerParams.phone || '',
+        vip: Boolean(showGoerParams.vip),
         docType: showGoerParams.docType,
         docNumber: showGoerParams.docNumber
       };
@@ -48,9 +50,61 @@ module.exports = {
   },
 
   search: function(args) {
-    return Showgoer.find(args).then(function(listShowGoers) {
-      return FlashbandService.findAssociations(listShowGoers);
+    var defer = q.defer();
+
+    Showgoer.find(args).then(function(listShowGoers) {
+      FlashbandService.findAssociations(listShowGoers).then(function(showgoers) {
+        var setStatus = function(item, next) {
+          item.status = 'not';
+          item.zone   = '';
+
+          if (item.flashband) {
+            item.status = 'out';
+
+            Entrance.findOne({tag: item.flashband, leave: null}).exec(function(err, entrance) {
+              if (err) return next();
+
+              if (entrance) {
+                item.zone = entrance.zone;
+                item.status = 'in';
+                next();
+              } else {
+                item.status = 'out';
+
+                Entrance.findOne({tag: item.flashband}).exec(function(err, leave) {
+                  if (err) return next();
+                  if (leave) item.zone = leave.zone;
+                  next();
+                });
+              }
+            });
+          } else {
+            Flashband.findOne({imported: true, showgoer: item.id}).exec(function(err, mdl) {
+              if (err) return next();
+
+              if (mdl && mdl.blockedAt) {
+                item.status = 'blk';
+
+                Entrance.findOne({tag: mdl.tag}).exec(function(err, entrance) {
+                  if (err) return next();
+                  if (entrance) item.zone = entrance.zone;
+                  next();
+                });
+              } else {
+                next();
+              }
+            });
+          }
+        };
+
+        async.eachSeries(showgoers, setStatus, function(err) {
+          if (err) return defer.reject(err);
+          defer.resolve(showgoers);
+        });
+      });
     });
+
+    return defer.promise;
   },
 
   associate: function(showGoerId, flashBandTag) {
