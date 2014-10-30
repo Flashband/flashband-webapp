@@ -1,6 +1,7 @@
 'use strict';
 
 var dependencies = [
+  'ngSails',
   'ngAnimate',
   'ngCookies',
   'ngTouch',
@@ -12,7 +13,10 @@ var dependencies = [
   'pascalprecht.translate',
   'datatables'];
 
-angular.module('flashbandWebapp', dependencies).config(function ($translateProvider, $stateProvider, $urlRouterProvider, AuthenticateAccess, dashboardAbstract) {
+angular.module('flashbandWebapp', dependencies).config(function ($sailsProvider, $translateProvider, $stateProvider, $urlRouterProvider, AuthenticateAccess, dashboardAbstract) {
+
+  $sailsProvider.url = 'http://localhost:1337';
+
   $stateProvider.state(dashboardAbstract, {
     abstract: true,
     templateUrl: 'partials/dashboard.html',

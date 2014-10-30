@@ -5,7 +5,7 @@
     <title>Flashband</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    
+
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp,app}) styles/vendor.css -->
@@ -30,7 +30,7 @@
     <![endif]-->
 
     <div ui-view></div>
-
+    <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -50,6 +50,13 @@
     <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    <script src="bower_components/angular-sails/dist/angular-sails.js"></script>
+
+        <script>
+      io.sails.autoConnect = false;
+      </script>
+
+
 
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/app.js"></script>
