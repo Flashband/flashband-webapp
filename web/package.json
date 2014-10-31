@@ -14,7 +14,6 @@
     "gulp-csso": "^0.2.6",
     "gulp-filter": "^1.0.2",
     "gulp-flatten": "0.0.3",
-    "gulp-imagemin": "^1.0.1",
     "gulp-inject": "^1.0",
     "gulp-jshint": "^1.8",
     "gulp-karma": "0.0.4",
