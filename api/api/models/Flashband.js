@@ -8,6 +8,10 @@ module.exports = {
       unique: true
     },
 
+    ref: {
+      type: 'string'
+    },
+
     imported: {
       type: 'boolean',
       defaultsTo: true

@@ -5,7 +5,8 @@
     "serial": "1",
     "blockedAt": null,
     "imported": true,
-    "showgoer": "542f3b144027a8df0635de2a"
+    "showgoer": "542f3b144027a8df0635de2a",
+    "ref": "branca"
   },
 
   {
@@ -13,7 +14,8 @@
     "serial": "1",
     "blockedAt": null,
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   },
 
   {
@@ -21,7 +23,8 @@
     "serial": "1",
     "blockedAt": "09/04/2014 01:15:27 AM (-0300)",
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   },
 
   {
@@ -29,7 +32,8 @@
     "serial": "1",
     "blockedAt": "09/04/2014 01:15:27 AM (-0300)",
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   },
 
   {
@@ -37,7 +41,8 @@
     "serial": "1",
     "blockedAt": null,
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   },
 
   {
@@ -45,7 +50,8 @@
     "serial": "1",
     "blockedAt": null,
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   },
 
   {
@@ -53,7 +59,8 @@
     "serial": "1",
     "blockedAt": null,
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   },
 
   {
@@ -61,6 +68,7 @@
     "serial": "1",
     "blockedAt": null,
     "showgoer": null,
-    "imported": true
+    "imported": true,
+    "ref": "branca"
   }
 ]

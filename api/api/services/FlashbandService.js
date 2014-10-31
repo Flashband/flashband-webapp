@@ -20,7 +20,6 @@ var FlashbandEnabler = function(defer) {
       next();
     };
 
-
     Flashband.findOne({ tag: arg.tag }).exec(function(err, flashband) {
       if (err) { return rejectBatch(err); }
       if (!flashband) {
@@ -28,10 +27,14 @@ var FlashbandEnabler = function(defer) {
           tag: arg.tag
         };
       }
+
       flashband.imported = true;
       flashband.serial = arg.serial;
       flashband.blockedAt = null;
       flashband.showgoer = null;
+
+      if (arg.ref) flashband.ref = arg.ref;
+
       if (flashband.id) {
         flashband.save().then(appendFlashband).fail(rejectBatch);
       } else {

@@ -6,6 +6,12 @@ var stringReadableStream = require('../../../helpers/StringReadableStream');
 describe('FlashbandBatchImporter', function () {
 
   describe('#parse', function() {
+    it('should import one valid flashband with info color', function(done) {
+      var fileContent = 'QrCode;UID;Referencia\n000001;80 28 53 3A 0A 83 04;azul';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.deep.equal([{tag: '8028533A0A8304', serial: '000001', ref: 'azul'}]).and.notify(done);
+    });
+
     it('should import one valid flashband', function(done) {
       var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04';
       var importFile = stringReadableStream.createReadableStream(fileContent);
