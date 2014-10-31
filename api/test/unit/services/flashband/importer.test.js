@@ -60,6 +60,12 @@ describe('FlashbandBatchImporter', function () {
       expect(FlashbandBatchImporter.parse(importFile)).to.eventually.be.rejected.and.deep.equal([{line: 3, error: 'Number of tag\'s pairs nonstandard.'}]).and.notify(done);
     });
 
+    it('should allow flashbands (Number of tag\'s without spaces to pairs)', function(done) {
+      var fileContent = 'Qrcode      ;UID \n000001;8028533A0A8304\n000002;8028533A0A8333';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.deep.equal([{tag: '8028533A0A8304', serial: '000001'},{tag: '8028533A0A8333', serial: '000002'}]).and.notify(done);
+    });
+
     it('should reject file without flashbands', function(done) {
       var fileContent = 'Qrcode      ;UID ';
       var importFile = stringReadableStream.createReadableStream(fileContent);
