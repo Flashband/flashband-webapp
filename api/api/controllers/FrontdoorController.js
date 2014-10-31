@@ -33,12 +33,7 @@ module.exports = {
     var args = getFlashbandArgs(req);
 
     FrontdoorService.checkRegistered(args).then(function (inside) {
-      FrontdoorService[inside ? 'registerLeave' : 'registerEnter'](args).then(function (entrance) {
-        if (inside) { return res.created(outputSuccessful(entrance.showgoer)); }
-        res.created(inputSuccessful(entrance.showgoer));
-      }).fail(function(reason) {
-        res.forbidden(reason.message);
-      });
+      module.exports[inside ? 'leave' : 'enter'](req, res);
     }).fail(function(reason) {
       res.forbidden(reason.message);
     });
