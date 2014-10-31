@@ -31,6 +31,7 @@
 
     <div ui-view></div>
     <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
+    <script>io.sails.autoConnect = false;</script>
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -51,12 +52,6 @@
     <!-- endbower -->
     <!-- endbuild -->
     <script src="bower_components/angular-sails/dist/angular-sails.js"></script>
-
-        <script>
-      io.sails.autoConnect = false;
-      </script>
-
-
 
     <!-- build:js({app,.tmp}) scripts/main.js -->
     <script src="scripts/app.js"></script>
