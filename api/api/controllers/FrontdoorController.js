@@ -14,7 +14,9 @@ module.exports = {
   enter: function(req, res) {
     var args = getFlashbandArgs(req);
     FrontdoorService.registerEnter(args).then(function(entrance) {
-      res.created(inputSuccessful(entrance.showgoer));
+      var response = inputSuccessful(entrance.showgoer);
+      sails.io.sockets.emit('frontdoor:enter', response);
+      res.created(response);
     }).fail(function(reason) {
       res.forbidden(reason.message);
     });
@@ -23,7 +25,9 @@ module.exports = {
   leave: function(req, res) {
     var args = getFlashbandArgs(req);
     FrontdoorService.registerLeave(args).then(function(entrance) {
-      res.created(outputSuccessful(entrance.showgoer));
+      var response = outputSuccessful(entrance.showgoer);
+      sails.io.sockets.emit('frontdoor:leave', response);
+      res.created(response);
     }).fail(function(reason) {
       res.forbidden(reason.message);
     });
@@ -31,7 +35,6 @@ module.exports = {
 
   cross: function(req, res) {
     var args = getFlashbandArgs(req);
-
     FrontdoorService.checkRegistered(args).then(function (inside) {
       module.exports[inside ? 'leave' : 'enter'](req, res);
     }).fail(function(reason) {
