@@ -5,12 +5,54 @@
 angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, $sails, $q, FlashbandRestFact, $interval, DTColumnDefBuilder, DTOptionsBuilder, DTColumnBuilder, $translate) {
 
   $scope.totFlashbands = 0;
-  $scope.listShowgoers = [];
   
-  var showgoersDeferred = $q.defer();
+  var showgoers = null
+    , showgoersDeferred = $q.defer();
+
+  // Save firt socket connection list of showgoers.
+  showgoersDeferred.promise.then(function (list) {
+    showgoers = list;
+  });
+
+  /**
+   * Updates a given showgoer to the list.
+   */
+  function updateShowgoerList(showgoer) {
+    if (showgoers) {
+      var index = null;
+      showgoers.forEach(function (current, i) {
+        index = current.id === showgoer.id ? i : index;
+      });
+
+      if (index) {
+        showgoers[index].zone = showgoer.zone;
+        showgoers[index].status = showgoer.status;
+      } else {
+        showgoers.push(showgoer);
+      }
+    }
+  }
 
   $sails.on('connect', function () {
+
+    // Try and get showgoers via socket.
     $sails.get("/showgoer").success(showgoersDeferred.resolve);
+
+    // Listen for frondoor enter events.
+    $sails.on('frontdoor:enter', function (message) {
+      message.showgoer.zone = message.entrance.zone;
+      message.showgoer.status = 'in';
+      updateShowgoerList(message.showgoer);
+      $scope.dtOptions.reloadData();
+    });
+
+    // Listen for frondoor leave events.
+    $sails.on('frontdoor:leave', function (message) {
+      message.showgoer.zone = '';
+      message.showgoer.status = 'out';
+      updateShowgoerList(message.showgoer);
+      $scope.dtOptions.reloadData();
+    });
   });
   
   $scope.zones = [
@@ -30,7 +72,7 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, $sa
   ];
 
   $scope.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
-    return showgoersDeferred.promise.then(function(list) {
+    return (showgoers ? $q.when(showgoers) : showgoersDeferred.promise).then(function(list) {
       var newList = [];
   
       if (!list) return newList;
@@ -48,10 +90,10 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, $sa
           item.vipst = 'Sim';
         else
           item.vipst = 'Não';
-  
+
         if (validVip && validZone) {
           $translate('FLASHBAND.SHOWGOER.DOCTYPE.'.concat(item.docType.toUpperCase())).then(function(t) {
-            item.docNumber = t.concat(': ', item.docNumber);
+            item.document = t.concat(': ', item.docNumber);
           });
   
           $translate('FLASHBAND.SHOWGOER.STATUS.'.concat(item.status.toUpperCase())).then(function(t) {
@@ -93,7 +135,7 @@ angular.module('flashbandWebapp').controller('StatusCtrl', function ($scope, $sa
   $scope.dtColumns = [
     DTColumnBuilder.newColumn('name').withTitle('Visitante'),
     DTColumnBuilder.newColumn('vipst').withTitle('Vip'),
-    DTColumnBuilder.newColumn('docNumber').withTitle('Documento'),
+    DTColumnBuilder.newColumn('document').withTitle('Documento'),
     DTColumnBuilder.newColumn('phone').withTitle('Telefone'),
     DTColumnBuilder.newColumn('status').withTitle('Situação')
   ];
