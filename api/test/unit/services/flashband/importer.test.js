@@ -6,6 +6,12 @@ var stringReadableStream = require('../../../helpers/StringReadableStream');
 describe('FlashbandBatchImporter', function () {
 
   describe('#parse', function() {
+    it('should import one valid flashband with info color', function(done) {
+      var fileContent = 'QrCode;UID;Referencia\n000001;80 28 53 3A 0A 83 04;azul';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.deep.equal([{tag: '8028533A0A8304', serial: '000001', ref: 'azul'}]).and.notify(done);
+    });
+
     it('should import one valid flashband', function(done) {
       var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04';
       var importFile = stringReadableStream.createReadableStream(fileContent);
@@ -58,6 +64,12 @@ describe('FlashbandBatchImporter', function () {
       var fileContent = 'Qrcode      ;UID \n000001;80 28 53 3A 0A 83 04\n000002;80 28 53 3A 0A 83';
       var importFile = stringReadableStream.createReadableStream(fileContent);
       expect(FlashbandBatchImporter.parse(importFile)).to.eventually.be.rejected.and.deep.equal([{line: 3, error: 'Number of tag\'s pairs nonstandard.'}]).and.notify(done);
+    });
+
+    it('should allow flashbands (Number of tag\'s without spaces to pairs)', function(done) {
+      var fileContent = 'Qrcode      ;UID \n000001;8028533A0A8304\n000002;8028533A0A8333';
+      var importFile = stringReadableStream.createReadableStream(fileContent);
+      expect(FlashbandBatchImporter.parse(importFile)).to.eventually.deep.equal([{tag: '8028533A0A8304', serial: '000001'},{tag: '8028533A0A8333', serial: '000002'}]).and.notify(done);
     });
 
     it('should reject file without flashbands', function(done) {

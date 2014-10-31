@@ -2,15 +2,23 @@
 var csv = require('csv');
 var q = require('q');
 
-
 var convertFlashband = function(record) {
-  if (!(record.UID || record.Qrcode)) {
+  for (var k in record)
+    record[k.toLowerCase()] = record[k];
+
+  if (!(record.uid || record.qrcode))
     return {tag: false, serial: false, error: true};
-  } else {
-    var tag = record.UID.replace(/\s/g, '').toUpperCase().trim();
-    var serial = record.Qrcode;
-    return {tag: tag, serial: serial, error: false};
-  }
+
+  var objReturn = {
+    tag: record.uid.replace(/\s/g, '').toUpperCase().trim(),
+    serial: record.qrcode,
+    error: false
+  };
+
+  if (record.referencia)
+    objReturn.ref = record.referencia;
+
+  return objReturn;
 };
 
 module.exports = {
@@ -30,15 +38,17 @@ module.exports = {
         defer.reject(errors);
       } else {
         var newList = [];
+
         flashbands.forEach(function(f) {
           if (!f.error) {
-            newList.push({ tag: f.tag, serial: f.serial});
+            var item = { tag: f.tag, serial: f.serial};
+            if (f.ref) item.ref = f.ref;
+            newList.push(item);
           }
         });
 
-        if (!newList.length) {
+        if (!newList.length)
           return defer.reject([{line: 1, error: 'No flashbands found.'}]);
-        }
 
         defer.resolve(newList);
       }
